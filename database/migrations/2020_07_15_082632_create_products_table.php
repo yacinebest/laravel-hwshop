@@ -19,13 +19,11 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->decimal('price',7,2);
             $table->dateTime('updated_price_at');
-            $table->string('datasheet');
+            $table->string('datasheet')->nullable();
             $table->integer('copy_number');
             $table->integer('view')->default(0);
-
             $table->uuid('category_id');
             //filter
-            //brand id
             $table->timestamps();
         });
     }

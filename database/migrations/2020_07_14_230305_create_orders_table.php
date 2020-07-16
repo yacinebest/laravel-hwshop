@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->uuid('user_id');
             $table->uuid('admin_id')->nullable();//the one that approved this order
 
-            $table->date('order_date');
+            $table->dateTime('order_date');
             $table->enum('status',['processing','canceled','approved'])->default('processing');
             $table->timestamps();
         });

@@ -2,7 +2,8 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Models\Role;
+use App\Models\User;
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 
@@ -19,10 +20,19 @@ use Illuminate\Support\Str;
 
 $factory->define(User::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        // 'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
         'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+        'password' => bcrypt('123456789'),
         'remember_token' => Str::random(10),
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+        'username' => $faker->userName,
+        'address' => $faker->address,
+        'birth_date' => $faker->dateTimeBetween('01-01-1970','31-12-2008')->format('Y-m-d'),
+        'gender' => $faker->randomElement( ['Male','Female']),
+        'country' => $faker->country,
+        'phone_number' => $faker->e164PhoneNumber,
+        'role_id' =>  Role::whereType( $faker->randomElement( ['USER','ADMIN'])  )->first()->id
     ];
 });
