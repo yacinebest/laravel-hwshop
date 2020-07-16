@@ -25,8 +25,6 @@ class CreateUsersTable extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('username');
-            $table->enum('group',['user','admin'])->default('user');
-
             $table->string('address')->nullable();
 
 
@@ -34,6 +32,8 @@ class CreateUsersTable extends Migration
             $table->enum('gender',['Male','Female'])->nullable();
             $table->string('country')->nullable();
             $table->string('phone_number')->nullable();
+
+            $table->uuid('role_id')->nullable();
 
 
         });
