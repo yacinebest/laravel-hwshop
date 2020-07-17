@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     use Notifiable;
+    // protected $with =['role','orders'] ;
 
     // Disable Incrementing
     public $incrementing = false;
@@ -47,4 +48,35 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+/*
+|---------------------------------------------------------------------------|
+| RELATIONSHIP                                                              |
+|---------------------------------------------------------------------------|
+*/
+    public function role()
+    {
+        return $this->belongsTo('App\Models\Role');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany('App\Models\Order');
+    }
+
+    public function images()
+    {
+        return $this->morphMany('App\Models\Image', 'imageable');
+    }
+
+    public function comments()
+    {
+        return $this->hasMany('App\Models\Comment');
+    }
+
+    public function votes()
+    {
+        return $this->hasMany('App\Models\Vote');
+    }
 }

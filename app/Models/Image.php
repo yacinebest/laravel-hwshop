@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Image extends Model
+class Image extends BaseModel
 {
-    //
+    public function imageable()
+    {
+        return $this->morphTo();
+    }
 }

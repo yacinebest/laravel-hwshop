@@ -19,7 +19,7 @@ class CreateCommentsTable extends Migration
             $table->uuid('user_id');
 
             $table->text('body');
-            $table->uuid('comment_id')->nullable();
+            $table->uuid('parent_id')->nullable();
             $table->timestamps();
         });
     }

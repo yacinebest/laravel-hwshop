@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderProductTable extends Migration
+class CreateVotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateOrderProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_product', function (Blueprint $table) {
-            $table->uuid('order_id');
-            $table->uuid('product_id');
-            $table->integer('ordered_quantity')->default(1);
+        Schema::create('votes', function (Blueprint $table) {
+            $table->uuid('id');
+            $table->uuid('user_id');
+            $table->enum('type',['UP','DOWN'])->default('UP');
+            $table->uuid('voteable_id');
+            $table->string("voteable_type");
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateOrderProductTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_product');
+        Schema::dropIfExists('votes');
     }
 }

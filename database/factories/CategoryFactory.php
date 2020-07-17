@@ -9,7 +9,7 @@ use Faker\Generator as Faker;
 $factory->define(Category::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        // 'category_id' => $faker->randomElement([function(){
+        // 'parent_id' => $faker->randomElement([function(){
         //     return factory(\App\Models\Category::class)->create()->id;
         // },null]) ,
     ];
