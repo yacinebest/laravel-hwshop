@@ -16,9 +16,7 @@
                     <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                         <div class="d-flex justify-content-between">
                             <button class="btn btn-sm btn-info disabled mr-4 " >{{ __('Connect') }}</button>
-                            {{-- <a href="#" class="btn btn-sm btn-info mr-4">{{ __('Connect') }}</a> --}}
-                            {{-- <a href="#" class="btn btn-sm btn-default float-right">{{ __('Message') }}</a> --}}
-                            <button  href="#" class="btn btn-sm btn-default float-right">{{ $user->role->type }}</button >
+                            <button  class="btn btn-sm btn-default disabled float-right">{{ $user->role->type }}</button >
                         </div>
                     </div>
 
@@ -113,20 +111,39 @@
 
                                 @endforeach
 
-                                <label class="form-control-label" >Gender </label>
-                                <select class="form-control" name="gender">
-                                    @if($user->gender==="MALE")
-                                        <option value="MALE" selected="selected" >Male</option>
-                                    @else
-                                        <option value="MALE"  >Male</option>
-                                    @endif
+                                <div class="form-group">
+                                    <label class="form-control-label" >Gender </label>
+                                    <select class="form-control" name="gender">
+                                        @if($user->gender==="MALE")
+                                            <option value="MALE" selected="selected" >Male</option>
+                                        @else
+                                            <option value="MALE"  >Male</option>
+                                        @endif
 
-                                    @if($user->gender==="FEMALE")
-                                        <option value="FEMALE" selected="selected" >Female</option>
-                                    @else
-                                        <option value="FEMALE"  >Female</option>
-                                    @endif
-                                </select>
+                                        @if($user->gender==="FEMALE")
+                                            <option value="FEMALE" selected="selected" >Female</option>
+                                        @else
+                                            <option value="FEMALE"  >Female</option>
+                                        @endif
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-control-label" >Role </label>
+                                    <select class="form-control" name="role_id">
+
+                                        @foreach($roles as $role)
+                                            @if($user->role->type==$role->type)
+                                                <option value="{{ $role->id }}" selected="selected" >{{ $role->type}}</option>
+                                            @else
+                                                <option value="{{ $role->id }}"  >{{ $role->type }}</option>
+                                            @endif
+                                        @endforeach
+
+                                    </select>
+                                </div>
+
+
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>

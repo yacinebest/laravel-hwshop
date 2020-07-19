@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,7 +20,8 @@ class ProfileController extends Controller
     public function edit()
     {
         $user = User::findOrFail(Auth::user()->id);
-        return view('profile.edit',compact('user'));
+        $roles = Role::all();
+        return view('profile.edit',compact('user','roles'));
     }
 
     /**
