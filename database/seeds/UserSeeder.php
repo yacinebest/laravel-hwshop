@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
     {
         DB::table('users')->delete();
 
-        factory(\App\Models\User::class)->create(['email'=>'admin1@gmail.com','username'=>'admin1','first_name'=>'karim','last_name'=>'bet']);
-        factory(\App\Models\User::class)->create(['email'=>'admin2@gmail.com','username'=>'admin2','first_name'=>'zaki','last_name'=>'det']);
+        factory(\App\Models\User::class)->create(['email'=>'admin1@gmail.com','username'=>'admin1','firstname'=>'karim','lastname'=>'bet']);
+        factory(\App\Models\User::class)->create(['email'=>'admin2@gmail.com','username'=>'admin2','firstname'=>'zaki','lastname'=>'det']);
     }
 }

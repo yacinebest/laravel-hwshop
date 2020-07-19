@@ -62,19 +62,19 @@ class UserUnitTest extends TestCase
 
     }
 
-    /**
-     * @test
-     * @return void
-    */
-    function can_access_image_relation()
-    {
-        $this->user->images()->create(['file'=>'t.jpg']);
-        $this->user->images()->create(['file'=>'t2.jpg']);
+    // /**
+    //  * @test
+    //  * @return void
+    // */
+    // function can_access_image_relation()
+    // {
+    //     $this->user->images()->create(['file'=>'t.jpg']);
+    //     $this->user->images()->create(['file'=>'t2.jpg']);
 
 
-        $this->assertNotEmpty($this->user->images);
-        $this->assertCount(2,$this->user->images);
-    }
+    //     $this->assertNotEmpty($this->user->images);
+    //     $this->assertCount(2,$this->user->images);
+    // }
 
      /**
      * @test
@@ -101,5 +101,20 @@ class UserUnitTest extends TestCase
         $this->assertNotEmpty($this->user->votes);
         $this->assertCount(4,$this->user->votes);
     }
+
+
+      //  /**
+    //  * @test
+    //  * @return void
+    // */
+    // function can_count_comments_relation()
+    // {
+    //     $product = factory(Product::class)->create();
+    //     $this->user->comments()->create(['product_id'=>$product->id,'body'=>'tdfd']);
+    //     $this->user->comments()->create(['product_id'=>$product->id,'body'=>'sftdfd']);
+
+    //     $this->assertNotEmpty($this->user->comments);
+    //     $this->assertCount(2,$this->user->comments);
+    // }
 
 }

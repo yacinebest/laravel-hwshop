@@ -22,17 +22,18 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('firstname');
+            $table->string('lastname');
             $table->string('username');
             $table->string('address')->nullable();
 
 
             $table->date('birth_date')->nullable();
-            $table->enum('gender',['Male','Female'])->nullable();
+            $table->enum('gender',['MALE','FEMALE'])->nullable();
             $table->string('country')->nullable();
             $table->string('phone_number')->nullable();
 
+            $table->string('avatar')->default('default.jpg');
             $table->uuid('role_id')->nullable();
 
 

@@ -28,7 +28,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password','first_name','last_name','username'
+        'name', 'email', 'password','firstname','lastname','username','address',
+        'birth_date','gender','country','phone_number','role_id','avatar'
     ];
 
     /**
@@ -65,10 +66,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Order');
     }
 
-    public function images()
-    {
-        return $this->morphMany('App\Models\Image', 'imageable');
-    }
+    // public function images()
+    // {
+    //     return $this->morphMany('App\Models\Image', 'imageable');
+    // }
 
     public function comments()
     {
@@ -79,4 +80,20 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Vote');
     }
+
+
+/*
+|---------------------------------------------------------------------------|
+| GETTER & SETTER                                                           |
+|---------------------------------------------------------------------------|
+*/
+    // public function commentCount()
+    // {
+    //     return count('comments');
+    // }
+
+    // public function count($entity)
+    // {
+    //     return count($this->user->$entity);
+    // }
 }
