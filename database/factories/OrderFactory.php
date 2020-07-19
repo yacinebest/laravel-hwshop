@@ -17,6 +17,5 @@ $factory->define(Order::class, function (Faker $faker) {
         //     return factory(\App\Models\User::class)->create(['role_id'=>Role::whereType('ADMIN')->first()->id])->id;
         // },
         'order_date' => $faker->dateTimeBetween('01-01-2020','16-07-2020')->format('Y-m-d H:m:s'),
-        // 'status' => $faker->randomElement(['processing','canceled','approved']),
     ];
 });

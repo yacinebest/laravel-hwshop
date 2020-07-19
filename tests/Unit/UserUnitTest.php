@@ -102,19 +102,68 @@ class UserUnitTest extends TestCase
         $this->assertCount(4,$this->user->votes);
     }
 
+    /**
+     * @test
+     * @return void
+    */
+    function is_admin_relation()
+    {
 
-      //  /**
-    //  * @test
-    //  * @return void
-    // */
-    // function can_count_comments_relation()
-    // {
-    //     $product = factory(Product::class)->create();
-    //     $this->user->comments()->create(['product_id'=>$product->id,'body'=>'tdfd']);
-    //     $this->user->comments()->create(['product_id'=>$product->id,'body'=>'sftdfd']);
+        $this->assertTrue( $this->admin->isAdmin);
+        $this->assertTrue($this->user->isUser);
+    }
 
-    //     $this->assertNotEmpty($this->user->comments);
-    //     $this->assertCount(2,$this->user->comments);
-    // }
+      /**
+     * @test
+     * @return void
+    */
+    function can_count_comments_relation()
+    {
+        $product = factory(Product::class)->create();
+        $this->user->comments()->create(['product_id'=>$product->id,'body'=>'tdfd']);
+        $this->user->comments()->create(['product_id'=>$product->id,'body'=>'sftdfd']);
+
+        $this->assertNotEmpty($this->user->comments);
+        $this->assertCount(2,$this->user->comments);
+        $this->assertEquals(2,$this->user->commentCount);
+    }
+
+      /**
+     * @test
+     * @return void
+    */
+    function can_count_up_down_votes_relation()
+    {
+
+        factory(Vote::class,4)->create(['user_id'=>$this->user->id,'type'=>'UP']);
+        factory(Vote::class,2)->create(['user_id'=>$this->user->id,'type'=>'DOWN']);
+
+        $this->assertNotEmpty($this->user->votes);
+        $this->assertCount(6,$this->user->votes);
+
+        $this->assertEquals(4,$this->user->upVoteCount);
+        $this->assertEquals(2,$this->user->downVoteCount);
+    }
+
+        /**
+     * @test
+     * @return void
+    */
+    function can_count_orders_approved_relation()
+    {
+        factory(Order::class,5)->create(['admin_id'=>$this->admin->id,'status'=>'APPROVED']);
+        factory(Order::class,2)->create();
+        $this->assertEquals(5,$this->admin->orderApprovedByAdminCount);
+    }
+
+
+    /**
+     * @test
+     * @return void
+    */
+    function get_age_relation()
+    {
+        $this->assertNotEmpty($this->user->age);
+    }
 
 }

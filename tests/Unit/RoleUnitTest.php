@@ -21,8 +21,8 @@ class RoleUnitTest extends TestCase
         parent::setUp();
         // $this->role_user = factory(Role::class)->create(['type'=>'USER']);
         // $this->role_admin = factory(Role::class)->create(['type'=>'ADMIN']);
-        $this->role_user =  Role::whereType('USER');
-        $this->role_admin = Role::whereType('ADMIN');
+        $this->role_user =  Role::whereType('USER')->first();
+        $this->role_admin = Role::whereType('ADMIN')->first();
 
     }
     /**
@@ -31,6 +31,7 @@ class RoleUnitTest extends TestCase
     */
     function can_access_users_relation()
     {
+        // dd($this->role_user);
         $users = factory(User::class,5)->create(['role_id'=>$this->role_user->id]);
         $this->assertCount(5,$users);
         $this->assertCount(5,$this->role_user->users);
@@ -42,6 +43,6 @@ class RoleUnitTest extends TestCase
     */
     function can_get_all_roles()
     {
-        dd(Role::all(['type']));
+        $this->assertNotEmpty(Role::all(['type']));
     }
 }

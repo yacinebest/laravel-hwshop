@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Category extends BaseModel
 {
-    protected $with =['products','parent'] ;
+    // protected $with =['products','parent'] ;
 
     public function products()
     {

@@ -4,7 +4,7 @@ namespace App\Models;
 
 class Role extends BaseModel
 {
-    protected $with =['users'] ;
+    // protected $with =['users'] ;
 /*
 |---------------------------------------------------------------------------|
 | RELATIONSHIP                                                              |

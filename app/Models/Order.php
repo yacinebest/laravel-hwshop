@@ -5,7 +5,7 @@ namespace App\Models;
 
 class Order extends BaseModel
 {
-    protected $with =['user'] ;
+    // protected $with =['user'] ;
 
     public function user()
     {

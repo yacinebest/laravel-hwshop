@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -9,7 +10,10 @@ use Illuminate\Support\Str;
 class User extends Authenticatable
 {
     use Notifiable;
-    // protected $with =['role','orders'] ;
+    // protected $with =['orders'] ;
+    // protected $appends =['isAdmin','isUser'];
+    protected $appends =['isAdmin','isUser','commentCount','upVoteCount','downVoteCount' ,
+    'orderApprovedByAdminCount','age'];
 
     // Disable Incrementing
     public $incrementing = false;
@@ -66,6 +70,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Order');
     }
 
+    public function ordersApprovedByAdmin()
+    {
+        return $this->hasMany('App\Models\Order','admin_id');
+    }
+
     // public function images()
     // {
     //     return $this->morphMany('App\Models\Image', 'imageable');
@@ -87,13 +96,59 @@ class User extends Authenticatable
 | GETTER & SETTER                                                           |
 |---------------------------------------------------------------------------|
 */
-    // public function commentCount()
-    // {
-    //     return count('comments');
-    // }
+    /**
+     * @return bool
+     */
+    public function getIsAdminAttribute()
+    {
+        return $this->role && $this->role->type === 'ADMIN';
+    }
 
-    // public function count($entity)
-    // {
-    //     return count($this->user->$entity);
-    // }
+    /**
+     * @return bool
+     */
+    public function getIsUserAttribute()
+    {
+        return $this->role  && $this->role->type === 'USER';
+    }
+
+     /**
+     * @return number
+     */
+    public function getCommentCountAttribute()
+    {
+        return count($this->comments);
+    }
+
+     /**
+     * @return number
+     */
+    public function getUpVoteCountAttribute()
+    {
+        return count($this->votes()->whereType('UP')->get());
+    }
+     /**
+     * @return number
+     */
+    public function getDownVoteCountAttribute()
+    {
+        return count($this->votes()->whereType('DOWN')->get());
+    }
+
+     /**
+     * @return number
+     */
+    public function getOrderApprovedByAdminCountAttribute()
+    {
+        return count($this->ordersApprovedByAdmin()->whereStatus('APPROVED')->get());
+    }
+
+
+    /**
+     * Accessor for Age.
+     */
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->birth_date)->age;
+    }
 }
