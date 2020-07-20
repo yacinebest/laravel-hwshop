@@ -55,6 +55,21 @@ class User extends Authenticatable
     ];
 
 
+    public static function countAdmin()
+    {
+        return count(User::whereRoleId(Role::whereType('ADMIN')->first()->id)->get() );
+    }
+
+    public static function countUser()
+    {
+        return count(User::whereRoleId(Role::whereType('USER')->first()->id)->get() );
+    }
+
+    public static function count()
+    {
+        return count(User::all());
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | RELATIONSHIP                                                              |

@@ -31,8 +31,6 @@ class UserController extends Controller
         'created_at' => 'Created At'
     ];
 
-
-
     /**
      * Display a listing of the users
      *
@@ -46,14 +44,11 @@ class UserController extends Controller
         $auth = Auth::user();
         $routes = $this->routes;
         $columns = $this->columns;
+        $models = $this->getModelsCount();
 
-        $models = [
-            'Admin'=>count(User::whereRoleId(Role::whereType('ADMIN')->first()->id)->get() ),
-            'User'=>count(User::whereRoleId(Role::whereType('USER')->first()->id)->get() ),
-            'All User' => count(User::all()),
-        ];
-        $users = User::orderBy('created_at','DESC')->paginate(10);
         $page='All User';
+        $users = User::orderBy('created_at','DESC')->paginate(10);
+
 
         return view('users.index',compact('page','routes','models','columns','users','auth') );
     }
@@ -64,16 +59,12 @@ class UserController extends Controller
         $auth = Auth::user();
         $routes = $this->routes;
         $columns = $this->columns;
+        $models = $this->getModelsCount();
 
-        $models = [
-            'Admin'=>count(User::whereRoleId(Role::whereType('ADMIN')->first()->id)->get() ),
-            'User'=>count(User::whereRoleId(Role::whereType('USER')->first()->id)->get() ),
-            'All User' => count(User::all()),
-        ];
-
+        $page='Admin';
         $users = User::where('role_id',Role::whereType('ADMIN')->first()->id )
                             ->orderBy('created_at','DESC')->paginate(10);
-        $page='Admin';
+
 
         return view('users.index',compact('page','routes','models','columns','users','auth') );
     }
@@ -83,16 +74,12 @@ class UserController extends Controller
         $auth = Auth::user();
         $routes = $this->routes;
         $columns = $this->columns;
+        $models = $this->getModelsCount();
 
-        $models = [
-            'Admin'=>count(User::whereRoleId(Role::whereType('ADMIN')->first()->id)->get() ),
-            'User'=>count(User::whereRoleId(Role::whereType('USER')->first()->id)->get() ),
-            'All User' => count(User::all()),
-        ];
-
+        $page='User';
         $users = User::where('role_id',Role::whereType('USER')->first()->id )
                             ->orderBy('created_at','DESC')->paginate(10);
-        $page='User';
+
 
         return view('users.index',compact('page','routes','models','columns','users','auth') );
     }
@@ -116,5 +103,20 @@ class UserController extends Controller
     {
         User::findOrFail($id)->delete();
         return redirect()->back();
+    }
+
+
+/*
+|---------------------------------------------------------------------------|
+| CUSTOM FUNCTION                                                           |
+|---------------------------------------------------------------------------|
+*/
+    public function getModelsCount()
+    {
+        return $models = [
+            'Admin'=>User::countAdmin(),
+            'User'=>User::countUser(),
+            'All User' => User::count(),
+        ];
     }
 }

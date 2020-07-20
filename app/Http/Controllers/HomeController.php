@@ -29,12 +29,19 @@ class HomeController extends Controller
     {
 
         $models = [
-            'User'=>count(User::all()),
+            'User'=>User::count(),
             'Product'=>count(Product::all()),
             'Category'=>count(Category::all()),
             'Order'=>count(Order::all()),
         ];
 
-        return view('dashboard',compact('models'));
+        $routes = [
+            'User'=>'user.index',
+            'Product'=>'user.index',
+            'Category'=> 'user.index',
+            'Order'=>'user.index'
+        ];
+
+        return view('dashboard',compact('models','routes'));
     }
 }
