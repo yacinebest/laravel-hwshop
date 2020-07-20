@@ -5,7 +5,7 @@
                     <img :src="'/storage/uploads/avatars/' + this.avatar" id="avatar-img" >
             </span>
             <div class="media-body ml-2 d-none d-lg-block">
-                <span class="mb-0 text-sm  font-weight-bold">{{ this.authUser.username }}</span>
+                <span class="mb-0 text-sm  font-weight-bold">{{ this.username }}</span>
             </div>
         </div>
         <div v-else>
@@ -41,6 +41,11 @@ export default {
         upload: {
             type: Boolean,
             default: false
+        },
+        username: {
+            type: String,
+            required: false,
+            default: ''
         }
     },
     data() {

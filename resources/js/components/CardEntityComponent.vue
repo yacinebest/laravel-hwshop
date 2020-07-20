@@ -4,7 +4,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col">
-                        <h5 class="card-title text-uppercase text-muted mb-0">{{ this.entity_name}}</h5>
+                        <h5 class="card-title text-uppercase text-muted mb-0">
+                            <a :href="this.entity_route">
+                                {{ this.entity_name}}
+                            </a>
+                        </h5>
                         <span class="h2 font-weight-bold mb-0">{{ this.entity_total }} </span>
                     </div>
                     <div class="col-auto">
@@ -33,6 +37,10 @@ export default {
         entity_total: {
             type: String,
             default: '0'
+        },
+        entity_route: {
+            type: String,
+            required: true,
         },
     },
     mounted() {

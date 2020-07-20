@@ -13,7 +13,7 @@ class User extends Authenticatable
     // protected $with =['orders'] ;
     // protected $appends =['isAdmin','isUser'];
     protected $appends =['isAdmin','isUser','commentCount','upVoteCount','downVoteCount' ,
-    'orderApprovedByAdminCount','age'];
+    'orderApprovedByAdminCount','age','roleType'];
 
     // Disable Incrementing
     public $incrementing = false;
@@ -151,4 +151,12 @@ class User extends Authenticatable
     {
         return Carbon::parse($this->birth_date)->age;
     }
+
+    /**
+     */
+    public function getRoleTypeAttribute()
+    {
+        return $this->role->type;
+    }
+
 }

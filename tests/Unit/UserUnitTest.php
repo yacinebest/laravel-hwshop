@@ -47,6 +47,9 @@ class UserUnitTest extends TestCase
         $this->assertNotEmpty($this->user->role);
         $this->assertEquals ($this->user->role->type , 'USER');
         $this->assertEquals ($this->admin->role->type , 'ADMIN');
+
+        $this->assertEquals ($this->user->roleType , 'USER');
+        $this->assertEquals ($this->admin->roleType , 'ADMIN');
     }
 
      /**

@@ -34,6 +34,7 @@ class HomeController extends Controller
             'Category'=>count(Category::all()),
             'Order'=>count(Order::all()),
         ];
+
         return view('dashboard',compact('models'));
     }
 }

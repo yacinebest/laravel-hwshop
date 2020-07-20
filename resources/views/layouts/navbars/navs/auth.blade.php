@@ -18,7 +18,8 @@
         <ul class="navbar-nav align-items-center d-none d-md-flex">
             <li class="nav-item dropdown">
                 <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <user-avatar :user="{{ Auth::user() }}" ></user-avatar>
+                    {{-- <user-avatar :user="{{ Auth::user() }}"  ></user-avatar> --}}
+                    <user-avatar :user="{{ Auth::user() }}" username="{{ Auth::user()->username }}" ></user-avatar>
 
                 </a>
                 <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">

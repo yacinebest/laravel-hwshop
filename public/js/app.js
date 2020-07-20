@@ -1933,6 +1933,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     entity_name: {
@@ -1942,6 +1946,10 @@ __webpack_require__.r(__webpack_exports__);
     entity_total: {
       type: String,
       "default": '0'
+    },
+    entity_route: {
+      type: String,
+      required: true
     }
   },
   mounted: function mounted() {}
@@ -2002,6 +2010,11 @@ __webpack_require__.r(__webpack_exports__);
     upload: {
       type: Boolean,
       "default": false
+    },
+    username: {
+      type: String,
+      required: false,
+      "default": ''
     }
   },
   data: function data() {
@@ -37694,7 +37707,15 @@ var render = function() {
             _c(
               "h5",
               { staticClass: "card-title text-uppercase text-muted mb-0" },
-              [_vm._v(_vm._s(this.entity_name))]
+              [
+                _c("a", { attrs: { href: this.entity_route } }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(this.entity_name) +
+                      "\n                        "
+                  )
+                ])
+              ]
             ),
             _vm._v(" "),
             _c("span", { staticClass: "h2 font-weight-bold mb-0" }, [
@@ -37775,7 +37796,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "media-body ml-2 d-none d-lg-block" }, [
             _c("span", { staticClass: "mb-0 text-sm  font-weight-bold" }, [
-              _vm._v(_vm._s(this.authUser.username))
+              _vm._v(_vm._s(this.username))
             ])
           ])
         ])
