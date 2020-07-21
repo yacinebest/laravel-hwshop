@@ -7,17 +7,22 @@ use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 
 class HomeController extends Controller
 {
+
+    private $userRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->middleware('auth');
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -27,21 +32,13 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        $models = [
-            'User'=>User::count(),
-            'Product'=>count(Product::all()),
-            'Category'=>count(Category::all()),
-            'Order'=>count(Order::all()),
+        $cardCountAndRoute =[
+            'User'=>['count'=>$this->userRepository->getAllUserCount(),'route'=>'user.index'],
+            'Product'=>['count'=>count(Product::all()),'route'=>'user.index'],
+            'Category'=>['count'=>count(Category::all()),'route'=>'user.index'],
+            'Order'=>['count'=>count(Order::all()),'route'=>'user.index'],
         ];
 
-        $routes = [
-            'User'=>'user.index',
-            'Product'=>'user.index',
-            'Category'=> 'user.index',
-            'Order'=>'user.index'
-        ];
-
-        return view('dashboard',compact('models','routes'));
+        return view('dashboard',compact('cardCountAndRoute'));
     }
 }

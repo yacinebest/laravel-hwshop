@@ -28,12 +28,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::get('user/{id}', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
-
-
     Route::get('allAdmin', ['as' => 'user.admin.index', 'uses' => 'UserController@indexAdmin']);
     Route::get('allUser', ['as' => 'user.user.index', 'uses' => 'UserController@indexUser']);
-
-
     Route::post('user/{id}', ['as' => 'user.updateRole', 'uses' => 'UserController@updateRole']);
 
 

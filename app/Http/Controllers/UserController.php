@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Http\Controllers;
+
 
 use App\Http\Requests\UserRequest;
 use App\Models\Category;
@@ -8,28 +8,18 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    protected $routes = [
-        'Admin'=>'user.admin.index',
-        'User'=>'user.user.index',
-        'All User'=> 'user.index'
-    ];
+    private $userRepository;
 
-    protected $columns =[
-        'avatar'=>'Avatar',
-        // 'username'=>'Username',
-        'roleType'=>'Role',
-        'firstname'=>'First Name',
-        'lastname'=>'Last Name',
-        'email'=>'Email',
-        'phone_number'=>'Phone Number',
-        'created_at' => 'Created At'
-    ];
+    public function __construct(UserRepositoryInterface $userRepository) {
+        $this->userRepository = $userRepository;
+    }
 
     /**
      * Display a listing of the users
@@ -40,53 +30,39 @@ class UserController extends Controller
     // public function index($name,User $model)
     public function index()
     {
-
-        $auth = Auth::user();
-        $routes = $this->routes;
-        $columns = $this->columns;
-        $models = $this->getModelsCount();
-
         $page='All User';
-        $users = User::orderBy('created_at','DESC')->paginate(10);
-
-
-        return view('users.index',compact('page','routes','models','columns','users','auth') );
+        $users = $this->userRepository->defaultReadWithPagination();
+        return $this->accessIndex($users,$page);
     }
 
 
     public function indexAdmin()
     {
-        $auth = Auth::user();
-        $routes = $this->routes;
-        $columns = $this->columns;
-        $models = $this->getModelsCount();
-
         $page='Admin';
-        $users = User::where('role_id',Role::whereType('ADMIN')->first()->id )
-                            ->orderBy('created_at','DESC')->paginate(10);
-
-
-        return view('users.index',compact('page','routes','models','columns','users','auth') );
+        $users = $this->userRepository->ReadAdminWithPagination();
+        return $this->accessIndex($users,$page);
     }
 
     public function indexUser()
     {
-        $auth = Auth::user();
-        $routes = $this->routes;
-        $columns = $this->columns;
-        $models = $this->getModelsCount();
-
         $page='User';
-        $users = User::where('role_id',Role::whereType('USER')->first()->id )
-                            ->orderBy('created_at','DESC')->paginate(10);
-
-
-        return view('users.index',compact('page','routes','models','columns','users','auth') );
+        $users = $this->userRepository->ReadUserWithPagination();
+        return $this->accessIndex($users,$page);
     }
+
+    public function accessIndex($users,$page)
+    {
+        $auth = $this->userRepository->getAuthUser();
+        $columns = $this->userRepository->getAccessibleColumn();
+
+        $cardCountAndRoute = $this->userRepository->getCardCountAndRoute();
+
+        return view('users.index',compact('cardCountAndRoute','page','columns','users','auth') );
+    }   
+
 
     public function edit($id)
     {
-        // dd($id);
         $user = User::findOrFail($id);
         $roles = Role::all();
         return view('users.edit',compact('user','roles'));
@@ -96,6 +72,7 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         $user->update(['role_id'=>$request->role_id]);
+        $user->refresh();
         return back()->withStatus(__('Profile successfully updated.'));
     }
 
@@ -105,18 +82,4 @@ class UserController extends Controller
         return redirect()->back();
     }
 
-
-/*
-|---------------------------------------------------------------------------|
-| CUSTOM FUNCTION                                                           |
-|---------------------------------------------------------------------------|
-*/
-    public function getModelsCount()
-    {
-        return $models = [
-            'Admin'=>User::countAdmin(),
-            'User'=>User::countUser(),
-            'All User' => User::count(),
-        ];
-    }
 }
