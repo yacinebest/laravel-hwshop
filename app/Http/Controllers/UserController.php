@@ -1,17 +1,10 @@
 <?php
 namespace App\Http\Controllers;
 
-
-use App\Http\Requests\UserRequest;
-use App\Models\Category;
-use App\Models\Order;
-use App\Models\Product;
-use App\Models\Role;
-use App\Models\User;
+use App\Http\Requests\User\UserUpdateRole;
+use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -54,31 +47,36 @@ class UserController extends Controller
     {
         $auth = $this->userRepository->getAuthUser();
         $columns = $this->userRepository->getAccessibleColumn();
-
         $cardCountAndRoute = $this->userRepository->getCardCountAndRoute();
 
         return view('users.index',compact('cardCountAndRoute','page','columns','users','auth') );
     }   
 
 
+
+
     public function edit($id)
     {
-        $user = User::findOrFail($id);
-        $roles = Role::all();
+        $user = $this->userRepository->findOrFail($id);
+        
+        $closure  = function(RoleRepositoryInterface $rep){
+            return $rep->all();
+        };  
+        $roles = app()->call($closure);
         return view('users.edit',compact('user','roles'));
     }
 
-    public function updateRole($id,Request $request)
+    public function update($id,UserUpdateRole $request)
     {
-        $user = User::findOrFail($id);
-        $user->update(['role_id'=>$request->role_id]);
-        $user->refresh();
+        $user = $this->userRepository->findOrFail($id);
+        $this->userRepository->update($user,['role_id'=>$request->role_id]);
         return back()->withStatus(__('Profile successfully updated.'));
     }
 
     public function destroy($id)
     {
-        User::findOrFail($id)->delete();
+        $user = $this->userRepository->findOrFail($id);
+        $this->userRepository->delete($user);
         return redirect()->back();
     }
 

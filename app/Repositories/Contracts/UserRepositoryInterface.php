@@ -1,9 +1,11 @@
 <?php
 namespace App\Repositories\Contracts;
 
+use App\Repositories\Contracts\Base\DeleteInterface;
 use App\Repositories\Contracts\Base\ReadInterface;
+use App\Repositories\Contracts\Base\UpdateInterface;
 
-interface UserRepositoryInterface  {
+interface UserRepositoryInterface  extends DeleteInterface , ReadInterface ,UpdateInterface {
 
     public function getAuthUser();
 

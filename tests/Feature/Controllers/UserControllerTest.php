@@ -104,7 +104,7 @@ class UserControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         Auth::login($this->admin);
-        $response = $this->post(route('user.updateRole',$this->user->id),['role_id'=>$this->role_admin->id]);
+        $response = $this->put(route('user.update',$this->user->id),['role_id'=>$this->role_admin->id]);
         $this->user->refresh();
 
         $this->assertEquals('ADMIN',$this->user->roleType);

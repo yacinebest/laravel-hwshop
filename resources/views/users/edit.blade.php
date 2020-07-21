@@ -53,8 +53,9 @@
 
                         @endforeach
 
-                        <form method="post" action="{{ route('user.updateRole',$user->id) }}" autocomplete="off">
+                        <form method="post" action="{{ route('user.update',$user->id) }}" autocomplete="off">
                             @csrf
+                            @method('put')
 
                             <div class="form-group">
                                 <label class="form-control-label" >Role </label>

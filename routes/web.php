@@ -30,8 +30,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('user/{id}', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
     Route::get('allAdmin', ['as' => 'user.admin.index', 'uses' => 'UserController@indexAdmin']);
     Route::get('allUser', ['as' => 'user.user.index', 'uses' => 'UserController@indexUser']);
-    Route::post('user/{id}', ['as' => 'user.updateRole', 'uses' => 'UserController@updateRole']);
-
 
 	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
