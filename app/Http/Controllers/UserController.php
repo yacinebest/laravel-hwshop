@@ -1,8 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PasswordRequest;
-use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\User\PasswordRequest;
+use App\Http\Requests\User\ProfileRequest;
 use App\Http\Requests\User\UserUpdateRole;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -106,7 +106,7 @@ class UserController extends Controller
     /**
      * Change the password
      *
-     * @param  \App\Http\Requests\PasswordRequest  $request
+     * @param  \App\Http\Requests\User\PasswordRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function password(PasswordRequest $request)

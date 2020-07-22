@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\User;
 
+use App\Models\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UserRequest extends FormRequest
+class ProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,15 +27,9 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => [
-                'required', 'min:3'
-            ],
-            'email' => [
-                'required', 'email'//, Rule::unique((new User)->getTable())->ignore($this->route()->user->id ?? null)
-            ],
-            // 'password' => [
-            //     $this->route()->user ? 'nullable' : 'required', 'confirmed', 'min:6'
-            // ]
+            'username' => ['required', 'min:3'],
+            'email' => ['required', 'email'],
+            //, Rule::unique((new User())->getTable())->ignore(auth()->id())
         ];
     }
 }
