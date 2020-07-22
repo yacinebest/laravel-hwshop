@@ -2,10 +2,11 @@
 namespace App\Repositories\Contracts;
 
 use App\Repositories\Contracts\Base\DeleteInterface;
+use App\Repositories\Contracts\Base\ReadableColumnInterface;
 use App\Repositories\Contracts\Base\ReadInterface;
 use App\Repositories\Contracts\Base\UpdateInterface;
 
-interface UserRepositoryInterface  extends DeleteInterface , ReadInterface ,UpdateInterface {
+interface UserRepositoryInterface  extends DeleteInterface , ReadInterface ,UpdateInterface , ReadableColumnInterface {
 
     public function getAuthUser();
     public function isAuthUserEqualTo($user);
@@ -14,7 +15,6 @@ interface UserRepositoryInterface  extends DeleteInterface , ReadInterface ,Upda
     public function getAdminCount();
     public function getUserCount();
 
-    public function getAccessibleColumn();
     public function getCardCountAndRoute();
 
 

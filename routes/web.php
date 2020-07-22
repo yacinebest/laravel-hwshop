@@ -38,5 +38,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
     Route::post('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
 
+    Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
+
+
 });
 

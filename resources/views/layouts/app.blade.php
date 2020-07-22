@@ -22,6 +22,7 @@
         <!-- Argon CSS -->
         <link type="text/css" href="{{ asset('argon') }}/css/argon.css?v=1.0.0" rel="stylesheet">
 
+        @yield('links')
     </head>
     <body class="{{ $class ?? '' }}">
         <div id='app'>
@@ -52,6 +53,6 @@
         <script src="{{ asset('js/app.js') }}"></script>
         <!-- Argon JS -->
         <script src="{{ asset('argon') }}/js/argon.js?v=1.0.0"></script>
-
+        @yield('scripts')
     </body>
 </html>

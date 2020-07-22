@@ -4,7 +4,9 @@ namespace App\Models;
 
 class Category extends BaseModel
 {
+    // protected $with =['parent'] ;
     // protected $with =['products','parent'] ;
+    protected $appends =['parentName'];
 
     public function products()
     {
@@ -25,5 +27,15 @@ class Category extends BaseModel
     public function images()
     {
         return $this->morphMany('App\Models\Image', 'imageable');
+    }
+
+/*
+|---------------------------------------------------------------------------|
+| CUSTOM FUNCTION                                                           |
+|---------------------------------------------------------------------------|
+*/
+    public function getParentNameAttribute()
+    {
+        return $this->parent ? $this->parent->name : null ;
     }
 }
