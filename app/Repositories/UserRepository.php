@@ -18,11 +18,14 @@ class UserRepository implements UserRepositoryInterface  {
     use UpdateTrait;
 
     public function getAuthUser(){
-        return Auth::user();
+        return User::findOrFail(Auth::user()->id ) ;
+    }
+
+    public function isAuthUserEqualTo($user){
+        return $this->getAuthUser()->id === $user->id ;
     }
 
 
-    
 
     public function getAllUserCount(){
         return User::count();
@@ -75,7 +78,7 @@ class UserRepository implements UserRepositoryInterface  {
     }
 
 
-    
+
     public function findOrFail($id,$model = null){
         return $this->baseFindOrFail($id,'User');
     }

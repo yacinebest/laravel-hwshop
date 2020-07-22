@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Tests\Feature\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
@@ -89,9 +89,24 @@ class UserControllerTest extends TestCase
         $this->withoutExceptionHandling();
 
         Auth::login($this->admin);
-        $response = $this->get(route('user.user.index',$this->user->id));
+        $response = $this->get(route('user.edit',$this->user->id));
 
         $response->assertOk();
+    }
+
+    /**
+     * @test
+     * @group feature_controller
+     * @return void
+    */
+    function can_edit_own_profile()
+    {
+        $this->withoutExceptionHandling();
+
+        Auth::login($this->user);
+        $response = $this->get(route('user.edit',$this->user->id));
+
+        $response->assertRedirect();
     }
 
     /**
@@ -110,6 +125,22 @@ class UserControllerTest extends TestCase
         $this->assertEquals('ADMIN',$this->user->roleType);
     }
 
+    /**
+     * @test
+     * @group feature_controller
+     * @return void
+    */
+    function can_updateProfile_user()
+    {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+        Auth::login($this->admin);
+        $response = $this->put(route('user.update',$this->user->id),['role_id'=>$user->role_id, 'username'=>'fsdsfs','email'=>$this->user->email ]);
+        $this->user->refresh();
+
+        $this->assertEquals($user->roleType,$this->user->roleType);
+    }
+
       /**
      * @test
      * @group feature_controller
@@ -123,6 +154,21 @@ class UserControllerTest extends TestCase
         $response = $this->delete(route('user.destroy',$this->user->id));
 
         $this->assertEmpty(User::find($this->user->id));
+    }
+
+    /**
+     * @test
+     * @group feature_controller
+     * @return void
+    */
+    function can_show_profile_user()
+    {
+        $this->withoutExceptionHandling();
+
+        Auth::login($this->admin);
+        $response = $this->get(route('user.profile'));
+
+        $response->assertOk();
     }
 
 

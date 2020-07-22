@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PasswordRequest;
+use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\User\UserUpdateRole;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
@@ -48,9 +50,8 @@ class UserController extends Controller
         $auth = $this->userRepository->getAuthUser();
         $columns = $this->userRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->userRepository->getCardCountAndRoute();
-
         return view('users.index',compact('cardCountAndRoute','page','columns','users','auth') );
-    }   
+    }
 
 
 
@@ -58,18 +59,28 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userRepository->findOrFail($id);
-        
-        $closure  = function(RoleRepositoryInterface $rep){
-            return $rep->all();
-        };  
-        $roles = app()->call($closure);
-        return view('users.edit',compact('user','roles'));
+        if($this->userRepository->isAuthUserEqualTo($user) )
+            return redirect()->route('user.profile');
+        else{
+            $closure  = function(RoleRepositoryInterface $rep){
+                return $rep->all();
+            };
+            $roles = app()->call($closure);
+            return view('users.edit',compact('user','roles'));
+        }
     }
 
     public function update($id,UserUpdateRole $request)
     {
         $user = $this->userRepository->findOrFail($id);
         $this->userRepository->update($user,['role_id'=>$request->role_id]);
+        return back()->withStatus(__('Profile successfully updated.'));
+    }
+
+    public function updateProfile(ProfileRequest $request)
+    {
+        $user = $this->userRepository->getAuthUser();
+        $this->userRepository->update($user,$request->all());
         return back()->withStatus(__('Profile successfully updated.'));
     }
 
@@ -80,4 +91,42 @@ class UserController extends Controller
         return redirect()->back();
     }
 
+
+    public function profile()
+    {
+
+        $user = $this->userRepository->getAuthUser();
+        $closure  = function(RoleRepositoryInterface $rep){
+            return $rep->all();
+        };
+        $roles = app()->call($closure);
+        return view('users.profile',compact('user','roles'));
+    }
+
+    /**
+     * Change the password
+     *
+     * @param  \App\Http\Requests\PasswordRequest  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function password(PasswordRequest $request)
+    {
+        $user = $this->userRepository->getAuthUser();
+        $this->userRepository->update($user,['password' => bcrypt($request->get('password')) ]);
+        return back()->withPasswordStatus(__('Password successfully updated.'));
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        $avatar = $this->storeFile($request->file('avatar'),"public/uploads/avatars");
+        $user = $this->userRepository->findOrFail($request->user_id);
+        $this->userRepository->update($user,['avatar' => $avatar ]);
+        return response()->json($avatar);
+    }
+
+    private function storeFile($file , $path)
+    {
+        $file->store($path);
+        return $file->hashName();
+    }
 }

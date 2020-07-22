@@ -31,12 +31,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('allAdmin', ['as' => 'user.admin.index', 'uses' => 'UserController@indexAdmin']);
     Route::get('allUser', ['as' => 'user.user.index', 'uses' => 'UserController@indexUser']);
 
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
-	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+    Route::get('profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
+    Route::put('profile', ['as' => 'user.update.profile', 'uses' => 'UserController@updateProfile']);
+    Route::post('profile', ['as' => 'user.upload.avatar', 'uses' => 'UserController@uploadAvatar']);
 
-    Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
-    Route::post('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+    Route::put('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
+    Route::post('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
 
-    Route::post('profile', ['as' => 'profile.upload', 'uses' => 'ProfileController@upload']);
 });
 

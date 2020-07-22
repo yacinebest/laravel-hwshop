@@ -8,6 +8,7 @@ use App\Repositories\Contracts\Base\UpdateInterface;
 interface UserRepositoryInterface  extends DeleteInterface , ReadInterface ,UpdateInterface {
 
     public function getAuthUser();
+    public function isAuthUserEqualTo($user);
 
     public function getAllUserCount();
     public function getAdminCount();
@@ -15,13 +16,13 @@ interface UserRepositoryInterface  extends DeleteInterface , ReadInterface ,Upda
 
     public function getAccessibleColumn();
     public function getCardCountAndRoute();
-    
-    
+
+
     public function defaultReadWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10);
 
     public function ReadAdminWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10);
     public function ReadUserWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10);
 
-    
+
 
 }
