@@ -15,7 +15,6 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return [
             // 'id'=>'Id',
             'name'=>'Name',
-            'parentName'=>'Parent',
             'created_at' => 'Created At'
         ];
     }

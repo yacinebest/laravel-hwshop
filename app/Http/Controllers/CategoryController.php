@@ -22,16 +22,17 @@ class CategoryController extends Controller
      */
     public function index()
     {
+
         $page='Categories';
-        // $entities = Category::paginate(5);
+        $baseCategories = Category::with('childs')->where('parent_id',null)->get();
         $entities = $this->categoryRepository->paginate();
         $columns = $this->categoryRepository->getAccessibleColumn();
         $cardCountAndRoute = [];
 
         $auth = Auth::user();
 
-        $display = 'tree';
-        return view('layouts.default.index',compact('page','entities','cardCountAndRoute','columns','auth','display'));
+        // return view('layouts.default.index',compact('page','entities','cardCountAndRoute','columns','auth','display'));
+        return view('categories.index',compact('page','entities','cardCountAndRoute','columns','auth','baseCategories'));
     }
 
     /**

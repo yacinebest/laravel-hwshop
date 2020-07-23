@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 
 $factory->define(Category::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
+        'name' => "Category ". $faker->numberBetween(),
         'parent_id' => $faker->randomElement([function(){
             return factory(\App\Models\Category::class)->create()->id;
         },null]) ,

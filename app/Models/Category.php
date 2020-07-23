@@ -4,18 +4,22 @@ namespace App\Models;
 
 class Category extends BaseModel
 {
-    // protected $with =['parent'] ;
+    // protected $with =['childs'] ;
     // protected $with =['products','parent'] ;
-    protected $appends =['parentName'];
+    // protected $appends =['parentName'];
 
     public function products()
     {
         return $this->hasMany('App\Models\Product');
     }
 
-    public function parent()
+    // public function parent()
+    // {
+    //     return $this->belongsTo('App\Models\Category', 'parent_id');
+    // }
+    public function childs()
     {
-        return $this->belongsTo('App\Models\Category', 'parent_id');
+        return $this->hasMany('App\Models\Category', 'parent_id');
     }
 
     public function brands()
@@ -34,8 +38,8 @@ class Category extends BaseModel
 | CUSTOM FUNCTION                                                           |
 |---------------------------------------------------------------------------|
 */
-    public function getParentNameAttribute()
-    {
-        return $this->parent ? $this->parent->name : null ;
-    }
+    // public function getParentNameAttribute()
+    // {
+    //     return $this->parent ? $this->parent->name : null ;
+    // }
 }

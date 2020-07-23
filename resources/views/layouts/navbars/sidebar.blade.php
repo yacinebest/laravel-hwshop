@@ -114,15 +114,20 @@
                     <div class="collapse show" id="navbar-examples2">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="">
+                                <a class="nav-link" href="{{ route('category.index') }}">
                                     {{ __('Display All Category') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="">
-                                    {{ __('Create,Update Category') }}
+                                <a class="nav-link" href="{{ route('category.create') }}">
+                                    {{ __('Create Category') }}
                                 </a>
                             </li>
+                            {{-- <li class="nav-item">
+                                <a class="nav-link" href="{{ route('category.edit') }}">
+                                    {{ __('Edit Category') }}
+                                </a>
+                            </li> --}}
                         </ul>
                     </div>
                 </li>

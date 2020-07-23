@@ -52,7 +52,8 @@ class CategoryUnitTest extends TestCase
         $subcategory  = factory(Category::class)->create(['parent_id'=>$this->category->id]);
 
         $this->assertNotEmpty($subcategory);
-        $this->assertNotEmpty($subcategory->parent);
+        $this->assertNotEmpty($this->category->childs);
+        // $this->assertNotEmpty($subcategory->parent);
 
     }
 
