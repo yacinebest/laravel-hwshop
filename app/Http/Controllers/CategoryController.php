@@ -42,7 +42,13 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $page='Create Categories';
+        $route_name= 'category';
+        $fillable_columns = $this->categoryRepository->getFillableColumn();
+        $cardCountAndRoute = [];
+        $auth = Auth::user();
+
+        return view('categories.create',compact('page','cardCountAndRoute','fillable_columns','route_name','auth'));
     }
 
     /**
@@ -53,7 +59,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->categoryRepository->create($request);
+        return redirect(route('category.index'));
     }
 
     /**
