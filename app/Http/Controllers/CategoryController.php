@@ -22,17 +22,20 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        if(request()->wantsJson())
+            return response()->json(Category::all());
+        else{
+            $page='Categories';
+            $baseCategories = Category::with('childs')->where('parent_id',null)->get();
+            $entities = $this->categoryRepository->paginate();
+            $columns = $this->categoryRepository->getAccessibleColumn();
+            $cardCountAndRoute = [];
 
-        $page='Categories';
-        $baseCategories = Category::with('childs')->where('parent_id',null)->get();
-        $entities = $this->categoryRepository->paginate();
-        $columns = $this->categoryRepository->getAccessibleColumn();
-        $cardCountAndRoute = [];
+            $auth = Auth::user();
 
-        $auth = Auth::user();
-
-        // return view('layouts.default.index',compact('page','entities','cardCountAndRoute','columns','auth','display'));
-        return view('categories.index',compact('page','entities','cardCountAndRoute','columns','auth','baseCategories'));
+            // return view('layouts.default.index',compact('page','entities','cardCountAndRoute','columns','auth','display'));
+            return view('categories.index',compact('page','entities','cardCountAndRoute','columns','auth','baseCategories'));
+        }
     }
 
     /**
@@ -48,7 +51,14 @@ class CategoryController extends Controller
         $cardCountAndRoute = [];
         $auth = Auth::user();
 
-        return view('categories.create',compact('page','cardCountAndRoute','fillable_columns','route_name','auth'));
+        $level=1;
+        $categories_level= [];
+        do {
+            $categories_level[$level]=Category::where('level',$level)->get();
+            $level++;
+        } while (count(Category::where('level',$level)->get())>0);
+
+        return view('categories.create',compact('page','cardCountAndRoute','fillable_columns','route_name','auth','categories_level'));
     }
 
     /**

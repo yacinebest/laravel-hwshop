@@ -17,6 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->uuid('id');
             $table->string('name');
             $table->uuid('parent_id')->nullable(); //parent
+            $table->integer('level')->default(1);
             //filter
             $table->timestamps();
         });
