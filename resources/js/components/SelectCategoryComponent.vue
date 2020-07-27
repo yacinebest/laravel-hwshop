@@ -1,30 +1,27 @@
 <template>
     <div>
-        <!-- <label for="">{{ categories_level.data }}</label> -->
+        <input type="hidden" name="parent_id" v-bind:value="selected.id" />
         <div v-for="(value,name) in categories_level" :key="name"  class="form-group">
             <div class="form-group" >
                 <label>Level {{ name }}</label>
-                <!-- <div v-for="(category,index)  in value" :key="index">
-                            <p>{{ category.name }}</p>
-                    </div> -->
-                <select  :id="'select-'+ name " class="form-control select-option" @change="selectedOption" >
-                    <option :id="'default-'+name"></option>
-                    <option v-for="(category,index)  in value" :key="index" :value="category.id" >{{  category.name  }}</option>
-                    <!-- <option v-for="(category,index)  in value" :key="index" :value="category" >{{  category.name  }}</option> -->
+                <select   :id="'select_'+ name " class="form-control" @change="selectedOption" v-model="selectedObject['select_' + name]">
+                    <option :id="'default_'+name" :value="{}" selected></option>
+                    <option v-for="(category,index)  in value" :key="index" :value="category" :id="category.id" >{{  category.name  }}</option>
                 </select>
-                
-            </div>  
-        </div> 
+            </div>
+
+        </div>
+        <p>Selected {{ selected ? selected.name : '' }}</p>
     </div>
 </template>
 
 <script>
 export default {
     mounted() {
-        document.querySelectorAll('select[id^=select-]').forEach(element => {
+        document.querySelectorAll('select[id^=select_]').forEach(element => {
                 this.selectedObject[element.id]= {}
                 this.lengthSelect++
-        });
+        })
     },
     props:{
         categories_level: {
@@ -33,86 +30,101 @@ export default {
             default: ()=>({})
         }
     },
-    data() {
+     data() {
         return {
             selectedObject: ({}),
             categories: ({}),
-            lengthSelect: 0
+            lengthSelect: 0,
+            selected: ({})
         }
+    },
+    computed: {
     },
     methods: {
         selectedOption(e){
-            let id = e.target.value 
             let selectId = e.target.id
-            let currentIndex = selectId.substring(selectId.length, selectId.lastIndexOf("-")+1) 
+            let currentIndex = selectId.substring(selectId.length, selectId.lastIndexOf("_")+1)
 
-            this.deselectAllOption( currentIndex)
+            this.deselectAllOption(currentIndex)
+            this.selectOptionFromEvent(e)
+            this.setNameSelectd(e)
 
-            if(id===''){
-                this.initElementSelectedObject(currentIndex)
-                this.selectDefaultOption(currentIndex)
-                this.enabledAboveSelect(currentIndex)
+
+            if( Object.keys( this.selectedObject['select_' + currentIndex]).length != 0  ){
+                let id = (this.selectedObject['select_' + currentIndex].parent_id) ? this.selectedObject['select_' + currentIndex].parent_id : null
+
+                for (let index = currentIndex-1 ; index > 0 && id!=null ; index--) {
+                    this.selectedObject['select_' + index] = this.categories.find(function(elem){
+                                    if(elem.id=== id)
+                                        return elem ;
+                                });
+                    this.deselectAllOption(index)
+                    this.selectOption(this.selectedObject['select_' + index].id)
+                    this.disabledSelect(index)
+                    if(this.selectedObject['select_' + index].parent_id)
+                        id = this.selectedObject['select_' + index].parent_id
+                }
             }
             else{
-                this.selectOption(id)
-
-                this.fillSelectedObject(currentIndex,id)
-
-                this.cleanAllSelectRefill(currentIndex)
+                this.enabledAboveSelect(currentIndex)
             }
+        },
+        enabledSelect(index){
+            document.getElementById('select_' + index).removeAttribute('disabled')
+        },
+        enabledAboveSelect(index){
+            let beforeIndex = index-1
+            if( beforeIndex >0)
+                this.enabledSelect(beforeIndex)
+        },
+        disabledSelect(index){
+            document.getElementById('select_' + index).setAttribute('disabled',true)
         },
 
 
-
         deselectAllOption(index){
-            let options = Array.from(document.getElementById('select-' +index ).options)
+            let options = Array.from(document.getElementById('select_' +index ).options)
             options.forEach(element => {
                 element.removeAttribute('selected')
             });
         },
 
         selectOption(value){
-            document.querySelector("option[value='"+value+"']").setAttribute('selected',true)
+            document.getElementById(value).setAttribute('selected',true)
+        },
+        selectOptionFromEvent(e){
+            let indexTable = e.target.options.selectedIndex
+            this.selectOption(e.target.options[indexTable].id)
         },
         selectDefaultOption(index){
-            document.getElementById("default-"+index).setAttribute('selected',true)
+            document.getElementById("default_"+index).setAttribute('selected',true)
         },
 
-        enabledSelect(index){
-            document.getElementById('select-' + index).removeAttribute('disabled') 
-        },
-        enabledAboveSelect(index){
-            let beforeIndex = index-1
-            if( beforeIndex >0)
-                this.enabledSelect(beforeIndex)   
-        },
-        disabledSelect(index){
-            document.getElementById('select-' + index).setAttribute('disabled',true) 
-        },
+        setNameSelectd(e){
+            let selectId = e.target.id
+            let currentIndex = selectId.substring(selectId.length, selectId.lastIndexOf("_")+1)
 
-        initElementSelectedObject(index){
-            this.selectedObject['select-' + index]={}
-        },
-        fillSelectedObject(currentIndex,id){
-            for (let index = currentIndex ; index > 0 ; index--) {
-                
-                this.selectedObject['select-' + index] = this.categories.find(function(elem){
-                                                    if(elem.id=== id)
-                                                        return elem ;
-                                                });
+            let indexTable = e.target.options.selectedIndex
 
-                id = this.selectedObject['select-' +index ].parent_id
-            }
-        },
-        cleanAllSelectRefill(currentIndex){
-            for (let index = currentIndex - 1 ; index > 0 ; index--) {
-                this.deselectAllOption(index)
-                let value = this.selectedObject['select-' + index].id
-                this.selectOption(value)
-                this.disabledSelect(index)
+            let id = e.target.options[indexTable].id
+
+
+            this.selected = this.categories.find(function(elem){
+                                if(elem.id=== id)
+                                    return elem ;
+                            }) || ({});
+
+            if(Object.keys(this.selected).length==0 ){
+                for (let index =1 ; index <=currentIndex  ; index++) {
+                    if(Object.keys(this.selectedObject['select_'+index]).length==0){
+                        let beforeIndex = index-1;
+                        if( beforeIndex)
+                            this.selected = this.selectedObject['select_'+beforeIndex] ;
+                    }
+
+                }
             }
         }
-
     },
     created() {
         axios.get('/category')

@@ -69,6 +69,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request->all();
         $this->categoryRepository->create($request);
         return redirect(route('category.index'));
     }

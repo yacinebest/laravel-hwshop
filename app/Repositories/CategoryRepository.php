@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Traits\Base\CreateTraits;
 use App\Traits\Base\ReadTrait;
@@ -34,7 +35,16 @@ class CategoryRepository implements CategoryRepositoryInterface {
     }
 
     public function create(Request $request){
-        if($request->has('parent_id')) $this->categoryRequest = array_merge($this->categoryRequest,['parent_id']) ;
+        if($request->has('parent_id')) {
+            $this->categoryRequest = array_merge($this->categoryRequest,['parent_id','level']) ;
+            $request['level'] = $this->getLevelCategory($request['parent_id']) + 1;
+        }
         return $this->baseCreate('Category',$request->only($this->categoryRequest));
+    }
+
+
+
+    public function getLevelCategory($id){
+        return Category::findOrFail($id)->level;
     }
 }

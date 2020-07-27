@@ -12,4 +12,6 @@ interface CategoryRepositoryInterface extends ReadInterface , ReadableColumnInte
     public function getFillableColumn();
 
     public function create(Request $request);
+
+    public function getLevelCategory($id);
 }
