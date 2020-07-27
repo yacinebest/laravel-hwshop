@@ -50,7 +50,7 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                        <a class="dropdown-item" href=""><i class="ni ni-fat-remove"></i>Edit</a>
+                                                        <a class="dropdown-item" href="{{ $route_name ? route( $route_name . '.edit',$entity->id) : '' }}"><i class="ni ni-fat-remove"></i>Edit</a>
                                                         <a class="dropdown-item" href=""><i class="ni ni-fat-remove"></i>Delete</a>
                                                         {{-- <form method="post" action="{{ route('user.destroy',$user->id) }}" >
                                                             @csrf

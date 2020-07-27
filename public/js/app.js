@@ -1987,15 +1987,43 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    var select_id;
     document.querySelectorAll('select[id^=select_]').forEach(function (element) {
-      _this.selectedObject[element.id] = {};
+      if (Object.keys(_this.selected_categories).length > 0) {
+        select_id = element.id.substring(element.id.length, element.id.lastIndexOf("_") + 1);
+
+        if (_this.selected_categories.hasOwnProperty(element.id)) {
+          _this.selectedObject[element.id] = _this.selected_categories[element.id];
+
+          _this.selectOption(_this.selectedObject[element.id].id);
+
+          _this.disabledSelect(select_id);
+        } else {
+          _this.selectedObject[element.id] = {};
+
+          _this.enabledAboveSelect(select_id);
+        }
+      } else _this.selectedObject[element.id] = {};
+
       _this.lengthSelect++;
     });
+    this.enabledSelect(this.lengthSelect);
+    var last_id = Object.keys(this.selected_categories).length;
+
+    if (last_id > 0) {
+      this.selected = this.selected_categories['select_' + last_id];
+    }
   },
   props: {
     categories_level: {
       type: Object,
       required: true,
+      "default": function _default() {
+        return {};
+      }
+    },
+    selected_categories: {
+      type: Object,
       "default": function _default() {
         return {};
       }

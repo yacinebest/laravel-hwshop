@@ -7,7 +7,7 @@
 
             <div class="card-header bg-white border-0">
                 <div class="row align-items-center">
-                    <h3 class="col-12 mb-0">{{ __('Create ' . $page) }}</h3>
+                    <h3 class="col-12 mb-0">{{ __('Edit ' . $page) }}</h3>
                 </div>
             </div>
 
@@ -25,8 +25,9 @@
                     @endif
 
                     {{-- <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off"> --}}
-                    <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off">
+                    <form method="post" action="{{ route( $route_name . '.update',$category->id ) }}" autocomplete="off">
                         @csrf
+                        @method('put')
 
                         @foreach ($fillable_columns as $key=>$placeholder)
                             <div class="form-group">
@@ -34,7 +35,7 @@
                                 @php
                                     $type='text';
                                 @endphp
-                                <input type="{{ $type}}" name="{{ $key }}" id="input-{{ $key }}" class="form-control form-control-alternative" placeholder="{{ __($placeholder) }}" >
+                                <input type="{{ $type}}" name="{{ $key }}" id="input-{{ $key }}" class="form-control form-control-alternative" placeholder="{{ __($placeholder) }}" value="{{ old($key, $category->$key) }}" >
 
 
                                 @if ($errors->has($key))
@@ -48,7 +49,7 @@
                         @yield('custom_colomn')
 
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success mt-4">{{ __('Create') }}</button>
+                            <button type="submit" class="btn btn-success mt-4">{{ __('Save') }}</button>
                         </div>
 
                     </form>

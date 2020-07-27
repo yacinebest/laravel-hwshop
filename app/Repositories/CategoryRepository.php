@@ -5,11 +5,15 @@ use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Traits\Base\CreateTraits;
 use App\Traits\Base\ReadTrait;
+use App\Traits\Base\UpdateTrait;
 use Illuminate\Http\Request;
 
 class CategoryRepository implements CategoryRepositoryInterface {
-    use ReadTrait;
+    use ReadTrait{
+        findOrFail as baseFindOrFail;
+    }
     use CreateTraits;
+    use UpdateTrait;
 
 
     private $categoryRequest = ['name'];
@@ -22,6 +26,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return [
             // 'id'=>'Id',
             'name'=>'Name',
+            'level'=>'Level',
             'created_at' => 'Created At'
         ];
     }
@@ -46,5 +51,9 @@ class CategoryRepository implements CategoryRepositoryInterface {
 
     public function getLevelCategory($id){
         return Category::findOrFail($id)->level;
+    }
+
+    public function findOrFail($id,$model = null){
+        return $this->baseFindOrFail($id,'Category');
     }
 }

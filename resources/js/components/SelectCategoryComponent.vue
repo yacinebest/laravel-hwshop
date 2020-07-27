@@ -18,15 +18,42 @@
 <script>
 export default {
     mounted() {
+        let select_id;
         document.querySelectorAll('select[id^=select_]').forEach(element => {
-                this.selectedObject[element.id]= {}
+                if ( Object.keys( this.selected_categories).length >0 ){
+                    select_id = element.id.substring(element.id.length, element.id.lastIndexOf("_")+1)
+                    if (this.selected_categories.hasOwnProperty(element.id)) {
+                        this.selectedObject[element.id]= this.selected_categories[element.id]
+                        this.selectOption(this.selectedObject[element.id].id)
+                        this.disabledSelect( select_id)
+                    }
+                    else{
+                        this.selectedObject[element.id]= {}
+                        this.enabledAboveSelect(select_id)
+                    }
+                }
+                else
+                    this.selectedObject[element.id]= {}
+
                 this.lengthSelect++
         })
+
+        this.enabledSelect(this.lengthSelect)
+
+        let last_id = Object.keys( this.selected_categories).length
+        if(last_id>0){
+            this.selected = this.selected_categories['select_'+last_id]
+        }
+
     },
     props:{
         categories_level: {
             type: Object,
             required: true,
+            default: ()=>({})
+        },
+        selected_categories: {
+            type: Object,
             default: ()=>({})
         }
     },

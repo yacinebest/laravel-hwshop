@@ -38,10 +38,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::put('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
     Route::post('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
 
-    Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
-    Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
-    Route::get('category/{id}/edit', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
+    Route::resource('category', 'CategoryController');
 
-    Route::post('category', ['as' => 'category.store', 'uses' => 'CategoryController@store']);
+    // Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
+    // Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
+    // Route::get('category/{id}/edit', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
+
+    // Route::post('category', ['as' => 'category.store', 'uses' => 'CategoryController@store']);
 });
 

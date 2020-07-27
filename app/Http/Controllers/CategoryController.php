@@ -33,8 +33,10 @@ class CategoryController extends Controller
 
             $auth = Auth::user();
 
+            $route_name= 'category';
+
             // return view('layouts.default.index',compact('page','entities','cardCountAndRoute','columns','auth','display'));
-            return view('categories.index',compact('page','entities','cardCountAndRoute','columns','auth','baseCategories'));
+            return view('categories.index',compact('page','entities','cardCountAndRoute','columns','auth','baseCategories','route_name'));
         }
     }
 
@@ -93,7 +95,29 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $page='Update Categories';
+        $route_name= 'category';
+        $fillable_columns = $this->categoryRepository->getFillableColumn();
+        $cardCountAndRoute = [];
+        $category = $this->categoryRepository->findOrFail($id);
+
+        $level=1;
+        $categories_level= [];
+        do {
+            $categories_level[$level]=Category::where('level',$level)->get();
+            $level++;
+        } while (count(Category::where('level',$level)->get())>0);
+
+        $selected_categories= [];
+        // $selected_categories['select_'.$category->level] = $category;
+        $parent_id = $category->parent_id;
+        for ($i=$category->level; $i > 0 && $parent_id!=null ; $i--) {
+            $selected_categories['select_'.$i] = $this->categoryRepository->findOrFail($parent_id);
+            $parent_id = $selected_categories['select_'.$i]->parent_id;
+        }
+
+        return view('categories.edit',compact('page','cardCountAndRoute','fillable_columns','route_name','category','categories_level','selected_categories'));
+
     }
 
     /**
@@ -105,7 +129,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $category = $this->categoryRepository->findOrFail($id);
+        // dd($category,$request->all());
+        $level =  ($request->parent_id ? $this->categoryRepository->findOrFail($request->parent_id)->level + 1 : 1  );
+        $this->categoryRepository->update($category,['name'=>$request->name,'parent_id'=> $request->parent_id,'level'=>$level]);
+        return back()->withStatus(__('Category successfully updated.'));
     }
 
     /**

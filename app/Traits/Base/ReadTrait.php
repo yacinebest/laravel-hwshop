@@ -11,6 +11,8 @@ trait ReadTrait{
     public function findOrFail($id,$model = null){
         if($model=='User')
             return User::findOrFail($id);
+        else if($model=='Category')
+            return Category::findOrFail($id);
         else
             throw new ModelNotFoundException('Entity Not Found');
     }
@@ -18,9 +20,9 @@ trait ReadTrait{
     public function all($model = null){
         if($model=='User')
             return User::all();
-        if($model=='Role')
+        else if($model=='Role')
             return Role::all();
-        if($model=='Category')
+        else if($model=='Category')
             return Category::all();
         else
             throw new ModelNotFoundException('Model Not Found');
