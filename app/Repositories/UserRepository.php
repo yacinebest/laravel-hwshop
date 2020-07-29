@@ -12,9 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class UserRepository implements UserRepositoryInterface  {
 
     use DeleteTrait;
-    use ReadTrait{
-        findOrFail as baseFindOrFail;
-    }
+    use ReadTrait;
     use UpdateTrait;
 
     public function getAuthUser(){
@@ -51,7 +49,7 @@ class UserRepository implements UserRepositoryInterface  {
             'lastname'=>'Last Name',
             'email'=>'Email',
             'phone_number'=>'Phone Number',
-            'created_at' => 'Created At'
+            // 'created_at' => 'Created At'
         ];
     }
 
@@ -79,8 +77,8 @@ class UserRepository implements UserRepositoryInterface  {
 
 
 
-    public function findOrFail($id,$model = null){
-        return $this->baseFindOrFail($id,'User');
-    }
+    // public function findOrFail($id,$model = null){
+    //     return $this->baseFindOrFail($id,'User');
+    // }
 
 }

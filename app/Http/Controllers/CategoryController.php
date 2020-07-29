@@ -21,18 +21,19 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {//            return response()->json(Category::all());
-        if(request()->wantsJson())
-            return response()->json( $this->categoryRepository->allCategories() );
-        else{
-            $entities = $this->categoryRepository->paginate();
-            $columns = $this->categoryRepository->getAccessibleColumn();
-            $cardCountAndRoute = $this->categoryRepository->getCardCountAndRoute();
+    {
+        $entities = $this->categoryRepository->basePaginate();
+        $columns = $this->categoryRepository->getAccessibleColumn();
+        $cardCountAndRoute = $this->categoryRepository->getCardCountAndRoute();
 
-            $baseCategories = $this->categoryRepository->getBaseCategories();
+        $baseCategories = $this->categoryRepository->getBaseCategories();
 
-            return view('categories.index',compact('cardCountAndRoute','entities','columns','baseCategories'));
-        }
+        return view('categories.index',compact('cardCountAndRoute','entities','columns','baseCategories'));
+    }
+
+    public function indexJson()
+    {
+        return response()->json( $this->categoryRepository->allCategories() );
     }
 
     /**
@@ -72,7 +73,7 @@ class CategoryController extends Controller
 
         $fillable_columns = $this->categoryRepository->getFillableColumn();
 
-        $category = $this->categoryRepository->findOrFail($id);
+        $category = $this->categoryRepository->baseFindOrFail($id);
 
         $categories_level= $this->categoryRepository->getCategoriesLevels();
 
@@ -90,7 +91,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = $this->categoryRepository->findOrFail($id);
+        $category = $this->categoryRepository->baseFindOrFail($id);
 
         $this->categoryRepository->updateCategoriesWithChilds($category,$request);
 
@@ -105,7 +106,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = $this->categoryRepository->findOrFail($id);
+        $category = $this->categoryRepository->baseFindOrFail($id);
         $this->categoryRepository->deleteWithChilds($category);
         return redirect()->back();
     }

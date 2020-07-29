@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
 
     Route::resource('category', 'CategoryController');
+    Route::post('allCategory', ['as' => 'category.indexJson', 'uses' => 'CategoryController@indexJson']);
 
     // Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
     // Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);

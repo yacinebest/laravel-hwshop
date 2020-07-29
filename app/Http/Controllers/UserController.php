@@ -58,12 +58,12 @@ class UserController extends Controller
 
     public function edit($id)
     {
-        $user = $this->userRepository->findOrFail($id);
+        $user = $this->userRepository->baseFindOrFail($id);
         if($this->userRepository->isAuthUserEqualTo($user) )
             return redirect()->route('user.profile');
         else{
             $closure  = function(RoleRepositoryInterface $rep){
-                return $rep->all();
+                return $rep->baseAll();
             };
             $roles = app()->call($closure);
             return view('users.edit',compact('user','roles'));
@@ -72,7 +72,7 @@ class UserController extends Controller
 
     public function update($id,UserUpdateRole $request)
     {
-        $user = $this->userRepository->findOrFail($id);
+        $user = $this->userRepository->baseFindOrFail($id);
         $this->userRepository->update($user,['role_id'=>$request->role_id]);
         return back()->withStatus(__('Profile successfully updated.'));
     }
@@ -86,7 +86,7 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = $this->userRepository->findOrFail($id);
+        $user = $this->userRepository->baseFindOrFail($id);
         $this->userRepository->delete($user);
         return redirect()->back();
     }
@@ -97,7 +97,7 @@ class UserController extends Controller
 
         $user = $this->userRepository->getAuthUser();
         $closure  = function(RoleRepositoryInterface $rep){
-            return $rep->all();
+            return $rep->baseAll();
         };
         $roles = app()->call($closure);
         return view('users.profile',compact('user','roles'));
@@ -119,7 +119,7 @@ class UserController extends Controller
     public function uploadAvatar(Request $request)
     {
         $avatar = $this->storeFile($request->file('avatar'),"public/uploads/avatars");
-        $user = $this->userRepository->findOrFail($request->user_id);
+        $user = $this->userRepository->baseFindOrFail($request->user_id);
         $this->userRepository->update($user,['avatar' => $avatar ]);
         return response()->json($avatar);
     }

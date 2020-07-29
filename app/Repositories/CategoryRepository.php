@@ -10,34 +10,30 @@ use App\Traits\Base\UpdateTrait;
 use Illuminate\Http\Request;
 
 class CategoryRepository implements CategoryRepositoryInterface {
-    use ReadTrait{
-        findOrFail as baseFindOrFail;
-    }
+    use ReadTrait;
     use CreateTraits;
     use UpdateTrait;
     use DeleteTrait;
 
-
     private $categoryRequest = ['name'];
 
-    public function paginate($number = 10){
-        return $this->basePaginate($number,'Category');
-    }
+
+    // public function paginate($number = 10){
+    //     return $this->basePaginate($number,'Category');
+    // }
 
     public function getAccessibleColumn(){
         return [
-            // 'id'=>'Id',
             'name'=>'Name',
             'level'=>'Level',
-            'created_at' => 'Created At'
+            'childCount' => 'All Childs',
+            'created_at' => 'Created At',
         ];
     }
 
     public function getFillableColumn(){
         return [
-            // 'id'=>'Id',
             'name'=>'Name',
-            // 'parent_id'=>'Parent',
         ];
     }
 
@@ -55,9 +51,9 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return Category::findOrFail($id)->level;
     }
 
-    public function findOrFail($id,$model = null){
-        return $this->baseFindOrFail($id,'Category');
-    }
+    // public function findOrFail($id,$model = null){
+    //     return $this->baseFindOrFail($id,'Category');
+    // }
 
 
     public function getCardCountAndRoute(){
@@ -78,7 +74,8 @@ class CategoryRepository implements CategoryRepositoryInterface {
         return Category::with('childs')->where('parent_id',null)->get();
     }
     public function allCategories(){
-        return $this->all('Category');
+        return $this->baseAll();
+        // return $this->all('Category');
     }
 
     public function getCategoriesLevels(){
@@ -95,7 +92,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
         $selected_categories= [];
         $parent_id = $category->parent_id;
         for ($i=$category->level -1; $i > 0 && $parent_id!=null ; $i--) {
-            $selected_categories['select_'.$i] = $this->findOrFail($parent_id);
+            $selected_categories['select_'.$i] = $this->baseFindOrFail($parent_id);
             $parent_id = $selected_categories['select_'.$i]->parent_id;
         }
         return $selected_categories;
@@ -107,7 +104,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
 
         $oldLevel = $category->level;
 
-        $level =  ($request->parent_id ? $this->findOrFail($request->parent_id)->level + 1 : 1  );
+        $level =  ($request->parent_id ? $this->baseFindOrFail($request->parent_id)->level + 1 : 1  );
         $this->update($category,['name'=>$request->name,'parent_id'=> $request->parent_id,'level'=>$level]);
         $category->refresh();
         $currentLevel = $category->level;

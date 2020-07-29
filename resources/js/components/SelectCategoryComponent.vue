@@ -161,10 +161,14 @@ export default {
         }
     },
     created() {
-        axios.get('/category')
+        axios.post('/allCategory')
             .then( ({data}) => {
                 this.categories = data
             })
+        // axios.get('/category')
+        //     .then( ({data}) => {
+        //         this.categories = data
+        //     })
     },
 }
 </script>

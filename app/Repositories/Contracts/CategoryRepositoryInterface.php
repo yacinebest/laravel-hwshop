@@ -10,7 +10,7 @@ use App\Repositories\Contracts\Base\UpdateInterface;
 use Illuminate\Http\Request;
 
 interface CategoryRepositoryInterface extends ReadInterface , ReadableColumnInterface ,CreateInterface , UpdateInterface , DeleteInterface {
-    public function paginate($number = 10);
+    // public function paginate($number = 10);
 
     public function getFillableColumn();
 

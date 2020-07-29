@@ -2127,10 +2127,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this3 = this;
 
-    axios.get('/category').then(function (_ref) {
+    axios.post('/allCategory').then(function (_ref) {
       var data = _ref.data;
       _this3.categories = data;
-    });
+    }); // axios.get('/category')
+    //     .then( ({data}) => {
+    //         this.categories = data
+    //     })
   }
 });
 

@@ -6,11 +6,9 @@ use App\Repositories\Contracts\RoleRepositoryInterface;
 use App\Traits\Base\ReadTrait;
 
 class RoleRepository implements RoleRepositoryInterface  {
-    use ReadTrait{
-        all as baseAll;
-    }
+    use ReadTrait;
 
-    public function all($model = null){
-       return $this->baseAll('Role');
-    }
+    // public function all($model = null){
+    //    return $this->baseAll();
+    // }
 }
