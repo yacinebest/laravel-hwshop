@@ -1,6 +1,9 @@
 <template>
     <div>
         <input type="hidden" name="parent_id" v-bind:value="selected.id" />
+        <div v-if="Object.keys( this.current_category).length >0" class="form-group" >
+            <label>Current Level : {{current_category.level}}</label>
+        </div>
         <div v-for="(value,name) in categories_level" :key="name"  class="form-group">
             <div class="form-group" >
                 <label>Level {{ name }}</label>
@@ -11,7 +14,7 @@
             </div>
 
         </div>
-        <p>Selected {{ selected ? selected.name : '' }}</p>
+        <p>Selected Parent {{ selected ? selected.name : '' }}</p>
     </div>
 </template>
 
@@ -55,7 +58,11 @@ export default {
         selected_categories: {
             type: Object,
             default: ()=>({})
-        }
+        },
+        current_category: {
+            type: Object,
+            default: ()=>({})
+        },
     },
      data() {
         return {

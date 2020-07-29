@@ -1983,6 +1983,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     var _this = this;
@@ -2023,6 +2026,12 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     selected_categories: {
+      type: Object,
+      "default": function _default() {
+        return {};
+      }
+    },
+    current_category: {
       type: Object,
       "default": function _default() {
         return {};
@@ -37960,6 +37969,14 @@ var render = function() {
         domProps: { value: _vm.selected.id }
       }),
       _vm._v(" "),
+      Object.keys(this.current_category).length > 0
+        ? _c("div", { staticClass: "form-group" }, [
+            _c("label", [
+              _vm._v("Current Level : " + _vm._s(_vm.current_category.level))
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _vm._l(_vm.categories_level, function(value, name) {
         return _c("div", { key: name, staticClass: "form-group" }, [
           _c("div", { staticClass: "form-group" }, [
@@ -38026,7 +38043,9 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("p", [
-        _vm._v("Selected " + _vm._s(_vm.selected ? _vm.selected.name : ""))
+        _vm._v(
+          "Selected Parent " + _vm._s(_vm.selected ? _vm.selected.name : "")
+        )
       ])
     ],
     2

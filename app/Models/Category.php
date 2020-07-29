@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Collection;
+
 class Category extends BaseModel
 {
     // protected $with =['childs'] ;
@@ -38,8 +40,17 @@ class Category extends BaseModel
 | CUSTOM FUNCTION                                                           |
 |---------------------------------------------------------------------------|
 */
-    // public function getParentNameAttribute()
-    // {
-    //     return $this->parent ? $this->parent->name : null ;
-    // }
+
+    public function getAllChilds()
+    {
+        $sections = new Collection();
+
+        foreach ($this->childs as $section) {
+            $sections->push($section);
+            $sections = $sections->merge($section->getAllChilds());
+        }
+
+        return $sections;
+    }
+
 }

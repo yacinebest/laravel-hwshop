@@ -21,22 +21,17 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {//            return response()->json(Category::all());
         if(request()->wantsJson())
-            return response()->json(Category::all());
+            return response()->json( $this->categoryRepository->allCategories() );
         else{
-            $page='Categories';
-            $baseCategories = Category::with('childs')->where('parent_id',null)->get();
             $entities = $this->categoryRepository->paginate();
             $columns = $this->categoryRepository->getAccessibleColumn();
-            $cardCountAndRoute = [];
+            $cardCountAndRoute = $this->categoryRepository->getCardCountAndRoute();
 
-            $auth = Auth::user();
+            $baseCategories = $this->categoryRepository->getBaseCategories();
 
-            $route_name= 'category';
-
-            // return view('layouts.default.index',compact('page','entities','cardCountAndRoute','columns','auth','display'));
-            return view('categories.index',compact('page','entities','cardCountAndRoute','columns','auth','baseCategories','route_name'));
+            return view('categories.index',compact('cardCountAndRoute','entities','columns','baseCategories'));
         }
     }
 
@@ -47,20 +42,11 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $page='Create Categories';
-        $route_name= 'category';
+
         $fillable_columns = $this->categoryRepository->getFillableColumn();
-        $cardCountAndRoute = [];
-        $auth = Auth::user();
+        $categories_level= $this->categoryRepository->getCategoriesLevels();
 
-        $level=1;
-        $categories_level= [];
-        do {
-            $categories_level[$level]=Category::where('level',$level)->get();
-            $level++;
-        } while (count(Category::where('level',$level)->get())>0);
-
-        return view('categories.create',compact('page','cardCountAndRoute','fillable_columns','route_name','auth','categories_level'));
+        return view('categories.create',compact('fillable_columns','categories_level'));
     }
 
     /**
@@ -71,20 +57,8 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request->all();
         $this->categoryRepository->create($request);
         return redirect(route('category.index'));
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -95,29 +69,16 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $page='Update Categories';
-        $route_name= 'category';
+
         $fillable_columns = $this->categoryRepository->getFillableColumn();
-        $cardCountAndRoute = [];
+
         $category = $this->categoryRepository->findOrFail($id);
 
-        $level=1;
-        $categories_level= [];
-        do {
-            $categories_level[$level]=Category::where('level',$level)->get();
-            $level++;
-        } while (count(Category::where('level',$level)->get())>0);
+        $categories_level= $this->categoryRepository->getCategoriesLevels();
 
-        $selected_categories= [];
-        // $selected_categories['select_'.$category->level] = $category;
-        $parent_id = $category->parent_id;
-        for ($i=$category->level; $i > 0 && $parent_id!=null ; $i--) {
-            $selected_categories['select_'.$i] = $this->categoryRepository->findOrFail($parent_id);
-            $parent_id = $selected_categories['select_'.$i]->parent_id;
-        }
+        $selected_categories= $this->categoryRepository->getDirectParents($category) ;
 
-        return view('categories.edit',compact('page','cardCountAndRoute','fillable_columns','route_name','category','categories_level','selected_categories'));
-
+        return view('categories.edit',compact('fillable_columns','category','categories_level','selected_categories'));
     }
 
     /**
@@ -130,9 +91,9 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = $this->categoryRepository->findOrFail($id);
-        // dd($category,$request->all());
-        $level =  ($request->parent_id ? $this->categoryRepository->findOrFail($request->parent_id)->level + 1 : 1  );
-        $this->categoryRepository->update($category,['name'=>$request->name,'parent_id'=> $request->parent_id,'level'=>$level]);
+
+        $this->categoryRepository->updateCategoriesWithChilds($category,$request);
+
         return back()->withStatus(__('Category successfully updated.'));
     }
 
@@ -143,6 +104,19 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $category = $this->categoryRepository->findOrFail($id);
+        $this->categoryRepository->deleteWithChilds($category);
+        return redirect()->back();
+    }
+
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
         //
     }
