@@ -3,24 +3,11 @@ namespace App\Repositories;
 
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
-use App\Traits\Base\CreateTraits;
-use App\Traits\Base\DeleteTrait;
-use App\Traits\Base\ReadTrait;
-use App\Traits\Base\UpdateTrait;
 use Illuminate\Http\Request;
 
-class CategoryRepository implements CategoryRepositoryInterface {
-    use ReadTrait;
-    use CreateTraits;
-    use UpdateTrait;
-    use DeleteTrait;
+class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface {
 
     private $categoryRequest = ['name'];
-
-
-    // public function paginate($number = 10){
-    //     return $this->basePaginate($number,'Category');
-    // }
 
     public function getAccessibleColumn(){
         return [
@@ -42,7 +29,7 @@ class CategoryRepository implements CategoryRepositoryInterface {
             $this->categoryRequest = array_merge($this->categoryRequest,['parent_id','level']) ;
             $request['level'] = $this->getLevelCategory($request['parent_id']) + 1;
         }
-        return $this->baseCreate('Category',$request->only($this->categoryRequest));
+        return $this->baseCreate($request->only($this->categoryRequest));
     }
 
 
@@ -50,11 +37,6 @@ class CategoryRepository implements CategoryRepositoryInterface {
     public function getLevelCategory($id){
         return Category::findOrFail($id)->level;
     }
-
-    // public function findOrFail($id,$model = null){
-    //     return $this->baseFindOrFail($id,'Category');
-    // }
-
 
     public function getCardCountAndRoute(){
 

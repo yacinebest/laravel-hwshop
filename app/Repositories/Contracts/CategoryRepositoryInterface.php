@@ -2,15 +2,9 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\Category;
-use App\Repositories\Contracts\Base\CreateInterface;
-use App\Repositories\Contracts\Base\DeleteInterface;
-use App\Repositories\Contracts\Base\ReadableColumnInterface;
-use App\Repositories\Contracts\Base\ReadInterface;
-use App\Repositories\Contracts\Base\UpdateInterface;
 use Illuminate\Http\Request;
 
-interface CategoryRepositoryInterface extends ReadInterface , ReadableColumnInterface ,CreateInterface , UpdateInterface , DeleteInterface {
-    // public function paginate($number = 10);
+interface CategoryRepositoryInterface {
 
     public function getFillableColumn();
 

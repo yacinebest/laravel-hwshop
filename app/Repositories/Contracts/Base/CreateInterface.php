@@ -2,5 +2,5 @@
 namespace App\Repositories\Contracts\Base;
 
 interface CreateInterface{
-    public function baseCreate($model,$data);
+    public function baseCreate($data);
 }

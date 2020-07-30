@@ -4,16 +4,9 @@ namespace App\Repositories;
 use App\Models\Role;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
-use App\Traits\Base\DeleteTrait;
-use App\Traits\Base\ReadTrait;
-use App\Traits\Base\UpdateTrait;
 use Illuminate\Support\Facades\Auth;
 
-class UserRepository implements UserRepositoryInterface  {
-
-    use DeleteTrait;
-    use ReadTrait;
-    use UpdateTrait;
+class UserRepository extends BaseRepository implements UserRepositoryInterface  {
 
     public function getAuthUser(){
         return User::findOrFail(Auth::user()->id ) ;
@@ -74,11 +67,5 @@ class UserRepository implements UserRepositoryInterface  {
         return User::where('role_id',Role::whereType('USER')->first()->id )
                             ->orderBy($column,$order)->paginate($paginate);;
     }
-
-
-
-    // public function findOrFail($id,$model = null){
-    //     return $this->baseFindOrFail($id,'User');
-    // }
 
 }

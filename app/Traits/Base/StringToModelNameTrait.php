@@ -1,9 +1,12 @@
 <?php
 namespace App\Traits\Base;
 
-trait StringToModelNameTraits{
-    function convertVariableToModelName($modelName='',$nameSpace='App\\Models')
+trait StringToModelNameTrait{
+    function convertRepositoryToModelName($modelName='',$nameSpace='App\\Models')
     {
+        if($modelName==="")
+            $modelName= explode('Repository',class_basename($this))[0] ;
+
         if (empty($nameSpace) || is_null($nameSpace) || $nameSpace === "")
         {
            $modelNameWithNameSpace = "App\\Models".'\\'.$modelName;
