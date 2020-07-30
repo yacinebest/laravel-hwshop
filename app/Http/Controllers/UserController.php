@@ -26,7 +26,7 @@ class UserController extends Controller
     public function index()
     {
         $page='All User';
-        $users = $this->userRepository->defaultReadWithPagination();
+        $users = $this->userRepository->basePaginate();
         return $this->accessIndex($users,$page);
     }
 
@@ -34,14 +34,14 @@ class UserController extends Controller
     public function indexAdmin()
     {
         $page='Admin';
-        $users = $this->userRepository->ReadAdminWithPagination();
+        $users = $this->userRepository->paginateOnlyAdmin();
         return $this->accessIndex($users,$page);
     }
 
     public function indexUser()
     {
         $page='User';
-        $users = $this->userRepository->ReadUserWithPagination();
+        $users = $this->userRepository->paginateOnlyUser();
         return $this->accessIndex($users,$page);
     }
 
@@ -59,7 +59,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->userRepository->baseFindOrFail($id);
-        if($this->userRepository->isAuthUserEqualTo($user) )
+        if($this->userRepository->isAuthEqualTo($user) )
             return redirect()->route('user.profile');
         else{
             $closure  = function(RoleRepositoryInterface $rep){

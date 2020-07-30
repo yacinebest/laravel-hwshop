@@ -33,7 +33,7 @@ class HomeController extends Controller
     public function index()
     {
         $cardCountAndRoute =[
-            'User'=>['count'=>$this->userRepository->getAllUserCount(),'route'=>'user.index'],
+            'User'=>['count'=>$this->userRepository->baseCount() ,'route'=>'user.index'],
             'Product'=>['count'=>count(Product::all()),'route'=>'user.index'],
             'Category'=>['count'=>count(Category::all()),'route'=>'user.index'],
             'Order'=>['count'=>count(Order::all()),'route'=>'user.index'],

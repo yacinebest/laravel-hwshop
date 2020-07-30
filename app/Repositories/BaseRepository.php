@@ -23,9 +23,14 @@ class BaseRepository implements BaseRepositoryInterface {
     }
 
 
-    public function basePaginate($number = 10){
+    public function basePaginate($column = 'created_at',$order = 'DESC',$number = 10){
         $modelClass= $this->convertRepositoryToModelName();
-        return  $modelClass::paginate($number);
+        return  $modelClass::orderBy($column,$order)->paginate($number);
+    }
+
+    public function baseCount(){
+        $modelClass= $this->convertRepositoryToModelName();
+        return  count( $modelClass::all() );
     }
 
 /*

@@ -4,35 +4,16 @@ namespace App\Repositories;
 use App\Models\Role;
 use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Facades\Auth;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface  {
 
-    public function getAuthUser(){
-        return User::findOrFail(Auth::user()->id ) ;
-    }
-
-    public function isAuthUserEqualTo($user){
-        return $this->getAuthUser()->id === $user->id ;
-    }
-
-
-
-    public function getAllUserCount(){
-        return User::count();
-    }
-
-    public function getAdminCount(){
-        return User::countAdmin();
-    }
-
-    public function getUserCount(){
-        return User::countUser();
-    }
-
-
-
-
+/*
+|---------------------------------------------------------------------------|
+| Override BaseRepository FUNCTION                                          |
+|---------------------------------------------------------------------------|
+*/
     public function getAccessibleColumn(){
         return [
             'avatar'=>'Avatar',
@@ -48,22 +29,38 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface  
 
     public function getCardCountAndRoute(){
         return [
-            'Admin'=>['count'=>$this->getAdminCount(),'route'=>'user.admin.index'],
-            'User'=>['count'=>$this->getUserCount(),'route'=>'user.user.index'],
-            'All User'=>['count'=>$this->getAllUserCount(),'route'=>'user.index'],
+            'Admin'=>['count'=>$this->countOnlyAdmin(),'route'=>'user.admin.index'],
+            'User'=>['count'=>$this->countOnlyUser(),'route'=>'user.user.index'],
+            'All User'=>['count'=>$this->baseCount(),'route'=>'user.index'],
         ];
     }
-
-    public function defaultReadWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10){
-        return User::orderBy($column,$order)->paginate($paginate);;
+/*
+|---------------------------------------------------------------------------|
+| Override Interface FUNCTION                                               |
+|---------------------------------------------------------------------------|
+*/
+    public function getAuthUser(){
+        return Auth::check() ? User::findOrFail(Auth::user()->id ) : null ;
     }
 
-    public function ReadAdminWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10){
+    public function isAuthEqualTo($user){
+        return $this->getAuthUser() && ($this->getAuthUser()->id === $user->id) ;
+    }
+
+    public function countOnlyUser(){
+        return User::countUser();
+    }
+
+    public function countOnlyAdmin(){
+        return User::countAdmin();
+    }
+
+    public function paginateOnlyAdmin($column = 'created_at',$order = 'DESC',$paginate = 10){
         return User::where('role_id',Role::whereType('ADMIN')->first()->id )
                             ->orderBy($column,$order)->paginate($paginate);;
     }
 
-    public function ReadUserWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10){
+    public function paginateOnlyUser($column = 'created_at',$order = 'DESC',$paginate = 10){
         return User::where('role_id',Role::whereType('USER')->first()->id )
                             ->orderBy($column,$order)->paginate($paginate);;
     }

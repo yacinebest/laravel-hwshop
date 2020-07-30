@@ -1,6 +1,6 @@
 <?php
 namespace App\Repositories\Contracts;
 
-interface RoleRepositoryInterface {
+interface RoleRepositoryInterface extends BaseRepositoryInterface {
 
 }

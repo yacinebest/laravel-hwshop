@@ -1,23 +1,16 @@
 <?php
 namespace App\Repositories\Contracts;
 
-interface UserRepositoryInterface  {
+use App\Repositories\Contracts\Base\CardCountRouteInterface;
+
+interface UserRepositoryInterface extends BaseRepositoryInterface , CardCountRouteInterface  {
 
     public function getAuthUser();
-    public function isAuthUserEqualTo($user);
+    public function isAuthEqualTo($user);
 
-    public function getAllUserCount();
-    public function getAdminCount();
-    public function getUserCount();
+    public function countOnlyUser();
+    public function countOnlyAdmin();
 
-    public function getCardCountAndRoute();
-
-
-    public function defaultReadWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10);
-
-    public function ReadAdminWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10);
-    public function ReadUserWithPagination($column = 'created_at',$order = 'DESC',$paginate = 10);
-
-
-
+    public function paginateOnlyAdmin($column = 'created_at',$order = 'DESC',$paginate = 10);
+    public function paginateOnlyUser($column = 'created_at',$order = 'DESC',$paginate = 10);
 }
