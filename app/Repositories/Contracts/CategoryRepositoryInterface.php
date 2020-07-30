@@ -2,27 +2,22 @@
 namespace App\Repositories\Contracts;
 
 use App\Models\Category;
+use App\Repositories\Contracts\Base\CardCountRouteInterface;
 use Illuminate\Http\Request;
 
-interface CategoryRepositoryInterface {
-
-    public function getFillableColumn();
-
-    public function create(Request $request);
+interface CategoryRepositoryInterface extends BaseRepositoryInterface , CardCountRouteInterface {
 
     public function getLevelCategory($id);
 
-    public function getCardCountAndRoute();
-
     public function getBaseCategories();
 
-    public function allCategories();
-
-    public function getCategoriesLevels();
+    public function getCategoriesWhereLevel($level);
 
     public function getDirectParents(Category $category);
 
-    public function updateCategoriesWithChilds($category,Request $request);
+    public function getCategoriesLevels();
+
+    public function updateWithChilds($category,Request $request);
 
     public function deleteWithChilds($entity);
 }

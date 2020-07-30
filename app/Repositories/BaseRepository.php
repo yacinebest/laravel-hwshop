@@ -70,4 +70,8 @@ class BaseRepository implements BaseRepositoryInterface {
     public function getAccessibleColumn(){
         return [];
     }
+
+    public function getFillableColumn(){
+        return [];
+    }
 }

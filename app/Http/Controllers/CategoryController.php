@@ -33,7 +33,7 @@ class CategoryController extends Controller
 
     public function indexJson()
     {
-        return response()->json( $this->categoryRepository->allCategories() );
+        return response()->json( $this->categoryRepository->baseAll() );
     }
 
     /**
@@ -58,7 +58,9 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $this->categoryRepository->create($request);
+        if($request->has('parent_id'))
+            $request['level'] = $this->categoryRepository->getLevelCategory($request['parent_id']) + 1;
+        $this->categoryRepository->baseCreate($request->all());
         return redirect(route('category.index'));
     }
 
@@ -93,7 +95,7 @@ class CategoryController extends Controller
     {
         $category = $this->categoryRepository->baseFindOrFail($id);
 
-        $this->categoryRepository->updateCategoriesWithChilds($category,$request);
+        $this->categoryRepository->updateWithChilds($category,$request);
 
         return back()->withStatus(__('Category successfully updated.'));
     }
