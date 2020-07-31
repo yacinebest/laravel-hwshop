@@ -23,12 +23,7 @@ class CategoryController extends Controller
     public function index()
     {
         $entities = $this->categoryRepository->basePaginate();
-        $columns = $this->categoryRepository->getAccessibleColumn();
-        $cardCountAndRoute = $this->categoryRepository->getCardCountAndRoute();
-
-        $baseCategories = $this->categoryRepository->getBaseCategories();
-
-        return view('categories.index',compact('cardCountAndRoute','entities','columns','baseCategories'));
+        return $this->loadIndex($entities);
     }
 
     public function indexJson()
@@ -36,6 +31,19 @@ class CategoryController extends Controller
         return response()->json( $this->categoryRepository->baseAll() );
     }
 
+    public function indexByLevel($level = null)
+    {
+        $entities = $this->categoryRepository->basePaginate( $level ? ['level'=> intval($level)] : []) ;
+        return $this->loadIndex($entities);
+    }
+
+    private function loadIndex($entities){
+        $columns = $this->categoryRepository->getAccessibleColumn();
+        $cardCountAndRoute = $this->categoryRepository->getCardCountAndRoute();
+        $baseCategories = $this->categoryRepository->getBaseCategories();
+
+        return view('categories.index',compact('cardCountAndRoute','entities','columns','baseCategories'));
+    }
     /**
      * Show the form for creating a new resource.
      *

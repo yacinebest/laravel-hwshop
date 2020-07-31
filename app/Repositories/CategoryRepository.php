@@ -39,7 +39,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $level=1;
         $cardCountAndRoute= [];
         do {
-            $cardCountAndRoute['Level '.$level]=['count'=>count(Category::where('level',$level)->get()) , 'route'=>'category.index'] ;
+            $cardCountAndRoute['Level '.$level]=['count'=>count(Category::where('level',$level)->get()) , 'route'=>'category.indexLevel','attribute'=>$level] ;
             $level++;
         } while (count(Category::where('level',$level)->get())>0);
 

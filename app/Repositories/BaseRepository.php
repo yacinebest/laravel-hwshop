@@ -23,9 +23,17 @@ class BaseRepository implements BaseRepositoryInterface {
     }
 
 
-    public function basePaginate($column = 'created_at',$order = 'DESC',$number = 10){
+    public function basePaginate($where = [],$order =['created_at'=>'DESC'],$number = 10){
         $modelClass= $this->convertRepositoryToModelName();
-        return  $modelClass::orderBy($column,$order)->paginate($number);
+
+        $result = (new $modelClass)->newQuery();;
+        foreach ($order as $key => $value) {
+            $result->orderBy($key,$value);
+        }
+        foreach ($where as $key => $value) {
+            $result->where($key,$value );
+        }
+        return $result->paginate($number);
     }
 
     public function baseCount(){
