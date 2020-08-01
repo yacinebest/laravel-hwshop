@@ -1,4 +1,4 @@
-@extends('layouts.default.edit',['page'=>'Categories','route_name'=>'category'])
+@extends('layouts.default.edit',['page'=>'Category','route_name'=>'category','entity'=>$category])
 
 @section('custom_colomn')
 <select-category

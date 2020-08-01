@@ -50,7 +50,9 @@ class UserController extends Controller
         $auth = $this->userRepository->getAuthUser();
         $columns = $this->userRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->userRepository->getCardCountAndRoute();
-        return view('users.index',compact('cardCountAndRoute','page','columns','users','auth') );
+
+        $entities = $users;
+        return view('users.index',compact('cardCountAndRoute','page','columns','entities','auth') );
     }
 
 
@@ -58,6 +60,7 @@ class UserController extends Controller
 
     public function edit($id)
     {
+
         $user = $this->userRepository->baseFindOrFail($id);
         if($this->userRepository->isAuthEqualTo($user) )
             return redirect()->route('user.profile');
@@ -66,7 +69,9 @@ class UserController extends Controller
                 return $rep->baseAll();
             };
             $roles = app()->call($closure);
-            return view('users.edit',compact('user','roles'));
+
+            $read_only_columns = $this->userRepository->getReadOnlyColumn();
+            return view('users.edit',compact('user','roles','read_only_columns'));
         }
     }
 

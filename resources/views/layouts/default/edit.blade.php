@@ -24,18 +24,44 @@
                         </div>
                     @endif
 
-                    {{-- <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off"> --}}
-                    <form method="post" action="{{ route( $route_name . '.update',$category->id ) }}" autocomplete="off">
+                    @isset($read_only_columns)
+                    @foreach ($read_only_columns as $key=>$placeholder)
+                        <div class="form-group">
+                            <label class="form-control-label" for="input-{{ $key }}">{{ __($placeholder) }}</label>
+                            @php
+                            if($key=='email')
+                                $type='email';
+                            else if($key=='birth_date')
+                                $type='date';
+                            else
+                                $type='text';
+                            @endphp
+                            <input type="{{ $type}}" name="{{ $key }}" id="input-{{ $key }}" class="form-control form-control-alternative" placeholder="{{ __($placeholder) }}" value="{{ old($key, $user->$key) }}" readonly >
+
+
+                            @if ($errors->has($key))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first($key) }}</strong>
+                                </span>
+                            @endif
+                        </div>
+                    @endforeach
+                    @endisset
+
+
+
+                    <form method="post" action="{{ route( $route_name . '.update',$entity->id ) }}" autocomplete="off">
                         @csrf
                         @method('put')
 
+                        @isset($fillable_columns)
                         @foreach ($fillable_columns as $key=>$placeholder)
                             <div class="form-group">
                                 <label class="form-control-label" for="input-{{ $key }}">{{ __($placeholder) }}</label>
                                 @php
                                     $type='text';
                                 @endphp
-                                <input type="{{ $type}}" name="{{ $key }}" id="input-{{ $key }}" class="form-control form-control-alternative" placeholder="{{ __($placeholder) }}" value="{{ old($key, $category->$key) }}" >
+                                <input type="{{ $type}}" name="{{ $key }}" id="input-{{ $key }}" class="form-control form-control-alternative" placeholder="{{ __($placeholder) }}" value="{{ old($key, $entity->$key) }}" >
 
 
                                 @if ($errors->has($key))
@@ -45,6 +71,7 @@
                                 @endif
                             </div>
                         @endforeach
+                        @endisset
 
                         @yield('custom_colomn')
 
@@ -53,6 +80,8 @@
                         </div>
 
                     </form>
+
+
                 </div>
             </div>
 

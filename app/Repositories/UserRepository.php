@@ -65,4 +65,18 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface  
                             ->orderBy($column,$order)->paginate($paginate);;
     }
 
+    public function getReadOnlyColumn(){
+        return [
+            'username'=>'Username',
+            'firstname'=>'First name',
+            'lastname'=>'Last name',
+            'email'=>'Email',
+            'birth_date'=>'Birth Date',
+            'country'=>'Country',
+            'address'=>'Address',
+            'phone_number'=>'Phone Number',
+            'gender'=>'Gender'
+        ];
+    }
+
 }
