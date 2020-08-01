@@ -105,7 +105,8 @@ class UserController extends Controller
             return $rep->baseAll();
         };
         $roles = app()->call($closure);
-        return view('users.profile',compact('user','roles'));
+        $editable_columns = $this->userRepository->getEditableColumn();
+        return view('users.profile',compact('user','roles','editable_columns'));
     }
 
     /**

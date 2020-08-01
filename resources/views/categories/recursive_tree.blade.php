@@ -5,7 +5,7 @@
         @foreach($entity->childs as $entities)
             <ul>
                 <li><a href="{{ isset($route_name) ? route( $route_name . '.edit',$entities->id) : '' }}">{{ $entities->name }}</a></li>
-                @include('categories.recursive-element', ['baseCategories' => $entities->childs])
+                @include('categories.recursive_tree', ['baseCategories' => $entities->childs])
             </ul>
         @endforeach
     @endif

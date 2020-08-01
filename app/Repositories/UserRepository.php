@@ -79,4 +79,16 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface  
         ];
     }
 
+    public function getEditableColumn(){
+        return  [
+            'username'=>'Username',
+            'firstname'=>'First name',
+            'lastname'=>'Last name',
+            'email'=>'Email',
+            'phone_number'=>'Phone Number',
+            'birth_date'=>'Birth Date',
+            'country'=>'Country',
+            'address'=>'Address',
+        ];
+    }
 }

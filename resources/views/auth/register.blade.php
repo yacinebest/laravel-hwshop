@@ -21,11 +21,11 @@
                                         'password_confirmation'=>'Confirm Password'] as $key=>$placeholder)
 
                                 @if($key==='username' || $key==='firstname' || $key==='lastname')
-                                    @include('includes.form_group_element',['page'=>'register','type'=>'text'])
+                                    @include('auth.input_login',['page'=>'register','type'=>'text'])
                                 @elseif($key==='password' || $key==='password_confirmation')
-                                    @include('includes.form_group_element',['page'=>'register','type'=>'password'])
+                                    @include('auth.input_login',['page'=>'register','type'=>'password'])
                                 @else
-                                    @include('includes.form_group_element',['page'=>'register'])
+                                    @include('auth.input_login',['page'=>'register'])
                                 @endif
                             @endforeach
                             <div class="text-center">

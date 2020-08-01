@@ -1,11 +1,17 @@
 @extends('layouts.app', ['title' => __('User Profile')])
 
 @section('content')
-    @include('users.partials.header', [
-        'title' => __('Hello') . ' '. $user->firstname . ' ' . $user->lastname,
-        'description' => __('This is your profile page. You can see the progress you\'ve made with your work and manage your projects or assigned tasks'),
-        'class' => 'col-lg-7'
-    ])
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="background-image: url(../argon/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+        <span class="mask bg-gradient-default opacity-8"></span>
+        <div class="container-fluid d-flex align-items-center">
+            <div class="row">
+                <div class="col-md-12 col-lg-7">
+                    <h1 class="display-2 text-white">{{  __('Hello') . ' '. $user->firstname . ' ' . $user->lastname }}</h1>
+                    <p class="text-white mt-0 mb-5">{{ __('This is your profile page. You can see the progress you\'ve made with your work and manage your projects or assigned tasks') }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="container-fluid mt--7">
         <div class="row">
@@ -51,9 +57,6 @@
                                 <i class="ni location_pin mr-2"></i>{{ __( $user->country ) }} ,<br>
                                 <i class="ni location_pin mr-2"></i>{{ __( $user->address ) }}
                             </div>
-                            {{-- <hr class="my-4" />
-                            <p>{{ __('Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.') }}</p>
-                            <a href="#">{{ __('Show more') }}</a> --}}
                         </div>
                     </div>
                 </div>
@@ -84,9 +87,7 @@
 
                             <div class="pl-lg-4">
 
-                                @foreach (['username'=>'Username','firstname'=>'First name','lastname'=>'Last name',
-                                            'email'=>'Email','birth_date'=>'Birth Date',
-                                            'country'=>'Country','address'=>'Address','phone_number'=>'Phone Number'] as $key=>$placeholder)
+                                @foreach ($editable_columns as $key=>$placeholder)
 
                                     <div class="form-group{{ $errors->has($key) ? ' has-danger' : '' }}">
                                         <label class="form-control-label" for="input-{{ $key }}">{{ __($placeholder) }}</label>
@@ -201,6 +202,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
 
         @include('layouts.footers.auth')

@@ -20,14 +20,3 @@
         </span>
     @endif
 </div>
-
-{{--
-
-<div class="form-group">
-    <div class="input-group input-group-alternative">
-        <div class="input-group-prepend">
-            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-        </div>
-        <input class="form-control" placeholder="{{ __('Confirm Password') }}" type="password" name="password_confirmation" required>
-    </div>
-</div> --}}

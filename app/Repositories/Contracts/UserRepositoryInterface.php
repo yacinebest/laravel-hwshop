@@ -15,4 +15,5 @@ interface UserRepositoryInterface extends BaseRepositoryInterface , CardCountRou
     public function paginateOnlyUser($column = 'created_at',$order = 'DESC',$paginate = 10);
 
     public function getReadOnlyColumn();
+    public function getEditableColumn();
 }

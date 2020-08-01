@@ -17,7 +17,7 @@
                             @csrf
 
                             @foreach (['email'=>'Email','password'=>'Password'] as $key=>$placeholder)
-                                @include('includes.form_group_element',['page'=>'login'])
+                                @include('auth.input_login',['page'=>'login'])
                             @endforeach
 
                             <div class="custom-control custom-control-alternative custom-checkbox">

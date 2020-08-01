@@ -24,7 +24,6 @@
                         </div>
                     @endif
 
-                    {{-- <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off"> --}}
                     <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off">
                         @csrf
 

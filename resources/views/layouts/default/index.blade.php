@@ -41,7 +41,6 @@
                                     @foreach($entities as $entity)
                                         <tr class="{{ isset($auth) && $entity->id===$auth->id ? 'table-success' : '' }}">
                                             @foreach($columns as $key => $value)
-                                                {{-- <td >{{ $entity->$key }}</td> --}}
                                                 @if($key==='avatar')
                                                     <td>
                                                         <user-avatar :user="{{ $entity }}" ></user-avatar>
