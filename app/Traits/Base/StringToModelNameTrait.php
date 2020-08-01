@@ -24,4 +24,8 @@ trait StringToModelNameTrait{
             return app($modelNameWithNameSpace);
         }
     }
+
+    public function explodeNameSpaceModels($path,$nameSpace='App\\Models\\'){
+        return explode($nameSpace,$path)[1] ;
+    }
 }

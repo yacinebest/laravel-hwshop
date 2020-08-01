@@ -8,6 +8,8 @@ use App\Models\Image;
 use App\Models\Product;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
 class ImageUnitTest extends TestCase
@@ -31,5 +33,15 @@ class ImageUnitTest extends TestCase
     {
         $this->assertNotEmpty($this->image);
     }
+
+    // /**
+    //  * @test
+    //  * @return void
+    // */
+    // function can_read_type()
+    // {
+    //     dd($this->image->imageable_type);
+    // }
+
 
 }

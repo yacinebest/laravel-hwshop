@@ -123,11 +123,23 @@
                                     {{ __('Create Category') }}
                                 </a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{ route('category.edit') }}">
-                                    {{ __('Edit Category') }}
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="navbar-examples">
+                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Image Management') }}</span>
+                    </a>
+
+                    <div class="collapse show" id="navbar-examples2">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('image.index') }}">
+                                    {{ __('Display All Image') }}
                                 </a>
-                            </li> --}}
+                            </li>
                         </ul>
                     </div>
                 </li>

@@ -50,7 +50,11 @@
                                                         <i class="fas fa-ellipsis-v"></i>
                                                     </a>
                                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                                        <a class="dropdown-item" href="{{ isset($route_name) ? route( $route_name . '.edit',$entity->id) : '' }}"><i class="ni ni-fat-remove"></i>Edit</a>
+
+                                                        @if( !isset($edit) || $edit)
+                                                            <a class="dropdown-item" href="{{ isset($route_name) ? route( $route_name . '.edit',$entity->id) : '' }}"><i class="ni ni-fat-remove"></i>Edit</a>
+                                                        @endif
+
                                                         @if(isset($route_name))
                                                             <form method="post" action="{{ route( $route_name .'.destroy',$entity->id) }}" >
                                                                 @csrf
@@ -58,7 +62,6 @@
                                                                 <button type="submit" class="dropdown-item"><i class="ni ni-fat-remove"></i>Delete</button>
                                                             </form>
                                                         @endif
-                                                        {{-- <a class="dropdown-item" href="{{  ? route( $route_name . '.destroy',$entity->id) : '' }}"><i class="ni ni-fat-remove"></i>Delete</a> --}}
                                                     </div>
 
                                                 </div>
@@ -67,7 +70,9 @@
                                     @endforeach
                             </tbody>
                         </table>
-                        {!! $entities->links() !!}
+                        @if(!empty($entities))
+                            {!! $entities->links() !!}
+                        @endif
                     </div>
 
                     @yield('displayTree')
