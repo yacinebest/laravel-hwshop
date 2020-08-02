@@ -48,9 +48,9 @@ class ImageController extends Controller
     //     return $file;
     // }
 
-    // private static function storeFile($file , $path)
-    // {
-    //     $file->store($path);
-    //     return $file->hashName();
-    // }
+    public static function storeFile($file , $path)
+    {
+        $file->store($path);
+        return $file->hashName();
+    }
 }

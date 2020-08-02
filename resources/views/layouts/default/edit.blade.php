@@ -50,7 +50,7 @@
 
 
 
-                    <form method="post" action="{{ route( $route_name . '.update',$entity->id ) }}" autocomplete="off">
+                    <form method="post" action="{{ route( $route_name . '.update',$entity->id ) }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
                         @method('put')
 

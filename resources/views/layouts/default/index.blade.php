@@ -45,6 +45,10 @@
                                                     <td>
                                                         <user-avatar :user="{{ $entity }}" ></user-avatar>
                                                     </td>
+                                                @elseif($key==='logo')
+                                                    <td>
+                                                        <brand-logo :entity="{{ $entity }}"></brand-logo>
+                                                    </td>
                                                 @else
                                                     <td >{{ $entity->$key }}</td>
                                                 @endif

@@ -124,15 +124,10 @@ class UserController extends Controller
 
     public function uploadAvatar(Request $request)
     {
-        $avatar = $this->storeFile($request->file('avatar'),"public/uploads/avatars");
+        $avatar = ImageController::storeFile($request->file('avatar'),"public/uploads/avatars");
         $user = $this->userRepository->baseFindOrFail($request->user_id);
         $this->userRepository->update($user,['avatar' => $avatar ]);
         return response()->json($avatar);
     }
 
-    private function storeFile($file , $path)
-    {
-        $file->store($path);
-        return $file->hashName();
-    }
 }

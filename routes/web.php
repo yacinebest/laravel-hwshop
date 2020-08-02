@@ -45,6 +45,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('image', 'ImageController', ['except' => ['show','update','edit','create','store'] ] );
     // Route::get('image', ['as' => 'image.index', 'uses' => 'ImageController@index']);
 
+    Route::resource('brand', 'BrandController', ['except' => ['show'] ] );
+
 
 
     // Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);

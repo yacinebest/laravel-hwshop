@@ -14,7 +14,7 @@
             <div class="card-body">
                 <div class="pl-lg-4">
                     <h6 class="heading-small text-muted mb-4">{{ __( $page .' information') }}</h6>
-
+                    @yield('image')
                     @if (session('status'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ session('status') }}
@@ -24,7 +24,7 @@
                         </div>
                     @endif
 
-                    <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off">
+                    <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
 
                         @foreach ($fillable_columns as $key=>$placeholder)

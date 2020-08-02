@@ -144,6 +144,28 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link active collapsed" href="#navbar-examples4" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples4">
+                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Brand Management') }}</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-examples4">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('brand.index') }}">
+                                    {{ __('Display All Brand') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('brand.create') }}">
+                                    {{ __('Create Brand') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}

@@ -35,9 +35,8 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(    'App\\Repositories\\Contracts\\ImageRepositoryInterface' ,
                             'App\\Repositories\\ImageRepository');
 
-
-
-
+        $this->app->bind(    'App\\Repositories\\Contracts\\BrandRepositoryInterface' ,
+                            'App\\Repositories\\BrandRepository');
 
     }
 }
