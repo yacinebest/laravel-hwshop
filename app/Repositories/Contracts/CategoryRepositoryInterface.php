@@ -20,4 +20,6 @@ interface CategoryRepositoryInterface extends BaseRepositoryInterface , CardCoun
     public function updateWithChilds($category,Request $request);
 
     public function deleteWithChilds($entity);
+
+    public function deleteImages($entity);
 }

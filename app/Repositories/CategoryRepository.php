@@ -17,6 +17,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         return [
             'name'=>'Name',
             'level'=>'Level',
+            'imageCount'=>'Images',
             'childCount' => 'All Childs',
             'created_at' => 'Created At',
         ];
@@ -104,8 +105,19 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
 
     public function deleteWithChilds($entity){
         foreach($entity->getAllChilds() as $child) {
+            $this->deleteImages($child);
             $this->delete($child);
         }
+        $this->deleteImages($entity);
         $this->delete($entity);
     }
+
+    public function deleteImages($entity){
+        if ($entity->imageCount > 0) {
+            collect($entity->images)->map(function($image){
+                $this->delete($image);
+            });
+        }
+    }
+
 }

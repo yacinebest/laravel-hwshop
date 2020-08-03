@@ -24,9 +24,11 @@
                         </div>
                     @endif
 
+
                     <form method="post" action="{{ route( $route_name . '.store') }}" autocomplete="off" enctype="multipart/form-data">
                         @csrf
 
+                        @isset($fillable_columns)
                         @foreach ($fillable_columns as $key=>$placeholder)
                             <div class="form-group">
                                 <label class="form-control-label" for="input-{{ $key }}">{{ __($placeholder) }}</label>
@@ -43,6 +45,7 @@
                                 @endif
                             </div>
                         @endforeach
+                        @endisset
 
                         @yield('custom_colomn')
 

@@ -49,6 +49,10 @@
                                                     <td>
                                                         <brand-logo :entity="{{ $entity }}"></brand-logo>
                                                     </td>
+                                                @elseif($key==='imageCount')
+                                                    <td>
+                                                        <button class="btn btn-primary" type="submit">{{ $entity->$key }} Image</button>
+                                                    </td>
                                                 @else
                                                     <td >{{ $entity->$key }}</td>
                                                 @endif

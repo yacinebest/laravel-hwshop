@@ -4,16 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Repositories\Contracts\ImageRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
     private $categoryRepository;
+    private $imageRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository) {
+    public function __construct(CategoryRepositoryInterface $categoryRepository,ImageRepositoryInterface $imageRepository) {
         $this->categoryRepository = $categoryRepository;
+        $this->imageRepository = $imageRepository;
     }
+
+
 
     /**
      * Display a listing of the resource.
@@ -66,9 +71,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->has('parent_id'))
-            $request['level'] = $this->categoryRepository->getLevelCategory($request['parent_id']) + 1;
-        $this->categoryRepository->baseCreate($request->all());
+        $data = $this->processRequestForStore($request);
+        $category = $this->categoryRepository->baseCreate( $data);
+        
+        $images = $this->imageRepository->uploadImages($request,'categories');
+
+        $this->imageRepository->attachImagesToEntity($images,$category);
+
         return redirect(route('category.index'));
     }
 
@@ -130,5 +139,20 @@ class CategoryController extends Controller
     public function show($id)
     {
         //
+    }
+
+
+/*
+|---------------------------------------------------------------------------|
+| CUSTOM FUNCTION                                                           |
+|---------------------------------------------------------------------------|
+*/
+
+    public function processRequestForStore(Request $request){
+        if($request->has('parent_id') && $request->parent_id!=null )
+            $data = array_merge( $request->only(['parent_id','name']) , ['level'=>$this->categoryRepository->getLevelCategory($request['parent_id']) + 1] );
+        else
+            $data = $request->only(['name']);
+        return $data;
     }
 }

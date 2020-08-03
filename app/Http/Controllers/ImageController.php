@@ -29,6 +29,33 @@ class ImageController extends Controller
         return view('images.index',compact('entities','columns'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('images.create');
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $images = $this->imageRepository->uploadImages($request,'categories');
+        // $p=array();
+        // $p = array_map(function($element){
+        //         dd($element);
+        //         return $element;
+        // },$images);
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -48,9 +75,5 @@ class ImageController extends Controller
     //     return $file;
     // }
 
-    public static function storeFile($file , $path)
-    {
-        $file->store($path);
-        return $file->hashName();
-    }
+   
 }

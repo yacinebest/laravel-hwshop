@@ -9,7 +9,7 @@ class Category extends BaseModel
     // protected $with =['childs'] ;
     // protected $with =['products','parent'] ;
     // protected $appends =['parentName'];
-    protected $appends =['childCount'];
+    protected $appends =['childCount','imageCount'];
 
     public function products()
     {
@@ -49,6 +49,14 @@ class Category extends BaseModel
     public function getChildCountAttribute()
     {
         return count($this->getAllChilds());
+    }
+
+    /**
+     * @return number
+     */
+    public function getImageCountAttribute()
+    {
+        return count($this->images);
     }
 
 /*

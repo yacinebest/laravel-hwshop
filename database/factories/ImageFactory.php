@@ -13,10 +13,8 @@ $factory->define(Image::class, function (Faker $faker) {
         // 'file' => $faker->image('public/storage/uploads/images',640,480, null, false) ,
         // 'file' => $faker->name . '.jpg',
         'imageable_type' => $faker->randomElement( [
-            App\Models\User::class,
             App\Models\Category::class,
             App\Models\Product::class,
-            App\Models\Brand::class,
         ]),
         'imageable_id' =>function(array $note){
             return factory($note['imageable_type'])->create()->id;
