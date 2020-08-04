@@ -73,7 +73,7 @@ class CategoryController extends Controller
     {
         $data = $this->processRequestForStore($request);
         $category = $this->categoryRepository->baseCreate( $data);
-        
+
         $images = $this->imageRepository->uploadImages($request,'categories');
 
         $this->imageRepository->attachImagesToEntity($images,$category);
@@ -97,7 +97,6 @@ class CategoryController extends Controller
         $categories_level= $this->categoryRepository->getCategoriesLevels();
 
         $selected_categories= $this->categoryRepository->getDirectParents($category) ;
-
         return view('categories.edit',compact('fillable_columns','category','categories_level','selected_categories'));
     }
 
@@ -110,9 +109,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $category = $this->categoryRepository->baseFindOrFail($id);
 
         $this->categoryRepository->updateWithChilds($category,$request);
+
+        $images = $this->imageRepository->uploadImages($request,'categories');
+
+        $this->imageRepository->attachImagesToEntity($images,$category);
 
         return back()->withStatus(__('Category successfully updated.'));
     }

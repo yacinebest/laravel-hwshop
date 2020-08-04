@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Models\Category;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use Illuminate\Http\Request;
+use phpDocumentor\Reflection\Types\Object_;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface {
 
@@ -65,11 +66,15 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
     public function getDirectParents(Category $category){
         $selected_categories= [];
         $parent_id = $category->parent_id;
-        for ($i=$category->level -1; $i > 0 && $parent_id!=null ; $i--) {
-            $selected_categories['select_'.$i] = $this->baseFindOrFail($parent_id);
-            $parent_id = $selected_categories['select_'.$i]->parent_id;
+        if($parent_id!=null){
+            for ($i=$category->level -1; $i > 0 && $parent_id!=null ; $i--) {
+                $selected_categories['select_'.$i] = $this->baseFindOrFail($parent_id);
+                $parent_id = $selected_categories['select_'.$i]->parent_id;
+            }
+            return $selected_categories;
         }
-        return $selected_categories;
+        else
+            return new Object_();
     }
 
 

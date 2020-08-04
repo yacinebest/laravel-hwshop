@@ -75,5 +75,9 @@ class ImageController extends Controller
     //     return $file;
     // }
 
-   
+    public static function upload(Request $request)
+    {
+        return response()->json($request->all());
+        dd($request);
+    }
 }
