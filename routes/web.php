@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('allCategory', ['as' => 'category.indexJson', 'uses' => 'CategoryController@indexJson']);
     Route::get('Category/Level/{level}', ['as' => 'category.indexLevel', 'uses' => 'CategoryController@indexByLevel']);
 
-    Route::resource('image', 'ImageController', ['except' => ['show','update','edit'] ] );
+    Route::resource('image', 'ImageController', ['except' => ['update','edit'] ] );
     Route::post('/images-upload', ['as' => 'image.upload', 'uses' => 'ImageController@upload']);
 
     // Route::resource('image', 'ImageController', ['except' => ['show','update','edit','create','store'] ] );

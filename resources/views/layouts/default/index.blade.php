@@ -1,7 +1,6 @@
 @extends('layouts.app', ['title' => __( $page . ' Management')])
 
 @section('content')
-
 <div class="main-content">
 
     @include('layouts.headers.cards',['cardCountAndRoute'=> (isset($cardCountAndRoute) ? $cardCountAndRoute : [] )])
@@ -51,7 +50,8 @@
                                                     </td>
                                                 @elseif($key==='imageCount')
                                                     <td>
-                                                        <button class="btn btn-primary" type="submit">{{ $entity->$key }} Image</button>
+                                                        <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary">{{ $entity->$key }} Image</a>
+                                                        {{-- <button class="btn btn-primary" type="submit">{{ $entity->$key }} Image</button> --}}
                                                     </td>
                                                 @else
                                                     <td >{{ $entity->$key }}</td>

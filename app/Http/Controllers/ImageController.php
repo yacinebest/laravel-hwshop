@@ -3,17 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\Image;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\Console\Input\Input;
 
 class ImageController extends Controller
 {
     private $imageRepository;
+    private $categoryRepository;
 
-    public function __construct(ImageRepositoryInterface $imageRepository) {
+    public function __construct(ImageRepositoryInterface $imageRepository,CategoryRepositoryInterface $categoryRepository) {
         $this->imageRepository = $imageRepository;
+        $this->categoryRepository = $categoryRepository;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -48,12 +53,14 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
-        $images = $this->imageRepository->uploadImages($request,'categories');
-        // $p=array();
-        // $p = array_map(function($element){
-        //         dd($element);
-        //         return $element;
-        // },$images);
+        foreach ($request->images as $image) {
+            $name= $this->imageRepository->storeFile($image,'public/uploads/categories');
+            $images[]=$name;
+        }
+        $category = $this->categoryRepository->baseFindOrFail($request->category_id);
+        $this->imageRepository->attachImagesToEntity($images,$category);
+        $category->refresh();
+        return response()->json($category->images);
     }
 
 
@@ -65,15 +72,24 @@ class ImageController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $image =  $this->imageRepository->baseFindOrFail($id);
+        $this->imageRepository->delete($image);
+        return response()->json([]);
     }
 
-
-    // public static function uploadImage(Request $request)
-    // {
-    //     $file = ImageController::storeFile($request->file('file'),"public/uploads/images");
-    //     return $file;
-    // }
+     /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $columns = $this->imageRepository->getAccessibleColumn();
+        $category = $this->categoryRepository->baseFindOrFail($id);
+        $images = $category->images;
+        return view('images.show',compact('columns','category','images'));
+    }
 
     public static function upload(Request $request)
     {
