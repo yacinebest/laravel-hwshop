@@ -233,7 +233,10 @@ return [
 		'Form'  => Collective\Html\FormFacade::class,
 		'Html'  => Collective\Html\HtmlFacade::class,
 		'Form'  => Collective\Html\FormFacade::class,
-		'Html'  => Collective\Html\HtmlFacade::class,
+        'Html'  => Collective\Html\HtmlFacade::class,
+
+
+        'Category' => App\Models\Category::class,
     ],
 
 ];

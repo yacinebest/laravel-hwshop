@@ -14,9 +14,9 @@ class ImageRepository extends BaseRepository implements ImageRepositoryInterface
 */
     public function getAccessibleColumn(){
         return [
-            'file'=>'File',
+            'imagePath'=>'Image',
             'imageable_type'=>'Type',
-            'imageable_id'=>'Id',
+            'imageable_id'=>'Name',
             // 'created_at' => 'Created At'
         ];
     }

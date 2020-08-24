@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Image;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
@@ -26,12 +27,11 @@ class ImageController extends Controller
      */
     public function index()
     {
-        $entities = $this->imageRepository->basePaginate([],['imageable_type'=>'ASC','imageable_id'=>'DESC']);
+        $images = $this->imageRepository->basePaginate([],['imageable_type'=>'ASC','imageable_id'=>'DESC']);
         $columns = $this->imageRepository->getAccessibleColumn();
         // $cardCountAndRoute = $this->imageRepository->getCardCountAndRoute();
 
-
-        return view('images.index',compact('entities','columns'));
+        return view('images.index',compact('columns','images'));
     }
 
     /**
