@@ -21,6 +21,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             'view'=>'View',
             'categoryName'=>'Category',
             'columnCount' => 'Count',
+            'brands' => 'Brands',
             // 'imageCount'=>'Images',
             // 'commentCount'=>'Comment',
             // 'upVoteCount'=> 'Up Vote',
@@ -36,6 +37,21 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             // 'copy_number'=>'Copy Number',
             // 'category_id'=>'Category',
         ];
+    }
+
+/*
+|---------------------------------------------------------------------------|
+| Override Interface FUNCTION                                               |
+|---------------------------------------------------------------------------|
+*/
+
+
+    public function attachBrandToProduct($brand,$product){
+        $product->brands()->attach($brand);
+    }
+
+    public function detachAllBrandToProduct($product){
+        $product->brands()->detach();
     }
 
 }

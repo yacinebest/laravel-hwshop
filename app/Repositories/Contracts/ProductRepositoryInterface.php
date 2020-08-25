@@ -4,4 +4,8 @@ namespace App\Repositories\Contracts;
 
 interface ProductRepositoryInterface extends BaseRepositoryInterface{
 
+
+    public function attachBrandToProduct($brand,$product);
+    public function detachAllBrandToProduct($product);
+
 }

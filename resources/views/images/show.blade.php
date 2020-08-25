@@ -1,5 +1,3 @@
-{{-- @extends('layouts.default.index' , ['page'=>'Images','route_name'=>'image','edit'=>false]) --}}
-
 @extends('layouts.app', ['title' => __('Images Management'),'route_name'=>'image','edit'=>false])
 
 

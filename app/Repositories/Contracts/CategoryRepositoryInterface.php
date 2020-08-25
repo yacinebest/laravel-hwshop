@@ -21,5 +21,4 @@ interface CategoryRepositoryInterface extends BaseRepositoryInterface , CardCoun
 
     public function deleteWithChilds($entity);
 
-    public function deleteImages($entity);
 }

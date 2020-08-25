@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Product\ProductStoreRequest;
+use App\Models\Product;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
@@ -65,16 +66,11 @@ class ProductController extends Controller
         $data = $this->processRequestForStore($request);
         $product = $this->productRepository->baseCreate( $data);
 
-        if( $request->input('brands') ){
-            foreach ($request->input('brands') as $brand) {
-                $product->brands()->attach($brand);
-            }
-        }
+        $this->processRequestBrandsField($request,$product);
 
-        $images = $this->imageRepository->uploadImages($request,'products');
-        if($images)
-            $this->imageRepository->attachImagesToEntity($images,$product);
+        $this->processRequestImagesFile($request,$product);
 
+        $this->processRequestDatasheetFile($request,$product);
 
         return redirect(route('product.index'));
     }
@@ -98,7 +94,16 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $product = $this->productRepository->baseFindOrFail( $id);
+
+        $category = $this->categoryRepository->baseFindOrFail($product->category_id);
+        $categories_level= $this->categoryRepository->getCategoriesLevels();
+        $selected_categories= $this->categoryRepository->getDirectParents($category) ;
+
+        $brands = $this->brandRepository->basePaginate();
+
+        return view('products.edit',compact('brands','product','category','categories_level','selected_categories'));
     }
 
     /**
@@ -108,9 +113,23 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ProductStoreRequest $request, $id)
     {
-        //
+
+        $product = $this->productRepository->baseFindOrFail( $id);
+
+        $data = $this->processRequestForStore($request);
+
+        $this->productRepository->update($product,$data);
+
+        $this->processRequestBrandsField($request,$product,true);
+
+        $this->processRequestImagesFile($request,$product);
+
+        $this->processRequestDatasheetFile($request,$product);
+
+        return back()->withStatus(__('Product successfully updated.'));
+
     }
 
     /**
@@ -121,7 +140,10 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = $this->productRepository->baseFindOrFail( $id);
+        $this->productRepository->deleteImages($product);
+        $this->productRepository->delete($product);
+        return redirect()->back();
     }
 
 /*
@@ -136,6 +158,32 @@ class ProductController extends Controller
                 ['category_id'=>$request['parent_id'],'updated_price_at'=>now()->format('Y-m-d H:m:s')]
             );
         return $data;
+    }
+
+    public function processRequestBrandsField(Request $request,Product $product,$detach =false){
+        if( $request->input('brands') ){
+
+            if($detach)
+                $this->productRepository->detachAllBrandToProduct($product);
+
+            foreach ($request->input('brands') as $brand) {
+                $this->productRepository->attachBrandToProduct($brand,$product);
+            }
+        }
+    }
+
+    public function processRequestImagesFile(Request $request,Product $product){
+        $images = $this->imageRepository->uploadImages($request,'products');
+        if($images)
+            $this->imageRepository->attachImagesToEntity($images,$product);
+    }
+
+    public function processRequestDatasheetFile(Request $request,Product $product){
+        if($file=$request->file('datasheet')){
+            $file->store('public/uploads/datasheet/');
+            $name = $file->hashName();
+            $product->update(['datasheet'=> $name]);
+        }
     }
 
 }

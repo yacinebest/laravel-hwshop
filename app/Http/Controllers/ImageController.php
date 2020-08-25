@@ -85,9 +85,15 @@ class ImageController extends Controller
      */
     public function show($id)
     {
+        // dd([]);
         $columns = $this->imageRepository->getAccessibleColumn();
-        $category = $this->categoryRepository->baseFindOrFail($id);
-        $images = $category->images;
+        try {
+            $category = $this->categoryRepository->baseFindOrFail($id);
+            $images = $category->images;
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
         return view('images.show',compact('columns','category','images'));
     }
 

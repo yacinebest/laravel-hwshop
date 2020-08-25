@@ -70,6 +70,14 @@ class BaseRepository implements BaseRepositoryInterface {
         $entity->delete();
     }
 
+    public function deleteImages($entity){
+        if ($entity->imageCount > 0) {
+            collect($entity->images)->map(function($image){
+                $this->delete($image);
+            });
+        }
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | Custom                                                                    |

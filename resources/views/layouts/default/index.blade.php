@@ -58,12 +58,26 @@
                                                 @elseif($key==='columnCount')
                                                     <td>
                                                         <ul class="list-unstyled">
-                                                            <li> <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary m-2">{{ $entity->imageCount }} Image</a></li>
-                                                            <li> <a href="#" class="btn btn-primary m-2">{{ $entity->commentCount }} Comment</a></li>
-                                                            <li> <a href="#" class="btn btn-primary m-2">{{ $entity->upVoteCount }} Up Vote</a></li>
-                                                            <li> <a href="#" class="btn btn-primary m-2">{{ $entity->downVoteCount }} Down Vote</a></li>
+                                                            <li>
+                                                                <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary mr-2 mb-2">{{ $entity->imageCount }}  <i class="fa fa-image" ></i></a>
+                                                                <a href="#" class="btn btn-primary mr-2 mb-2">{{ $entity->commentCount }}  <i class="fa fa-comment" ></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="#" class="btn btn-primary mr-2">{{ $entity->upVoteCount }}  <i class="fa fa-thumbs-up" ></i></a>
+                                                                <a href="#" class="btn btn-primary ">{{ $entity->downVoteCount }}  <i class="fa fa-thumbs-down"></i></a>
+                                                            </li>
+                                                            <li>
+                                                                <p>Datasheet : @if( $entity->datasheet) Avaible @else Not Avaible @endif </p>
+                                                            </li>
                                                         </ul>
-                                                        {{-- <button class="btn btn-primary" type="submit">{{ $entity->$key }} Image</button> --}}
+                                                    </td>
+                                                @elseif($key==='brands')
+                                                    <td>
+                                                        <ul class="list-group">
+                                                        @foreach($entity->brands as $brand)
+                                                            <li>{{ $brand->name }}</li>
+                                                        @endforeach
+                                                        </ul>
                                                     </td>
                                                 @else
                                                     <td >{{ $entity->$key }}</td>

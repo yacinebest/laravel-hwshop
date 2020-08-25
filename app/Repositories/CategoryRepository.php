@@ -67,6 +67,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         $selected_categories= [];
         $parent_id = $category->parent_id;
         if($parent_id!=null){
+            $selected_categories['select_'.$category->level] = $category; // to have also current category
             for ($i=$category->level -1; $i > 0 && $parent_id!=null ; $i--) {
                 $selected_categories['select_'.$i] = $this->baseFindOrFail($parent_id);
                 $parent_id = $selected_categories['select_'.$i]->parent_id;
@@ -115,14 +116,6 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
         }
         $this->deleteImages($entity);
         $this->delete($entity);
-    }
-
-    public function deleteImages($entity){
-        if ($entity->imageCount > 0) {
-            collect($entity->images)->map(function($image){
-                $this->delete($image);
-            });
-        }
     }
 
 }
