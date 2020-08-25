@@ -6,6 +6,7 @@ namespace App\Models;
 class Product extends BaseModel
 {
     // protected $with =['category'] ;
+    protected $appends =['categoryName','imageCount','upVoteCount','downVoteCount','commentCount'];
 
     public function category()
     {
@@ -39,6 +40,47 @@ class Product extends BaseModel
     public function votes()
     {
         return $this->morphMany('App\Models\Vote', 'voteable');
+    }
+
+/*
+|---------------------------------------------------------------------------|
+| GETTER & SETTER                                                           |
+|---------------------------------------------------------------------------|
+*/
+
+    public function getCategoryNameAttribute(){
+        return $this->category->name;
+    }
+
+     /**
+     * @return number
+     */
+    public function getImageCountAttribute()
+    {
+        return count($this->images);
+    }
+
+      /**
+     * @return number
+     */
+    public function getUpVoteCountAttribute()
+    {
+        return count($this->votes()->whereType('UP')->get());
+    }
+     /**
+     * @return number
+     */
+    public function getDownVoteCountAttribute()
+    {
+        return count($this->votes()->whereType('DOWN')->get());
+    }
+
+     /**
+     * @return number
+     */
+    public function getCommentCountAttribute()
+    {
+        return count($this->comments);
     }
 
 }

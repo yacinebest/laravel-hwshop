@@ -37,12 +37,7 @@
                                 @endphp
                                 <input type="{{ $type}}" name="{{ $key }}" id="input-{{ $key }}" class="form-control form-control-alternative" placeholder="{{ __($placeholder) }}" >
 
-
-                                @if ($errors->has($key))
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $errors->first($key) }}</strong>
-                                    </span>
-                                @endif
+                                @include('layouts.form.error_field',['key'=>$key])
                             </div>
                         @endforeach
                         @endisset

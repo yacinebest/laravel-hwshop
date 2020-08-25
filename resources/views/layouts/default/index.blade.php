@@ -55,6 +55,16 @@
                                                         <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary">{{ $entity->$key }} Image</a>
                                                         {{-- <button class="btn btn-primary" type="submit">{{ $entity->$key }} Image</button> --}}
                                                     </td>
+                                                @elseif($key==='columnCount')
+                                                    <td>
+                                                        <ul class="list-unstyled">
+                                                            <li> <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary m-2">{{ $entity->imageCount }} Image</a></li>
+                                                            <li> <a href="#" class="btn btn-primary m-2">{{ $entity->commentCount }} Comment</a></li>
+                                                            <li> <a href="#" class="btn btn-primary m-2">{{ $entity->upVoteCount }} Up Vote</a></li>
+                                                            <li> <a href="#" class="btn btn-primary m-2">{{ $entity->downVoteCount }} Down Vote</a></li>
+                                                        </ul>
+                                                        {{-- <button class="btn btn-primary" type="submit">{{ $entity->$key }} Image</button> --}}
+                                                    </td>
                                                 @else
                                                     <td >{{ $entity->$key }}</td>
                                                 @endif

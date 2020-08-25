@@ -24,7 +24,12 @@ class Image extends BaseModel
      */
     public function getImagePathAttribute()
     {
-        return "/storage/uploads/categories/" . $this->file ;
+        $folder = "";
+        if($this->imageable_type=="Category")
+            $folder="categories";
+        else if($this->imageable_type=="Product")
+            $folder="products";
+        return "/storage/uploads/". $folder ."/" . $this->file ;
     }
 
 }

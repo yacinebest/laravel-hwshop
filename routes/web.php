@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('brand', 'BrandController', ['except' => ['show'] ] );
 
+    Route::resource('product', 'ProductController');
 
 
     // Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);

@@ -237,6 +237,7 @@ return [
 
 
         'Category' => App\Models\Category::class,
+        'Product' => App\Models\Product::class,
     ],
 
 ];

@@ -13,5 +13,6 @@
             <td>{{ $entity->imageable_type  }}</td>
             <td>{{ $entity->imageable->name  }}</td>
             @include('layouts.dropdown.btnAction', ['entity' => $entity ])
+    </tr>
     @endforeach
 @endsection

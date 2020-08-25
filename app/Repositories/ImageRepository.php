@@ -17,6 +17,7 @@ class ImageRepository extends BaseRepository implements ImageRepositoryInterface
             'imagePath'=>'Image',
             'imageable_type'=>'Type',
             'imageable_id'=>'Name',
+
             // 'created_at' => 'Created At'
         ];
     }

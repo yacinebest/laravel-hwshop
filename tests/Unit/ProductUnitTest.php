@@ -111,4 +111,32 @@ class ProductUnitTest extends TestCase
         $this->assertNotEmpty($this->product->votes);
         $this->assertCount(2,$this->product->votes);
     }
+
+       /**
+     * @test
+     * @return void
+    */
+    function can_access_brands_relation()
+    {
+        $user = factory(User::class)->create();
+        $this->product->brands()->create(['name'=>"dqsdqsd"]);
+        $this->product->brands()->create(['name'=>"dqsdqsd"]);
+
+        $this->assertNotEmpty($this->product->brands);
+        $this->assertCount(2,$this->product->brands);
+
+    }
+
+       /**
+     * @test
+     * @return void
+    */
+    function can_attach_brands_relation()
+    {
+        $this->product->brands()->attach(factory(Brand::class)->create());
+        $this->product->brands()->attach(factory(Brand::class)->create());
+
+        $this->assertNotEmpty($this->product->brands);
+        $this->assertCount(2,$this->product->brands);
+    }
 }
