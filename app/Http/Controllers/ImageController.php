@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Image;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
+use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Console\Input\Input;
@@ -14,10 +15,14 @@ class ImageController extends Controller
 {
     private $imageRepository;
     private $categoryRepository;
+    private $productRepository;
 
-    public function __construct(ImageRepositoryInterface $imageRepository,CategoryRepositoryInterface $categoryRepository) {
+    public function __construct(ImageRepositoryInterface $imageRepository,
+                                CategoryRepositoryInterface $categoryRepository,
+                                ProductRepositoryInterface $productRepository) {
         $this->imageRepository = $imageRepository;
         $this->categoryRepository = $categoryRepository;
+        $this->productRepository = $productRepository;
     }
 
     /**
@@ -53,14 +58,30 @@ class ImageController extends Controller
      */
     public function store(Request $request)
     {
+        try {
+            $entity = $this->categoryRepository->baseFindOrFail($request->entity_id);
+            $folder= "categories";
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        try {
+            $entity = $this->productRepository->baseFindOrFail($request->entity_id);
+            $folder= "products";
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
         foreach ($request->images as $image) {
-            $name= $this->imageRepository->storeFile($image,'public/uploads/categories');
+            $name= $this->imageRepository->storeFile($image,'public/uploads/' . $folder);
             $images[]=$name;
         }
-        $category = $this->categoryRepository->baseFindOrFail($request->category_id);
-        $this->imageRepository->attachImagesToEntity($images,$category);
-        $category->refresh();
-        return response()->json($category->images);
+
+
+        if($images)
+            $this->imageRepository->attachImagesToEntity($images,$entity);
+        $entity->refresh();
+        return response()->json($entity->images);
     }
 
 
@@ -88,13 +109,20 @@ class ImageController extends Controller
         // dd([]);
         $columns = $this->imageRepository->getAccessibleColumn();
         try {
-            $category = $this->categoryRepository->baseFindOrFail($id);
-            $images = $category->images;
+            $entity = $this->categoryRepository->baseFindOrFail($id);
         } catch (\Throwable $th) {
             //throw $th;
         }
 
-        return view('images.show',compact('columns','category','images'));
+        try {
+            $entity = $this->productRepository->baseFindOrFail($id);
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
+
+        $images = $entity->images;
+        return view('images.show',compact('columns','entity','images'));
+        // return view('images.show',compact('columns','category','images'));
     }
 
     public static function upload(Request $request)

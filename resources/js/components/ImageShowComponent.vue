@@ -4,7 +4,7 @@
         <div class="card-header border-0">
             <div class="row align-items-center">
                 <div class="col-8">
-                    <h3 class="mb-0">Images For {{ this.category.name }} :</h3>
+                    <h3 class="mb-0">Images For {{ this.entity.name }} :</h3>
                 </div>
                 <div class="col-4 text-right">
                     <input id="input-file" type="file" name="images[]" class="d-none" @change="uploadImages" multiple>
@@ -31,7 +31,7 @@
                         <td>
                             <div class="images-preview">
                                 <div class="img-wrapper" >
-                                    <img :src="`/storage/uploads/categories/${image.file}`" :alt="`Category ${image.file}`" width="200" height="200">
+                                    <img :src="image.imagePath" :alt="`Category ${image.file}`" width="200" height="200">
                                 </div>
                             </div>
                         </td>
@@ -52,7 +52,7 @@ export default {
             required: true,
             default: ()=>([])
         },
-        category: {
+        entity: {
             type: Object,
             required: true,
             default: ()=>({})
@@ -74,7 +74,7 @@ export default {
             const files = e.target.files;
 
             let form = new FormData()
-            form.append('category_id',this.category.id)
+            form.append('entity_id',this.entity.id)
             Array.from(files).forEach(file => {
                 form.append('images[]', file, file.name);
             });

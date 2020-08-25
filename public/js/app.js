@@ -2064,7 +2064,7 @@ __webpack_require__.r(__webpack_exports__);
         return [];
       }
     },
-    category: {
+    entity: {
       type: Object,
       required: true,
       "default": function _default() {
@@ -2092,7 +2092,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var files = e.target.files;
       var form = new FormData();
-      form.append('category_id', this.category.id);
+      form.append('entity_id', this.entity.id);
       Array.from(files).forEach(function (file) {
         form.append('images[]', file, file.name);
       });
@@ -38280,7 +38280,7 @@ var render = function() {
       _c("div", { staticClass: "row align-items-center" }, [
         _c("div", { staticClass: "col-8" }, [
           _c("h3", { staticClass: "mb-0" }, [
-            _vm._v("Images For " + _vm._s(this.category.name) + " :")
+            _vm._v("Images For " + _vm._s(this.entity.name) + " :")
           ])
         ]),
         _vm._v(" "),
@@ -38326,7 +38326,7 @@ var render = function() {
                   _c("div", { staticClass: "img-wrapper" }, [
                     _c("img", {
                       attrs: {
-                        src: "/storage/uploads/categories/" + image.file,
+                        src: image.imagePath,
                         alt: "Category " + image.file,
                         width: "200",
                         height: "200"
