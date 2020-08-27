@@ -15,6 +15,7 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->uuid('id');
+            $table->bigIncrements('ref');
             $table->uuid('user_id');
             $table->uuid('admin_id')->nullable();//the one that approved this order
 

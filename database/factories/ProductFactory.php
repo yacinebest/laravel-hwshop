@@ -13,7 +13,7 @@ $factory->define(Product::class, function (Faker $faker) {
         'price' => $faker->randomNumber(5),
         'updated_price_at' => now()->format('Y-m-d H:m:s'),
         'copy_number' => $faker->randomNumber(3),
-        'view' => $faker->randomNumber(5),
+        // 'view' => $faker->randomNumber(5),
         'category_id'=> function(){
             return factory(\App\Models\Category::class)->create()->id;
         }
