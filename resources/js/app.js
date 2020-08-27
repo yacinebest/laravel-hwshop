@@ -14,8 +14,19 @@ import BrandLogo from './components/BrandLogoComponent.vue';
 import ImageUploader from './components/ImageUploaderComponent.vue';
 import ImageShow from './components/ImageShowComponent.vue';
 import TableIndex from './components/TableIndexComponent.vue';
+import Modal from './components/ModalComponent.vue';
 
 const app = new Vue({
     el: '#app',
-    components: { CardEntity, UserUpload, UserAvatar, SelectCategory, BrandLogo, ImageUploader, ImageShow, TableIndex }
+    components: {
+        CardEntity,
+        UserUpload,
+        UserAvatar,
+        SelectCategory,
+        BrandLogo,
+        ImageUploader,
+        ImageShow,
+        TableIndex,
+        Modal
+    }
 });

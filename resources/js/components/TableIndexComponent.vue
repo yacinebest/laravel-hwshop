@@ -22,48 +22,30 @@
                         <p v-else>{{   order[column]  }}</p>
                     </td>
                      <td>
-                        <div class="col-4 text-right">
+                         <div class="col-4 text-right m-2">
+                            <button @click="showModal(order)" class="btn btn-sm btn-secondary" >See Details</button>
+                        </div>
+                        <div class="col-4 text-right m-2">
                             <button @click="applyChanges(order)" class="btn btn-sm btn-primary" >Apply Changes</button>
                         </div>
                     </td>
                 </tr>
-            <!-- <tr v->
-                <td v-for="(name,column) in columns" :key="column">
-                {{   order[column]  }}
-                </td> -->
-                <!-- @foreach($columns as $key => $value)
-                    @if($key==='statusOrder')
-                    <td>
-                        <select class="selectpicker form-control" data-style="btn-primary" name="status">
-
-                            @foreach($entity->enumStatus() as $status)
-                                @if($entity->status==$status)
-                                    <option value="{{ $status }}" selected="selected" >{{ $status}}</option>
-                                @else
-                                    <option value="{{ $status }}"  >{{ $status }}</option>
-                                @endif
-                            @endforeach
-
-                        </select>
-                    </td>
-                    @else
-                        <td >{{ $entity->$key }}</td>
-                    @endif
-                @endforeach -->
-<!--
-                <td>
-                    <div class="col-4 text-right">
-                        <a href="" class="btn btn-sm btn-primary">Apply Changes</a>
-                    </div>
-                </td> -->
-            <!-- </tr> -->
             </tbody>
         </table>
+        <modal
+            v-if="isModalVisible"
+            :order="sendOrder"
+            @close="closeModal"
+        />
     </div>
 </template>
 
 <script>
+import Modal from './ModalComponent.vue'
 export default {
+    components: {
+      Modal,
+    },
     props:{
         columns: {
             type: Object,
@@ -78,7 +60,9 @@ export default {
     },
     data() {
         return {
-            orders:  this.paginate.data
+            orders:  this.paginate.data,
+            isModalVisible: false,
+            sendOrder: {}
         }
     },
     methods: {
@@ -102,6 +86,15 @@ export default {
                     order.admin_id = data.admin.id
                     order.adminUsername = data.admin.username
                 })
+        },
+
+        showModal(order) {
+            this.sendOrder = order
+            this.isModalVisible = true;
+        },
+        closeModal() {
+            this.sendOrder = {}
+            this.isModalVisible = false;
         }
     },
 }

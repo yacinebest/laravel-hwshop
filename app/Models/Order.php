@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 class Order extends BaseModel
 {
-    // protected $with =['user'] ;
+    protected $with =['products'] ;
     protected $appends =['userUsername','adminUsername','enumStatus'];
 
     public function user()
