@@ -64,7 +64,7 @@
                                                             <ul class="list-unstyled">
                                                                 <li>
                                                                     <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary mr-2 mb-2">{{ $entity->imageCount }}  <i class="fa fa-image" ></i></a>
-                                                                    <a href="#" class="btn btn-primary mr-2 mb-2">{{ $entity->commentCount }}  <i class="fa fa-comment" ></i></a>
+                                                                    <a href="{{ route('comment.show',$entity->id) }}" class="btn btn-primary mr-2 mb-2">{{ $entity->commentCount }}  <i class="fa fa-comment" ></i></a>
                                                                 </li>
                                                                 <li>
                                                                     <a href="#" class="btn btn-primary mr-2">{{ $entity->upVoteCount }}  <i class="fa fa-thumbs-up" ></i></a>

@@ -54,6 +54,12 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('order', 'OrderController', ['except' => ['create','store','show','edit','destroy'] ]);
 
+    // Route::resource('comment', 'CommentController', ['except' => ['index','create','store','update','edit'] ]);
+    Route::get('comments/{comment}',  ['as' => 'comment.show', 'uses' => 'CommentController@show'] );
+    Route::delete('comments/{comment}',  ['as' => 'comment.destroy', 'uses' => 'CommentController@destroy'] );
+
+
+
     // Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
     // Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
     // Route::get('category/{id}/edit', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);

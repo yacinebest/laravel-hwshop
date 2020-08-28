@@ -78,6 +78,14 @@ class BaseRepository implements BaseRepositoryInterface {
         }
     }
 
+    public function deleteVotes($entity){
+        if ($entity->voteCount > 0) {
+            collect($entity->votes)->map(function($vote){
+                $this->delete($vote);
+            });
+        }
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | Custom                                                                    |

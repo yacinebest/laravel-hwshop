@@ -4,6 +4,9 @@ namespace App\Models;
 
 class Comment extends BaseModel
 {
+
+    protected $appends =['upVoteCount','downVoteCount','voteCount'];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User');
@@ -23,4 +26,35 @@ class Comment extends BaseModel
     {
         return $this->belongsTo('App\Models\Comment', 'parent_id');
     }
+
+
+/*
+|---------------------------------------------------------------------------|
+| GETTER & SETTER                                                           |
+|---------------------------------------------------------------------------|
+*/
+
+    /**
+     * @return number
+     */
+    public function getUpVoteCountAttribute()
+    {
+        return count($this->votes()->whereType('UP')->get());
+    }
+    /**
+     * @return number
+     */
+    public function getDownVoteCountAttribute()
+    {
+        return count($this->votes()->whereType('DOWN')->get());
+    }
+
+     /**
+     * @return number
+     */
+    public function getVoteCountAttribute()
+    {
+        return count($this->votes);
+    }
+
 }
