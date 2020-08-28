@@ -56,7 +56,8 @@
 
 <script>
   export default {
-    name: 'modal',
+    // name: 'modal',
+    name: 'indexpage',
     props:{
         order: {
             type: Object,

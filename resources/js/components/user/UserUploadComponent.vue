@@ -13,6 +13,7 @@
 
 <script>
 export default {
+    name: 'user',
     props:{
         user: {
             type: Object,

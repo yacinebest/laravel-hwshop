@@ -29,6 +29,7 @@
 
 <script>
 export default {
+    name: 'indexpage',
     props: {
         entity_name: {
             type: String,

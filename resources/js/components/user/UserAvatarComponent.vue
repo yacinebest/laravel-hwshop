@@ -26,9 +26,10 @@
 </template>
 
 <script>
-import UserUpload from './UserUploadComponent.vue'
+// import UserUpload from './user/UserUploadComponent.vue'
 
 export default {
+    name: 'user',
     //  components: {
     //     UserUpload
     // },

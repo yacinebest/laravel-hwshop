@@ -32,17 +32,18 @@
                 </tr>
             </tbody>
         </table>
-        <modal
+        <!-- <modal
             v-if="isModalVisible"
             :order="sendOrder"
             @close="closeModal"
-        />
+        /> -->
     </div>
 </template>
 
 <script>
-import Modal from './ModalComponent.vue'
+import Modal from './ModalComponent.vue';
 export default {
+    name: 'indexpage',
     components: {
       Modal,
     },
