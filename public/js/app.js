@@ -2583,9 +2583,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'indexpage',
+  name: "indexpage",
   components: {
     Modal: _ModalComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -2622,10 +2639,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     applyChanges: function applyChanges(order) {
       var form = new FormData();
-      form.append('status', order.status);
+      form.append("status", order.status);
       axios.post("order/".concat(order.id), {
         status: order.status,
-        _method: 'patch'
+        _method: "patch"
       }).then(function (_ref) {
         var data = _ref.data;
         alert("Your have Update Status of Order ".concat(order.ref));
@@ -39661,107 +39678,128 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("table", { staticClass: "table align-items-center table-flush" }, [
-      _c("thead", { staticClass: "thead-light" }, [
-        _c(
-          "tr",
-          [
-            _vm._l(_vm.columns, function(name) {
-              return _c("th", { key: name, attrs: { scope: "col" } }, [
-                _vm._v(
-                  "\n                    " + _vm._s(name) + "\n                "
-                )
-              ])
-            }),
-            _vm._v(" "),
-            _c("th", { attrs: { scope: "col" } })
-          ],
-          2
-        )
-      ]),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.orders, function(order) {
-          return _c(
+  return _c(
+    "div",
+    [
+      _c("table", { staticClass: "table align-items-center table-flush" }, [
+        _c("thead", { staticClass: "thead-light" }, [
+          _c(
             "tr",
-            { key: order.id },
             [
-              _vm._l(_vm.columns, function(name, column) {
-                return _c("td", { key: column }, [
-                  column == "status"
-                    ? _c("div", [
-                        _c(
-                          "select",
-                          {
-                            staticClass: "selectpicker form-control",
-                            attrs: {
-                              "data-id": order.id,
-                              "data-style": "btn-primary",
-                              name: "status"
-                            },
-                            on: { change: _vm.changeStatus }
-                          },
-                          _vm._l(order.enumStatus, function(status) {
-                            return _c(
-                              "option",
-                              {
-                                key: status,
-                                domProps: {
-                                  value: status,
-                                  selected: order.status == status
-                                }
-                              },
-                              [_vm._v(_vm._s(status))]
-                            )
-                          }),
-                          0
-                        )
-                      ])
-                    : _c("p", [_vm._v(_vm._s(order[column]))])
+              _vm._l(_vm.columns, function(name) {
+                return _c("th", { key: name, attrs: { scope: "col" } }, [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(name) +
+                      "\n                "
+                  )
                 ])
               }),
               _vm._v(" "),
-              _c("td", [
-                _c("div", { staticClass: "col-4 text-right m-2" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm btn-secondary",
-                      on: {
-                        click: function($event) {
-                          return _vm.showModal(order)
-                        }
-                      }
-                    },
-                    [_vm._v("See Details")]
-                  )
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-4 text-right m-2" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-sm btn-primary",
-                      on: {
-                        click: function($event) {
-                          return _vm.applyChanges(order)
-                        }
-                      }
-                    },
-                    [_vm._v("Apply Changes")]
-                  )
-                ])
-              ])
+              _c("th", { attrs: { scope: "col" } })
             ],
             2
           )
-        }),
-        0
-      )
-    ])
-  ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "tbody",
+          _vm._l(_vm.orders, function(order) {
+            return _c(
+              "tr",
+              { key: order.id },
+              [
+                _vm._l(_vm.columns, function(name, column) {
+                  return _c("td", { key: column }, [
+                    column == "status"
+                      ? _c("div", [
+                          _c(
+                            "select",
+                            {
+                              staticClass: "selectpicker form-control",
+                              attrs: {
+                                "data-id": order.id,
+                                "data-style": "btn-primary",
+                                name: "status"
+                              },
+                              on: { change: _vm.changeStatus }
+                            },
+                            _vm._l(order.enumStatus, function(status) {
+                              return _c(
+                                "option",
+                                {
+                                  key: status,
+                                  domProps: {
+                                    value: status,
+                                    selected: order.status == status
+                                  }
+                                },
+                                [_vm._v(_vm._s(status))]
+                              )
+                            }),
+                            0
+                          )
+                        ])
+                      : _c("p", [_vm._v(_vm._s(order[column]))])
+                  ])
+                }),
+                _vm._v(" "),
+                _c("td", [
+                  _c("div", { staticClass: "col-4 text-right m-2" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-secondary",
+                        on: {
+                          click: function($event) {
+                            return _vm.showModal(order)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            See Details\n                        "
+                        )
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-4 text-right m-2" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-sm btn-primary",
+                        on: {
+                          click: function($event) {
+                            return _vm.applyChanges(order)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            Apply Changes\n                        "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ],
+              2
+            )
+          }),
+          0
+        )
+      ]),
+      _vm._v(" "),
+      _vm.isModalVisible
+        ? _c("modal", {
+            attrs: { order: _vm.sendOrder },
+            on: { close: _vm.closeModal }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -52112,7 +52150,7 @@ Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 
 var app = new Vue({
-  el: '#app',
+  el: "#app",
   components: {
     CardEntity: _components_indexpage_CardEntityComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
     UserUpload: _components_user_UserUploadComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"],

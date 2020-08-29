@@ -21,6 +21,10 @@ class CreateOrdersTable extends Migration
 
             $table->dateTime('order_date');
             $table->enum('status',['PROCESSING','CANCELED','APPROVED'])->default('PROCESSING');
+
+            $table->uuid('invoice_id')->nullable();
+            $table->uuid('delivery_id')->nullable();
+            $table->uuid('payment_id')->nullable();
             $table->timestamps();
         });
     }
