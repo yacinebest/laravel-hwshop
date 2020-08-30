@@ -1,7 +1,8 @@
 <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
     <div class="container-fluid">
         <!-- Toggler -->
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main"
+            aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <!-- Brand -->
@@ -11,10 +12,12 @@
         <!-- User -->
         <ul class="nav align-items-center d-md-none">
             <li class="nav-item dropdown">
-                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
                     <div class="media align-items-center">
                         <span class="avatar avatar-sm rounded-circle">
-                        <img alt="Image placeholder" src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
+                            <img alt="Image placeholder"
+                                src="{{ asset('argon') }}/img/theme/team-1-800x800.jpg">
                         </span>
                     </div>
                 </a>
@@ -58,7 +61,9 @@
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
-                        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                        <button type="button" class="navbar-toggler" data-toggle="collapse"
+                            data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false"
+                            aria-label="Toggle sidenav">
                             <span></span>
                             <span></span>
                         </button>
@@ -68,7 +73,8 @@
             <!-- Form -->
             <form class="mt-4 mb-3 d-md-none">
                 <div class="input-group input-group-rounded input-group-merge">
-                    <input type="search" class="form-control form-control-rounded form-control-prepended" placeholder="{{ __('Search') }}" aria-label="Search">
+                    <input type="search" class="form-control form-control-rounded form-control-prepended"
+                        placeholder="{{ __('Search') }}" aria-label="Search">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fa fa-search"></span>
@@ -84,9 +90,11 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples1" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples1">
+                    <a class="nav-link active collapsed" href="#navbar-examples1" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="navbar-examples1">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Admin Management') }}</span>
+                        <span class="nav-link-text"
+                            style="color: #f4645f;">{{ __('Admin Management') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples1">
@@ -106,9 +114,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples5" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples5">
+                    <a class="nav-link active collapsed" href="#navbar-examples5" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="navbar-examples5">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Product Management') }}</span>
+                        <span class="nav-link-text"
+                            style="color: #f4645f;">{{ __('Product Management') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples5">
@@ -116,6 +126,11 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('product.index') }}">
                                     {{ __('Display All Product') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('supply.index') }}">
+                                    {{ __('Display All Supply') }}
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -128,9 +143,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples6" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples6">
+                    <a class="nav-link active collapsed" href="#navbar-examples6" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="navbar-examples6">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Order Management') }}</span>
+                        <span class="nav-link-text"
+                            style="color: #f4645f;">{{ __('Order Management') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples6">
@@ -146,9 +163,11 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples2" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples2">
+                    <a class="nav-link active collapsed" href="#navbar-examples2" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="navbar-examples2">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Category Management') }}</span>
+                        <span class="nav-link-text"
+                            style="color: #f4645f;">{{ __('Category Management') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples2">
@@ -168,9 +187,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples3" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples3">
+                    <a class="nav-link active collapsed" href="#navbar-examples3" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="navbar-examples3">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Image Management') }}</span>
+                        <span class="nav-link-text"
+                            style="color: #f4645f;">{{ __('Image Management') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples3">
@@ -185,9 +206,11 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples4" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="navbar-examples4">
+                    <a class="nav-link active collapsed" href="#navbar-examples4" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="navbar-examples4">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text" style="color: #f4645f;">{{ __('Brand Management') }}</span>
+                        <span class="nav-link-text"
+                            style="color: #f4645f;">{{ __('Brand Management') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples4">
@@ -209,7 +232,7 @@
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}
-                    </a>
+                </a>
                 </li> --}}
             </ul>
             <!-- Divider -->
@@ -219,17 +242,20 @@
             <!-- Navigation -->
             <ul class="navbar-nav mb-md-3">
                 <li class="nav-item">
-                    <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
+                    <a class="nav-link"
+                        href="https://demos.creative-tim.com/argon-dashboard/docs/getting-started/overview.html">
                         <i class="ni ni-spaceship"></i> Getting started
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
+                    <a class="nav-link"
+                        href="https://demos.creative-tim.com/argon-dashboard/docs/foundation/colors.html">
                         <i class="ni ni-palette"></i> Foundation
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
+                    <a class="nav-link"
+                        href="https://demos.creative-tim.com/argon-dashboard/docs/components/alerts.html">
                         <i class="ni ni-ui-04"></i> Components
                     </a>
                 </li>

@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Order;
 use Tests\TestCase;
 use App\Models\Product;
+use App\Models\Supply;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -159,4 +160,23 @@ class ProductUnitTest extends TestCase
         $this->assertEmpty($this->product->brands);
         $this->assertCount(0,$this->product->brands);
     }
+
+        /**
+     * @test
+     * @return void
+    */
+    function can_access_supplies_relation()
+    {
+        for ($i=0; $i <2 ; $i++) {
+            $this->product->supplies()->save(
+                factory(Supply::class)->create(['product_id'=>$this->product->id])
+            );
+        }
+
+        $this->product = $this->product->refresh();
+
+        $this->assertNotEmpty($this->product->supplies);
+        $this->assertCount(2,$this->product->supplies);
+    }
+
 }

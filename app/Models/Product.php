@@ -42,6 +42,11 @@ class Product extends BaseModel
         return $this->morphMany('App\Models\Vote', 'voteable');
     }
 
+    public function supplies()
+    {
+        return $this->hasMany('App\Models\Supply');
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | GETTER & SETTER                                                           |
