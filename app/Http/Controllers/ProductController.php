@@ -66,6 +66,8 @@ class ProductController extends Controller
         $data = $this->processRequestForStore($request);
         $product = $this->productRepository->baseCreate( $data);
 
+        $this->processRequestSuppliesField($request,$product);
+
         $this->processRequestBrandsField($request,$product);
 
         $this->processRequestImagesFile($request,$product);
@@ -183,6 +185,14 @@ class ProductController extends Controller
             $file->store('public/uploads/datasheet/');
             $name = $file->hashName();
             $product->update(['datasheet'=> $name]);
+        }
+    }
+
+    public function processRequestSuppliesField($request,$product){
+        if($admission_price = $request->input('admission_price') ){
+            $quantity = $request->input('copy_number');
+            $supply_date = $request->input('supply_date');
+            $this->productRepository->attachSupplyToProduct($admission_price,$supply_date,$quantity,$product);
         }
     }
 

@@ -21,6 +21,8 @@ class CreateSuppliesTable extends Migration
             $table->integer('quantity');
             $table->dateTime('supply_date');
             $table->decimal('admission_price',7,2);
+
+            $table->enum('status',['WAITING','IN PROGRESS','CANCELED','COMPLETED'])->default('WAITING');
             $table->timestamps();
         });
     }

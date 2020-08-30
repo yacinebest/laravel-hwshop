@@ -9,5 +9,9 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface{
     public function detachAllBrandToProduct($product);
 
     public function getComments($product);
+    public function getSupplies($product);
+    public function getSuppliesPaginate($product);
+
+    public function attachSupplyToProduct($admission_price,$supply_date,$quantity,$product);
 
 }

@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\Supply;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface {
@@ -58,5 +59,22 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $product->comments ;
     }
 
+    public function getSupplies($product){
+        return $product->supplies;
+    }
+
+    public function getSuppliesPaginate($product){
+        return $this->defaultPaginate($product->supplies());
+    }
+
+    public function attachSupplyToProduct($admission_price,$supply_date,$quantity,$product){
+        $product->supplies()->save(
+            factory(Supply::class)->create(['product_id'=>$product->id,
+                                            'admission_price'=>$admission_price,
+                                            'quantity'=>$quantity,
+                                            'supply_date'=>$supply_date,
+                                            'status'=>'IN PROGRESS'])
+        );
+    }
 
 }

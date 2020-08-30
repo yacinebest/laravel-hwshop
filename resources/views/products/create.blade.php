@@ -23,6 +23,12 @@
 </div>
 
 <div class="form-group">
+    <label class="form-control-label" for="input-admission-price">{{ __("Admission Price") }}</label>
+    <input type="number" name="admission_price" id="input-admission-price" class="form-control form-control-alternative" min="0" >
+    @include('layouts.form.error_field',['key'=>"admission_price"])
+</div>
+
+<div class="form-group">
     <label class="form-control-label" for="input-price">{{ __("Price") }}</label>
     <input type="number" name="price" id="input-price" class="form-control form-control-alternative" min="0" >
     @include('layouts.form.error_field',['key'=>"price"])
@@ -32,6 +38,13 @@
     <label class="form-control-label" for="input-copy_number">{{ __("Copy Number") }}</label>
     <input type="number" name="copy_number" id="input-copy_number" class="form-control form-control-alternative" min="0"  >
     @include('layouts.form.error_field',['key'=>"copy_number"])
+</div>
+
+
+<div class="form-group">
+    <label class="form-control-label" for="input-supply_date">{{ __("Supply Date") }}</label>
+    <input type="date" name="supply_date" id="input-supply_date" class="form-control form-control-alternative" >
+    @include('layouts.form.error_field',['key'=>"supply_date"])
 </div>
 
 <div class="form-group">

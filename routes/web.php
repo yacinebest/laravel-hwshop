@@ -59,6 +59,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('comments/{comment}',  ['as' => 'comment.destroy', 'uses' => 'CommentController@destroy'] );
 
     Route::get('supplies',  ['as' => 'supply.index', 'uses' => 'SupplyController@index'] );
+    Route::post('supplies', ['as' => 'supply.store', 'uses' => 'SupplyController@store']);
+    Route::get('supplies/create/{product}',  ['as' => 'supply.create', 'uses' => 'SupplyController@create'] );
+    Route::get('supplies/{supply}',  ['as' => 'supply.show', 'uses' => 'SupplyController@show'] );
+    Route::put('supplies/{supply}',  ['as' => 'supply.update', 'uses' => 'SupplyController@update'] );
 
     // Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
     // Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);

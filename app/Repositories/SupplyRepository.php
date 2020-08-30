@@ -15,10 +15,23 @@ class SupplyRepository extends BaseRepository implements SupplyRepositoryInterfa
     public function getAccessibleColumn(){
         return [
             'ref'=>'Ref',
-            'productName'=>'Product Name',
+            'productName'=>'Supply For',
             'admission_price'=>'Admission Price',
             'quantity' => 'quantity',
+            'status'=>'Status',
             'supply_date' => 'Supply Date',
+            'updated_at' => 'Updated At',
+            'other'=>''
         ];
+    }
+
+/*
+|---------------------------------------------------------------------------|
+| CUSTOM FUNCTION                                                           |
+|---------------------------------------------------------------------------|
+*/
+
+    public function getEnumStatusSupply(){
+        return ['WAITING','IN PROGRESS','CANCELED','COMPLETED'];
     }
 }

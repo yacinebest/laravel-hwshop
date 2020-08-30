@@ -33,6 +33,10 @@ class BaseRepository implements BaseRepositoryInterface {
         foreach ($where as $key => $value) {
             $result->where($key,$value );
         }
+        return $this->defaultPaginate($result,$number);
+    }
+
+    public function defaultPaginate($result,$number = 10){
         return $result->paginate($number);
     }
 
