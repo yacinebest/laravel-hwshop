@@ -6,7 +6,8 @@ namespace App\Models;
 class Product extends BaseModel
 {
     // protected $with =['category'] ;
-    protected $appends =['categoryName','imageCount','upVoteCount','downVoteCount','commentCount'];
+    protected $appends =['categoryName','imageCount','upVoteCount','downVoteCount','commentCount',
+                        'isSupplyActive'];
 
     public function category()
     {
@@ -92,5 +93,19 @@ class Product extends BaseModel
     {
         return count($this->comments);
     }
+
+     /**
+     */
+    public function getIsSupplyActiveAttribute()
+    {
+        $p = $this->supplies->filter(function($supply){
+            return $supply->status == 'IN PROGRESS';
+        });
+        // dd($p->isEmpty());
+        return !$p->isEmpty() ;
+        // return $p ? true : false;
+    }
+
+
 
 }

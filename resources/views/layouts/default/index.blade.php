@@ -72,7 +72,7 @@
                                                                 </li>
                                                                 <li>
                                                                     <a href="{{ route('supply.show',$entity->id) }}" class="btn btn-primary  mt-2 mr-2">Supply</a>
-                                                                    <a href="#" class="btn btn-primary  mt-2">History</a>
+                                                                    <a href="{{ route('history.show',$entity->id) }}" class="btn btn-primary  mt-2">History</a>
                                                                 </li>
                                                                 <li>
                                                                     <p>Datasheet : @if( $entity->datasheet) Avaible @else Not Avaible @endif </p>

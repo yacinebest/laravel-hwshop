@@ -41,6 +41,8 @@ class SupplyRepository extends BaseRepository implements SupplyRepositoryInterfa
     }
 
     public function linkHistoryToSupply($supply,$history){
-        $supply->history()->associate($history);
+        $this->update($supply,['history_id'=>$history->id]);
+        // $supply->history()->associate($history);
+        // $history->supply()->associate($supply);
     }
 }

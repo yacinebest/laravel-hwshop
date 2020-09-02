@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class History extends BaseModel
 {
+
+    protected $appends =['productName','supplyName'];
 /*
 |---------------------------------------------------------------------------|
 | RELATIONSHIP                                                              |
@@ -16,8 +18,22 @@ class History extends BaseModel
         return $this->belongsTo('App\Models\Product');
     }
 
-    public function history()
+    public function supply()
     {
-        return $this->belongsTo('App\Models\History');
+        return $this->belongsTo('App\Models\Supply');
+    }
+
+/*
+|---------------------------------------------------------------------------|
+| GETTER & SETTER                                                           |
+|---------------------------------------------------------------------------|
+*/
+
+    public function getProductNameAttribute(){
+        return $this->product->name;
+    }
+
+    public function getSupplyRefAttribute(){
+        return $this->supply->ref;
     }
 }

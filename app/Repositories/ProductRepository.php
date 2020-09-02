@@ -68,6 +68,10 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         return $this->defaultPaginate($product->supplies());
     }
 
+    public function getHistoriesPaginate($product){
+        return $this->defaultPaginate($product->histories());
+    }
+
     public function attachSupplyToProduct($admission_price,$supply_date,$quantity,$product){
         $supply =
                 factory(Supply::class)->create([

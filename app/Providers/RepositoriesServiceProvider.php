@@ -50,6 +50,9 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(    'App\\Repositories\\Contracts\\SupplyRepositoryInterface' ,
                             'App\\Repositories\\SupplyRepository');
 
+        $this->app->bind(    'App\\Repositories\\Contracts\\HistoryRepositoryInterface' ,
+                            'App\\Repositories\\HistoryRepository');
+
 
     }
 }

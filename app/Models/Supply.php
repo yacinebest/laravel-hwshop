@@ -8,7 +8,8 @@ class Supply extends BaseModel
 {
 
     //
-    protected $appends =['productName'];
+    protected $appends =['productName','hasBeenUsed'];
+    protected $enumStatus = ['WAITING','IN PROGRESS','CANCELED','COMPLETED'];
 
     public function product()
     {
@@ -41,5 +42,11 @@ class Supply extends BaseModel
     public function getEndedAtAttribute($value){
         return $value ? Carbon::parse($value)->format('Y-m-d') : 'Not Yet';
     }
+
+    public function getHasBeenUsedAttribute(){
+        return $this->status==$this->enumStatus[2] || $this->status==$this->enumStatus[3] ;
+    }
+
+
 
 }

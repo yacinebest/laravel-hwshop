@@ -64,6 +64,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('supplies/{supply}',  ['as' => 'supply.show', 'uses' => 'SupplyController@show'] );
     Route::put('supplies/{supply}',  ['as' => 'supply.update', 'uses' => 'SupplyController@update'] );
 
+
+    Route::get('histories/{history}',  ['as' => 'history.show', 'uses' => 'HistoryController@show'] );
     // Route::get('category', ['as' => 'category.index', 'uses' => 'CategoryController@index']);
     // Route::get('category/create', ['as' => 'category.create', 'uses' => 'CategoryController@create']);
     // Route::get('category/{id}/edit', ['as' => 'category.edit', 'uses' => 'CategoryController@edit']);
