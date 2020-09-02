@@ -1,7 +1,7 @@
-@foreach($histories as $supply)
+@foreach($histories as $history)
     <tr>
         @foreach($columns as $key => $value)
-            <td >{{ $supply->$key }}</td>
+            <td >{{ $history->$key }}</td>
         @endforeach
     </tr>
 @endforeach

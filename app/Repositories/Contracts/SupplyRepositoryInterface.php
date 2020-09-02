@@ -8,4 +8,6 @@ interface SupplyRepositoryInterface extends BaseRepositoryInterface{
     public function getEnumStatusSupplyWait();
 
     public function linkHistoryToSupply($supply,$history);
+
+    public function updateChangeStatusWithRelat($status,$supply);
 }

@@ -34,7 +34,6 @@
                                         @foreach($columns as $key => $value)
                                             <th  scope="col">{{ $value }}</th>
                                         @endforeach
-                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

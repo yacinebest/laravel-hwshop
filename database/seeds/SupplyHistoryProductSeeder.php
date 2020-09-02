@@ -1,10 +1,9 @@
 <?php
 
-use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
-class ProductSeeder extends Seeder
+class SupplyHistoryProductSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,11 +12,7 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('products')->delete();
-
-        for ($i=0; $i < 5 ; $i++) {
-            $category = Category::all()->random(1)->first();
-            $product = factory(\App\Models\Product::class)->create(['category_id'=>$category->id]);
+        foreach (Product::get()->take(5) as $product) {
             $supply = factory(\App\Models\Supply::class)->create(['product_id'=>$product->id]);
             $history = factory(\App\Models\History::class)->create([
                                     'product_id'=>$product->id,

@@ -21,21 +21,6 @@ class SupplyController extends Controller
         $this->historyRepository = $historyRepository;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $entities = $this->supplyRepository->basePaginate();
-        $supplies = $this->supplyRepository->basePaginate();
-        $columns = $this->supplyRepository->getAccessibleColumn();
-        $status =  $this->supplyRepository->getEnumStatusSupply();
-        // $cardCountAndRoute = $this->productRepository->getCardCountAndRoute();
-        return view('supplies.index',compact('supplies','columns','status'));
-    }
-
      /**
      * Show the form for creating a new resource.
      *
@@ -60,13 +45,9 @@ class SupplyController extends Controller
     {
         $data = $this->processRequestForStore($request);
         $supply = $this->supplyRepository->baseCreate( $data);
-        $history = $this->historyRepository->
-                    baseCreate([
-                        'supply_id'=>$supply->id,
-                        'product_id'=>$request->input('product_id'),
-                        'quantity'=> $request->input('quantity'),
-                        'selling_price'=> $request->input('selling_price')
-                    ]);
+
+        $data = $this->processRequestForCreateHistory($request,$supply);
+        $history = $this->historyRepository->baseCreate($data);
 
         $this->supplyRepository->linkHistoryToSupply($supply,$history);
 
@@ -98,33 +79,28 @@ class SupplyController extends Controller
     public function update(Request $request, $id)
     {
         $supply = $this->supplyRepository->baseFindOrFail( $id);
-
-        $status = $request->input('status');
-        $current_time = now()->format('Y-m-d H:m:s');
-        switch ($status) {
-            case ($this->supplyRepository->getEnumStatusSupply())[2]://canceled
-            case ($this->supplyRepository->getEnumStatusSupply())[3]://completed
-                $this->supplyRepository->update($supply,['ended_at'=>$current_time]);
-                $this->historyRepository->update($supply->history,['ended_at'=>$current_time]);
-                $this->productRepository->update($supply->product,['copy_number'=>0,'price'=>0]);
-            break;
-
-            case ($this->supplyRepository->getEnumStatusSupply())[1]://in progress
-                $this->supplyRepository->update($supply,['started_at'=>$current_time]);
-                $this->historyRepository->update($supply->history,['started_at'=>$current_time]);
-                $this->productRepository->update($supply->product,
-                        ['copy_number'=>$supply->quantity,'price'=>$supply->history->selling_price]
-                    );
-            break;
-            default:
-            break;
-        }
-
-
         $data = $this->processRequestForUpdate($request);
         $this->supplyRepository->update($supply,$data);
 
+        $this->supplyRepository->updateChangeStatusWithRelat($request->input('status'),$supply);
+
         return back()->withStatus(__('Supply successfully updated.'));
+    }
+
+     /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $supply = $this->supplyRepository->baseFindOrFail( $id);
+        if($supply->status != ($this->supplyRepository->getEnumStatusSupply())[1]){//in progress
+            $this->supplyRepository->delete($supply->history);
+            $this->supplyRepository->delete($supply);
+        }
+        return redirect()->back();
     }
 
 
@@ -140,5 +116,14 @@ class SupplyController extends Controller
 
     public function processRequestForUpdate(Request $request){
         return $request->only(['status']);
+    }
+
+    public function processRequestForCreateHistory(Request $request,$supply){
+        return [
+            'supply_id'=>$supply->id,
+            'product_id'=>$request->input('product_id'),
+            'quantity'=> $request->input('quantity'),
+            'selling_price'=> $request->input('selling_price')
+        ];
     }
 }

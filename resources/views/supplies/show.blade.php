@@ -8,5 +8,5 @@
 @endsection
 
 @section('entities_column')
-@include('supplies.rowSupply', ['supplies' => $supplies,'columns'=>$columns])
+@include('supplies.rowSupply', ['supplies' => $supplies,'columns'=>$columns,'route_name'=>'supply'])
 @endsection

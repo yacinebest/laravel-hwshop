@@ -129,11 +129,6 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('supply.index') }}">
-                                    {{ __('Display All Supply') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('product.create') }}">
                                     {{ __('Create Product') }}
                                 </a>

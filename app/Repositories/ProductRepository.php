@@ -19,7 +19,7 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             'name'=>'Name',
             'price'=>'Price',
             'updated_price_at'=>'Updated Price At',
-            'copy_number'=>'Copy Number',
+            'copy_number'=>'Quantity',
             'view'=>'View',
             'categoryName'=>'Category',
             'columnCount' => 'Count',
