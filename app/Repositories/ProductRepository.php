@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Models\History;
 use App\Models\Supply;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 
@@ -68,13 +69,31 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
 
     public function attachSupplyToProduct($admission_price,$supply_date,$quantity,$product){
-        $product->supplies()->save(
-            factory(Supply::class)->create(['product_id'=>$product->id,
-                                            'admission_price'=>$admission_price,
-                                            'quantity'=>$quantity,
-                                            'supply_date'=>$supply_date,
-                                            'status'=>'IN PROGRESS'])
-        );
+        $supply =
+                factory(Supply::class)->create([
+                    'product_id'=>$product->id,
+                    'admission_price'=>$admission_price,
+                    'quantity'=>$quantity,
+                    'supply_date'=>$supply_date,
+                    'started_at'=>now()->format('Y-m-d H:m:s'),
+                    'status'=>'IN PROGRESS'
+                ]);
+
+        $product->supplies()->save($supply);
+        return $supply;
     }
 
+    public function attachHistoryToProduct($selling_price,$quantity,$product,$supply){
+        $history =
+                factory(History::class)->create([
+                    'product_id'=>$product->id,
+                    'supply_id'=>$supply->id,
+                    'quantity'=>$quantity,
+                    'selling_price'=>$selling_price,
+                    'started_at'=>now()->format('Y-m-d H:m:s')
+                ]);
+
+        $product->histories()->save($history);
+        return $history;
+    }
 }

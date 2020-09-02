@@ -13,13 +13,19 @@
     @include('layouts.form.error_field',['key'=>"admission_price"])
 </div>
 
+<div class="form-group">
+    <label class="form-control-label" for="input-selling_price">{{ __("Selling Price") }}</label>
+    <input type="number" name="selling_price" id="input-selling_price" class="form-control form-control-alternative" min="0" >
+    @include('layouts.form.error_field',['key'=>"selling_price"])
+</div>
+
 
 <div class="form-group">
     <label class="form-control-label" for="input-quantity">{{ __("Quantity") }}</label>
     <input type="number" name="quantity" id="input-quantity" class="form-control form-control-alternative" min="0"  >
     @include('layouts.form.error_field',['key'=>"quantity"])
 </div>
-
+{{--
 <div class="form-group">
     <label class="form-control-label" >Status </label>
     <select class="form-control" name="status">
@@ -28,9 +34,13 @@
         @endforeach
     </select>
     @include('layouts.form.error_field',['key'=>"status"])
+</div> --}}
+
+<div class="form-group">
+    <label class="form-control-label" for="input-status">{{ __("Status") }}</label>
+    <input type="text" name="status" id="input-status" class="form-control form-control-alternative" value="{{ $status }}" readonly>
+    @include('layouts.form.error_field',['key'=>"status"])
 </div>
-
-
 
 <div class="form-group">
     <label class="form-control-label" for="input-supply_date">{{ __("Supply Date") }}</label>

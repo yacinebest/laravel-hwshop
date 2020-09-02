@@ -30,7 +30,6 @@ class SupplyController extends Controller
         $status =  $this->supplyRepository->getEnumStatusSupply();
         // $cardCountAndRoute = $this->productRepository->getCardCountAndRoute();
         return view('supplies.index',compact('supplies','columns','status'));
-        // return view('supplies.index',compact('entities','columns'));
     }
 
      /**
@@ -41,7 +40,7 @@ class SupplyController extends Controller
     public function create($id)
     {
         $fillable_columns = $this->supplyRepository->getFillableColumn();
-        $status =  $this->supplyRepository->getEnumStatusSupply();
+        $status =  ($this->supplyRepository->getEnumStatusSupplyWait())[0];
         $product = $this->productRepository->baseFindOrFail( $id);
 
         return view('supplies.create',compact('fillable_columns','status','product'));
@@ -58,7 +57,7 @@ class SupplyController extends Controller
         $data = $this->processRequestForStore($request);
         $supply = $this->supplyRepository->baseCreate( $data);
 
-        return redirect(route('supply.index'));
+        return redirect(route('supply.show',$request->input('product_id')));
     }
 
      /**

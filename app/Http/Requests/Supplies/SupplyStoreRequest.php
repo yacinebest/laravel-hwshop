@@ -26,6 +26,7 @@ class SupplyStoreRequest extends FormRequest
         return [
             'product_id' => ['required'],
             'admission_price' => ['required'],
+            'selling_price' => ['required'],
             'quantity' => ['required'],
             'status' => ['required'],
             'supply_date' => ['required'],

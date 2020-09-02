@@ -31,6 +31,7 @@ class ProductStoreRequest extends FormRequest
             'admission_price' => ['required'],
             'copy_number' => ['required'],
             'supply_date' => ['required'],
+            'started_at' => ['required'],
             'brands' => ['required'],
         ];
     }

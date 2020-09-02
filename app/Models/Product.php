@@ -47,6 +47,11 @@ class Product extends BaseModel
         return $this->hasMany('App\Models\Supply');
     }
 
+    public function histories()
+    {
+        return $this->hasMany('App\Models\History');
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | GETTER & SETTER                                                           |

@@ -13,5 +13,5 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface{
     public function getSuppliesPaginate($product);
 
     public function attachSupplyToProduct($admission_price,$supply_date,$quantity,$product);
-
+    public function attachHistoryToProduct($selling_price,$quantity,$product,$supply);
 }

@@ -15,6 +15,11 @@ class Supply extends BaseModel
         return $this->belongsTo('App\Models\Product');
     }
 
+    public function history()
+    {
+        return $this->belongsTo('App\Models\History');
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | GETTER & SETTER                                                           |
@@ -28,4 +33,13 @@ class Supply extends BaseModel
     public function getSupplyDateAttribute($value){
         return Carbon::parse($value)->format('Y-m-d');
     }
+
+    public function getStartedAtAttribute($value){
+        return $value ? Carbon::parse($value)->format('Y-m-d') : 'Not Yet';
+    }
+
+    public function getEndedAtAttribute($value){
+        return $value ? Carbon::parse($value)->format('Y-m-d') : 'Not Yet';
+    }
+
 }

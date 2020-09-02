@@ -20,7 +20,8 @@ class SupplyRepository extends BaseRepository implements SupplyRepositoryInterfa
             'quantity' => 'quantity',
             'status'=>'Status',
             'supply_date' => 'Supply Date',
-            'updated_at' => 'Updated At',
+            'started_at' => 'Started At',
+            'ended_at' => 'Ended At',
             'other'=>''
         ];
     }
@@ -33,5 +34,13 @@ class SupplyRepository extends BaseRepository implements SupplyRepositoryInterfa
 
     public function getEnumStatusSupply(){
         return ['WAITING','IN PROGRESS','CANCELED','COMPLETED'];
+    }
+
+    public function getEnumStatusSupplyWait(){
+        return ['WAITING'];
+    }
+
+    public function linkHistoryToSupply($supply,$history){
+        $supply->history()->associate($history);
     }
 }

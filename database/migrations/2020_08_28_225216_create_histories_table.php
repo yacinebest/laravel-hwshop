@@ -16,11 +16,12 @@ class CreateHistoriesTable extends Migration
         Schema::create('histories', function (Blueprint $table) {
             $table->uuid('id');
             $table->uuid('product_id');
+            $table->uuid('supply_id');
 
             $table->integer('quantity');
             $table->decimal('selling_price',7,2);
-            $table->dateTime('start_date');
-            $table->dateTime('end_date')->nullable();
+            $table->dateTime('started_at')->nullable();
+            $table->dateTime('ended_at')->nullable();
             $table->timestamps();
         });
     }

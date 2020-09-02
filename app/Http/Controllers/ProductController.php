@@ -8,6 +8,7 @@ use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use App\Repositories\Contracts\SupplyRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -16,15 +17,18 @@ class ProductController extends Controller
     private $categoryRepository ;
     private $brandRepository ;
     private $imageRepository;
+    private $supplyRepository;
 
     public function __construct(ProductRepositoryInterface $productRepository,
                                 CategoryRepositoryInterface $categoryRepository,
                                 BrandRepositoryInterface $brandRepository,
-                                ImageRepositoryInterface $imageRepository) {
+                                ImageRepositoryInterface $imageRepository,
+                                SupplyRepositoryInterface $supplyRepository) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->brandRepository = $brandRepository;
         $this->imageRepository = $imageRepository;
+        $this->supplyRepository = $supplyRepository;
     }
 
     /**
@@ -66,7 +70,11 @@ class ProductController extends Controller
         $data = $this->processRequestForStore($request);
         $product = $this->productRepository->baseCreate( $data);
 
-        $this->processRequestSuppliesField($request,$product);
+        $supply = $this->processRequestSuppliesField($request,$product);
+        $history = $this->processRequestHistoriesField($request,$product,$supply);
+
+        $this->supplyRepository->linkHistoryToSupply($supply,$history);
+
 
         $this->processRequestBrandsField($request,$product);
 
@@ -189,11 +197,16 @@ class ProductController extends Controller
     }
 
     public function processRequestSuppliesField($request,$product){
-        if($admission_price = $request->input('admission_price') ){
-            $quantity = $request->input('copy_number');
-            $supply_date = $request->input('supply_date');
-            $this->productRepository->attachSupplyToProduct($admission_price,$supply_date,$quantity,$product);
-        }
+        $admission_price = $request->input('admission_price');
+        $quantity = $request->input('copy_number');
+        $supply_date = $request->input('supply_date');
+        return $this->productRepository->attachSupplyToProduct($admission_price,$supply_date,$quantity,$product);
+    }
+
+    public function processRequestHistoriesField($request,$product,$supply){
+        $selling_price = $request->input('price');
+        $quantity = $request->input('copy_number');
+        return $this->productRepository->attachHistoryToProduct($selling_price,$quantity,$product,$supply);
     }
 
 }

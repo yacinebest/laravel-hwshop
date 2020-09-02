@@ -16,10 +16,13 @@ class CreateSuppliesTable extends Migration
         Schema::create('supplies', function (Blueprint $table) {
             $table->uuid('id');
             $table->uuid('product_id');
+            $table->uuid('history_id')->nullable();
 
             $table->bigIncrements('ref');
             $table->integer('quantity');
             $table->dateTime('supply_date');
+            $table->dateTime('started_at')->nullable();
+            $table->dateTime('ended_at')->nullable();
             $table->decimal('admission_price',7,2);
 
             $table->enum('status',['WAITING','IN PROGRESS','CANCELED','COMPLETED'])->default('WAITING');
