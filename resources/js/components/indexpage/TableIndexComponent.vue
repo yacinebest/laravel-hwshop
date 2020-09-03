@@ -13,7 +13,6 @@
                 <tr v-for="order in orders" :key="order.id">
                     <td v-for="(name, column) in columns" :key="column">
                         <div v-if="column == 'status'">
-                            <!-- <p v-if="order.status==order.enumStatus[2]" class="text-danger">{{ order.status }}</p> -->
                             <select
                                 :data-id="order.id"
                                 @change="changeStatus"
@@ -80,7 +79,8 @@ export default {
         return {
             orders: this.paginate.data,
             isModalVisible: false,
-            sendOrder: {}
+            sendOrder: {},
+            products: []
         };
     },
     methods: {
@@ -108,10 +108,12 @@ export default {
 
         showModal(order) {
             this.sendOrder = order;
+            this.products = order.products;
             this.isModalVisible = true;
         },
         closeModal() {
             this.sendOrder = {};
+            this.products = [];
             this.isModalVisible = false;
         }
     }

@@ -52,7 +52,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('product', 'ProductController');
 
-    Route::resource('order', 'OrderController', ['except' => ['create','store','show','edit','destroy'] ]);
+    Route::resource('order', 'OrderController', ['except' => ['create','store','edit','destroy'] ]);
+    Route::post('orders/{order}/products', ['as' => 'order.productRelat', 'uses' => 'OrderController@getProductRelat']);
+
 
     Route::get('comments/{comment}',  ['as' => 'comment.show', 'uses' => 'CommentController@show'] );
     Route::delete('comments/{comment}',  ['as' => 'comment.destroy', 'uses' => 'CommentController@destroy'] );

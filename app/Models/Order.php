@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 class Order extends BaseModel
 {
-    protected $with =['products'] ;
+    // protected $with =['products'] ; //changed
     protected $appends =['userUsername','adminUsername','enumStatus'];
 
     public function user()
@@ -65,4 +65,5 @@ class Order extends BaseModel
     public function getUpdatedAtAttribute($value){
         return Carbon::parse($value)->format('Y-m-d h-m-s');
     }
+
 }

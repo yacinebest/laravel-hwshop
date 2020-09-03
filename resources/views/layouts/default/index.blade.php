@@ -104,6 +104,7 @@
                         @if(!empty($entities))
                             {!! $entities->links() !!}
                         @endif
+                        @yield('paginate')
                     </div>
 
                     @yield('displayTree')

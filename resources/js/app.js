@@ -19,6 +19,7 @@ import ImageUploader from "./components/image/ImageUploaderComponent.vue";
 import ImageShow from "./components/image/ImageShowComponent.vue";
 
 import TableIndex from "./components/indexpage/TableIndexComponent.vue";
+// import TableIndex from "./components/TableIndexComponent.vue";
 import Modal from "./components/indexpage/ModalComponent.vue";
 
 const app = new Vue({

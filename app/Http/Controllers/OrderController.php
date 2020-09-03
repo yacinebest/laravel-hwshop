@@ -45,4 +45,25 @@ class OrderController extends Controller
         $this->orderRepository->update($order,['status'=>$request->status,'admin_id'=>$auth->id]);
         return response()->json(['admin'=>$auth]);
     }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        dd($id);
+        // $product = $this->productRepository->baseFindOrFail( $id);
+        // $supplies = $this->productRepository->getSuppliesPaginate($product);
+        // $columns = $this->supplyRepository->getAccessibleColumn();
+        // $status =  $this->supplyRepository->getEnumStatusSupply();
+        // return view('supplies.show',compact('product','supplies','columns','status'));
+    }
+
+    public function getProductRelat($id){
+        $order = $this->orderRepository->baseFindOrFail($id);
+        return response()->json($order->products);
+    }
 }

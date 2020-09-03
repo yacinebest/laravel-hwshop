@@ -16,8 +16,8 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->uuid('id');
             $table->bigIncrements('ref');
-            $table->string('contact_info');
-            $table->string('token');
+            $table->string('contact_info')->default('CCP123456789');
+            $table->string('token')->nullable();
             $table->enum('method',['CCP','VISA','PAYPAL'])->default('CCP');
 
             $table->timestamps();

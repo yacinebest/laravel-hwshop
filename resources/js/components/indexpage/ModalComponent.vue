@@ -58,23 +58,34 @@
   export default {
     // name: 'modal',
     name: 'indexpage',
-    props:{
+      props:{
         order: {
             type: Object,
             required: true,
             default: ()=>({})
         }
     },
+    mounted() {
+        axios
+            .post(`orders/${this.order.id}/products`)
+            .then(({ data }) => {
+                console.log(`mounter ${data}`)
+                this.products= data
+            });
+    },
     data() {
         return {
-            products: this.order ? this.order.products : []
+            products: []
+            // products: this.order ? this.order.products : []
         }
     },
     watch: {
         order: {
             deep: true,
             handler (val, oldVal) {
-                this.products = this.order.products
+                // this.products = this.order
+
+                // this.products = this.order.products
             }
         }
     },

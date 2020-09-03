@@ -2491,16 +2491,26 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.post("orders/".concat(this.order.id, "/products")).then(function (_ref) {
+      var data = _ref.data;
+      console.log("mounter ".concat(data));
+      _this.products = data;
+    });
+  },
   data: function data() {
     return {
-      products: this.order ? this.order.products : []
+      products: [] // products: this.order ? this.order.products : []
+
     };
   },
   watch: {
     order: {
       deep: true,
-      handler: function handler(val, oldVal) {
-        this.products = this.order.products;
+      handler: function handler(val, oldVal) {// this.products = this.order
+        // this.products = this.order.products
       }
     }
   },
@@ -2510,14 +2520,14 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('close');
     },
     totalPrice: function totalPrice() {
-      var _this = this;
+      var _this2 = this;
 
       var total = parseFloat(0);
 
       if (this.products) {
         this.products.forEach(function (element) {
           console.log(element);
-          total += _this.totalPriceProduct(element);
+          total += _this2.totalPriceProduct(element);
         });
       }
 
@@ -2541,7 +2551,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalComponent.vue */ "./resources/js/components/indexpage/ModalComponent.vue");
-//
 //
 //
 //
@@ -2626,7 +2635,8 @@ __webpack_require__.r(__webpack_exports__);
     return {
       orders: this.paginate.data,
       isModalVisible: false,
-      sendOrder: {}
+      sendOrder: {},
+      products: []
     };
   },
   methods: {
@@ -2652,10 +2662,12 @@ __webpack_require__.r(__webpack_exports__);
     },
     showModal: function showModal(order) {
       this.sendOrder = order;
+      this.products = order.products;
       this.isModalVisible = true;
     },
     closeModal: function closeModal() {
       this.sendOrder = {};
+      this.products = [];
       this.isModalVisible = false;
     }
   }
@@ -52147,6 +52159,7 @@ Vue.use(vue_toasted__WEBPACK_IMPORTED_MODULE_0___default.a);
 
 
 
+ // import TableIndex from "./components/TableIndexComponent.vue";
 
 
 var app = new Vue({

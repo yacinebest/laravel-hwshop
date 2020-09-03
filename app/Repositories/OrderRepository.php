@@ -19,7 +19,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             'adminUsername'=>'Verified By',
             'status'=>'Status',
             'order_date'=>'Order Date',
-            'updated_at'=>'Updated At',
+            'updated_at'=>'Updated At'
         ];
     }
 }
