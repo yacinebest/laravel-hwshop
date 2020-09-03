@@ -7,7 +7,7 @@ use Carbon\Carbon;
 class Order extends BaseModel
 {
     // protected $with =['products'] ; //changed
-    protected $appends =['userUsername','adminUsername','enumStatus'];
+    protected $appends =['userUsername','adminUsername','enumStatus','hasBeenVerified'];
 
     public function user()
     {
@@ -64,6 +64,10 @@ class Order extends BaseModel
 
     public function getUpdatedAtAttribute($value){
         return Carbon::parse($value)->format('Y-m-d h-m-s');
+    }
+
+    public function getHasBeenVerifiedAttribute($value){
+        return $this->status=='CANCELED' || $this->status=='APPROVED' ;
     }
 
 }

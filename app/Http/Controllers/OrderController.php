@@ -28,7 +28,8 @@ class OrderController extends Controller
         $orders = $this->orderRepository->basePaginate();
         $columns = $this->orderRepository->getAccessibleColumn();
         // $cardCountAndRoute = $this->imageRepository->getCardCountAndRoute();
-        return view('orders.index',compact('columns','orders'));
+        $status = $this->orderRepository->getEnumStatusSupply();
+        return view('orders.index',compact('columns','orders','status'));
     }
 
     /**
@@ -43,7 +44,8 @@ class OrderController extends Controller
         $auth = $this->userRepository->getAuthUser();
         $order = $this->orderRepository->baseFindOrFail($id);
         $this->orderRepository->update($order,['status'=>$request->status,'admin_id'=>$auth->id]);
-        return response()->json(['admin'=>$auth]);
+        return back()->withStatus(__('Order successfully updated.'));
+        // return response()->json(['admin'=>$auth]);
     }
 
     /**
@@ -55,7 +57,7 @@ class OrderController extends Controller
     public function show($id)
     {
         dd($id);
-        // $product = $this->productRepository->baseFindOrFail( $id);
+        $order = $this->orderRepository->baseFindOrFail($id);
         // $supplies = $this->productRepository->getSuppliesPaginate($product);
         // $columns = $this->supplyRepository->getAccessibleColumn();
         // $status =  $this->supplyRepository->getEnumStatusSupply();
