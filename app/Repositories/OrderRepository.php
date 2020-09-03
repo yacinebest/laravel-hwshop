@@ -20,6 +20,7 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             'status'=>'Status',
             'order_date'=>'Order Date',
             'updated_at'=>'Updated At',
+            'deliveryDate'=>'Delivery',
             'other'=>''
         ];
     }
@@ -32,5 +33,11 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 
     public function getEnumStatusSupply(){
         return ['PROCESSING','CANCELED','APPROVED'];
+    }
+
+    public function linkDeliveryToOrder($order,$delivery){
+        $order->delivery()->associate($delivery) ;
+        $order->save();
+        // $order->delivery_id = $delivery->id;
     }
 }

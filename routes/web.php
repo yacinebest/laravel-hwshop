@@ -67,4 +67,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
     Route::get('histories/{history}',  ['as' => 'history.show', 'uses' => 'HistoryController@show'] );
+
+    Route::get('deliveries/create/{order}',  ['as' => 'delivery.create', 'uses' => 'DeliveryController@create'] );
+    Route::post('deliveries', ['as' => 'delivery.store', 'uses' => 'DeliveryController@store']);
+
 });

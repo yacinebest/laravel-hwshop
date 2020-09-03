@@ -7,7 +7,8 @@ use Carbon\Carbon;
 class Order extends BaseModel
 {
     // protected $with =['products'] ; //changed
-    protected $appends =['userUsername','adminUsername','enumStatus','hasBeenVerified'];
+    protected $appends =['userUsername','adminUsername','enumStatus','hasBeenVerified',
+                        'deliveryDate','isCanceled'];
 
     public function user()
     {
@@ -28,7 +29,10 @@ class Order extends BaseModel
     }
 
 
-
+    public function delivery()
+    {
+        return $this->belongsTo('App\Models\Delivery');
+    }
 
 /*
 |---------------------------------------------------------------------------|
@@ -66,8 +70,17 @@ class Order extends BaseModel
         return Carbon::parse($value)->format('Y-m-d h-m-s');
     }
 
-    public function getHasBeenVerifiedAttribute($value){
+    public function getHasBeenVerifiedAttribute(){
         return $this->status=='CANCELED' || $this->status=='APPROVED' ;
     }
+
+    public function getDeliveryDateAttribute(){
+        return $this->delivery ? Carbon::parse($this->delivery->delivery_date)->format('Y-m-d') : false ;
+    }
+
+    public function getIsCanceledAttribute(){
+        return $this->status=='CANCELED' ;
+    }
+
 
 }
