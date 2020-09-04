@@ -224,6 +224,25 @@
                     </div>
                 </li>
 
+                <li class="nav-item">
+                    <a class="nav-link active collapsed" href="#navbar-examples7" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="navbar-examples7">
+                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
+                        <span class="nav-link-text"
+                            style="color: #f4645f;">{{ __('Payment Management') }}</span>
+                    </a>
+
+                    <div class="collapse" id="navbar-examples7">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('payment.index') }}">
+                                    {{ __('Payment Method') }}
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="#">
                         <i class="ni ni-planet text-blue"></i> {{ __('Icons') }}

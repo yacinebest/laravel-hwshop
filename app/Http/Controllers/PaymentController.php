@@ -2,10 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Contracts\PaymentRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
+
+    private $paymentRepository;
+
+    public function __construct(PaymentRepositoryInterface $paymentRepository) {
+        $this->paymentRepository = $paymentRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -13,7 +21,10 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $entities = $this->paymentRepository->basePaginate();
+        $columns = $this->paymentRepository->getAccessibleColumn();
+
+        return view('payments.index',compact('entities','columns'));
     }
 
     /**
@@ -23,7 +34,10 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        // $fillable_columns = $this->paymentRepository->getFillableColumn();
+        $method = 'CCP';
+
+        return view('payments.create',compact('method'));
     }
 
     /**
@@ -34,42 +48,13 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $this->processRequestForStore($request);
+        $this->paymentRepository->baseCreate( $data);
+
+        return redirect(route('payment.index'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -79,6 +64,20 @@ class PaymentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $payment = $this->paymentRepository->baseFindOrFail( $id);
+        $this->paymentRepository->delete($payment);
+        return redirect()->back();
+    }
+
+
+
+/*
+|---------------------------------------------------------------------------|
+| CUSTOM FUNCTION                                                           |
+|---------------------------------------------------------------------------|
+*/
+
+    public function processRequestForStore(Request $request){
+        return $request->only(['method','contact_info','phone_number']);
     }
 }
