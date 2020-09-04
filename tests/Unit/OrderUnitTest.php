@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\Product;
 use App\Models\Role;
 use App\Models\User;
@@ -72,6 +73,17 @@ class OrderUnitTest extends TestCase
         $this->assertEquals($this->order->products->get(1)->pivot->ordered_quantity,20);
 
         dd($this->order->products);
+    }
+
+    /**
+     * @test
+     * @return void
+    */
+    function can_access_payment_relation()
+    {
+        $payment = factory(Payment::class)->create(['contact_info'=>'CCP123456789']);
+        $this->order->update(['payment_id'=>$payment->id]);
+        $this->assertNotEmpty($this->order->payment);
     }
 
 }

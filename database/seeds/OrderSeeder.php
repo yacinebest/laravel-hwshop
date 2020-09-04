@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Payment;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -17,9 +18,10 @@ class OrderSeeder extends Seeder
         DB::table('orders')->delete();
 
         $role_user = Role::whereType('USER')->first();
+        $payment = Payment::whereMethod('CCP')->first();
 
         foreach (User::where('role_id',$role_user->id)->get()->take(6) as $user) {
-            factory(\App\Models\Order::class)->create(['user_id'=>$user->id]);
+            factory(\App\Models\Order::class)->create(['user_id'=>$user->id,'payment_id'=>$payment->id]);
         }
     }
 }

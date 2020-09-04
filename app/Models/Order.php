@@ -34,6 +34,11 @@ class Order extends BaseModel
         return $this->belongsTo('App\Models\Delivery');
     }
 
+    public function payment()
+    {
+        return $this->belongsTo('App\Models\Payment');
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | GETTER & SETTER                                                           |
