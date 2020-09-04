@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\Models\Invoice;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Product;
@@ -84,6 +85,34 @@ class OrderUnitTest extends TestCase
         $payment = factory(Payment::class)->create(['contact_info'=>'CCP123456789']);
         $this->order->update(['payment_id'=>$payment->id]);
         $this->assertNotEmpty($this->order->payment);
+    }
+
+     /**
+     * @test
+     * @return void
+    */
+    function can_access_invoice_relation()
+    {
+        $this->order->products()->attach(factory(Product::class)->create(['price'=>5000]),['ordered_quantity'=>10]);
+        $this->order->products()->attach(factory(Product::class)->create(['price'=>2500]),['ordered_quantity'=>20]);
+
+        $quantity = $this->order->products->get(0)->pivot->ordered_quantity +
+                    $this->order->products->get(1)->pivot->ordered_quantity;
+
+        $total_price = $this->order->products->get(0)->price +
+                        $this->order->products->get(1)->price;
+
+        $invoice = factory(Invoice::class)->create([
+            'quantity'=>$quantity,
+            'total_price'=>$total_price
+        ]);
+
+        $this->order->invoice()->associate($invoice);
+
+        $this->order->save();
+        $invoice->save();
+
+        $this->assertNotEmpty($this->order->invoice);
     }
 
 }

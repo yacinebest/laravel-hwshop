@@ -23,6 +23,14 @@
                         @else
                             <li>Payment Token: <br>{{ $order->payment->token }}</li>
                         @endif
+                       <li>
+                           Invocie File : <br>
+                           @if($order->invoice->file)
+                               {{$order->invoice->file}}
+                           @else
+                               Not Avaible
+                           @endif
+                       </li>
                     </ul>
                 </td>
             @elseif($key=='deliveryDate')

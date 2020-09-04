@@ -59,6 +59,9 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(    'App\\Repositories\\Contracts\\PaymentRepositoryInterface' ,
                             'App\\Repositories\\PaymentRepository');
 
+        $this->app->bind(    'App\\Repositories\\Contracts\\InvoiceRepositoryInterface' ,
+                            'App\\Repositories\\InvoiceRepository');
+
 
     }
 }

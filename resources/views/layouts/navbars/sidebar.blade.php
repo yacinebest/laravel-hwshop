@@ -152,6 +152,11 @@
                                     {{ __('Display All Order') }}
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('invoice.index') }}">
+                                    {{ __('Display All Invoice') }}
+                                </a>
+                            </li>
                         </ul>
                     </div>
                 </li>
