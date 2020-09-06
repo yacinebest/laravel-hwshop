@@ -21,6 +21,7 @@ class DeliveryRepository extends BaseRepository implements DeliveryRepositoryInt
     public function getFillableColumn(){
         return [
             'delivery_society'=>'Delivery Society',
+            // 'price'=>'Price',
             // 'delivery_date'=>'Delivery Date',
             'phone_number'=>'Phone Number'
         ];

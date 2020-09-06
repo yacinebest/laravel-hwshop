@@ -23,14 +23,9 @@
                         @else
                             <li>Payment Token: <br>{{ $order->payment->token }}</li>
                         @endif
-                       <li>
-                           Invocie File : <br>
-                           @if($order->invoice->file)
-                               {{$order->invoice->file}}
-                           @else
-                               Not Avaible
-                           @endif
-                       </li>
+                        <li>
+                            <a href="{{ route('invoice.show',$order->id) }}" target="_blank" >Download Invoice</a>
+                        </li>
                     </ul>
                 </td>
             @elseif($key=='deliveryDate')
@@ -38,8 +33,10 @@
                     @if($order->deliveryDate)
                         <div class="form-group">
                             <p>Society :{{ $order->delivery->delivery_society }}</p>
-                            <p>Date :{{ $order->deliveryDate }}</p>
-                            <p>Number :{{ $order->delivery->phone_number }}</p>
+                            <p>Price :{{ $order->delivery->price }}</p>
+                            <p>Delivery Date :{{ $order->deliveryDate }}</p>
+                            <p>N° :{{ $order->delivery->phone_number }}</p>
+                            <p>Status :{{ $order->delivery->status }}</p>
                         </div>
                     @else
                         @if($order->isCanceled)

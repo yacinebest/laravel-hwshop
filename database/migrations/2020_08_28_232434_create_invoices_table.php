@@ -18,7 +18,6 @@ class CreateInvoicesTable extends Migration
             $table->bigIncrements('ref');
             $table->integer('quantity');
             $table->decimal('total_price',13,2);
-            $table->string('file')->nullable();
             $table->timestamps();
         });
     }

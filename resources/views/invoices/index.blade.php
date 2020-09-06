@@ -2,6 +2,27 @@
 
 {{-- @section('otherBtn')
     <div class="col-4 text-right">
-        <a href="{{ route('payment.create') }}" class="btn btn-sm btn-primary">Add Payment Method</a>
+        <a href="{{ route('invoice.show','645465') }}" target="_blank" class="btn btn-sm btn-primary">file</a>
     </div>
 @endsection --}}
+
+
+@section('entities_column')
+@foreach($invoices as $invoice)
+    <tr>
+        @foreach($columns as $key => $value)
+            @if($key=='file')
+                <td><a href="{{ route('invoice.show',$invoice->order->id) }}" target="_blank" >Download Invoice</a></td>
+            @else
+                <td >{{ $invoice->$key }}</td>
+            @endif
+        @endforeach
+    </tr>
+@endforeach
+@endsection
+
+@section('paginate')
+@if(!empty($invoices))
+{!! $invoices->links() !!}
+@endif
+@endsection

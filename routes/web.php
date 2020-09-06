@@ -73,7 +73,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::resource('payment', 'PaymentController',['except' => ['edit','update','show'] ]);
 
-    Route::resource('invoice', 'InvoiceController');
-
-
+    Route::get('invoice',  ['as' => 'invoice.index', 'uses' => 'InvoiceController@index'] );
+    Route::get('invoice/{invoice}',  ['as' => 'invoice.show', 'uses' => 'InvoiceController@show'] );
 });

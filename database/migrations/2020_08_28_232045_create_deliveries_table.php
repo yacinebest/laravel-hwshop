@@ -19,6 +19,8 @@ class CreateDeliveriesTable extends Migration
             $table->string('delivery_society')->nullable();
             $table->dateTime('delivery_date');
             $table->string('phone_number');
+            $table->decimal('price',8,2);
+            $table->enum('status',['WAITING','IN PROGRESS','CANCELED','APPROVED'])->default('WAITING');
 
             $table->timestamps();
         });

@@ -50,7 +50,6 @@ class DeliveryController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = $this->processRequestForStore($request);
         $delivery = $this->deliveryRepository->baseCreate( $data);
 
@@ -113,7 +112,7 @@ class DeliveryController extends Controller
 */
 
     public function processRequestForStore(Request $request){
-        return $request->only(['delivery_society','phone_number','delivery_date']);
+        return $request->only(['delivery_society','price','phone_number','delivery_date']);
     }
 
 

@@ -166,7 +166,9 @@ return [
          * Package Service Providers...
          */
 		Collective\Html\HtmlServiceProvider::class,
-		Collective\Html\HtmlServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
+
+        LaravelDaily\Invoices\InvoiceServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -234,6 +236,8 @@ return [
 		'Html'  => Collective\Html\HtmlFacade::class,
 		'Form'  => Collective\Html\FormFacade::class,
         'Html'  => Collective\Html\HtmlFacade::class,
+
+        'Invoice' => LaravelDaily\Invoices\Facades\Invoice::class,
 
 
         'Category' => App\Models\Category::class,
