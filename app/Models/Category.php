@@ -6,17 +6,14 @@ use Illuminate\Support\Collection;
 
 class Category extends BaseModel
 {
-    protected $appends =['childCount','imageCount','productCount'];
+    protected $appends =['childCount','imageCount'];
+    // protected $appends =['childCount','imageCount','productCount'];
 
     public function products()
     {
         return $this->hasMany('App\Models\Product');
     }
 
-    // public function parent()
-    // {
-    //     return $this->belongsTo('App\Models\Category', 'parent_id');
-    // }
     public function childs()
     {
         return $this->hasMany('App\Models\Category', 'parent_id');
@@ -56,10 +53,7 @@ class Category extends BaseModel
         return count($this->images);
     }
 
-    /**
-     * @return number
-     */
-    public function getProductCountAttribute()
+    public function getProductCount()
     {
         return count($this->products);
     }

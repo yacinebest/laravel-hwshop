@@ -16,18 +16,22 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(CategorySeeder::class);
-        $this->call(BrandSeeder::class);
-
+        
         $this->call(PaymentSeeder::class);
 
         $this->call(OrderSeeder::class);
-        $this->call(OrderProductSeeder::class);
-        $this->call(SupplyHistoryProductSeeder::class);
+
+        $this->call(ProductSeeder::class);
+
+        $this->call(BrandSeeder::class);
+
+
+
+
+        $this->call(SupplyHistorySeeder::class);
 
         $this->call(InvoiceSeeder::class);
         $this->call(DeliverySeeder::class);
-
-
 
 
     }

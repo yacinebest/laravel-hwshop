@@ -40,9 +40,9 @@ class ProductController extends Controller
     {
         $entities = $this->productRepository->basePaginate();
         $columns = $this->productRepository->getAccessibleColumn();
-        // $cardCountAndRoute = $this->productRepository->getCardCountAndRoute();
+        $cardCountAndRoute = $this->productRepository->getCardCountAndRoute();
 
-        return view('products.index',compact('entities','columns'));
+        return view('products.index',compact('cardCountAndRoute','entities','columns'));
     }
 
     /**

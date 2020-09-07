@@ -47,7 +47,8 @@ class CategoryController extends Controller
         $cardCountAndRoute = $this->categoryRepository->getCardCountAndRoute();
         $baseCategories = $this->categoryRepository->getBaseCategories();
 
-        return view('categories.index',compact('cardCountAndRoute','entities','columns','baseCategories'));
+        $categories = $entities;
+        return view('categories.index',compact('cardCountAndRoute','categories','columns','baseCategories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -131,18 +132,6 @@ class CategoryController extends Controller
         $this->categoryRepository->deleteWithChilds($category);
         return redirect()->back();
     }
-
-     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
 
 /*
 |---------------------------------------------------------------------------|

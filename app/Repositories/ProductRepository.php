@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\History;
+use App\Models\Product;
 use App\Models\Supply;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 
@@ -41,6 +42,11 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         ];
     }
 
+    public function getCardCountAndRoute(){
+        return [
+            'Product'=>['count'=>$this->countProduct(),'route'=>'product.index'],
+        ];
+    }
 /*
 |---------------------------------------------------------------------------|
 | Override Interface FUNCTION                                               |
@@ -99,5 +105,15 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $product->histories()->save($history);
         return $history;
+    }
+
+/*
+|---------------------------------------------------------------------------|
+| Override Interface FUNCTION                                               |
+|---------------------------------------------------------------------------|
+*/
+
+    public function countProduct(){
+        return count(Product::all());
     }
 }

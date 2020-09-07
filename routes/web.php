@@ -43,10 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('image', 'ImageController', ['except' => ['update','edit'] ] );
     Route::post('/images-upload', ['as' => 'image.upload', 'uses' => 'ImageController@upload']);
 
-    // Route::resource('image', 'ImageController', ['except' => ['show','update','edit','create','store'] ] );
-    // Route::get('image', ['as' => 'image.index', 'uses' => 'ImageController@index']);
-
-    Route::resource('category', 'CategoryController');
+    Route::resource('category', 'CategoryController',['except' => ['show'] ]);
     Route::post('allCategory', ['as' => 'category.indexJson', 'uses' => 'CategoryController@indexJson']);
     Route::get('Category/Level/{level}', ['as' => 'category.indexLevel', 'uses' => 'CategoryController@indexByLevel']);
 

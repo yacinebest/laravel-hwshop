@@ -22,6 +22,6 @@ class UserSeeder extends Seeder
         factory(\App\Models\User::class)->create(['email'=>'admin2@gmail.com','username'=>'admin2',
                                                     'firstname'=>'zaki','lastname'=>'det','role_id'=>$role_admin->id]);
 
-        factory(\App\Models\User::class,40)->create(['role_id'=>$role_user->id]);
+        factory(\App\Models\User::class,10)->create(['role_id'=>$role_user->id]);
     }
 }

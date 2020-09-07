@@ -2,7 +2,9 @@
 
 namespace App\Repositories\Contracts;
 
-interface ProductRepositoryInterface extends BaseRepositoryInterface{
+use App\Repositories\Contracts\Base\CardCountRouteInterface;
+
+interface ProductRepositoryInterface extends BaseRepositoryInterface , CardCountRouteInterface{
 
 
     public function attachBrandToProduct($brand,$product);
@@ -15,4 +17,6 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface{
 
     public function attachSupplyToProduct($admission_price,$supply_date,$quantity,$product);
     public function attachHistoryToProduct($selling_price,$quantity,$product,$supply);
+
+    public function countProduct();
 }

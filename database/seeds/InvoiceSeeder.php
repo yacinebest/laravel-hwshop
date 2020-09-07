@@ -20,7 +20,7 @@ class InvoiceSeeder extends Seeder
             $total_price = 0;
             foreach ($order->products as $product) {
                 $quantity += $product->pivot->ordered_quantity ;
-                $total_price += $product->price ;
+                $total_price += ($product->price * $product->pivot->ordered_quantity) ;
             }
 
             $invoice = factory(\App\Models\Invoice::class)->create([

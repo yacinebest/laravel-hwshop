@@ -163,30 +163,6 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples2" data-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="navbar-examples2">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text"
-                            style="color: #f4645f;">{{ __('Category Management') }}</span>
-                    </a>
-
-                    <div class="collapse" id="navbar-examples2">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('category.index') }}">
-                                    {{ __('Display All Category') }}
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('category.create') }}">
-                                    {{ __('Create Category') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link active collapsed" href="#navbar-examples4" data-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="navbar-examples4">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
@@ -196,6 +172,11 @@
 
                     <div class="collapse" id="navbar-examples4">
                         <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('category.index') }}">
+                                    {{ __('Category Management') }}
+                                </a>
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('image.index') }}">
                                     {{ __('Image Management') }}

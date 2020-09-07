@@ -51,11 +51,10 @@
                                                         <td>
                                                             <brand-logo :entity="{{ $entity }}"></brand-logo>
                                                         </td>
-                                                    @elseif($key==='imageCount')
+                                                    {{-- @elseif($key==='imageCount')
                                                         <td>
                                                             <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary">{{ $entity->$key }} Image</a>
-                                                            {{-- <button class="btn btn-primary" type="submit">{{ $entity->$key }} Image</button> --}}
-                                                        </td>
+                                                        </td> --}}
                                                     @elseif($key==='columnCount')
                                                         <td>
                                                             <ul class="list-unstyled">
