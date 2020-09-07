@@ -5,10 +5,8 @@ namespace App\Models;
 
 class Product extends BaseModel
 {
-    // protected $with =['category'] ;
-    protected $appends =['imageCount','upVoteCount','downVoteCount','commentCount',
-                        'isSupplyActive'];
-                        // 'categoryName',
+    // protected $appends =['imageCount','upVoteCount','downVoteCount','commentCount',
+    //                     'isSupplyActive'];
 
     public function category()
     {

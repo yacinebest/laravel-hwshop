@@ -39467,7 +39467,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "col-xl-3 col-lg-6" }, [
+  return _c("div", { staticClass: "col-xl-3 col-lg-6 mb-4" }, [
     _c("div", { staticClass: "card card-stats mb-4 mb-xl-0" }, [
       _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row" }, [

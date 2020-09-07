@@ -46,16 +46,22 @@
                                     <td>
                                         <ul class="list-unstyled">
                                             <li>
-                                                <a href="{{ route('image.show',$product->id) }}" class="btn btn-primary mt-2">{{ $product->imageCount }} Image</a>
+                                                <a href="{{ route('image.show',$product->id) }}" class="btn btn-primary w-100 mt-2">{{ $product->imageCount }} Image</a>
                                             </li>
                                             <li>
-                                                <a href="#" class="btn btn-primary mt-2">Comment</a>
+                                                <a href="#" class="btn btn-primary w-100 mt-2">Comment</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('supply.show',$product->id) }}" class="btn btn-primary w-100  mt-2 ">Supply</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{ route('history.show',$product->id) }}" class="btn btn-primary w-100  mt-2">History</a>
                                             </li>
                                             <li>
                                                 @if( $product->datasheet)
-                                                    <button class="btn btn-primary mt-2">Datasheet</button>                         
+                                                    <button class="btn btn-primary w-100 mt-2">Datasheet</button>                         
                                                 @else
-                                                    <button disabled="disabled" class="btn btn-light mt-2">Datasheet</button> 
+                                                    <button disabled="disabled" class="btn btn-light w-100 mt-2">Datasheet</button> 
                                                 @endif
                                             </li>
                                         </ul>
@@ -92,9 +98,9 @@
             
         </div>
 
-        @include('supplies.tableSupply')  
+        {{-- @include('supplies.tableSupply')  
 
-        @include('histories.tableHistory')  
+        @include('histories.tableHistory')   --}}
         
         @include('layouts.footers.auth')
     </div>

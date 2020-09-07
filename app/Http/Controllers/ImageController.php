@@ -106,7 +106,6 @@ class ImageController extends Controller
      */
     public function show($id)
     {
-        // dd([]);
         $columns = $this->imageRepository->getAccessibleColumn();
         try {
             $entity = $this->categoryRepository->baseFindOrFail($id);
