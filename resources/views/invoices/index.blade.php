@@ -1,12 +1,5 @@
 @extends('layouts.default.index' , ['page'=>'Invoices','route_name'=>'invoice','btnAction'=>false])
 
-{{-- @section('otherBtn')
-    <div class="col-4 text-right">
-        <a href="{{ route('invoice.show','645465') }}" target="_blank" class="btn btn-sm btn-primary">file</a>
-    </div>
-@endsection --}}
-
-
 @section('entities_column')
 @foreach($invoices as $invoice)
     <tr>

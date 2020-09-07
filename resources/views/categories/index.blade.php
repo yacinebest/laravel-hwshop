@@ -1,19 +1,11 @@
-@extends('layouts.default.index' , ['page'=>'Categories','route_name'=>'category'])
-
-
-@section('otherBtn')
-    <div class="col-4 text-right">
-        <a href="{{ route('category.create') }}" class="btn btn-sm btn-primary">Create New Category</a>
-    </div>
-@endsection
+@extends('layouts.default.index' , ['page'=>'Categories','route_name'=>'category',
+                                    'addBtn'=>'Category'])
 
 @section('entities_column')
 @foreach($categories as $category)
     <tr>
         @foreach($columns as $key => $value)
-            @if($key=='productCount')
-                <td>{{ $category->getProductCount() }}</td>
-            @elseif($key==='imageCount')
+            @if($key==='imageCount')
                 <td>
                     <a href="{{ route('image.show',$category->id) }}" class="btn btn-primary">{{ $category->$key }} Image</a>
                 </td>

@@ -58,8 +58,7 @@ class UserController extends Controller
         $columns = $this->userRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->userRepository->getCardCountAndRoute();
 
-        $entities = $users;
-        return view('users.index',compact('cardCountAndRoute','page','columns','entities','auth') );
+        return view('users.index',compact('cardCountAndRoute','page','columns','users','auth') );
     }
 
 

@@ -28,8 +28,8 @@ class BrandController extends Controller
         $entities = $this->brandRepository->basePaginate();
         $columns = $this->brandRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->brandRepository->getCardCountAndRoute();
-
-        return view('brands.index',compact('entities','columns','cardCountAndRoute'));
+        $brands = $entities ;
+        return view('brands.index',compact('brands','columns','cardCountAndRoute'));
     }
 
     /**

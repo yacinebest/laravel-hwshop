@@ -1,4 +1,4 @@
-@extends('layouts.default.edit',['page'=>'Brand','route_name'=>'brand'])
+@extends('layouts.default.edit',['page'=>'Brand','route_name'=>'brand','entity'])
 
 @section('custom_colomn')
 

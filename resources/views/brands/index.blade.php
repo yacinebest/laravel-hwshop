@@ -1,7 +1,20 @@
-@extends('layouts.default.index' , ['page'=>'Brands','route_name'=>'brand'])
+@extends('layouts.default.index' , ['page'=>'Brands','route_name'=>'brand',
+                                    'addBtn'=>'Brand'])
 
-@section('otherBtn')
-    <div class="col-4 text-right">
-        <a href="{{ route('brand.create') }}" class="btn btn-sm btn-primary">Create New Brand</a>
-    </div>
+@section('entities_column')
+@foreach($brands as $brand)
+<tr>
+    @foreach($columns as $key => $value)
+        @if($key==='logo')
+            <td>
+                <brand-logo :entity="{{ $brand }}"></brand-logo>
+            </td>
+        @else
+            <td >{{ $brand->$key }}</td>
+        @endif
+    @endforeach
+
+    @include('layouts.dropdown.btnAction', ['entity' => $brand, 'route_name'=>'brand' ])
+</tr>
+@endforeach
 @endsection
