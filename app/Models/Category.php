@@ -6,10 +6,7 @@ use Illuminate\Support\Collection;
 
 class Category extends BaseModel
 {
-    // protected $with =['childs'] ;
-    // protected $with =['products','parent'] ;
-    // protected $appends =['parentName'];
-    protected $appends =['childCount','imageCount'];
+    protected $appends =['childCount','imageCount','productCount'];
 
     public function products()
     {
@@ -57,6 +54,14 @@ class Category extends BaseModel
     public function getImageCountAttribute()
     {
         return count($this->images);
+    }
+
+    /**
+     * @return number
+     */
+    public function getProductCountAttribute()
+    {
+        return count($this->products);
     }
 
 /*

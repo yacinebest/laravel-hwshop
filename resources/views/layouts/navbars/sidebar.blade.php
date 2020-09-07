@@ -187,61 +187,28 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples3" data-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="navbar-examples3">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text"
-                            style="color: #f4645f;">{{ __('Image Management') }}</span>
-                    </a>
-
-                    <div class="collapse" id="navbar-examples3">
-                        <ul class="nav nav-sm flex-column">
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('image.index') }}">
-                                    {{ __('Display All Image') }}
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
                     <a class="nav-link active collapsed" href="#navbar-examples4" data-toggle="collapse" role="button"
                         aria-expanded="false" aria-controls="navbar-examples4">
                         <i class="fab fa-laravel" style="color: #f4645f;"></i>
                         <span class="nav-link-text"
-                            style="color: #f4645f;">{{ __('Brand Management') }}</span>
+                            style="color: #f4645f;">{{ __('Managements') }}</span>
                     </a>
 
                     <div class="collapse" id="navbar-examples4">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('brand.index') }}">
-                                    {{ __('Display All Brand') }}
+                                <a class="nav-link" href="{{ route('image.index') }}">
+                                    {{ __('Image Management') }}
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('brand.create') }}">
-                                    {{ __('Create Brand') }}
+                                <a class="nav-link" href="{{ route('brand.index') }}">
+                                    {{ __('Brand Management') }}
                                 </a>
                             </li>
-                        </ul>
-                    </div>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active collapsed" href="#navbar-examples7" data-toggle="collapse" role="button"
-                        aria-expanded="false" aria-controls="navbar-examples7">
-                        <i class="fab fa-laravel" style="color: #f4645f;"></i>
-                        <span class="nav-link-text"
-                            style="color: #f4645f;">{{ __('Payment Management') }}</span>
-                    </a>
-
-                    <div class="collapse" id="navbar-examples7">
-                        <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('payment.index') }}">
-                                    {{ __('Payment Method') }}
+                                    {{ __('Payment Management') }}
                                 </a>
                             </li>
                         </ul>

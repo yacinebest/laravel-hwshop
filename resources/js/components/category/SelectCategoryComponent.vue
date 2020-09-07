@@ -165,10 +165,6 @@ export default {
             .then( ({data}) => {
                 this.categories = data
             })
-        // axios.get('/category')
-        //     .then( ({data}) => {
-        //         this.categories = data
-        //     })
     },
 }
 </script>

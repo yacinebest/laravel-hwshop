@@ -27,20 +27,18 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'UserController', ['except' => ['show']]);
-    Route::get('user/{id}', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
+    // Route::get('user/{id}', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
     Route::get('allAdmin', ['as' => 'user.admin.index', 'uses' => 'UserController@indexAdmin']);
     Route::get('allUser', ['as' => 'user.user.index', 'uses' => 'UserController@indexUser']);
-
     Route::get('profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
     Route::put('profile', ['as' => 'user.update.profile', 'uses' => 'UserController@updateProfile']);
     Route::post('profile', ['as' => 'user.upload.avatar', 'uses' => 'UserController@uploadAvatar']);
-
     Route::put('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
     Route::post('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
 
-    Route::resource('category', 'CategoryController');
-    Route::post('allCategory', ['as' => 'category.indexJson', 'uses' => 'CategoryController@indexJson']);
-    Route::get('Category/Level/{level}', ['as' => 'category.indexLevel', 'uses' => 'CategoryController@indexByLevel']);
+    Route::resource('role', 'RoleController', ['except' => ['edit','update','show','destroy'] ] );
+
+    Route::resource('brand', 'BrandController', ['except' => ['show'] ] );
 
     Route::resource('image', 'ImageController', ['except' => ['update','edit'] ] );
     Route::post('/images-upload', ['as' => 'image.upload', 'uses' => 'ImageController@upload']);
@@ -48,7 +46,9 @@ Route::group(['middleware' => 'auth'], function () {
     // Route::resource('image', 'ImageController', ['except' => ['show','update','edit','create','store'] ] );
     // Route::get('image', ['as' => 'image.index', 'uses' => 'ImageController@index']);
 
-    Route::resource('brand', 'BrandController', ['except' => ['show'] ] );
+    Route::resource('category', 'CategoryController');
+    Route::post('allCategory', ['as' => 'category.indexJson', 'uses' => 'CategoryController@indexJson']);
+    Route::get('Category/Level/{level}', ['as' => 'category.indexLevel', 'uses' => 'CategoryController@indexByLevel']);
 
     Route::resource('product', 'ProductController');
 

@@ -15,6 +15,8 @@ class BrandRepository extends BaseRepository implements BrandRepositoryInterface
         return [
             'logo'=>'Logo',
             'name'=>'Name',
+            'categoriesCount'=>'Categories',
+            'productsCount'=>'Products',
             'created_at' => 'Created At',
         ];
     }

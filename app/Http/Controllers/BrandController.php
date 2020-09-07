@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\BrandRepositoryInterface;
+use App\Repositories\Contracts\ImageRepositoryInterface;
 use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
 
     private $brandRepository;
+    private $imageRepository;
 
-    public function __construct(BrandRepositoryInterface $brandRepository) {
+    public function __construct(BrandRepositoryInterface $brandRepository,
+                                ImageRepositoryInterface $imageRepository) {
         $this->brandRepository = $brandRepository;
+        $this->imageRepository = $imageRepository;
     }
 
     /**
@@ -104,7 +108,7 @@ class BrandController extends Controller
 */
     public function processRequest(Request $request){
         if($request->hasFile('image')){
-            $logo = ImageController::storeFile($request->file('image'),"public/uploads/logo");
+            $logo = $this->imageRepository->storeFile($request->file('image'),"public/uploads/logo");
             $data = ['name'=>$request->name,'logo'=>$logo] ;
         }
         else{

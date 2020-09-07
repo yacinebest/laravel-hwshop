@@ -22,13 +22,11 @@ class ImageRepository extends BaseRepository implements ImageRepositoryInterface
         ];
     }
 
-    // public function getCardCountAndRoute(){
-    //     return [
-    //         // 'Admin'=>['count'=>$this->countOnlyAdmin(),'route'=>'user.admin.index'],
-    //         // 'User'=>['count'=>$this->countOnlyUser(),'route'=>'user.user.index'],
-    //         // 'All User'=>['count'=>$this->baseCount(),'route'=>'user.index'],
-    //     ];
-    // }
+    public function getCardCountAndRoute(){
+        return [
+            'Images'=>['count'=>$this->baseCount(),'route'=>'image.index']
+        ];
+    }
 
     public function uploadImages(Request $request,$folder = 'images',$name = 'images')
     {

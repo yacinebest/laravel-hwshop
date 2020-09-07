@@ -19,6 +19,7 @@ class CategoryRepository extends BaseRepository implements CategoryRepositoryInt
             'name'=>'Name',
             'level'=>'Level',
             'imageCount'=>'Images',
+            'productCount'=>'Products',
             'childCount' => 'All Childs',
             'created_at' => 'Created At',
         ];

@@ -34,9 +34,9 @@ class ImageController extends Controller
     {
         $images = $this->imageRepository->basePaginate([],['imageable_type'=>'ASC','imageable_id'=>'DESC']);
         $columns = $this->imageRepository->getAccessibleColumn();
-        // $cardCountAndRoute = $this->imageRepository->getCardCountAndRoute();
+        $cardCountAndRoute = $this->imageRepository->getCardCountAndRoute();
 
-        return view('images.index',compact('columns','images'));
+        return view('images.index',compact('cardCountAndRoute','columns','images'));
     }
 
     /**
@@ -122,12 +122,10 @@ class ImageController extends Controller
 
         $images = $entity->images;
         return view('images.show',compact('columns','entity','images'));
-        // return view('images.show',compact('columns','category','images'));
     }
 
     public static function upload(Request $request)
     {
         return response()->json($request->all());
-        dd($request);
     }
 }

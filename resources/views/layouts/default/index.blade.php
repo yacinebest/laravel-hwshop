@@ -15,9 +15,6 @@
                             <div class="col-8">
                                 <h3 class="mb-0">{{ $page }} :</h3>
                             </div>
-                            {{-- <div class="col-4 text-right">
-                                <a href="" class="btn btn-sm btn-primary">Add {{ $page }}</a>
-                            </div> --}}
                             @yield('otherBtn')
                         </div>
                     </div>

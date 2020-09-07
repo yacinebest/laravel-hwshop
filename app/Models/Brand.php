@@ -4,6 +4,8 @@ namespace App\Models;
 
 class Brand extends BaseModel
 {
+    protected $appends =['categoriesCount','productsCount'];
+
     public function products()
     {
         return $this->belongsToMany('App\Models\Product')
@@ -19,5 +21,26 @@ class Brand extends BaseModel
     public function images()
     {
         return $this->morphMany('App\Models\Image', 'imageable');
+    }
+
+/*
+|---------------------------------------------------------------------------|
+| GETTER & SETTER                                                           |
+|---------------------------------------------------------------------------|
+
+    /**
+     * @return number
+     */
+    public function getCategoriesCountAttribute()
+    {
+        return $this->categories ? count($this->categories) : 0;
+    }
+
+    /**
+     * @return number
+     */
+    public function getProductsCountAttribute()
+    {
+        return $this->products ?  count($this->products) : 0;
     }
 }

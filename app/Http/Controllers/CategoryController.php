@@ -59,7 +59,6 @@ class CategoryController extends Controller
 
         $fillable_columns = $this->categoryRepository->getFillableColumn();
         $categories_level= $this->categoryRepository->getCategoriesLevels();
-
         return view('categories.create',compact('fillable_columns','categories_level'));
     }
 
@@ -89,7 +88,6 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-
         $fillable_columns = $this->categoryRepository->getFillableColumn();
 
         $category = $this->categoryRepository->baseFindOrFail($id);

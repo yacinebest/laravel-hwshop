@@ -11,7 +11,8 @@ import CardEntity from "./components/indexpage/CardEntityComponent.vue";
 import UserUpload from "./components/user/UserUploadComponent.vue";
 import UserAvatar from "./components/user/UserAvatarComponent.vue";
 
-import SelectCategory from "./components/category/SelectCategoryComponent.vue";
+import SelectCategory from "./components/SelectCategoryComponent.vue";
+// import SelectCategory from "./components/category/SelectCategoryComponent.vue";
 
 import BrandLogo from "./components/brand/BrandLogoComponent.vue";
 

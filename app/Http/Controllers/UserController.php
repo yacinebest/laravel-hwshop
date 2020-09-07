@@ -13,11 +13,14 @@ class UserController extends Controller
 {
     private $userRepository;
     private $imageRepository;
+    private $roleRepository;
 
     public function __construct(UserRepositoryInterface $userRepository,
-                                ImageRepositoryInterface $imageRepository) {
+                                ImageRepositoryInterface $imageRepository,
+                                RoleRepositoryInterface $roleRepository) {
         $this->userRepository = $userRepository;
         $this->imageRepository = $imageRepository;
+        $this->roleRepository = $roleRepository;
     }
 
     /**
@@ -69,12 +72,9 @@ class UserController extends Controller
         if($this->userRepository->isAuthEqualTo($user) )
             return redirect()->route('user.profile');
         else{
-            $closure  = function(RoleRepositoryInterface $rep){
-                return $rep->baseAll();
-            };
-            $roles = app()->call($closure);
-
+            $roles = $this->roleRepository->baseAll() ;
             $read_only_columns = $this->userRepository->getReadOnlyColumn();
+
             return view('users.edit',compact('user','roles','read_only_columns'));
         }
     }
@@ -103,13 +103,9 @@ class UserController extends Controller
 
     public function profile()
     {
-
-        $user = $this->userRepository->getAuthUser();
-        $closure  = function(RoleRepositoryInterface $rep){
-            return $rep->baseAll();
-        };
-        $roles = app()->call($closure);
+        $roles = $this->roleRepository->baseAll() ;
         $editable_columns = $this->userRepository->getEditableColumn();
+
         return view('users.profile',compact('user','roles','editable_columns'));
     }
 
