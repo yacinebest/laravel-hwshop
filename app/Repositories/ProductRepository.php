@@ -21,10 +21,12 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             'price'=>'Price',
             'updated_price_at'=>'Updated Price At',
             'copy_number'=>'Quantity',
-            'view'=>'View',
+            // 'view'=>'View',
             'categoryName'=>'Category',
-            'columnCount' => 'Count',
-            'brands' => 'Brands',
+
+            'columnCount' => '',
+            // 'brands' => 'Brands',
+
             // 'imageCount'=>'Images',
             // 'commentCount'=>'Comment',
             // 'upVoteCount'=> 'Up Vote',
@@ -53,6 +55,12 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 |---------------------------------------------------------------------------|
 */
 
+    public function getCardCountAndRouteForShow($product){
+        return [
+            'Supply'=>['count'=> $product->supplies ? count($product->supplies) : 0 ,'route'=>'supply.show','attribute'=>$product->id],
+            'History'=>['count'=> $product->histories ? count($product->histories) : 0 ,'route'=>'history.show','attribute'=>$product->id],
+        ];
+    }
 
     public function attachBrandToProduct($brand,$product){
         $product->brands()->attach($brand);

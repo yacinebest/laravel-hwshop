@@ -19,4 +19,6 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface , CardCount
     public function attachHistoryToProduct($selling_price,$quantity,$product,$supply);
 
     public function countProduct();
+
+    public function getCardCountAndRouteForShow($product);
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\Product\ProductStoreRequest;
 use App\Models\Product;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
+use App\Repositories\Contracts\HistoryRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use App\Repositories\Contracts\SupplyRepositoryInterface;
@@ -18,17 +19,20 @@ class ProductController extends Controller
     private $brandRepository ;
     private $imageRepository;
     private $supplyRepository;
+    private $historyRepository;
 
     public function __construct(ProductRepositoryInterface $productRepository,
                                 CategoryRepositoryInterface $categoryRepository,
                                 BrandRepositoryInterface $brandRepository,
                                 ImageRepositoryInterface $imageRepository,
-                                SupplyRepositoryInterface $supplyRepository) {
+                                SupplyRepositoryInterface $supplyRepository,
+                                HistoryRepositoryInterface $historyRepository) {
         $this->productRepository = $productRepository;
         $this->categoryRepository = $categoryRepository;
         $this->brandRepository = $brandRepository;
         $this->imageRepository = $imageRepository;
         $this->supplyRepository = $supplyRepository;
+        $this->historyRepository = $historyRepository;
     }
 
     /**
@@ -41,8 +45,8 @@ class ProductController extends Controller
         $entities = $this->productRepository->basePaginate();
         $columns = $this->productRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->productRepository->getCardCountAndRoute();
-
-        return view('products.index',compact('cardCountAndRoute','entities','columns'));
+        $products =$entities;
+        return view('products.index',compact('cardCountAndRoute','products','columns'));
     }
 
     /**
@@ -93,7 +97,18 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = $this->productRepository->baseFindOrFail( $id);
+
+        $supplies = $this->productRepository->getSuppliesPaginate($product);
+        $columns_supply = $this->supplyRepository->getAccessibleColumn(); 
+        $status =  $this->supplyRepository->getEnumStatusSupply();
+
+        $histories = $this->productRepository->getHistoriesPaginate($product);
+        $columns_history = $this->historyRepository->getAccessibleColumn();
+
+        $cardCountAndRoute = $this->productRepository->getCardCountAndRouteForShow($product);
+        return view('products.show',compact('cardCountAndRoute',
+            'product','supplies','histories','columns_supply','columns_history','status'));
     }
 
     /**

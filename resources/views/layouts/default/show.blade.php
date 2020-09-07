@@ -6,7 +6,12 @@
     <div class="container-fluid mt--7">
 
     <div class="container-fluid mt--7">
-
+        @if(isset($supplyTable) && $supplyTable)
+            @yield('supplyTable')    
+        @elseif(isset($historyTable) && $historyTable)
+            <p>qsdsqdqsdsq</p>
+            @yield('historyTable')    
+        @else
         <div class="row">
             <div class="col">
                 <div class="card shadow">
@@ -28,6 +33,7 @@
                         @if( isset($tableComponent) && $tableComponent )
                             @yield('tableComponent')
                         @else
+                            @if(isset($columns) && $columns)
                             <table class="table align-items-center table-flush">
                                 <thead class="thead-light">
                                     <tr>
@@ -53,6 +59,7 @@
                                         @endisset
                                 </tbody>
                             </table>
+                            @endif
                         @endif
                         @if(!empty($entities))
                             {!! $entities->links() !!}
@@ -70,7 +77,7 @@
                 </div>
             </div>
         </div>
-
+        @endif
         @include('layouts.footers.auth')
     </div>
 </div>

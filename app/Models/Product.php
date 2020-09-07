@@ -6,8 +6,9 @@ namespace App\Models;
 class Product extends BaseModel
 {
     // protected $with =['category'] ;
-    protected $appends =['categoryName','imageCount','upVoteCount','downVoteCount','commentCount',
+    protected $appends =['imageCount','upVoteCount','downVoteCount','commentCount',
                         'isSupplyActive'];
+                        // 'categoryName',
 
     public function category()
     {
@@ -59,9 +60,9 @@ class Product extends BaseModel
 |---------------------------------------------------------------------------|
 */
 
-    public function getCategoryNameAttribute(){
-        return $this->category->name;
-    }
+    // public function getCategoryNameAttribute(){
+    //     return $this->category->name;
+    // }
 
      /**
      * @return number

@@ -64,9 +64,9 @@ class SupplyController extends Controller
     {
         $product = $this->productRepository->baseFindOrFail( $id);
         $supplies = $this->productRepository->getSuppliesPaginate($product);
-        $columns = $this->supplyRepository->getAccessibleColumn();
         $status =  $this->supplyRepository->getEnumStatusSupply();
-        return view('supplies.show',compact('product','supplies','columns','status'));
+        $columns_supply = $this->supplyRepository->getAccessibleColumn(); 
+        return view('supplies.show',compact('product','supplies','columns_supply','status'));
     }
 
     /**

@@ -55,26 +55,6 @@
                                                         <td>
                                                             <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary">{{ $entity->$key }} Image</a>
                                                         </td> --}}
-                                                    @elseif($key==='columnCount')
-                                                        <td>
-                                                            <ul class="list-unstyled">
-                                                                <li>
-                                                                    <a href="{{ route('image.show',$entity->id) }}" class="btn btn-primary mr-2 mb-2">{{ $entity->imageCount }}  <i class="fa fa-image" ></i></a>
-                                                                    <a href="{{ route('comment.show',$entity->id) }}" class="btn btn-primary mr-2 mb-2">{{ $entity->commentCount }}  <i class="fa fa-comment" ></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" class="btn btn-primary mr-2">{{ $entity->upVoteCount }}  <i class="fa fa-thumbs-up" ></i></a>
-                                                                    <a href="#" class="btn btn-primary ">{{ $entity->downVoteCount }}  <i class="fa fa-thumbs-down"></i></a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="{{ route('supply.show',$entity->id) }}" class="btn btn-primary  mt-2 mr-2">Supply</a>
-                                                                    <a href="{{ route('history.show',$entity->id) }}" class="btn btn-primary  mt-2">History</a>
-                                                                </li>
-                                                                <li>
-                                                                    <p>Datasheet : @if( $entity->datasheet) Avaible @else Not Avaible @endif </p>
-                                                                </li>
-                                                            </ul>
-                                                        </td>
                                                     @elseif($key==='brands')
                                                         <td>
                                                             <ul class="list-group">
