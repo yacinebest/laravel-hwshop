@@ -9,7 +9,6 @@
             </div>
         </div>
         <div v-else>
-            <!-- <user-upload :user="user"></user-upload> -->
              <div class="row justify-content-center">
                 <div class="col-lg-3 order-lg-2">
                     <div class="card-profile-image">
@@ -26,13 +25,9 @@
 </template>
 
 <script>
-// import UserUpload from './user/UserUploadComponent.vue'
 
 export default {
     name: 'user',
-    //  components: {
-    //     UserUpload
-    // },
      props:{
         user: {
             type: Object,

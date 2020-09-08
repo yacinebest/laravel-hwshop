@@ -3,10 +3,11 @@
 
 
 @section('otherTable')
-@include('orders.tableOrder')
-@include('deliveries.tableDelivery',['columns'=>$columns_delivery])
-@include('invoices.tableInvoice',['columns'=>$columns_invoice])
-@include('payments.tablePayment',['columns'=>$columns_payment])
+@include('orders.table.tableOrder')
+@include('orders.table.tableOrderProducts')
+@include('orders.table.tableDelivery',['columns'=>$columns_delivery])
+@include('orders.table.tableInvoice',['columns'=>$columns_invoice])
+@include('orders.table.tablePayment',['columns'=>$columns_payment])
 
 
 

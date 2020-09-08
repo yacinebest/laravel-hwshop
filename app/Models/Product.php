@@ -100,10 +100,13 @@ class Product extends BaseModel
         $p = $this->supplies->filter(function($supply){
             return $supply->status == 'IN PROGRESS';
         });
-        // dd($p->isEmpty());
         return !$p->isEmpty() ;
-        // return $p ? true : false;
     }
 
+
+    public function getSubPriceAttribute()
+    {
+        return (double)($this->price) * (double)( $this->pivot->ordered_quantity)    ;
+    }
 
 }
