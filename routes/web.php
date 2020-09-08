@@ -14,9 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('backend.welcome');
-});
+Route::get('/', 'HomeController@welcome');
+
+// Route::middleware('isAdmin')->group(function () {
+//     // dd(Auth::user());
+//     Route::get('/', 'HomeController@welcome');
+
+//     Route::get('/', function () {
+//         return 'not admin';
+//     })->withoutMiddleware('isAdmin');
+// });
 
 Auth::routes();
 

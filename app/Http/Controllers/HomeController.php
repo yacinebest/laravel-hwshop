@@ -21,7 +21,6 @@ class HomeController extends Controller
      */
     public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->middleware('auth');
         $this->userRepository = $userRepository;
     }
 
@@ -32,6 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $this->middleware('auth');
         $cardCountAndRoute =[
             'User'=>['count'=>$this->userRepository->baseCount() ,'route'=>'user.index'],
             'Product'=>['count'=>count(Product::all()),'route'=>'user.index'],
@@ -39,5 +39,10 @@ class HomeController extends Controller
             'Order'=>['count'=>count(Order::all()),'route'=>'user.index'],
         ];
         return view('backend.dashboard',compact('cardCountAndRoute'));
+    }
+
+    public function welcome()
+    {
+        return view('backend.welcome');
     }
 }
