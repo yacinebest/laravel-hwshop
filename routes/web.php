@@ -25,12 +25,13 @@ Route::get('/management', 'HomeController@welcome')->withoutMiddleware('isAdmin'
 
 Auth::routes();
 
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['prefix'=>'management','middleware' => 'admin'], function () {
+// Route::group(['middleware' => 'admin'], function () {
 // Route::group(['middleware' => 'auth'], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::resource('user', 'UserController', ['except' => ['show']]);
-    // Route::get('user/{id}', ['as' => 'user.edit', 'uses' => 'UserController@edit']);
+
     Route::get('allAdmin', ['as' => 'user.admin.index', 'uses' => 'UserController@indexAdmin']);
     Route::get('allUser', ['as' => 'user.user.index', 'uses' => 'UserController@indexUser']);
     Route::get('profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);

@@ -8,7 +8,6 @@
                 </div>
                 <div class="col-4 text-right">
                     <input id="input-file" type="file" name="images[]" class="d-none" @change="uploadImages" multiple>
-                    <!-- <button type="button" class="btn btn-sm btn-primary" @click="document.getElementById('input-file').click()">Upload New Images</button> -->
                     <button type="button" class="btn btn-sm btn-primary" onclick="document.getElementById('input-file').click();">Upload New Images</button>
                 </div>
             </div>
@@ -65,7 +64,7 @@ export default {
     },
     methods: {
         deleteImage(image){
-            axios.delete(`/image/${image.id}`)
+            axios.delete(`/management/image/${image.id}`)
                 .then( ({data}) => {
                     this.currentImages.splice(this.currentImages.indexOf(image), 1);
                 })
@@ -79,7 +78,7 @@ export default {
                 form.append('images[]', file, file.name);
             });
 
-            axios.post('/image',form,{
+            axios.post('/management/image',form,{
                     headers: {
                         "Content-Type": "multipart/form-data"
                     },

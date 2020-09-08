@@ -57,7 +57,7 @@ export default {
             form.append('avatar',selectedFile)
             form.append('user_id',this.authUser.id)
 
-            axios.post('profile',form,{
+            axios.post('/management/profile',form,{
                     headers: {
                         "Content-Type": "multipart/form-data"
                     },

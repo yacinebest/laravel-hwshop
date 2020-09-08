@@ -104,6 +104,7 @@ class UserController extends Controller
     {
         $roles = $this->roleRepository->baseAll() ;
         $editable_columns = $this->userRepository->getEditableColumn();
+        $user = $this->userRepository->getAuthUser() ;
 
         return view('backend.users.profile',compact('user','roles','editable_columns'));
     }

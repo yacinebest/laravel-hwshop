@@ -161,7 +161,7 @@ export default {
         }
     },
     created() {
-        axios.post('/allCategory')
+        axios.post('/management/allCategory')
             .then( ({data}) => {
                 this.categories = data
             })
