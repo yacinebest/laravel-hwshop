@@ -48,7 +48,7 @@ class CategoryController extends Controller
         $baseCategories = $this->categoryRepository->getBaseCategories();
 
         $categories = $entities;
-        return view('categories.index',compact('cardCountAndRoute','categories','columns','baseCategories'));
+        return view('backend.categories.index',compact('cardCountAndRoute','categories','columns','baseCategories'));
     }
     /**
      * Show the form for creating a new resource.
@@ -60,7 +60,7 @@ class CategoryController extends Controller
 
         $fillable_columns = $this->categoryRepository->getFillableColumn();
         $categories_level= $this->categoryRepository->getCategoriesLevels();
-        return view('categories.create',compact('fillable_columns','categories_level'));
+        return view('backend.categories.create',compact('fillable_columns','categories_level'));
     }
 
     /**
@@ -96,7 +96,7 @@ class CategoryController extends Controller
         $categories_level= $this->categoryRepository->getCategoriesLevels();
 
         $selected_categories= $this->categoryRepository->getDirectParents($category) ;
-        return view('categories.edit',compact('fillable_columns','category','categories_level','selected_categories'));
+        return view('backend.categories.edit',compact('fillable_columns','category','categories_level','selected_categories'));
     }
 
     /**

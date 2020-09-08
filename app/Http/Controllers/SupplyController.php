@@ -32,7 +32,7 @@ class SupplyController extends Controller
         $status =  ($this->supplyRepository->getEnumStatusSupplyWait())[0];
         $product = $this->productRepository->baseFindOrFail( $id);
 
-        return view('supplies.create',compact('fillable_columns','status','product'));
+        return view('backend.supplies.create',compact('fillable_columns','status','product'));
     }
 
     /**
@@ -65,8 +65,8 @@ class SupplyController extends Controller
         $product = $this->productRepository->baseFindOrFail( $id);
         $supplies = $this->productRepository->getSuppliesPaginate($product);
         $status =  $this->supplyRepository->getEnumStatusSupply();
-        $columns_supply = $this->supplyRepository->getAccessibleColumn(); 
-        return view('supplies.show',compact('product','supplies','columns_supply','status'));
+        $columns_supply = $this->supplyRepository->getAccessibleColumn();
+        return view('backend.supplies.show',compact('product','supplies','columns_supply','status'));
     }
 
     /**

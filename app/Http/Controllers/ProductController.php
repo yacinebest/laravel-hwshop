@@ -46,7 +46,7 @@ class ProductController extends Controller
         $columns = $this->productRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->productRepository->getCardCountAndRoute();
         $products =$entities;
-        return view('products.index',compact('cardCountAndRoute','products','columns'));
+        return view('backend.products.index',compact('cardCountAndRoute','products','columns'));
     }
 
     /**
@@ -60,7 +60,7 @@ class ProductController extends Controller
         $categories_level= $this->categoryRepository->getCategoriesLevels();
         $brands = $this->brandRepository->basePaginate();
 
-        return view('products.create',compact('fillable_columns','categories_level','brands'));
+        return view('backend.products.create',compact('fillable_columns','categories_level','brands'));
     }
 
     /**
@@ -100,14 +100,14 @@ class ProductController extends Controller
         $product = $this->productRepository->baseFindOrFail( $id);
 
         $supplies = $this->productRepository->getSuppliesPaginate($product);
-        $columns_supply = $this->supplyRepository->getAccessibleColumn(); 
+        $columns_supply = $this->supplyRepository->getAccessibleColumn();
         $status =  $this->supplyRepository->getEnumStatusSupply();
 
         $histories = $this->productRepository->getHistoriesPaginate($product);
         $columns_history = $this->historyRepository->getAccessibleColumn();
 
         $cardCountAndRoute = $this->productRepository->getCardCountAndRouteForShow($product);
-        return view('products.show',compact('cardCountAndRoute',
+        return view('backend.products.show',compact('cardCountAndRoute',
             'product','supplies','histories','columns_supply','columns_history','status'));
     }
 
@@ -128,7 +128,7 @@ class ProductController extends Controller
 
         $brands = $this->brandRepository->basePaginate();
 
-        return view('products.edit',compact('brands','product','category','categories_level','selected_categories'));
+        return view('backend.products.edit',compact('brands','product','category','categories_level','selected_categories'));
     }
 
     /**

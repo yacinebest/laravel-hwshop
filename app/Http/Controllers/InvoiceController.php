@@ -39,7 +39,7 @@ class InvoiceController extends Controller
         $invoices = $this->invoiceRepository->basePaginate();
         $columns = $this->invoiceRepository->getAccessibleColumn();
 
-        return view('invoices.index',compact('invoices','columns'));
+        return view('backend.invoices.index',compact('invoices','columns'));
     }
 
     /**

@@ -34,7 +34,7 @@ class HistoryController extends Controller
         $product = $this->productRepository->baseFindOrFail( $id);
         $histories = $this->productRepository->getHistoriesPaginate($product);
         $columns_history = $this->historyRepository->getAccessibleColumn();
-        return view('histories.show',compact('product','histories','columns_history'));
+        return view('backend.histories.show',compact('product','histories','columns_history'));
     }
 
 }

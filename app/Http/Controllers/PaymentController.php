@@ -24,7 +24,7 @@ class PaymentController extends Controller
         $entities = $this->paymentRepository->basePaginate();
         $columns = $this->paymentRepository->getAccessibleColumn();
 
-        return view('payments.index',compact('entities','columns'));
+        return view('backend.payments.index',compact('entities','columns'));
     }
 
     /**
@@ -37,7 +37,7 @@ class PaymentController extends Controller
         // $fillable_columns = $this->paymentRepository->getFillableColumn();
         $method = 'CCP';
 
-        return view('payments.create',compact('method'));
+        return view('backend.payments.create',compact('method'));
     }
 
     /**

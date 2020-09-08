@@ -28,7 +28,7 @@ class PaymentUnitTest extends TestCase
     function can_create_payment_with_factory()
     {
         $this->assertNotEmpty($this->payment);
-        dd($this->payment);
+        // dd($this->payment);
     }
 
 }

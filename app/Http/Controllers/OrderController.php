@@ -41,7 +41,7 @@ class OrderController extends Controller
         $columns = $this->orderRepository->getAccessibleColumn();
         // $cardCountAndRoute = $this->imageRepository->getCardCountAndRoute();
         $status = $this->orderRepository->getEnumStatusSupply();
-        return view('orders.index',compact('columns','orders','status'));
+        return view('backend.orders.index',compact('columns','orders','status'));
     }
 
     /**
@@ -82,13 +82,13 @@ class OrderController extends Controller
 
         $columns_invoice = $this->invoiceRepository->getAccessibleColumn();
         $invoice = $order->invoice;
-        
+
         $columns_delivery = $this->deliveryRepository->getAccessibleColumn();
         $delivery = $order->delivery;
 
         $columns_payment = $this->paymentRepository->getAccessibleColumn();
         $payment = $order->payment;
-        return view('orders.show',compact('order','columns','columns_invoice','status','invoice','delivery','columns_delivery'
+        return view('backend.orders.show',compact('order','columns','columns_invoice','status','invoice','delivery','columns_delivery'
                                         ,'payment','columns_payment'));
     }
 

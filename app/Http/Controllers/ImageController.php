@@ -36,7 +36,7 @@ class ImageController extends Controller
         $columns = $this->imageRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->imageRepository->getCardCountAndRoute();
 
-        return view('images.index',compact('cardCountAndRoute','columns','images'));
+        return view('backend.images.index',compact('cardCountAndRoute','columns','images'));
     }
 
     /**
@@ -46,7 +46,7 @@ class ImageController extends Controller
      */
     public function create()
     {
-        return view('images.create');
+        return view('backend.images.create');
     }
 
 
@@ -120,7 +120,7 @@ class ImageController extends Controller
         }
 
         $images = $entity->images;
-        return view('images.show',compact('columns','entity','images'));
+        return view('backend.images.show',compact('columns','entity','images'));
     }
 
     public static function upload(Request $request)

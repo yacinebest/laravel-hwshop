@@ -29,7 +29,7 @@ class BrandController extends Controller
         $columns = $this->brandRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->brandRepository->getCardCountAndRoute();
         $brands = $entities ;
-        return view('brands.index',compact('brands','columns','cardCountAndRoute'));
+        return view('backend.brands.index',compact('brands','columns','cardCountAndRoute'));
     }
 
     /**
@@ -40,7 +40,7 @@ class BrandController extends Controller
     public function create()
     {
         $fillable_columns = $this->brandRepository->getFillableColumn();
-        return view('brands.create',compact('fillable_columns'));
+        return view('backend.brands.create',compact('fillable_columns'));
     }
 
     /**
@@ -69,7 +69,7 @@ class BrandController extends Controller
         $entity = $this->brandRepository->baseFindOrFail($id);
 
 
-        return view('brands.edit',compact('fillable_columns','entity'));
+        return view('backend.brands.edit',compact('fillable_columns','entity'));
     }
 
     /**

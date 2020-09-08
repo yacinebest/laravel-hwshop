@@ -38,7 +38,6 @@ class HomeController extends Controller
             'Category'=>['count'=>count(Category::all()),'route'=>'user.index'],
             'Order'=>['count'=>count(Order::all()),'route'=>'user.index'],
         ];
-
-        return view('dashboard',compact('cardCountAndRoute'));
+        return view('backend.dashboard',compact('cardCountAndRoute'));
     }
 }

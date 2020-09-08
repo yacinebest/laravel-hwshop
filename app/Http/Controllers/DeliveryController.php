@@ -39,7 +39,7 @@ class DeliveryController extends Controller
         $fillable_columns = $this->deliveryRepository->getFillableColumn();
         $order = $this->orderRepository->baseFindOrFail($id);
         // dd([$order,$fillable_columns]);
-        return view('deliveries.create',compact('fillable_columns','order'));
+        return view('backend.deliveries.create',compact('fillable_columns','order'));
     }
 
     /**

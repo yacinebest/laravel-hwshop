@@ -73,7 +73,7 @@ class OrderUnitTest extends TestCase
         $this->assertEquals($this->order->products->get(0)->pivot->ordered_quantity,10);
         $this->assertEquals($this->order->products->get(1)->pivot->ordered_quantity,20);
 
-        dd($this->order->products);
+        // dd($this->order->products);
     }
 
     /**

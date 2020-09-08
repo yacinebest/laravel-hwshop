@@ -58,7 +58,7 @@ class UserController extends Controller
         $columns = $this->userRepository->getAccessibleColumn();
         $cardCountAndRoute = $this->userRepository->getCardCountAndRoute();
 
-        return view('users.index',compact('cardCountAndRoute','page','columns','users','auth') );
+        return view('backend.users.index',compact('cardCountAndRoute','page','columns','users','auth') );
     }
 
 
@@ -74,7 +74,7 @@ class UserController extends Controller
             $roles = $this->roleRepository->baseAll() ;
             $read_only_columns = $this->userRepository->getReadOnlyColumn();
 
-            return view('users.edit',compact('user','roles','read_only_columns'));
+            return view('backend.users.edit',compact('user','roles','read_only_columns'));
         }
     }
 
@@ -105,7 +105,7 @@ class UserController extends Controller
         $roles = $this->roleRepository->baseAll() ;
         $editable_columns = $this->userRepository->getEditableColumn();
 
-        return view('users.profile',compact('user','roles','editable_columns'));
+        return view('backend.users.profile',compact('user','roles','editable_columns'));
     }
 
     /**
