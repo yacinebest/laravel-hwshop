@@ -20,8 +20,8 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
             'status'=>'Status',
             'order_date'=>'Order Date',
             'updated_at'=>'Updated At',
-            'deliveryDate'=>'Delivery',
-            'other'=>''
+            'deliveryDate'=>'Delivery Stat',
+            'payment'=>'Payment Mtd'
         ];
     }
 
@@ -30,6 +30,17 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
 | CUSTOM FUNCTION                                                           |
 |---------------------------------------------------------------------------|
 */
+    public function getAccessibleColumnForShow(){
+        return [
+            'userUsername'=>'Order By',
+            'adminUsername'=>'Verified By',
+            'status'=>'Status',
+            'order_date'=>'Order Date',
+            'updated_at'=>'Updated At',
+            'deliveryDate'=>'Delivery Stat',
+            'payment'=>'Payment Mtd'
+        ];
+    }
 
     public function getEnumStatusSupply(){
         return ['PROCESSING','CANCELED','APPROVED'];

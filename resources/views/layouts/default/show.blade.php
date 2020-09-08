@@ -3,7 +3,7 @@
 @section('content')
 <div class="main-content">
     @include('layouts.headers.cards',['cardCountAndRoute'=> (isset($cardCountAndRoute) ? $cardCountAndRoute : [] )])
-    <div class="container-fluid mt--7">
+    {{-- <div class="container-fluid mt--7"> --}}
 
     <div class="container-fluid mt--7">
 
@@ -14,7 +14,7 @@
         @endif
         @include('layouts.footers.auth')
     </div>
-</div>
+{{-- </div> --}}
 @endsection
 
 @section('scripts')

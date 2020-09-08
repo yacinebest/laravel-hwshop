@@ -7,4 +7,6 @@ interface OrderRepositoryInterface extends BaseRepositoryInterface{
     public function getEnumStatusSupply();
 
     public function linkDeliveryToOrder($order,$delivery);
+
+    public function getAccessibleColumnForShow();
 }

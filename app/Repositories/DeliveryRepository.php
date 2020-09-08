@@ -12,9 +12,12 @@ class DeliveryRepository extends BaseRepository implements DeliveryRepositoryInt
 */
     public function getAccessibleColumn(){
         return [
-            // 'logo'=>'Logo',
-            // 'name'=>'Name',
-            // 'created_at' => 'Created At',
+            'ref'=>'Ref',
+            'delivery_society'=>'Delivery Society',
+            'price'=>'Price',
+            'delivery_date'=>'Delivery Date',
+            'phone_number'=>'Phone Number',
+            'status'=>'Status'
         ];
     }
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Contracts\DeliveryRepositoryInterface;
+use App\Repositories\Contracts\InvoiceRepositoryInterface;
 use App\Repositories\Contracts\OrderRepositoryInterface;
+use App\Repositories\Contracts\PaymentRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -13,13 +15,19 @@ class OrderController extends Controller
     private $orderRepository;
     private $userRepository;
     private $deliveryRepository;
+    private $invoiceRepository;
+    private $paymentRepository;
 
     public function __construct(OrderRepositoryInterface $orderRepository,
                                 UserRepositoryInterface $userRepository,
-                                DeliveryRepositoryInterface $deliveryRepository) {
+                                DeliveryRepositoryInterface $deliveryRepository,
+                                InvoiceRepositoryInterface $invoiceRepository,
+                                PaymentRepositoryInterface $paymentRepository) {
         $this->orderRepository = $orderRepository;
         $this->userRepository = $userRepository;
         $this->deliveryRepository = $deliveryRepository;
+        $this->invoiceRepository = $invoiceRepository;
+        $this->paymentRepository = $paymentRepository;
     }
 
     /**
@@ -68,12 +76,20 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        dd($id);
         $order = $this->orderRepository->baseFindOrFail($id);
-        // $supplies = $this->productRepository->getSuppliesPaginate($product);
-        // $columns = $this->supplyRepository->getAccessibleColumn();
-        // $status =  $this->supplyRepository->getEnumStatusSupply();
-        // return view('supplies.show',compact('product','supplies','columns','status'));
+        $status = $this->orderRepository->getEnumStatusSupply();
+        $columns = $this->orderRepository->getAccessibleColumnForShow();
+
+        $columns_invoice = $this->invoiceRepository->getAccessibleColumn();
+        $invoice = $order->invoice;
+        
+        $columns_delivery = $this->deliveryRepository->getAccessibleColumn();
+        $delivery = $order->delivery;
+
+        $columns_payment = $this->paymentRepository->getAccessibleColumn();
+        $payment = $order->payment;
+        return view('orders.show',compact('order','columns','columns_invoice','status','invoice','delivery','columns_delivery'
+                                        ,'payment','columns_payment'));
     }
 
     public function getProductRelat($id){
