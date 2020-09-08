@@ -14,16 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@welcome');
+// Route::get('/', 'HomeController@welcome');
+Route::get('/', 'HomeController@home');
 
-// Route::middleware('isAdmin')->group(function () {
-//     // dd(Auth::user());
-//     Route::get('/', 'HomeController@welcome');
+Route::get('/management', 'HomeController@index')->middleware('isAdmin')->name('management');
+Route::get('/management', 'HomeController@welcome')->withoutMiddleware('isAdmin')->name('management');
 
-//     Route::get('/', function () {
-//         return 'not admin';
-//     })->withoutMiddleware('isAdmin');
-// });
+
+
 
 Auth::routes();
 

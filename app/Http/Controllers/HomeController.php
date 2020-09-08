@@ -31,7 +31,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $cardCountAndRoute =[
             'User'=>['count'=>$this->userRepository->baseCount() ,'route'=>'user.index'],
             'Product'=>['count'=>count(Product::all()),'route'=>'user.index'],
@@ -44,5 +44,11 @@ class HomeController extends Controller
     public function welcome()
     {
         return view('backend.welcome');
+    }
+
+    public function home()
+    {
+        return [];
+        // return view('backend.welcome');
     }
 }
