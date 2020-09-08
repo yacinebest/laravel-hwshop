@@ -30,7 +30,6 @@ class Category extends BaseModel
         return $this->morphMany('App\Models\Image', 'imageable');
     }
 
-
 /*
 |---------------------------------------------------------------------------|
 | GETTER & SETTER                                                           |
