@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use App\Repositories\Contracts\ImageRepositoryInterface;
 use Illuminate\Http\Request;

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Models\BaseModel;
 use App\Models\Category;
 use App\Models\Order;
@@ -44,11 +45,5 @@ class HomeController extends Controller
     public function welcome()
     {
         return view('backend.welcome');
-    }
-
-    public function home()
-    {
-        return view('frontend.home');
-        // return view('backend.welcome');
     }
 }

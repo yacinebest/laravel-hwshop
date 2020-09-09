@@ -22,6 +22,23 @@ class BaseRepository implements BaseRepositoryInterface {
         return  $modelClass::all();
     }
 
+    public function baseOrderBy($order =['created_at'=>'DESC']){
+        $modelClass= $this->convertRepositoryToModelName();
+        $result = (new $modelClass)->newQuery();;
+        foreach ($order as $key => $value) {
+            $result->orderBy($key,$value);
+        }
+        return  $result;
+    }
+
+    public function baseTake($elements,$number = 0){
+        return $number>0 ? $elements->take($number)->get() : $elements->get() ;
+    }
+
+    public function orderByLatest($number = 0){
+        $entities = $this->baseOrderBy(['created_at'=>'DESC']);
+        return $this->baseTake($entities,$number);
+    }
 
     public function basePaginate($where = [],$order =['created_at'=>'DESC'],$number = 10){
         $modelClass= $this->convertRepositoryToModelName();

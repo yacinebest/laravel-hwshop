@@ -8,5 +8,5 @@ use App\Repositories\Contracts\Base\ReadInterface;
 use App\Repositories\Contracts\Base\UpdateInterface;
 
 interface BaseRepositoryInterface extends ReadInterface , CreateInterface , DeleteInterface , UpdateInterface , ReadableColumnInterface {
-
+    public function orderByLatest($number = 0);
 }

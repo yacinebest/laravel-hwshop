@@ -14,65 +14,62 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', 'HomeController@welcome');
-Route::get('/', 'HomeController@home');
+Route::get('/', 'Frontend\HomeController@home')->name('home');
+Route::get('/FAQ', 'Frontend\FAQController@faq')->name('faq');
 
-Route::get('/management', 'HomeController@index')->middleware('isAdmin')->name('management');
-Route::get('/management', 'HomeController@welcome')->withoutMiddleware('isAdmin')->name('management');
-
-
+Route::get('/management', 'Backend\HomeController@index')->middleware('isAdmin')->name('management');
+Route::get('/management', 'Backend\HomeController@welcome')->withoutMiddleware('isAdmin')->name('management');
 
 Auth::routes();
 
 Route::group(['prefix'=>'management','middleware' => 'admin'], function () {
-// Route::group(['middleware' => 'admin'], function () {
 // Route::group(['middleware' => 'auth'], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/home', 'Backend\HomeController@index')->name('home');
 
-    Route::resource('user', 'UserController', ['except' => ['show']]);
+    Route::resource('user', 'Backend\UserController', ['except' => ['show']]);
 
-    Route::get('allAdmin', ['as' => 'user.admin.index', 'uses' => 'UserController@indexAdmin']);
-    Route::get('allUser', ['as' => 'user.user.index', 'uses' => 'UserController@indexUser']);
-    Route::get('profile', ['as' => 'user.profile', 'uses' => 'UserController@profile']);
-    Route::put('profile', ['as' => 'user.update.profile', 'uses' => 'UserController@updateProfile']);
-    Route::post('profile', ['as' => 'user.upload.avatar', 'uses' => 'UserController@uploadAvatar']);
-    Route::put('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
-    Route::post('profile/password', ['as' => 'user.password', 'uses' => 'UserController@password']);
+    Route::get('allAdmin', ['as' => 'user.admin.index', 'uses' => 'Backend\UserController@indexAdmin']);
+    Route::get('allUser', ['as' => 'user.user.index', 'uses' => 'Backend\UserController@indexUser']);
+    Route::get('profile', ['as' => 'user.profile', 'uses' => 'Backend\UserController@profile']);
+    Route::put('profile', ['as' => 'user.update.profile', 'uses' => 'Backend\UserController@updateProfile']);
+    Route::post('profile', ['as' => 'user.upload.avatar', 'uses' => 'Backend\UserController@uploadAvatar']);
+    Route::put('profile/password', ['as' => 'user.password', 'uses' => 'Backend\UserController@password']);
+    Route::post('profile/password', ['as' => 'user.password', 'uses' => 'Backend\UserController@password']);
 
-    Route::resource('role', 'RoleController', ['except' => ['edit','update','show','destroy'] ] );
+    Route::resource('role', 'Backend\RoleController', ['except' => ['edit','update','show','destroy'] ] );
 
-    Route::resource('brand', 'BrandController', ['except' => ['show'] ] );
+    Route::resource('brand', 'Backend\BrandController', ['except' => ['show'] ] );
 
-    Route::resource('image', 'ImageController', ['except' => ['update','edit'] ] );
-    Route::post('/images-upload', ['as' => 'image.upload', 'uses' => 'ImageController@upload']);
+    Route::resource('image', 'Backend\ImageController', ['except' => ['update','edit'] ] );
+    Route::post('/images-upload', ['as' => 'image.upload', 'uses' => 'Backend\ImageController@upload']);
 
-    Route::resource('category', 'CategoryController',['except' => ['show'] ]);
-    Route::post('allCategory', ['as' => 'category.indexJson', 'uses' => 'CategoryController@indexJson']);
-    Route::get('Category/Level/{level}', ['as' => 'category.indexLevel', 'uses' => 'CategoryController@indexByLevel']);
+    Route::resource('category', 'Backend\CategoryController',['except' => ['show'] ]);
+    Route::post('allCategory', ['as' => 'category.indexJson', 'uses' => 'Backend\CategoryController@indexJson']);
+    Route::get('Category/Level/{level}', ['as' => 'category.indexLevel', 'uses' => 'Backend\CategoryController@indexByLevel']);
 
-    Route::resource('product', 'ProductController');
+    Route::resource('product', 'Backend\ProductController');
 
-    Route::resource('order', 'OrderController', ['except' => ['create','store','edit','destroy'] ]);
-    Route::post('orders/{order}/products', ['as' => 'order.productRelat', 'uses' => 'OrderController@getProductRelat']);
-
-
-    Route::get('comments/{comment}',  ['as' => 'comment.show', 'uses' => 'CommentController@show'] );
-    Route::delete('comments/{comment}',  ['as' => 'comment.destroy', 'uses' => 'CommentController@destroy'] );
-
-    Route::post('supplies', ['as' => 'supply.store', 'uses' => 'SupplyController@store']);
-    Route::get('supplies/create/{product}',  ['as' => 'supply.create', 'uses' => 'SupplyController@create'] );
-    Route::get('supplies/{supply}',  ['as' => 'supply.show', 'uses' => 'SupplyController@show'] );
-    Route::put('supplies/{supply}',  ['as' => 'supply.update', 'uses' => 'SupplyController@update'] );
-    Route::delete('supplies/{supply}',  ['as' => 'supply.destroy', 'uses' => 'SupplyController@destroy'] );
+    Route::resource('order', 'Backend\OrderController', ['except' => ['create','store','edit','destroy'] ]);
+    Route::post('orders/{order}/products', ['as' => 'order.productRelat', 'uses' => 'Backend\OrderController@getProductRelat']);
 
 
-    Route::get('histories/{history}',  ['as' => 'history.show', 'uses' => 'HistoryController@show'] );
+    Route::get('comments/{comment}',  ['as' => 'comment.show', 'uses' => 'Backend\CommentController@show'] );
+    Route::delete('comments/{comment}',  ['as' => 'comment.destroy', 'uses' => 'Backend\CommentController@destroy'] );
 
-    Route::get('deliveries/create/{order}',  ['as' => 'delivery.create', 'uses' => 'DeliveryController@create'] );
-    Route::post('deliveries', ['as' => 'delivery.store', 'uses' => 'DeliveryController@store']);
+    Route::post('supplies', ['as' => 'supply.store', 'uses' => 'Backend\SupplyController@store']);
+    Route::get('supplies/create/{product}',  ['as' => 'supply.create', 'uses' => 'Backend\SupplyController@create'] );
+    Route::get('supplies/{supply}',  ['as' => 'supply.show', 'uses' => 'Backend\SupplyController@show'] );
+    Route::put('supplies/{supply}',  ['as' => 'supply.update', 'uses' => 'Backend\SupplyController@update'] );
+    Route::delete('supplies/{supply}',  ['as' => 'supply.destroy', 'uses' => 'Backend\SupplyController@destroy'] );
 
-    Route::resource('payment', 'PaymentController',['except' => ['edit','update','show'] ]);
 
-    Route::get('invoice',  ['as' => 'invoice.index', 'uses' => 'InvoiceController@index'] );
-    Route::get('invoice/{invoice}',  ['as' => 'invoice.show', 'uses' => 'InvoiceController@show'] );
+    Route::get('histories/{history}',  ['as' => 'history.show', 'uses' => 'Backend\HistoryController@show'] );
+
+    Route::get('deliveries/create/{order}',  ['as' => 'delivery.create', 'uses' => 'Backend\DeliveryController@create'] );
+    Route::post('deliveries', ['as' => 'delivery.store', 'uses' => 'Backend\DeliveryController@store']);
+
+    Route::resource('payment', 'Backend\PaymentController',['except' => ['edit','update','show'] ]);
+
+    Route::get('invoice',  ['as' => 'invoice.index', 'uses' => 'Backend\InvoiceController@index'] );
+    Route::get('invoice/{invoice}',  ['as' => 'invoice.show', 'uses' => 'Backend\InvoiceController@show'] );
 });

@@ -1,6 +1,7 @@
 <?php
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\User\PasswordRequest;
 use App\Http\Requests\User\ProfileRequest;
 use App\Http\Requests\User\UserUpdateRole;

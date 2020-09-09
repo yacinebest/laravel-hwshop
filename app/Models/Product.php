@@ -109,4 +109,17 @@ class Product extends BaseModel
         return (double)($this->price) * (double)( $this->pivot->ordered_quantity)    ;
     }
 
+    public function getQuantitySoldAttribute(){
+        $sold = 0;
+        foreach ($this->supplies as $supply) {
+            if($supply->isCompleted){
+                $sold += $supply->quantity;
+            }
+            else if($supply->isProgress){
+                $sold += ($supply->quantity - $this->copy_number );
+            }
+        }
+        return $sold;
+    }
+
 }

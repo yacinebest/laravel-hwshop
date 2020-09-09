@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
+use App\Http\Controllers\Controller;
 use App\Repositories\Contracts\DeliveryRepositoryInterface;
 use App\Repositories\Contracts\InvoiceRepositoryInterface;
 use App\Repositories\Contracts\OrderRepositoryInterface;

@@ -6,6 +6,7 @@ use App\Models\History;
 use App\Models\Product;
 use App\Models\Supply;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface {
 
@@ -113,6 +114,16 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $product->histories()->save($history);
         return $history;
+    }
+
+    public function orderBySell($number = 0){
+        $entities = Product::get()->sortByDesc('quantitySold'); 
+        return $entities->take($number);
+    }
+
+    public function orderByView($number = 0){
+        $entities = $this->baseOrderBy(['view'=>'DESC']);
+        return $this->baseTake($entities,$number);
     }
 
 /*

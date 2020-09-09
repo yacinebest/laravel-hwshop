@@ -32,15 +32,15 @@
         <div id="navbarMenu" class="in navbar-collapse justify-content-center collapse pr-3">
             <ul class="navbar-nav border-style-navbar">
                 <li class="nav-item border-style-navbar">
-                    <a href="#" class="nav-link nav-link-height">
+                    <a href="{{ route('home') }}" class="nav-link nav-link-height">
                         <span class="fa fa-home style-icon-short" aria-hidden="true"></span>
-                        Accueil
+                        HOME
                     </a>
                 </li>
                 <li class="nav-item dropdown border-style-navbar width-categorie">
                     <a class="nav-link nav-link-height dropdown-toggle caret-off" data-toggle="dropdown" href="#" aria-expanded="false">
                         <span class="fa fa-list-alt style-icon-short" aria-hidden="true" ></span>
-                            Categorie
+                            CATEGORIES
                             <span class="fa fa-angle-right style-icon-small" aria-hidden="true" ></span>
                     </a>
                     @include('frontend.layouts.navbars.submenu')
@@ -51,12 +51,12 @@
                         <span class="fa fa-shopping-cart style-icon-short" aria-hidden="true" style="/* text-shadow: 0 0 black; */ position: sticky;" >
                             <span class="cercel-number" style="left: 3px; top: -19px;" ></span>
                         </span >
-                        Panier
+                        CART
                     </a >
                 </li>
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link nav-link-height border-style-navbar" >
+                    <a href="{{ route('faq') }}" class="nav-link nav-link-height border-style-navbar" >
                         <span class="fa fa-question-circle style-icon-short" aria-hidden="true" ></span >
                         FAQ
                     </a >
@@ -96,7 +96,7 @@
                 <div id="compte-drop" class="nav-item dropdown border-style-navbar log-sign">
                     <a class="nav-link nav-link-height dropdown-toggle caret-off" data-toggle="dropdown" href="#" aria-expanded="false" >
                         <span class="fa fa-user style-icon-short"></span>
-                        Mon compte
+                        My Account
                         <span class="fa fa-angle-right style-icon-small" aria-hidden="true"></span>
                         <span class="sr-only"></span>
                     </a>
@@ -107,28 +107,28 @@
                             <li class="nav-item nav-drop">
                                 <a href="#" class="font-weight-lighter nav-link">
                                     <span class="fa fa-edit style-icon-short" aria-hidden="true"></span>
-                                    Mon profil
+                                    My Profile
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li class="nav-item nav-drop">
                                 <a href="#" class="font-weight-lighter nav-link">
                                     <span class="fa fa-sign-out style-icon-short" aria-hidden="true"></span>
-                                    Deconnexion
+                                    Logout
                                 </a>
                             </li>
                         @else
                             <li class="nav-item nav-drop">
                                 <a href="#" class="font-weight-lighter nav-link">
                                     <span class="fa fa-sign-in style-icon-short" aria-hidden="true"></span>
-                                    Connexion
+                                    Login
                                 </a>
                             </li>
                             <li class="dropdown-divider"></li>
                             <li class="nav-item nav-drop">
                                 <a href="#" class="font-weight-lighter nav-link">
                                     <span class="fa fa-user-plus style-icon-short" aria-hidden="true"></span>
-                                    Inscription
+                                    Register
                                 </a>
                             </li>
                         @endif

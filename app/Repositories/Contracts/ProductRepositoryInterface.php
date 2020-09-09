@@ -6,6 +6,8 @@ use App\Repositories\Contracts\Base\CardCountRouteInterface;
 
 interface ProductRepositoryInterface extends BaseRepositoryInterface , CardCountRouteInterface{
 
+    public function orderBySell($number = 0);
+    public function orderByView($number = 0);
 
     public function attachBrandToProduct($brand,$product);
     public function detachAllBrandToProduct($product);

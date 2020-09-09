@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use App\Models\Brand;
+use App\Models\History;
 use App\Models\Order;
 use Tests\TestCase;
 use App\Models\Product;
@@ -179,4 +180,48 @@ class ProductUnitTest extends TestCase
         $this->assertCount(2,$this->product->supplies);
     }
 
+       /**
+     * @test
+     * @return void
+    */
+    function find_number_product_sold(){
+        $product = factory(Product::class)->create(['copy_number'=>20]);
+        for ($i=0; $i <2 ; $i++) {
+            $supply = factory(Supply::class)->create(['product_id'=>$product->id,'quantity'=>20]);
+            
+            $data =  [
+                'supply_id'=>$supply->id,
+                'product_id'=>$product->id,
+                'quantity'=> $supply->quantity,
+                'selling_price'=> $supply->admission_price 
+            ];
+            $history = factory(History::class)->create($data);
+
+            $supply->update(['history_id'=>$history->id]);
+    
+            $product->supplies()->save($supply);
+            $supply->changeStatToInProgress();
+            $supply->changeStatToCompleted();
+        }
+
+        $supply = factory(Supply::class)->create(['product_id'=>$product->id,'quantity'=>20]);
+        $data =  [
+            'supply_id'=>$supply->id,
+            'product_id'=>$product->id,
+            'quantity'=> $supply->quantity,
+            'selling_price'=> $supply->admission_price 
+        ];
+        $history = factory(History::class)->create($data);
+
+        $supply->update(['history_id'=>$history->id]);
+        $product->supplies()->save($supply);
+        $supply->changeStatToInProgress();
+
+        $product->update(['copy_number'=>12]);
+        $product = $product->refresh();
+
+        dd([$product->quantitySold,$product->supplies]);
+        $this->assertNotEmpty($product->supplies);
+        $this->assertCount(3,$product->supplies);
+    }
 }

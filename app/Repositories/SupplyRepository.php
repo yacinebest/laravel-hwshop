@@ -84,16 +84,5 @@ class SupplyRepository extends BaseRepository implements SupplyRepositoryInterfa
             $data_product = ['copy_number'=>0,'price'=>0];
 
         $this->productRepository->update($supply->product,$data_product);
-
-        // $this->update($supply,['ended_at'=>$current_time]);
-        // $this->historyRepository->update($supply->history,['ended_at'=>$current_time]);
-        // $this->productRepository->update($supply->product,['copy_number'=>0,'price'=>0]);
-
-        // $this->update($supply,['started_at'=>$current_time]);
-        // $this->historyRepository->update($supply->history,['started_at'=>$current_time]);
-        // $this->productRepository->update($supply->product,
-        //         ['copy_number'=>$supply->quantity,'price'=>$supply->history->selling_price]
-        //     );
-
     }
 }
