@@ -15,7 +15,7 @@
                         </div>
                         <form role="form" method="POST" action="{{ route('register') }}">
                             @csrf
-
+                            
                             @foreach (['username'=>'Username','firstname'=>'First name','lastname'=>'Last name',
                                         'email'=>'Email','password'=>'Password',
                                         'password_confirmation'=>'Confirm Password'] as $key=>$placeholder)

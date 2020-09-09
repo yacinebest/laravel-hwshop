@@ -17,13 +17,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'Frontend\HomeController@home')->name('home');
 Route::get('/FAQ', 'Frontend\FAQController@faq')->name('faq');
 
-Route::get('/management', 'Backend\HomeController@index')->middleware('isAdmin')->name('management');
-Route::get('/management', 'Backend\HomeController@welcome')->withoutMiddleware('isAdmin')->name('management');
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', 'Frontend\AuthController@login')->name('login.user');
+    Route::get('/register', 'Frontend\AuthController@register')->name('register.user');
+});
 
-Auth::routes();
+
+
+Route::group(['prefix'=>'management'], function () {
+    Route::get('', 'Backend\HomeController@welcome')->middleware('management.auth')->name('management');
+    // Route::get('/management', 'Backend\HomeController@index')->middleware('isAdmin')->name('management');
+    Auth::routes();
+});
 
 Route::group(['prefix'=>'management','middleware' => 'admin'], function () {
-// Route::group(['middleware' => 'auth'], function () {
+
     Route::get('/home', 'Backend\HomeController@index')->name('home');
 
     Route::resource('user', 'Backend\UserController', ['except' => ['show']]);

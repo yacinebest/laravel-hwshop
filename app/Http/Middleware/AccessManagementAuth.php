@@ -6,7 +6,7 @@ use App\Models\Role;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class IsAdmin
+class AccessManagementAuth
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,11 @@ class IsAdmin
     public function handle($request, Closure $next)
     {
         $role_admin = Role::whereType('ADMIN')->first();
-        if (Auth::user() &&  Auth::user()->role_id == $role_admin->id) {
+        if(!Auth::check())
             return $next($request);
-        }
+        else if (  Auth::user() &&  Auth::user()->role_id == $role_admin->id)
+            return $next($request);
+
 
         return redirect('/');
     }

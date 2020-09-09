@@ -1,0 +1,41 @@
+/* Start Login Form */
+
+.identification-fluid {
+    background-color: #f6f7f9;
+}
+
+.main-identification {
+    background-color: #FFF;
+}
+
+.main-identification h2,
+.main-identification h3,
+.main-identification h4 {
+    color: #888;
+}
+
+.main-identification .form-control {
+    background-color: #f6f7f9;
+}
+
+.main-identification .btn {
+    background-color: #224A61;
+}
+
+.login,
+.sign input {
+    margin-bottom: 10px;
+}
+
+#NewsLetterSubscribe {
+    display: unset;
+}
+
+.sfooter {
+    width: 400px;
+    margin: auto;
+    margin-bottom: 40px;
+}
+
+
+/* End Login Form */
