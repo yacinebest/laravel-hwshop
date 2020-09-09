@@ -1,0 +1,488 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+
+/* marge pour decaler les elements du body  */
+
+body {
+    margin-top: 130px;
+}
+
+
+/* changer coleur bar navigation */
+
+.bg-dark {
+    background-color: #224A61 !important;
+}
+
+
+/* barre de recherche et logo */
+
+.grid-search-bar {
+    background-color: #193647 !important;
+    justify-content: center !important;
+}
+
+.logo-style {
+    height: 60px;
+    margin: 10px;
+    margin-left: 20px;
+    margin-bottom: 0px;
+}
+
+.logo-text {
+    max-height: 40px;
+}
+
+.logo-icon {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.search-bar-input {
+    margin: auto !important;
+    padding: 0px !important;
+    width: auto !important;
+    margin-right: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 0px !important;
+    padding-left: 0px !important;
+}
+
+.input-button-style {
+    background-color: #224A61 !important;
+}
+
+
+/**/
+
+.nav-link-height {
+    height: 60px;
+    padding-top: 19px;
+}
+
+
+/* enlever padding bar navigation */
+
+.navbar-padding {
+    padding: 0px;
+}
+
+
+/* theme style bar navigation */
+
+.navbar-nav .nav-item .nav-link {
+    font-family: Georgia, serif;
+    font-style: normal;
+    text-transform: uppercase;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+}
+
+
+/* theme style menu*/
+
+.style-menu {
+    font-family: Georgia, serif;
+    font-style: normal;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    text-transform: none;
+}
+
+
+/* changement couleur pour accueil categorie ... menu navbar */
+
+.navbar-nav .nav-item:active .nav-link,
+.navbar-nav .nav-item:hover .nav-link {
+    background-color: #256872 !important;
+    color: #77B6BF !important;
+}
+
+
+/* changement couleur pour les elements de categorie lorsque categorie:hover */
+
+.navbar-nav .nav-item:hover .nav-drop .nav-link {
+    background-color: #256872 !important;
+    color: #3DAEBF !important;
+}
+
+
+/* changement couleur pour sous-menu (menu de element de categorie) categorie lorsque hover elemnt categorie */
+
+.navbar-nav .nav-item:hover .nav-drop:hover .nav-link {
+    background-color: #77B6BF !important;
+    color: #143A40 !important;
+}
+
+
+/* couleur lorsque element de categorie not hover  */
+
+.navbar-nav .nav-item .nav-drop {
+    background-color: #256872 !important;
+    color: #3DAEBF !important;
+}
+
+
+/* changement couleur pour element de sous-menu de categorie lorsque hover */
+
+.navbar-nav .nav-item:hover .nav-drop:hover .nav-sous-drop:hover .nav-link {
+    /*background-color:  #56858C !important;*/
+    color: white !important;
+}
+
+
+/* couleur lorsque element de sous menu de categorie not hover  */
+
+.navbar-nav .nav-item .nav-drop .nav-sous-drop .nav-link {
+    background-color: #77B6BF !important;
+    color: #143A40 !important;
+}
+
+
+/* pour changer la couleur du texte cliquable */
+
+.nav-label:hover {
+    color: darkblue;
+}
+
+
+/* position menu de categorie  */
+
+.dropdown-menu {
+    border-radius: 0px;
+    top: 96%;
+    border: 0px solid rgba(23, 0, 0, 0.15);
+}
+
+
+/* position sous-menu de categorie  */
+
+.dropdown-sous-menu {
+    position: relative;
+    border-radius: 0px;
+    border: 0px solid rgba(23, 0, 0, 0.15);
+}
+
+
+/* button dropdown de ous categorie */
+
+.categorie-gird {
+    display: grid;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+
+.caret-button-grid {
+    display: grid;
+    grid-column-start: 2;
+    grid-column-end: 2;
+    grid-row-end: 2;
+    width: 100%;
+    height: 100%;
+    padding: 0px !important;
+    justify-items: center!important;
+    justify-self: center!important;
+}
+
+
+/* position submenu */
+
+.dropdown-submenu {
+    position: relative;
+    display: grid;
+    grid-template-columns: 87% 13%;
+}
+
+.dropdown-submenu>.dropdown-menu {
+    top: 5px;
+    left: 100%;
+    margin-top: -6px;
+    width: max-content;
+}
+
+
+/* largeur menu categorie */
+
+.dropdown-width-categorie {
+    min-width: 10.75rem;
+}
+
+
+/* largeur categorie */
+
+.width-categorie {
+    min-width: 11em;
+}
+
+
+/* largeur menu compte */
+
+.dropdown-width-compte {
+    min-width: 12rem;
+}
+
+.dropdown-menu-right-position {
+    position: absolute !important;
+    top: auto !important;
+}
+
+
+/* logo */
+
+.logo-site {
+    padding-left: 5px;
+}
+
+
+/* barre de recherche */
+
+.search-bar {
+    margin-right: 0px;
+    padding-right: 0px;
+    margin-left: 0px;
+}
+
+
+/* icon */
+
+.nav-icon {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.style-icon {
+    font-size: 37px;
+    /*color:white;*/
+}
+
+.style-icon-short {
+    font-size: 20px;
+    /*color:white;*/
+}
+
+.style-icon-medium {
+    font-size: 22px;
+    /*color:white;*/
+}
+
+
+/* --button **/
+
+.button-icon,
+.button-icon:hover,
+.button-icon:active {
+    border-width: 0px;
+    padding-left: 10px;
+    padding-bottom: 0px;
+    padding-top: 0px;
+    padding-right: 10px;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.button-icon:not(:disabled):not(.disabled):active:focus,
+.button-icon:not(:disabled):not(.disabled):active,
+.button-icon:focus,
+.button-icon:active {
+    color: #000000;
+    box-shadow: unset;
+    background-color: unset;
+    border-color: unset;
+}
+
+.button-icon:hover,
+.button-icon:active {
+    color: #000000;
+}
+
+
+/*separation entre element de dropdown*/
+
+.dropdown-divider {
+    margin-bottom: 0px;
+    margin-top: 0px;
+    border-top: 1px solid white;
+}
+
+
+/* pour masquer la fleche du dropdown */
+
+.caret-off::after {
+    display: none;
+}
+
+.caret-off::before {
+    display: none;
+}
+
+
+/* button pour ouvrir les sous categorie */
+
+.button-sub-categorie {
+    color: #FFFFFF;
+    background-color: unset;
+    border: unset;
+}
+
+.button-sub-categorie:focus {
+    box-shadow: unset;
+}
+
+.button-sub-categorie:hover,
+.button-sub-categorie:active,
+.button-sub-categorie:focus {
+    color: #FFFFFF;
+}
+
+.button-sub-categorie:hover,
+.button-sub-categorie:active,
+.button-sub-categorie:focus {
+    color: #383737;
+}
+
+
+/* pour afficher menu de utilisateur */
+
+.liste-comp {
+    min-width: auto;
+    display: block;
+    margin: 0px;
+    top: 0px;
+    left: -15px;
+    right: inherit;
+    position: absolute !important;
+}
+
+
+/* On alls that are greater or equal to 980px*/
+
+@media all and (min-width: 1200px) {
+    #panier {
+        display: list-item;
+    }
+    /* 1 partie du menu avoir texte panier */
+    #navbarMenuButtonGroup {
+        display: block;
+    }
+    /*  deuxieme partie du Menu Mon compte  */
+    /**/
+    .btn-group-menu {
+        display: none;
+    }
+    /* group button pour avoir icon user et shop Compte avec logo */
+    /**/
+    .drop-compte {
+        display: inline-block;
+    }
+    /* avoir texte du compte sans logo */
+    #user-compte-txt {
+        display: none;
+    }
+    /* icon compte */
+    .btn-group-menu-mobile {
+        display: none;
+    }
+    /* group button pour avoir icon user et shop a droite sur mobile */
+    /*.border-style-navbar{
+	border-right: none;
+    border-left: white;
+    border-style: outset;
+    border-top: none;
+    border-bottom: none;
+    border-width: thin;
+	}*/
+}
+
+
+/* On alls that are 979px to 768px */
+
+@media all and (max-width: 1199px) and (min-width: 992px) {
+    #panier {
+        display: none;
+    }
+    /* 1 partie du menu avoir texte panier */
+    #navbarMenuButtonGroup {
+        display: block;
+    }
+    /*  deuxieme partie du Menu Mon compte  */
+    /**/
+    .btn-group-menu {
+        display: inline-block;
+    }
+    /* group button pour avoir icon user et shop Compte avec logo */
+    /**/
+    .drop-compte {
+        display: none;
+    }
+    /* avoir texte du compte sans logo */
+    #user-compte-txt {
+        display: inline-block;
+    }
+    /* icon compte */
+    .btn-group-menu-mobile {
+        display: none;
+    }
+    /* group button pour avoir icon user et shop a droite sur mobile */
+    /*.border-style-navbar{
+		border-right: none;
+		border-left: white;
+		border-style: outset;
+		border-top: none;
+		border-bottom: none;
+		border-width: thin;
+	}	*/
+}
+
+
+/* On alls that are 767px or less */
+
+@media all and (max-width: 1075px) {
+    #panier {
+        display: none;
+    }
+    /* 1 partie du menu avoir texte panier */
+    #navbarMenuButtonGroup {
+        display: none;
+    }
+    /*  deuxieme partie du Menu Mon compte  */
+    /**/
+    .btn-group-menu {
+        display: none;
+    }
+    /* group button pour avoir icon user et shop Compte avec logo */
+    /**/
+    .drop-compte {
+        display: none;
+    }
+    /* avoir texte du compte sans logo */
+    #user-compte-txt {
+        display: none;
+    }
+    /* icon compte */
+    .btn-group-menu-mobile {
+        display: inline-block;
+    }
+    /* group button pour avoir icon user et shop a droite sur mobile */
+    /* lorseque le bouton pour afficher le sousmenu et utiliser on change le display pour avoir les element bien afficher */
+    .grid-subcategorie {
+        width: auto;
+        display: grid;
+        grid-column-start: 1;
+        grid-column-end: 6;
+    }
+    .dropdown-submenu>.dropdown-menu {
+        width: auto;
+    }
+}
+
+.navbarMenu-connexion-inscription {
+    min-width: 200px !important;
+}

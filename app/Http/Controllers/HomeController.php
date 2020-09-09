@@ -48,7 +48,7 @@ class HomeController extends Controller
 
     public function home()
     {
-        return [];
+        return view('frontend.home');
         // return view('backend.welcome');
     }
 }

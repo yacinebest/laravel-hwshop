@@ -22,7 +22,6 @@ Route::get('/management', 'HomeController@welcome')->withoutMiddleware('isAdmin'
 
 
 
-
 Auth::routes();
 
 Route::group(['prefix'=>'management','middleware' => 'admin'], function () {

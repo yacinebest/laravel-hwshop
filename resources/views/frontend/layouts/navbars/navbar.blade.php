@@ -1,0 +1,144 @@
+<header class="fixed-top">
+    @include('frontend.layouts.navbars.header')
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-padding nav-theme">
+
+        {{-- <button id="collapse-bar" class="navbar-toggler first-button collapsed" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button> --}}
+
+        <div class="justify-content-center">
+            <a href="#" class="navbar-brand mr-auto style-menu logo-site">
+                <img class="logo-style logo-text" src="{{ asset('/storage/svg/logo-hwshop-text.svg') }}" alt="HWShop Name" />
+            </a>
+        </div>
+
+        {{-- <div class="nav navbar-nav btn-group btn-group-menu-mobile">
+            <button type="button" class="btn btn-primary button-icon button-cart">
+                <span class="fa fa-shopping-cart style-icon">
+                    <span class="cercel-number"></span>
+                </span>
+            </button>
+            <button type="button" class="btn btn-primary button-icon" data-toggle="dropdown" aria-expanded="false" >
+                <span class="fa fa-user o style-icon"></span>
+            </button>
+            <div class="dropdown-menu dropdown-menu-right dropdown-menu-right-position p-0 m-0" >
+                <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding liste-comp" style="margin-top: 12px;" >
+                </ul>
+            </div>
+        </div> --}}
+
+        <!-- premiere partie du Menu Accueil, categorie... -->
+        <div id="navbarMenu" class="in navbar-collapse justify-content-center collapse pr-3">
+            <ul class="navbar-nav border-style-navbar">
+                <li class="nav-item border-style-navbar">
+                    <a href="#" class="nav-link nav-link-height">
+                        <span class="fa fa-home style-icon-short" aria-hidden="true"></span>
+                        Accueil
+                    </a>
+                </li>
+                <li class="nav-item dropdown border-style-navbar width-categorie">
+                    <a class="nav-link nav-link-height dropdown-toggle caret-off" data-toggle="dropdown" href="#" aria-expanded="false">
+                        <span class="fa fa-list-alt style-icon-short" aria-hidden="true" ></span>
+                            Categorie
+                            <span class="fa fa-angle-right style-icon-small" aria-hidden="true" ></span>
+                    </a>
+                    @include('frontend.layouts.navbars.submenu')
+                </li>
+
+                <li id="panier" class="nav-item">
+                    <a href="#" class="nav-link nav-link-height border-style-navbar button-cart" >
+                        <span class="fa fa-shopping-cart style-icon-short" aria-hidden="true" style="/* text-shadow: 0 0 black; */ position: sticky;" >
+                            <span class="cercel-number" style="left: 3px; top: -19px;" ></span>
+                        </span >
+                        Panier
+                    </a >
+                </li>
+
+                <li class="nav-item">
+                    <a href="#" class="nav-link nav-link-height border-style-navbar" >
+                        <span class="fa fa-question-circle style-icon-short" aria-hidden="true" ></span >
+                        FAQ
+                    </a >
+                </li>
+
+            </ul>
+        </div>
+
+      <!-- deuxieme partie du Menu Mon compte -->
+        <div id="navbarMenuButtonGroup" class="navbarMenu-connexion-inscription">
+            <!-- Compte avec logo -->
+            {{-- <div class="nav navbar-nav navbar-right btn-group btn-group-menu">
+                <button id="user-shop-icon" type="button" class="btn btn-primary button-icon button-cart">
+                    <span class="fa fa-shopping-cart style-icon">
+                        <span class="cercel-number"></span>
+                    </span>
+                </button>
+
+                <button id="user-compte-icon" type="button" class="btn btn-primary button-icon" data-toggle="dropdown" aria-expanded="false">
+                    <span class="fa fa-user o style-icon"></span>
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-right m-0 p-0">
+                    <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding liste-comp" style="margin-top: 12px; width: max-content; left: auto;" >
+                    </ul>
+                </div>
+            </div> --}}
+
+            <!-- Compte sans logo avec texte seulemnt -->
+            <div id="navbarcompte" class="nav navbar-nav navbar-right drop-compte">
+                <div id="user-compte-txt" class="nav-item nav-drop nav-icon">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
+                        <span class="fa fa-user o style-icon"></span>
+                    </a>
+                </div>
+
+                <div id="compte-drop" class="nav-item dropdown border-style-navbar log-sign">
+                    <a class="nav-link nav-link-height dropdown-toggle caret-off" data-toggle="dropdown" href="#" aria-expanded="false" >
+                        <span class="fa fa-user style-icon-short"></span>
+                        Mon compte
+                        <span class="fa fa-angle-right style-icon-small" aria-hidden="true"></span>
+                        <span class="sr-only"></span>
+                    </a>
+
+                    <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding lop" >
+
+                        @if(Auth::check())
+                            <li class="nav-item nav-drop">
+                                <a href="#" class="font-weight-lighter nav-link">
+                                    <span class="fa fa-edit style-icon-short" aria-hidden="true"></span>
+                                    Mon profil
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li class="nav-item nav-drop">
+                                <a href="#" class="font-weight-lighter nav-link">
+                                    <span class="fa fa-sign-out style-icon-short" aria-hidden="true"></span>
+                                    Deconnexion
+                                </a>
+                            </li>
+                        @else
+                            <li class="nav-item nav-drop">
+                                <a href="#" class="font-weight-lighter nav-link">
+                                    <span class="fa fa-sign-in style-icon-short" aria-hidden="true"></span>
+                                    Connexion
+                                </a>
+                            </li>
+                            <li class="dropdown-divider"></li>
+                            <li class="nav-item nav-drop">
+                                <a href="#" class="font-weight-lighter nav-link">
+                                    <span class="fa fa-user-plus style-icon-short" aria-hidden="true"></span>
+                                    Inscription
+                                </a>
+                            </li>
+                        @endif
+
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </nav>
+
+    @include('frontend.layouts.navbars.cart')
+</header>

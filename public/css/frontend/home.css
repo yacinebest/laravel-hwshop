@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+
+/* bouton panier */
+
+.btn-panier {
+    width: max-content;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+
+/* couleur background */
+
+body {
+    background-color: #f6f7f9;
+}
+
+
+/* logo marque */
+
+.box {
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #e5e7ea;
+}
+
+.box img {
+    max-width: 100%;
+}
+
+.item-logo {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.item-logo img {
+    min-height: 65px;
+    max-height: 65px;
+    height: fit-content;
+}
+
+
+/* image defilante */
+
+.carousel-item {
+    height: 65vh;
+    min-height: 350px;
+    background: no-repeat center center scroll;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
