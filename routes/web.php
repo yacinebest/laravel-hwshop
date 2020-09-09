@@ -18,8 +18,8 @@ Route::get('/', 'Frontend\HomeController@home')->name('home');
 Route::get('/FAQ', 'Frontend\FAQController@faq')->name('faq');
 
 Route::group(['middleware' => 'guest'], function () {
-    Route::get('/login', 'Frontend\AuthController@login')->name('login.user');
-    Route::get('/register', 'Frontend\AuthController@register')->name('register.user');
+    Route::get('/login', 'Frontend\AuthController@showLoginForm')->name('login.user');
+    Route::get('/register', 'Frontend\AuthController@showRegisterForm')->name('register.user');
 });
 
 
