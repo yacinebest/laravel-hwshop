@@ -174,4 +174,21 @@ class User extends Authenticatable
         return $this->role->type;
     }
 
+    public function getFullNameAttribute()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+    public function getKindAttribute()
+    {
+        return $this->gender=='MALE' ? 'M.' : 'Mme.' ;
+    }
+
+      /**
+     * @return number
+     */
+    public function getOrderCountAttribute()
+    {
+        return count($this->orders);
+    }
 }

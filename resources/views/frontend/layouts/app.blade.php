@@ -20,7 +20,7 @@
         <!-- Styles -->
         <link href="{{ asset('css/frontend/navbar.css') }}" rel="stylesheet">
         <link href="{{ asset('css/frontend/footer.css') }}" rel="stylesheet">
-        <link href="{{ asset('css/frontend/cart.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/frontend/mini-cart.css') }}" rel="stylesheet">
 
         @yield('links')
 

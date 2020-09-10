@@ -1,0 +1,37 @@
+/* Start Profile Page Edits */
+
+.profile-fluid,
+.profile-title,
+.card-body,
+.lateral,
+.profile-comment-area {
+    background-color: #f6f7f9;
+}
+
+.profile-card-header,
+.profile-card-footer,
+.profile-btn {
+    background-color: #224A61;
+    color: #FFF;
+}
+
+.profile-title {
+    font-size: 17px;
+}
+
+.profile-card:hover,
+.profile-btn:hover,
+.profile-title:hover,
+.lateral:hover {
+    -webkit-box-shadow: 0 4px 15px rgba(153, 153, 153, 0.3);
+    box-shadow: 0 4px 15px rgba(153, 153, 153, 0.3);
+    -webkit-transition: .3s;
+    transition: .3s;
+}
+
+.bg-bill {
+    background-color: #CFDFCF;
+}
+
+
+/* End Profile Page Edits */

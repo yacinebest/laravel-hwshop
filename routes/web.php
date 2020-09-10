@@ -18,6 +18,19 @@ Route::get('/', 'Frontend\HomeController@home')->name('home');
 Route::get('/FAQ', 'Frontend\FAQController@faq')->name('faq');
 Route::get('/product/{product}', 'Frontend\ProductController@product')->name('product');
 Route::get('/category/{category}', 'Frontend\CategoryController@category')->name('category');
+Route::get('/cart', 'Frontend\CartController@cart')->name('cart');
+Route::get('/profile', 'Frontend\UserController@profile')->name('profile');
+
+Route::put('/profile', 'Frontend\UserController@updateProfile')->name('profile.update');
+Route::put('/profile/password', 'Frontend\UserController@password')->name('profile.password');
+Route::post('/profile/password', 'Frontend\UserController@password')->name('profile.password');
+
+
+
+Route::get('/profile/orders', 'Frontend\UserController@orders')->name('user.orders');
+Route::get('/profile/histories', 'Frontend\UserController@histories')->name('user.histories');
+Route::get('/profile/comments', 'Frontend\UserController@comments')->name('user.comments');
+
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', 'Frontend\AuthController@showLoginForm')->name('login.user');

@@ -1,259 +1,121 @@
-*,
-*:before,
-*:after {
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
+/*
+body {
+    background-color: #eeeeee;
+    font-family: 'Open Sans', serif;
+    font-size: 14px
+}
+*/
+
+.title-grid {
+    color: #D6D9D0;
 }
 
-* .container {
-    margin: auto;
-    width: 80%;
+.container-fluid {
+    margin-top: 70px
 }
 
-.shopping-cart {
-    margin: 20px 0;
-    float: right;
-    background: white;
-    width: 320px;
-    position: absolute;
-    border-radius: 3px;
-    padding: 20px;
+.card-body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.40rem
 }
 
-.shopping-cart:after {
-    bottom: 100%;
-    left: 89%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-bottom-color: #193647 !important;
-    /* white;*/
-    border-width: 8px;
-    margin-left: -8px;
+.img-sm {
+    width: 80px;
+    height: 80px
 }
 
-
-/* */
-
-
-/* On alls that are 767px or less */
-
-
-/**/
-
-.bigicon {
-    color: white;
+.itemside .info {
+    padding-left: 15px;
+    padding-right: 7px
 }
 
-.mix {
-    min-height: 370px;
+.table-shopping-cart .price-wrap {
+    line-height: 1.2
 }
 
-ul.dropdown-cart {
-    min-width: 250px;
-    border: 2px solid #343434;
-    padding: 2px;
-    margin: 7px;
-    margin-top: 11px;
+.table-shopping-cart .price {
+    font-weight: bold;
+    margin-right: 5px;
+    display: block
 }
 
-ul.dropdown-cart li .item {
-    display: block;
-    padding: 3px 10px;
-    margin: 3px 0;
+.text-muted {
+    color: #969696 !important
 }
 
-ul.dropdown-cart li .item:hover {
-    background-color: #c3c5c5;
+a {
+    text-decoration: none !important
 }
 
-ul.dropdown-cart li .item:after {
-    visibility: hidden;
-    display: block;
-    font-size: 0;
-    content: " ";
-    clear: both;
-    height: 0;
+.card {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0px
 }
 
-ul.dropdown-cart li .item-left {
-    float: left;
+.itemside {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%
 }
 
-ul.dropdown-cart li .item-left img,
-ul.dropdown-cart li .item-left span.item-info {
-    float: left;
+.dlist-align {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex
 }
 
-ul.dropdown-cart li .item-left span.item-info {
-    margin-left: 10px;
+[class*="dlist-"] {
+    margin-bottom: 5px
 }
 
-ul.dropdown-cart li .item-left span.item-info span {
-    display: block;
-}
-
-ul.dropdown-cart li .item-right {
-    float: right;
-}
-
-ul.dropdown-cart li .item-right button {
-    margin-top: 14px;
+.coupon {
+    border-radius: 1px
 }
 
 
-/**/
+/*
+.price {
+    font-weight: 600;
+    color: #212529
+}*/
 
-ul.dropdown-cart li .item:hover {
-    background-color: unset;
-}
-
-.btn-panier {
+.btn-main {
     border-radius: 2px;
     text-transform: capitalize;
     font-size: 15px;
     padding: 10px 19px;
     cursor: pointer;
     color: #fff;
-    width: 100%;
-    background-color: #193647 !important;
-    border-color: #193647 !important;
+    width: 100%
 }
 
-.btn-panier:hover {
-    background-color: #224A61 !important;
-    border-color: #224A61 !important;
+.btn-light {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #f8f9fa;
+    font-size: 12px
 }
 
-.dropdown-divider {
-    margin-bottom: 0px;
-    margin-top: 0px;
-    border-top: 1px solid #193647;
+.btn-light:hover {
+    color: #ffffff;
+    background-color: #F44336;
+    border-color: #F44336
 }
 
-span.cercel-number {
-    /* background: red;*/
-    border-radius: 0.8em;
-    -moz-border-radius: 0.8em;
-    -webkit-border-radius: 0.8em;
-    /*color: #ffffff;*/
-    display: inline-block;
-    font-weight: bold;
-    line-height: 1.3em;
-    margin-right: 5px;
-    text-align: center;
-    width: 1.3em;
-    margin-left: 5px;
-    margin-top: 3px;
-    font-size: 20px;
-    background: #FFC800;
-    color: #282828;
-    font-size: 14px;
-    line-height: 20px;
-    position: absolute;
-    top: -3px;
-    left: 24px;
-}
-
-.item-info {
-    width: 100px;
-}
-
-
-/* */
-
-.shopping-cart {
-    padding: 0px !important;
-    margin: 0px !important;
-    list-style: none !important;
-    position: absolute !important;
-    margin-top: 10px !important;
-}
-
-.shopping-cart-items {
-    margin-top: 3px !important;
-    border-width: thin !important;
-    border-color: #193647 !important;
-    padding: 0px !important;
-    margin: 0px !important;
-    list-style: unset !important;
-}
-
-.header-shopping-cart {
-    background-color: #193647 !important;
-    color: white !important;
-    height: 35px !important;
-}
-
-.total-price {
-    float: right !important;
-    margin-top: 4px !important;
-}
-
-.img-cart {
-    height: 55px !important;
-    display: block !important;
-    float: left !important;
-}
-
-.list-article-panier {
-    overflow: auto;
-}
-
-@media all and (min-width: 1136px) {
-    .shopping-cart {
-        /*right: 466px !important;*/
-        right: 29%!important;
-    }
-    .list-article-panier {
-        max-height: 340px !important;
-    }
-}
-
-@media all and (max-width: 1135px) and (min-width: 955px) {
-    .shopping-cart {
-        /*right: 35px !important;*/
-        right: 3% !important;
-    }
-    .list-article-panier {
-        max-height: 272px !important;
-    }
-}
-
-@media all and (max-width: 955px) {
-    .shopping-cart {
-        /*right: 35px !important;*/
-        right: 5% !important;
-    }
-    .list-article-panier {
-        max-height: 204px !important;
-    }
-}
-
-
-/*
-@media all and (min-height: 585px) {
-    .list-article-panier {
-        max-height: 340px !important;
-    }
-}*/
-
-@media all and (max-height: 584px) and (min-height: 508px) {
-    .list-article-panier {
-        max-height: 272px !important;
-    }
-}
-
-@media all and (max-height: 507px) and (min-height: 365px) {
-    .list-article-panier {
-        max-height: 136px !important;
-    }
-}
-
-@media all and (max-height: 364px) {
-    .list-article-panier {
-        max-height: 68px !important;
-    }
+.btn-apply {
+    font-size: 11px
 }

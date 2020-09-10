@@ -92,5 +92,10 @@ class Order extends BaseModel
         return $this->status=='CANCELED' ;
     }
 
+    public function getTotalWithShippingCostAttribute(){
+        $total = $this->invoice  ? $this->invoice->total_price : 0 ;
+        $shipping_cost = $this->delivery  ? $this->delivery->price : 0 ;
+        return (double)( (double)($total) + (double)($shipping_cost) ) ;
+    }
 
 }

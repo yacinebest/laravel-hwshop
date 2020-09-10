@@ -1,5 +1,5 @@
  {{-- include  $_SERVER['DOCUMENT_ROOT'] . "/public/includes/panier-cart.php" ; --}}
-<div class="container">
+ <div class="container">
     <div class="shopping-cart" style="display: none; width:300px;  ">
         <ul class="dropdown-cart shopping-cart-items" role="menu" >
 
@@ -16,7 +16,7 @@
 
             <li class="panier-vide" style="height:35px;text-align-last: center;position: relative;top: 6px;" >
                 <span class="text-uppercase font-weight-bolder text-center">
-                    Votre Panier est Vide
+                    Your Cart Is Empty
                 </span>
             </li>
 
@@ -45,8 +45,8 @@
             </div>
 
             <li>
-                <a href="#" class="btn btn-out btn-primary btn-square btn-main btn-panier text-uppercase font-weight-bolder w-100" >
-                    Voir Panier
+                <a href="{{ route('cart') }}" class="btn btn-out btn-primary btn-square btn-main btn-panier text-uppercase font-weight-bolder w-100" >
+                    View Cart
                 </a>
             </li>
 

@@ -104,37 +104,9 @@
                     <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding lop" >
 
                         @if(Auth::check())
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                            <li class="nav-item nav-drop">
-                                <a href="#" class="font-weight-lighter nav-link">
-                                    <span class="fa fa-edit style-icon-short" aria-hidden="true"></span>
-                                    My Profile
-                                </a>
-                            </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="nav-item nav-drop">
-                                 <a href="{{ route('logout') }}" class="font-weight-lighter nav-link" onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                                    <span class="fa fa-sign-out style-icon-short" aria-hidden="true"></span>
-                                    <span>{{ __('Logout') }}</span>
-                                </a>
-                            </li>
+                            @include('frontend.layouts.navbars.menu.auth')
                         @else
-                            <li class="nav-item nav-drop">
-                                <a href="{{ route('login.user') }}" class="font-weight-lighter nav-link">
-                                    <span class="fa fa-sign-in style-icon-short" aria-hidden="true"></span>
-                                    Login
-                                </a>
-                            </li>
-                            <li class="dropdown-divider"></li>
-                            <li class="nav-item nav-drop">
-                                <a href="{{ route('register.user') }}" class="font-weight-lighter nav-link">
-                                    <span class="fa fa-user-plus style-icon-short" aria-hidden="true"></span>
-                                    Register
-                                </a>
-                            </li>
+                            @include('frontend.layouts.navbars.menu.user')
                         @endif
 
                     </ul>
@@ -144,5 +116,5 @@
         </div>
     </nav>
 
-    @include('frontend.layouts.navbars.cart')
+    @include('frontend.carts.mini_cart')
 </header>
