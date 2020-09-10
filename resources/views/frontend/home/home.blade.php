@@ -21,10 +21,10 @@
             <div class="col-lg-4 col-md-6">
                 <figure class="card card-product-grid shadow">
                 <div class="img-wrap img-height">
-                    <img class="img-height" src="https://picsum.photos/seed/picsum/380/225">
-                    <a class="btn-overlay" href="#">
-                    <i class="fa fa-search-plus"></i>
-                    See Product
+                    <img class="img-height" src="{{ $product->image ? $product->image->imagePath : 'https://picsum.photos/seed/picsum/380/225' }}">
+                    <a class="btn-overlay" href="{{ route('product',$product->id) }}">
+                        <i class="fa fa-search-plus"></i>
+                        See Product
                     </a>
                 </div>
 

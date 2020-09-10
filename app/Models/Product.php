@@ -122,4 +122,43 @@ class Product extends BaseModel
         return $sold;
     }
 
+
+    public function getImageAttribute(){
+        return $this->images()->first() ;
+    }
+
+      /**
+     */
+    public function getDatasheetFileAttribute()
+    {
+        return $this->datasheet;
+        if($this->datasheet){
+
+            return file_get_contents(storage_path().'/app/public/uploads/datasheet/'.$this->datasheet.'.xml' );
+
+            $directory = asset("/storage/uploads/datasheet/".$this->datasheet) ;
+            // $directory ="/public/storage/uploads/datasheet/".$this->datasheet;
+            if (file_exists($directory)) {
+                return simplexml_load_file($directory);
+                // return simplexml_load_file($directory);
+            }
+        }
+
+        return null;
+
+        // if (file_exists($directory)) {
+        //     $xml = simplexml_load_file($directory);
+        //     echo  "<div class='table-responsive'>";
+        //     echo "<table class='table table-bordered description-table'>";
+        //     $i = 1;
+        //     foreach( $xml->children() as $element ) {
+        //         $parity = !($i % 2) ? 'odd' : 'even'; $i++;
+        //         echo '<tr class="'. $parity .'">';
+        //             echo "<td>".$element->Attribut."</td><td>".$element->Valeur."</td>" ;
+        //         echo "</tr>";
+        //     }
+        //     echo "</table>";
+        //     echo "</div>";
+        // }
+    }
 }

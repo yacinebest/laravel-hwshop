@@ -1,0 +1,32 @@
+/* product */
+
+.description-table .even td {
+    background-color: #eaeaE1 !important;
+    border-color: #FFF;
+}
+
+.description-table .odd td {
+    background-color: #f6f7f0 !important;
+    border-color: #eaeaE1;
+}
+
+.article-body {
+    background-color: #f6f7f9;
+}
+
+.title-grid {
+    color: #D6D9D0;
+}
+
+.single-review {
+    background-color: #f6f7f0;
+}
+
+.description-text {
+    background-color: #f6f7f9;
+}
+
+.reply-icon,
+.delete-comment {
+    color: #888;
+}

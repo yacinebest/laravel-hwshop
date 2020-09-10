@@ -14,12 +14,12 @@ class SupplySeeder extends Seeder
     public function run()
     {
         //
-        DB::table('supplies')->delete();
+        // DB::table('supplies')->delete();
 
-        for ($i=0; $i < 5 ; $i++) {
-            $category = Category::all()->random(1)->first();
-            $product = factory(\App\Models\Product::class)->create(['category_id'=>$category->id]);
-            factory(\App\Models\Supply::class)->create(['product_id'=>$product->id]);
-        }
+        // for ($i=0; $i < 5 ; $i++) {
+        //     $category = Category::all()->random(1)->first();
+        //     $product = factory(\App\Models\Product::class)->create(['category_id'=>$category->id]);
+        //     factory(\App\Models\Supply::class)->create(['product_id'=>$product->id]);
+        // }
     }
 }

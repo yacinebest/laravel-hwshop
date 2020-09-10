@@ -6,12 +6,16 @@ use App\Model;
 use App\Models\Image;
 use Faker\Generator as Faker;
 
+function random_pic($dir='public/storage/uploads/products')
+{
+    $files = glob($dir . '/*.*');
+    $file = array_rand($files);
+    return last( explode('/', $files[$file]) );
+}
+
 $factory->define(Image::class, function (Faker $faker) {
     return [
-        'file' => $faker->name . '.jpg',
-        // 'file' => $faker->image('public/storage/uploads/images',640,480, null, false) ,
-        // 'file' => $faker->image('public/storage/uploads/images',640,480, null, false) ,
-        // 'file' => $faker->name . '.jpg',
+        'file' => random_pic('public/storage/uploads/products'),
         'imageable_type' => $faker->randomElement( [
             App\Models\Category::class,
             App\Models\Product::class,
