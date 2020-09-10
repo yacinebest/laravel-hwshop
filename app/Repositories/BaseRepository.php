@@ -35,6 +35,11 @@ class BaseRepository implements BaseRepositoryInterface {
         return $number>0 ? $elements->take($number)->get() : $elements->get() ;
     }
 
+    public function defaultTake($number){
+        $modelClass= $this->convertRepositoryToModelName();
+        return $modelClass::take($number)->get();
+    }
+
     public function orderByLatest($number = 0){
         $entities = $this->baseOrderBy(['created_at'=>'DESC']);
         return $this->baseTake($entities,$number);

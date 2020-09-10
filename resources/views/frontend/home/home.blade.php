@@ -59,7 +59,8 @@
 
 
 
-
-@include('frontend.home.sectionBrand')
+@if($brands)
+@include('frontend.home.sectionBrand',['brands'=>$brands])
+@endif
 
 @endsection

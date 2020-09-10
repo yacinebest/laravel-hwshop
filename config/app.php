@@ -169,6 +169,7 @@ return [
         Collective\Html\HtmlServiceProvider::class,
 
         LaravelDaily\Invoices\InvoiceServiceProvider::class,
+        Orchestra\Parser\XmlServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -238,7 +239,7 @@ return [
         'Html'  => Collective\Html\HtmlFacade::class,
 
         'Invoice' => LaravelDaily\Invoices\Facades\Invoice::class,
-
+        'XmlParser' => Orchestra\Parser\Xml\Facade::class,
 
         'Category' => App\Models\Category::class,
         'Product' => App\Models\Product::class,

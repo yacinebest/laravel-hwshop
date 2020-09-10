@@ -17,6 +17,7 @@ class ProductController extends Controller
     public function product($id)
     {
         $product = $this->productRepository->baseFindOrFail( $id);
-        return view('frontend.products.product',compact('product')) ;
+        $productsOrderBy = ['Most Viewed'=>$this->productRepository->orderByView(20)] ;
+        return view('frontend.products.product',compact('product','productsOrderBy')) ;
     }
 }

@@ -6,6 +6,16 @@
         </header>
 
         <div class="row">
+        @foreach($brands as $brand)
+            <div class="col-md-2 col-6">
+                <figure class="box item-logo shadow">
+                    <img alt="{{ $brand->name }}" src="{{ asset('storage/uploads/logo/' . $brand->logo)}}">
+                </figure>
+            </div>
+        @endforeach
+        </div>
+
+        {{-- <div class="row">
             <div class="col-md-2 col-6">
                 <figure class="box item-logo shadow">
                     <a href="#"><img alt="marque AMD" src="{{ asset('storage/svg/amd-2.svg') }}"></a>
@@ -72,6 +82,6 @@
                     <a href="#"><img alt="marque LOGITECH" src="{{ asset('storage/svg/logitech-5.svg') }}"></a>
                 </figure>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
