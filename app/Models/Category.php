@@ -57,6 +57,14 @@ class Category extends BaseModel
         return count($this->products);
     }
 
+    public function getImageAttribute(){
+        return $this->images()->first() ;
+    }
+
+    public function getDirectChildCountAttribute(){
+        return $this->childs ?  count($this->childs) : 0;
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | CUSTOM FUNCTION                                                           |
@@ -72,6 +80,17 @@ class Category extends BaseModel
             $sections = $sections->merge($section->getAllChilds());
         }
 
+        return $sections;
+    }
+
+    public function getParentsAttribute()
+    {
+        $sections = new Collection();
+        $category = $this;
+        while($category->parent_id!=null){
+            $category = Category::findOrFail($category->parent_id);
+            $sections->prepend($category);
+        }
         return $sections;
     }
 

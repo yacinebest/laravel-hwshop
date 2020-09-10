@@ -18,32 +18,7 @@
 <div class="container">
     <div class="row text-center">
         @foreach($products as $product)
-            <div class="col-lg-4 col-md-6">
-                <figure class="card card-product-grid shadow">
-                <div class="img-wrap img-height">
-                    <img class="img-height" src="{{ $product->image ? $product->image->imagePath : 'https://picsum.photos/seed/picsum/380/225' }}">
-                    <a class="btn-overlay" href="{{ route('product',$product->id) }}">
-                        <i class="fa fa-search-plus"></i>
-                        See Product
-                    </a>
-                </div>
-
-                    <figcaption class="info-wrap" >
-                    <div class="text-center" style="height: 85px !important;" >
-                        <a Producthref="#" Productclass="title h5 text-capitalize mw-100 mh-100 embed-responsive">
-                            {{ $product->name }}
-                        </a>
-                        <div class="price-wrap mt-2 price-product">
-                            <span class="price">{{ $product->price }} DZD</span>
-                        </div>
-                    </div>
-                    <a href="#" class="btn btn-block btn-primary mt-2 ajouter-panier" data-id="1">
-                        <i class="fa fa-cart-plus"></i>
-                        Add To Cart
-                    </a>
-                    </figcaption>
-                </figure>
-            </div>
+            @include('frontend.products.card_product',['product'=>$product,'page'=>'home'])
         @endforeach
     </div>
 </div>

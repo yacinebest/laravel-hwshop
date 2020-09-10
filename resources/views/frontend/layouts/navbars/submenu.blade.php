@@ -1,33 +1,31 @@
 <ul class="dropdown-menu dropdown-width-categorie navbar-dark bg-dark navbar-padding" >
 
     <li class="dropdown-divider"></li>
-    <!-- sous menu Accessoire-->
-    <li class="nav-item nav-drop dropdown-submenu">
-        <a href="#" class="nav-link categorie-gird">
-            <span class="nav-label">Accessoire</span>
-        </a>
 
-        <form class="nav-link dropdown-toggle caret-off caret-button-grid" >
-            <button id="dropdownCateAccessoire" type="button" class="btn dropdown-toggle dropdown-toggle-split caret-off button-sub-categorie" data-toggle="dropdown" >
-                <span class="fa fa-caret-right" aria-hidden="true"></span>
-            </button>
-        </form>
+    @foreach(Category::where('level','1')->get() as $category)
+        <li class="nav-item nav-drop dropdown-submenu">
+            <a href="{{route('category',$category->id)}}" class="nav-link categorie-gird">
+                <span class="nav-label">{{ $category->name }}</span>
+                <form class="nav-link dropdown-toggle caret-off caret-button-grid" >
+                    <button id="dropdownCate{{ $category->ref }}" type="button" class="btn dropdown-toggle dropdown-toggle-split caret-off button-sub-categorie" data-toggle="dropdown" >
+                        <span class="fa fa-caret-right" aria-hidden="true"></span>
+                    </button>
+                </form>
 
-        <ul class="dropdown-menu dropdown-sous-menu dropdown-width-categorie navbar-dark bg-dark navbar-padding style-menu grid-subcategorie" aria-labelledby="dropdownCateAccessoire">
-            <li class="nav-item nav-drop nav-sous-drop">
-                <a href="#" class="nav-link" >Casque</a>
-            </li>
-            <li class="nav-item nav-drop nav-sous-drop">
-                <a href="#" class="nav-link" >Haut Parleur</a >
-            </li>
-            <li class="nav-item nav-drop nav-sous-drop">
-                <a href="#" class="nav-link" >Micro</a >
-            </li>
-            <li class="nav-item nav-drop nav-sous-drop">
-                <a href="#" class="nav-link" >Chaise</a >
-            </li>
-        </ul>
-    </li>
+                @if($category->directChildCount > 0)
+                    <ul aria-labelledby="dropdownCate{{ $category->ref }}" class="dropdown-menu dropdown-sous-menu dropdown-width-categorie navbar-dark bg-dark navbar-padding style-menu grid-subcategorie" >
 
+                        @foreach($category->childs as $subcategory)
+                        <li class="nav-item nav-drop nav-sous-drop">
+                            <a href="{{route('category',$subcategory->id)}}" class="nav-link"> {{$subcategory->name}}</a>
+                        </li>
+                        @endforeach
+
+                    </ul>
+                @endif
+
+            </a>
+        </li>
+    @endforeach
 
 </ul>
