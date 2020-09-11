@@ -1,5 +1,8 @@
- {{-- include  $_SERVER['DOCUMENT_ROOT'] . "/public/includes/panier-cart.php" ; --}}
- <div class="container">
+
+{{-- :images="{{ $images }}" :entity="{{ $entity }} or :entity="{{ json_encoe($entity) }} " --}}
+<mini-cart :url_cart={{ json_encode (route('cart'))  }}></mini-cart>
+
+{{-- <div class="container">
     <div class="shopping-cart" style="display: none; width:300px;  ">
         <ul class="dropdown-cart shopping-cart-items" role="menu" >
 
@@ -52,4 +55,4 @@
 
         </ul>
     </div>
-</div>
+</div> --}}
