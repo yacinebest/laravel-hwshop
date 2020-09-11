@@ -34,11 +34,12 @@
         </div>
     </header>
 
-    <div id="display-article" class="row">
+    <product-card :products_props="{{ $products  }}" page="category"></product-card>
+    {{-- <div id="display-article" class="row">
         @foreach($products as $product)
             @include('frontend.products.card_product',['product'=>$product,'page'=>'category'])
         @endforeach
-    </div>
+    </div> --}}
 
 
     {{ $products->links() ? $products->links() : '' }}

@@ -22,7 +22,7 @@ class CategoryController extends Controller
         $category = $this->categoryRepository->baseFindOrFail($id);
         $productsOrderBy = ['Most Viewed'=>$this->productRepository->orderByView(20)] ;
         $nbr_product = $category->productCount ;
-        $products = $category->products()->paginate(6);
+        $products = $category->products()->paginate(6)->values();
         return view('frontend.categories.category',compact('category','productsOrderBy','nbr_product','products'));
     }
 }

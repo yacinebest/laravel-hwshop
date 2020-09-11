@@ -7,6 +7,7 @@ class Product extends BaseModel
 {
     // protected $appends =['imageCount','upVoteCount','downVoteCount','commentCount',
     //                     'isSupplyActive'];
+    protected $appends =['image'];
 
     public function category()
     {

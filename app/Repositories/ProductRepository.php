@@ -117,8 +117,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     }
 
     public function orderBySell($number = 0){
-        $entities = Product::get()->sortByDesc('quantitySold'); 
-        return $entities->take($number);
+        $entities = Product::get()->sortByDesc('quantitySold');
+        return $entities->take($number)->values();
     }
 
     public function orderByView($number = 0){

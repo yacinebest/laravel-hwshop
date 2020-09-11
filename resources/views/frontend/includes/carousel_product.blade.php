@@ -5,11 +5,12 @@
         </div>
         <div class="tab-pane fade show active" id="nav-home">
             <section class="products clearfix text-center">
-                <div class="owl-carousel owl-theme align-content-around">
+                <product-card :products_props="{{ $products  }}" page="carousel"></product-card>
+                {{-- <div class="owl-carousel owl-theme align-content-around">
                     @foreach($products as $product)
                         @include('frontend.products.card_product',['product'=>$product,'page'=>'carousel'])
                     @endforeach
-                </div>
+                </div> --}}
             </section>
         </div>
     </main>
