@@ -8,7 +8,7 @@
                         <span class="fa fa-shopping-cart style-icon-short" style="font-size: 27px;margin-left: 5px;margin-top: 1px;" aria-hidden="true"></span>
                         <span class="cercel-number" ></span>
                         <span class="font-weight-bolder total-price">Total :
-                            <span class="price-all-article">0</span>
+                            <span class="price-all-article" v-html="totalPrice"></span>
                             DZD
                         </span>
                     </span>
@@ -25,20 +25,20 @@
                     <li class="dropdown-divider "></li>
                     <div class="list-article-panier">
 
-                        <div v-for="product in products" :key="product.id">
+                        <div v-for="item in products" :key="item.id">
                             <li>
                                 <span class="item">
-                                    <img class="img-cart" :src=" product.image ? product.image.imagePath  : 'https://via.placeholder.com/50'" :alt="product.name">
+                                    <img class="img-cart" :src=" item.product.image ? item.product.image.imagePath  : 'https://via.placeholder.com/50'" :alt="item.product.name">
                                     <span class="d-block" >
                                         <a href="#" class="title font-weight-bolder text-capitalize text-dark" >
-                                            {{ product.name }}
+                                            {{ item.product.name }}
                                         </a>
                                     </span>
                                     <span class="price" style="font-weight: 900 !important;" >
-                                        <span class="text-muted qte">{{ product.pivot.ordered_quantity }} X </span>
-                                        {{ product.price }} DZD
+                                        <span class="text-muted qte">{{ item.quantity }} X </span>
+                                        {{ item.product.price }} DZD
                                     </span>
-                                    <button class="btn fa fa-trash-o d-block float-right delete-article" style="font-size: 25px;"></button>
+                                    <button @click="deleteProductFromCart(item.product)" class="btn fa fa-trash-o d-block float-right delete-article" style="font-size: 25px;"></button>
                                 </span>
                             </li>
                             <li class="dropdown-divider "></li>
@@ -60,6 +60,14 @@
 
 <script>
 export default {
+    created() {
+        this.$store.commit('loadFromLocalStorage')
+        this.$store.commit('updateStickyQte', Number(this.count))
+    },
+    mounted(){
+        this.count = this.qteTotal
+        this.products = this.$store.state.product_in_cart
+    },
      props:{
         url_cart: {
             type: String,
@@ -68,7 +76,35 @@ export default {
     },
     data() {
         return {
-            products: this.$store.state.product_in_cart
+            products: this.$store.state.product_in_cart,
+            count: Number(0)
+        }
+    },
+    computed: {
+        totalPrice: function () {
+            let total = 0
+            for(let item of this.products){
+                total += Number(item.product.price) * Number(item.quantity) ;
+            }
+            return total;
+        },
+        qteTotal: function () {
+            let qte = Number(0)
+            for (const iterator of this.products) {
+                qte += Number(iterator.quantity)
+            }
+            return qte;
+        }
+    },
+    methods: {
+        deleteProductFromCart(product){
+            this.$store.commit('deleteProduct', product)
+        },
+    },
+    watch: {
+        products: function(){
+            this.count = this.qteTotal
+            this.$store.commit('updateStickyQte', Number(this.count))
         }
     },
 }

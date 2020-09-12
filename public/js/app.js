@@ -2507,6 +2507,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -2568,6 +2574,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  created: function created() {
+    this.$store.commit('loadFromLocalStorage');
+    this.$store.commit('updateStickyQte', Number(this.count));
+  },
+  mounted: function mounted() {
+    this.count = this.qteTotal;
+    this.products = this.$store.state.product_in_cart;
+  },
   props: {
     url_cart: {
       type: String,
@@ -2576,8 +2590,60 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      products: this.$store.state.product_in_cart
+      products: this.$store.state.product_in_cart,
+      count: Number(0)
     };
+  },
+  computed: {
+    totalPrice: function totalPrice() {
+      var total = 0;
+
+      var _iterator = _createForOfIteratorHelper(this.products),
+          _step;
+
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+          total += Number(item.product.price) * Number(item.quantity);
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
+      }
+
+      return total;
+    },
+    qteTotal: function qteTotal() {
+      var qte = Number(0);
+
+      var _iterator2 = _createForOfIteratorHelper(this.products),
+          _step2;
+
+      try {
+        for (_iterator2.s(); !(_step2 = _iterator2.n()).done;) {
+          var iterator = _step2.value;
+          qte += Number(iterator.quantity);
+        }
+      } catch (err) {
+        _iterator2.e(err);
+      } finally {
+        _iterator2.f();
+      }
+
+      return qte;
+    }
+  },
+  methods: {
+    deleteProductFromCart: function deleteProductFromCart(product) {
+      this.$store.commit('deleteProduct', product);
+    }
+  },
+  watch: {
+    products: function products() {
+      this.count = this.qteTotal;
+      this.$store.commit('updateStickyQte', Number(this.count));
+    }
   }
 });
 
@@ -2592,6 +2658,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
 //
 //
 //
@@ -2677,6 +2745,11 @@ __webpack_require__.r(__webpack_exports__);
       products: this.products_props,
       route_product: '/product/'
     };
+  },
+  methods: {
+    addProductToCart: function addProductToCart(product) {
+      this.$store.commit('addProduct', product);
+    }
   }
 });
 
@@ -38858,27 +38931,50 @@ var render = function() {
             attrs: { role: "menu" }
           },
           [
-            _vm._m(0),
+            _c("li", { staticClass: "header-shopping-cart" }, [
+              _c("span", { staticClass: "text-uppercase" }, [
+                _c("span", {
+                  staticClass: "fa fa-shopping-cart style-icon-short",
+                  staticStyle: {
+                    "font-size": "27px",
+                    "margin-left": "5px",
+                    "margin-top": "1px"
+                  },
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v(" "),
+                _c("span", { staticClass: "cercel-number" }),
+                _vm._v(" "),
+                _c("span", { staticClass: "font-weight-bolder total-price" }, [
+                  _vm._v("Total :\n                        "),
+                  _c("span", {
+                    staticClass: "price-all-article",
+                    domProps: { innerHTML: _vm._s(_vm.totalPrice) }
+                  }),
+                  _vm._v("\n                        DZD\n                    ")
+                ])
+              ])
+            ]),
             _vm._v(" "),
             !this.products.length
-              ? _c("div", [_vm._m(1)])
+              ? _c("div", [_vm._m(0)])
               : _c("div", [
                   _c("li", { staticClass: "dropdown-divider " }),
                   _vm._v(" "),
                   _c(
                     "div",
                     { staticClass: "list-article-panier" },
-                    _vm._l(_vm.products, function(product) {
-                      return _c("div", { key: product.id }, [
+                    _vm._l(_vm.products, function(item) {
+                      return _c("div", { key: item.id }, [
                         _c("li", [
                           _c("span", { staticClass: "item" }, [
                             _c("img", {
                               staticClass: "img-cart",
                               attrs: {
-                                src: product.image
-                                  ? product.image.imagePath
+                                src: item.product.image
+                                  ? item.product.image.imagePath
                                   : "https://via.placeholder.com/50",
-                                alt: product.name
+                                alt: item.product.name
                               }
                             }),
                             _vm._v(" "),
@@ -38893,7 +38989,7 @@ var render = function() {
                                 [
                                   _vm._v(
                                     "\n                                        " +
-                                      _vm._s(product.name) +
+                                      _vm._s(item.product.name) +
                                       "\n                                    "
                                   )
                                 ]
@@ -38908,14 +39004,11 @@ var render = function() {
                               },
                               [
                                 _c("span", { staticClass: "text-muted qte" }, [
-                                  _vm._v(
-                                    _vm._s(product.pivot.ordered_quantity) +
-                                      " X "
-                                  )
+                                  _vm._v(_vm._s(item.quantity) + " X ")
                                 ]),
                                 _vm._v(
                                   "\n                                    " +
-                                    _vm._s(product.price) +
+                                    _vm._s(item.product.price) +
                                     " DZD\n                                "
                                 )
                               ]
@@ -38924,7 +39017,12 @@ var render = function() {
                             _c("button", {
                               staticClass:
                                 "btn fa fa-trash-o d-block float-right delete-article",
-                              staticStyle: { "font-size": "25px" }
+                              staticStyle: { "font-size": "25px" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteProductFromCart(item.product)
+                                }
+                              }
                             })
                           ])
                         ]),
@@ -38954,32 +39052,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("li", { staticClass: "header-shopping-cart" }, [
-      _c("span", { staticClass: "text-uppercase" }, [
-        _c("span", {
-          staticClass: "fa fa-shopping-cart style-icon-short",
-          staticStyle: {
-            "font-size": "27px",
-            "margin-left": "5px",
-            "margin-top": "1px"
-          },
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" "),
-        _c("span", { staticClass: "cercel-number" }),
-        _vm._v(" "),
-        _c("span", { staticClass: "font-weight-bolder total-price" }, [
-          _vm._v("Total :\n                        "),
-          _c("span", { staticClass: "price-all-article" }, [_vm._v("0")]),
-          _vm._v("\n                        DZD\n                    ")
-        ])
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -39169,7 +39241,7 @@ var render = function() {
                 _vm._v(" "),
                 product.copy_number > 0
                   ? _c(
-                      "a",
+                      "button",
                       {
                         class: {
                           "btn btn-block btn-primary mt-2 ajouter-panier ":
@@ -39177,7 +39249,11 @@ var render = function() {
                           "btn btn-primary fa fa-shopping-cart ajouter-panier ":
                             _vm.page == "carousel"
                         },
-                        attrs: { href: "#" }
+                        on: {
+                          click: function($event) {
+                            return _vm.addProductToCart(product)
+                          }
+                        }
                       },
                       [
                         _vm._v(
@@ -39186,13 +39262,17 @@ var render = function() {
                       ]
                     )
                   : _c(
-                      "a",
+                      "button",
                       {
                         staticClass: "btn btn-block btn-secondary mt-2 ",
                         staticStyle: { cursor: "default" },
-                        attrs: { href: "#" }
+                        attrs: { disabled: "disabled" }
                       },
-                      [_vm._v("Not available")]
+                      [
+                        _vm._v(
+                          "\n                    Not available\n                "
+                        )
+                      ]
                     )
               ])
             ]
@@ -53284,6 +53364,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -53293,7 +53382,78 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     product_in_cart: []
   },
   getters: {},
-  mutations: {},
+  mutations: {
+    addProduct: function addProduct(state, product) {
+      var index = state.product_in_cart.findIndex(function (item) {
+        return item.id === product.id;
+      });
+      var orderQuantity = Number(0);
+
+      if (index !== -1) {
+        orderQuantity = Number(state.product_in_cart[index].quantity) + Number(1);
+        vue__WEBPACK_IMPORTED_MODULE_0___default.a.set(state.product_in_cart, index, {
+          id: product.id,
+          product: product,
+          quantity: Number(orderQuantity)
+        });
+      } else {
+        orderQuantity = Number(1);
+        state.product_in_cart.push({
+          id: product.id,
+          product: product,
+          quantity: orderQuantity
+        });
+      }
+
+      this.commit('saveToLocalStorage');
+    },
+    loadProduct: function loadProduct(state, product) {
+      var orderQuantity = Number(product.quantity);
+      state.product_in_cart.push({
+        id: product.id,
+        product: product.product,
+        quantity: Number(orderQuantity)
+      });
+    },
+    deleteProduct: function deleteProduct(state, product) {
+      var index = state.product_in_cart.findIndex(function (item) {
+        return item.id === product.id;
+      });
+      state.product_in_cart.splice(index, 1);
+      this.commit('saveToLocalStorage');
+    },
+    updateStickyQte: function updateStickyQte(state, qteTotal) {
+      Array.from(document.getElementsByClassName('cercel-number')).forEach(function (el) {
+        if (Number(qteTotal) != 0) {
+          el.style.display = "inline-block";
+          el.innerHTML = Number(qteTotal);
+        } else {
+          el.style.display = "none";
+          el.innerHTML = '';
+        }
+      });
+    },
+    saveToLocalStorage: function saveToLocalStorage(state) {
+      localStorage.setItem('products', JSON.stringify(state.product_in_cart));
+    },
+    loadFromLocalStorage: function loadFromLocalStorage(state) {
+      if (localStorage.getItem('products')) {
+        var _iterator = _createForOfIteratorHelper(JSON.parse(localStorage.getItem('products'))),
+            _step;
+
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var iterator = _step.value;
+            this.commit('loadProduct', iterator);
+          }
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+      }
+    }
+  },
   actions: {}
 }));
 

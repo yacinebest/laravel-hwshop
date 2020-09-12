@@ -42,7 +42,8 @@
     </div> --}}
 
 
-    {{ $products->links() ? $products->links() : '' }}
+    {{-- {{ $products->links() ? $products->links() : '' }} --}}
+
     {{-- <div>
         <nav class="mt-4" aria-label="Page navigation sample">
             <ul id="display-page" class="pagination float-right">

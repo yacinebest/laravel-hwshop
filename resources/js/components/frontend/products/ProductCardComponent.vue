@@ -1,5 +1,4 @@
 <template>
-    <!-- <div class=" {{ page=='home' || page=='category' ? 'col-lg-4 col-md-6 ' : '' }} {{ page=='carousel' ? 'item p-2' : ''  }} "> -->
     <div :class="{'row text-center ': page=='home',
                 'row ': page=='category',
                 'owl-carousel owl-theme align-content-around ': page=='carousel'}">
@@ -51,12 +50,15 @@
 
                     </div>
 
-                    <a v-if="product.copy_number>0" href="#"
+                    <button v-if="product.copy_number>0"
+                        @click="addProductToCart(product)"
                         :class="{'btn btn-block btn-primary mt-2 ajouter-panier ': page=='home' || page=='category',
                                 'btn btn-primary fa fa-shopping-cart ajouter-panier ': page=='carousel' }">
                         Add To Cart
-                    </a>
-                    <a v-else href="#" class="btn btn-block btn-secondary mt-2 " style="cursor:default;" >Not available</a>
+                    </button>
+                    <button  v-else  disabled="disabled" class="btn btn-block btn-secondary mt-2 " style="cursor:default;">
+                        Not available
+                    </button>
                 </figcaption>
 
             </figure>
@@ -81,6 +83,11 @@ export default {
         return {
             products: this.products_props,
             route_product: '/product/'
+        }
+    },
+    methods: {
+        addProductToCart(product){
+            this.$store.commit('addProduct', product)
         }
     },
 }

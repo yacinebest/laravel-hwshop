@@ -48,7 +48,7 @@
 
                 <li id="panier" class="nav-item">
                     <a href="#" class="nav-link nav-link-height border-style-navbar button-cart" >
-                        <span class="fa fa-shopping-cart style-icon-short" aria-hidden="true" style="/* text-shadow: 0 0 black; */ position: sticky;" >
+                        <span class="fa fa-shopping-cart style-icon-short" aria-hidden="true" style="position: sticky;" >
                             <span class="cercel-number" style="left: 3px; top: -19px;" ></span>
                         </span >
                         CART
