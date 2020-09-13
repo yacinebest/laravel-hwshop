@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\Payment;
 use App\Repositories\Contracts\PaymentRepositoryInterface;
 
 class PaymentRepository extends BaseRepository implements PaymentRepositoryInterface {
@@ -26,5 +27,16 @@ class PaymentRepository extends BaseRepository implements PaymentRepositoryInter
             // 'contact_info'=>'Contact Info',
             // 'phone_number'=>'Phone Number'
         ];
+    }
+
+
+/*
+|---------------------------------------------------------------------------|
+| CUSTOM FUNCTION                                                           |
+|---------------------------------------------------------------------------|
+*/
+
+    public function findPaymentByMethod($method){
+        return Payment::whereMethod($method)->first();
     }
 }

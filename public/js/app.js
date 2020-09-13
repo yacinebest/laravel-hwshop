@@ -2673,9 +2673,19 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       this.$store.commit('deleteProduct', product);
     },
     updateQte: function updateQte(item) {
-      console.log(item.quantity);
       this.$store.commit('updateProduct', item);
       this.$store.commit('updateStickyQte', Number(this.qteTotal));
+    },
+    orderCart: function orderCart() {
+      var _this = this;
+
+      var form = new FormData();
+      form.append('products', this.products);
+      axios.post(this.url_order, this.products).then(function (_ref) {
+        var data = _ref.data;
+        if (data.login == false) _this.$store.commit('removeFromLocalStorage');
+        window.location = data.redirect;
+      });
     }
   }
 });
@@ -39292,26 +39302,25 @@ var render = function() {
           _vm._v(" "),
           _c("hr"),
           _vm._v(" "),
-          _c("form", { attrs: { action: _vm.url_order, method: "post" } }, [
-            _c("input", {
-              staticClass: "p-0 m-0 d-none order-input",
-              attrs: { name: "order" }
-            }),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-out btn-primary btn-square btn-main commander",
-                attrs: { type: "submit", "data-abc": "true" }
-              },
-              [
-                _vm._v(
-                  "\n                             Order\n                         "
-                )
-              ]
-            )
-          ]),
+          _c("input", {
+            staticClass: "p-0 m-0 d-none order-input",
+            attrs: { name: "order" }
+          }),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass:
+                "btn btn-out btn-primary btn-square btn-main commander",
+              attrs: { type: "submit", "data-abc": "true" },
+              on: { click: _vm.orderCart }
+            },
+            [
+              _vm._v(
+                "\n                             Order\n                         "
+              )
+            ]
+          ),
           _vm._v(" "),
           _c(
             "a",
@@ -53934,7 +53943,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         orderQuantity = Number(1);
         state.product_in_cart.push({
           id: product.id,
-          product: product.product,
+          product: product,
           quantity: orderQuantity
         });
       }
@@ -53997,6 +54006,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           _iterator.f();
         }
       }
+    },
+    removeFromLocalStorage: function removeFromLocalStorage(state) {
+      if (localStorage.getItem('products')) localStorage.removeItem('products');
     }
   },
   actions: {}

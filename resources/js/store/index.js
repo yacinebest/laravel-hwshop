@@ -18,7 +18,7 @@ export default new Vuex.Store({
                 Vue.set(state.product_in_cart, index, { id: product.id, product: product, quantity: Number(orderQuantity) });
             } else {
                 orderQuantity = Number(1)
-                state.product_in_cart.push({ id: product.id, product: product.product, quantity: orderQuantity })
+                state.product_in_cart.push({ id: product.id, product: product, quantity: orderQuantity })
             }
             this.commit('saveToLocalStorage')
         },
@@ -58,6 +58,10 @@ export default new Vuex.Store({
                     this.commit('loadProduct', iterator)
                 }
             }
+        },
+        removeFromLocalStorage(state) {
+            if (localStorage.getItem('products'))
+                localStorage.removeItem('products');
         }
     },
     actions: {},

@@ -75,12 +75,12 @@
                         </dl>
                         <hr>
 
-                        <form :action="url_order" method="post"  >
+                        <!-- <form :action="" method="post"  > -->
                             <input name="order" class="p-0 m-0 d-none order-input">
-                            <button type="submit" class="btn btn-out btn-primary btn-square btn-main commander" data-abc="true">
+                            <button @click="orderCart" type="submit" class="btn btn-out btn-primary btn-square btn-main commander" data-abc="true">
                                 Order
                             </button>
-                        </form>
+                        <!-- </form> -->
 
                     <a :href="this.url_back" class="btn btn-out btn-success btn-square btn-main mt-2 continuer-achat w-100" data-abc="true">
                         Continue Shopping
@@ -135,9 +135,20 @@ export default {
             this.$store.commit('deleteProduct', product)
         },
         updateQte(item){
-            console.log(item.quantity)
             this.$store.commit('updateProduct', item)
             this.$store.commit('updateStickyQte', Number(this.qteTotal))
+        },
+        orderCart(){
+            let form = new FormData()
+            form.append('products',this.products)
+
+            axios.post(this.url_order,this.products)
+                .then( ({data}) => {
+                    if(data.login==false)
+                        this.$store.commit('removeFromLocalStorage')
+
+                    window.location = data.redirect ;
+                })
         }
     },
 }

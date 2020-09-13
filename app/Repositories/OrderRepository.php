@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\Order;
 use App\Repositories\BaseRepository;
 use App\Repositories\Contracts\OrderRepositoryInterface;
 use Illuminate\Http\Request;
@@ -49,6 +50,19 @@ class OrderRepository extends BaseRepository implements OrderRepositoryInterface
     public function linkDeliveryToOrder($order,$delivery){
         $order->delivery()->associate($delivery) ;
         $order->save();
-        // $order->delivery_id = $delivery->id;
+    }
+
+    public function linkPaymentToOrder($order,$payment){
+        $order->payment()->associate($payment) ;
+        $order->save();
+    }
+
+    public function linkInvoiceToOrder($order,$invoice){
+        $order->invoice()->associate($invoice) ;
+        $order->save();
+    }
+
+    public function createOrder($user){
+        return factory(Order::class)->create(['user_id'=>$user->id]);
     }
 }
