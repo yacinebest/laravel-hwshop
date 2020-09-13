@@ -6,7 +6,8 @@ use Illuminate\Support\Collection;
 
 class Category extends BaseModel
 {
-    // protected $appends =['childCount','imageCount'];
+    protected $appends =['directChildCount'];
+    protected $with= ['brands'];
     // protected $appends =['childCount','imageCount','productCount'];
 
     public function products()

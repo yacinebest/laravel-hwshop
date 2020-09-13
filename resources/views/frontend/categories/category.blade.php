@@ -23,13 +23,7 @@
 {{-- section product filter --}}
 <section class="section-content padding-y mb-5">
     <div class="container">
-        <div class="row">
-
-            @include('frontend.categories.aside_filter',['category'=>$category])
-
-            @include('frontend.categories.paginate_card_products',['category'=>$category,'nbr_product'=>$nbr_product])
-
-        </div>
+        <category-paginate-filter :category="{{ $category  }}" :nbr_product="{{$nbr_product }}"></category-paginate-filter>
     </div>
 </section>
 

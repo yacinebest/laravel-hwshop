@@ -4,7 +4,8 @@ namespace App\Models;
 
 class Brand extends BaseModel
 {
-    protected $appends =['categoriesCount','productsCount'];
+    // protected $appends =['categoriesCount','productsCount'];
+    protected $appends =['productsCount'];
 
     public function products()
     {
@@ -43,4 +44,5 @@ class Brand extends BaseModel
     {
         return $this->products ?  count($this->products) : 0;
     }
+
 }

@@ -2,7 +2,7 @@
     <div :class="{'row text-center ': page=='home',
                 'row ': page=='category',
                 'owl-carousel owl-theme align-content-around ': page=='carousel'}">
-        <div v-for="product in this.products" :key="product.id"
+        <div v-for="product in products_props" :key="product.id"
             :class=" { 'col-lg-4 col-md-6 ': page=='home' || page=='category' ,
                         'item p-2':  page=='carousel'} ">
             <figure :class="{ 'card card-product-grid ': page=='home' || page=='category' ,
@@ -68,6 +68,7 @@
 
 <script>
 export default {
+    name: 'ProductCard',
     props:{
         products_props: {
             type: Array,
@@ -81,7 +82,6 @@ export default {
     },
     data() {
         return {
-            products: this.products_props,
             route_product: '/product/'
         }
     },
