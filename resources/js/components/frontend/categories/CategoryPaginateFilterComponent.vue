@@ -37,7 +37,7 @@
                     <div class="filter-content collapse show" id="collapse_3" >
                         <div class="card-body">
                             <label  v-for="brand in this.category.brands" :key="brand.id"  class="custom-control custom-checkbox">
-                                <input type="checkbox" :value="brand.name " class="custom-control-input marque-checkbox" />
+                                <input type="checkbox" :value="brand.name " v-model="brands" @change="changeBrands" class="custom-control-input marque-checkbox" />
                                 <div class="custom-control-label">
                                     {{ brand.name }}
                                     <b class="badge badge-pill badge-light float-right">
@@ -57,9 +57,9 @@
                         </a>
                     </header>
                     <div class="filter-content collapse show" id="collapse_4" >
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <p>
-                                <input type="text" id="amount" readonly="" class="text-dark text-center" style=" border: 0; font-weight: bold; width: -webkit-fill-available; " />
+                                <input type="text" v-model="price_range"  id="amount" readonly="" class="text-dark text-center"  style=" border: 0; font-weight: bold; width: -webkit-fill-available; " />
                             </p>
 
                             <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" >
@@ -79,7 +79,9 @@
                             <button id="price-reset" class="btn btn-block btn-sm btn-primary w-50 mt-3 mx-auto" >
                                 Reset
                             </button>
-                        </div>
+                        </div> -->
+
+
                     </div>
                 </article>
 
@@ -130,17 +132,17 @@
                     <span id="nombre-article" class="mr-md-auto">
                         {{ nbr_product }} Products Finds
                     </span>
-                    <select id="order-select" class="mr-2 form-control" >
-                        <option value="plus recent" selected="selected">Most Recent</option>
-                        <option value="plus ancien">Oldest</option>
-                        <option value="plus vues">Most Viewed</option>
-                        <option value="plus vendus">Most Sold</option>
-                        <option value="prix croissant">Ascending price</option>
-                        <option value="prix decroissant">Decreasing price</option>
+                    <select id="order-select" class="mr-2 form-control" @change="changeOrder" v-model="order" >
+                        <option value="created_at-desc" selected="selected">Most Recent</option>
+                        <option value="created_at-asc">Oldest</option>
+                        <option value="view">Most Viewed</option>
+                        <option value="quantitySold">Most Sold</option>
+                        <option value="price-asc">Ascending price</option>
+                        <option value="price-desc">Decreasing price</option>
                     </select>
 
-                    <select id="number-per-page" class="mr-2 form-control" >
-                        <option value="9" selected="selected">9</option>
+                    <select id="number-per-page" class="mr-2 form-control"  @change="changeNumberPaginate" v-model="nbr_paginate">
+                        <option value="3" selected="selected">3</option>
                         <option value="6">6</option>
                         <option value="9">9</option>
                         <option value="15">15</option>
@@ -148,14 +150,6 @@
                         <option value="21">21</option>
                     </select>
 
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-outline-secondary" data-toggle="tooltip" title="" data-original-title="List view" >
-                            <i class="fa fa-bars"></i>
-                        </a>
-                        <a href="#" class="btn btn-outline-secondary active" data-toggle="tooltip" title="" data-original-title="Grid view" >
-                            <i class="fa fa-th"></i>
-                        </a>
-                    </div>
                 </div>
             </header>
 
@@ -194,6 +188,10 @@ export default {
             products: [],
             pagination: {},
             next_page: null,
+            order: 'created_at-desc',
+            nbr_paginate: '3',
+            brands: [],
+            price_range: ''
         }
     },
     methods:{
@@ -205,6 +203,15 @@ export default {
                     this.next_page = pagination.next_page_url
                 })
         },
+        changeOrder(){
+            console.log(this.order)
+        },
+        changeNumberPaginate(){
+            console.log(this.nbr_paginate)
+        },
+        changeBrands(){
+            console.log(this.brands)
+        }
     }
 }
 </script>

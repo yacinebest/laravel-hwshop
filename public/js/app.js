@@ -3019,12 +3019,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'CategoryPaginateFilter',
   mounted: function mounted() {
@@ -3046,7 +3040,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       products: [],
       pagination: {},
-      next_page: null
+      next_page: null,
+      order: 'created_at-desc',
+      nbr_paginate: '3',
+      brands: [],
+      price_range: ''
     };
   },
   methods: {
@@ -3060,6 +3058,15 @@ __webpack_require__.r(__webpack_exports__);
         _this.products = pagination.data;
         _this.next_page = pagination.next_page_url;
       });
+    },
+    changeOrder: function changeOrder() {
+      console.log(this.order);
+    },
+    changeNumberPaginate: function changeNumberPaginate() {
+      console.log(this.nbr_paginate);
+    },
+    changeBrands: function changeBrands() {
+      console.log(this.brands);
     }
   }
 });
@@ -40508,9 +40515,46 @@ var render = function() {
                     },
                     [
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.brands,
+                            expression: "brands"
+                          }
+                        ],
                         staticClass: "custom-control-input marque-checkbox",
                         attrs: { type: "checkbox" },
-                        domProps: { value: brand.name }
+                        domProps: {
+                          value: brand.name,
+                          checked: Array.isArray(_vm.brands)
+                            ? _vm._i(_vm.brands, brand.name) > -1
+                            : _vm.brands
+                        },
+                        on: {
+                          change: [
+                            function($event) {
+                              var $$a = _vm.brands,
+                                $$el = $event.target,
+                                $$c = $$el.checked ? true : false
+                              if (Array.isArray($$a)) {
+                                var $$v = brand.name,
+                                  $$i = _vm._i($$a, $$v)
+                                if ($$el.checked) {
+                                  $$i < 0 && (_vm.brands = $$a.concat([$$v]))
+                                } else {
+                                  $$i > -1 &&
+                                    (_vm.brands = $$a
+                                      .slice(0, $$i)
+                                      .concat($$a.slice($$i + 1)))
+                                }
+                              } else {
+                                _vm.brands = $$c
+                              }
+                            },
+                            _vm.changeBrands
+                          ]
+                        }
                       }),
                       _vm._v(" "),
                       _c("div", { staticClass: "custom-control-label" }, [
@@ -40567,11 +40611,115 @@ var render = function() {
               ]
             ),
             _vm._v(" "),
-            _vm._m(3),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.order,
+                    expression: "order"
+                  }
+                ],
+                staticClass: "mr-2 form-control",
+                attrs: { id: "order-select" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.order = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    _vm.changeOrder
+                  ]
+                }
+              },
+              [
+                _c(
+                  "option",
+                  { attrs: { value: "created_at-desc", selected: "selected" } },
+                  [_vm._v("Most Recent")]
+                ),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "created_at-asc" } }, [
+                  _vm._v("Oldest")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "view" } }, [
+                  _vm._v("Most Viewed")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "quantitySold" } }, [
+                  _vm._v("Most Sold")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "price-asc" } }, [
+                  _vm._v("Ascending price")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "price-desc" } }, [
+                  _vm._v("Decreasing price")
+                ])
+              ]
+            ),
             _vm._v(" "),
-            _vm._m(4),
-            _vm._v(" "),
-            _vm._m(5)
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.nbr_paginate,
+                    expression: "nbr_paginate"
+                  }
+                ],
+                staticClass: "mr-2 form-control",
+                attrs: { id: "number-per-page" },
+                on: {
+                  change: [
+                    function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.nbr_paginate = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    },
+                    _vm.changeNumberPaginate
+                  ]
+                }
+              },
+              [
+                _c("option", { attrs: { value: "3", selected: "selected" } }, [
+                  _vm._v("3")
+                ]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "6" } }, [_vm._v("6")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "9" } }, [_vm._v("9")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "15" } }, [_vm._v("15")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "18" } }, [_vm._v("18")]),
+                _vm._v(" "),
+                _c("option", { attrs: { value: "21" } }, [_vm._v("21")])
+              ]
+            )
           ])
         ]),
         _vm._v(" "),
@@ -40650,85 +40798,10 @@ var staticRenderFns = [
         )
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "filter-content collapse show",
-          attrs: { id: "collapse_4" }
-        },
-        [
-          _c("div", { staticClass: "card-body" }, [
-            _c("p", [
-              _c("input", {
-                staticClass: "text-dark text-center",
-                staticStyle: {
-                  border: "0",
-                  "font-weight": "bold",
-                  width: "-webkit-fill-available"
-                },
-                attrs: { type: "text", id: "amount", readonly: "" }
-              })
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content",
-                attrs: { id: "slider-range" }
-              },
-              [
-                _c("div", {
-                  staticClass: "ui-slider-range ui-corner-all ui-widget-header",
-                  staticStyle: { left: "0%", width: "99.6%" }
-                }),
-                _vm._v(" "),
-                _c("span", {
-                  staticClass:
-                    "ui-slider-handle ui-corner-all ui-state-default",
-                  staticStyle: { left: "0%" },
-                  attrs: { tabindex: "0" }
-                }),
-                _vm._v(" "),
-                _c("span", {
-                  staticClass:
-                    "ui-slider-handle ui-corner-all ui-state-default",
-                  staticStyle: { left: "99.6%" },
-                  attrs: { tabindex: "0" }
-                })
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-block btn-sm btn-primary w-50 mt-3 mx-auto",
-                attrs: { id: "price-filter" }
-              },
-              [
-                _vm._v(
-                  "\n                            Submit\n                        "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass:
-                  "btn btn-block btn-sm btn-primary w-50 mt-3 mx-auto",
-                attrs: { id: "price-reset" }
-              },
-              [
-                _vm._v(
-                  "\n                            Reset\n                        "
-                )
-              ]
-            )
-          ])
-        ]
-      )
+      _c("div", {
+        staticClass: "filter-content collapse show",
+        attrs: { id: "collapse_4" }
+      })
     ])
   },
   function() {
@@ -40801,98 +40874,6 @@ var staticRenderFns = [
             ])
           ])
         ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      { staticClass: "mr-2 form-control", attrs: { id: "order-select" } },
-      [
-        _c(
-          "option",
-          { attrs: { value: "plus recent", selected: "selected" } },
-          [_vm._v("Most Recent")]
-        ),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "plus ancien" } }, [_vm._v("Oldest")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "plus vues" } }, [
-          _vm._v("Most Viewed")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "plus vendus" } }, [
-          _vm._v("Most Sold")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "prix croissant" } }, [
-          _vm._v("Ascending price")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "prix decroissant" } }, [
-          _vm._v("Decreasing price")
-        ])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "select",
-      { staticClass: "mr-2 form-control", attrs: { id: "number-per-page" } },
-      [
-        _c("option", { attrs: { value: "9", selected: "selected" } }, [
-          _vm._v("9")
-        ]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "6" } }, [_vm._v("6")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "9" } }, [_vm._v("9")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "15" } }, [_vm._v("15")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "18" } }, [_vm._v("18")]),
-        _vm._v(" "),
-        _c("option", { attrs: { value: "21" } }, [_vm._v("21")])
-      ]
-    )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "btn-group" }, [
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-outline-secondary",
-          attrs: {
-            href: "#",
-            "data-toggle": "tooltip",
-            title: "",
-            "data-original-title": "List view"
-          }
-        },
-        [_c("i", { staticClass: "fa fa-bars" })]
-      ),
-      _vm._v(" "),
-      _c(
-        "a",
-        {
-          staticClass: "btn btn-outline-secondary active",
-          attrs: {
-            href: "#",
-            "data-toggle": "tooltip",
-            title: "",
-            "data-original-title": "Grid view"
-          }
-        },
-        [_c("i", { staticClass: "fa fa-th" })]
       )
     ])
   }
