@@ -16,4 +16,6 @@ interface UserRepositoryInterface extends BaseRepositoryInterface , CardCountRou
 
     public function getReadOnlyColumn();
     public function getEditableColumn();
+
+    public function getOrdersSortByDate($user);
 }

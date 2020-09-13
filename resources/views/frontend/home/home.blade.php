@@ -17,11 +17,6 @@
 
 <div class="container">
     <product-card :products_props="{{ $products  }}" page="home"></product-card>
-    {{-- <div class="row text-center">
-        @foreach($products as $product)
-            @include('frontend.products.card_product',['product'=>$product,'page'=>'home'])
-        @endforeach
-    </div> --}}
 </div>
 
 <div class="product-more text-right">

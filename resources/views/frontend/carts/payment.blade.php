@@ -35,6 +35,12 @@
                     </div>
                 </div>
                 <div class="col-md-4">
+                    <dl class="dlist-align">
+                        <dt>Total Price:</dt>
+                        <dd class="text-right ml-3 dd-prix-total font-weight-bolder text-success">
+                            {{ $invoice->total_price }} DZD
+                        </dd>
+                    </dl>
                     <button
                         type="submit"
                         class="btn btn-out btn-primary btn-square btn-main commander"

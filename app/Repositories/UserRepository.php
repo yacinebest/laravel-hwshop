@@ -91,4 +91,8 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface  
             'address'=>'Address',
         ];
     }
+
+    public function getOrdersSortByDate($user){
+        return $user->orders->sortByDesc('order_date');
+    }
 }

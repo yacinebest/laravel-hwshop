@@ -24,7 +24,8 @@ class UserController extends Controller
 
     public function orders(){
         $user = $this->userRepository->getAuthUser();
-        return view('frontend.users.orders',compact('user'));
+        $orders = $this->userRepository->getOrdersSortByDate($user);
+        return view('frontend.users.orders',compact('user','orders'));
     }
 
     public function histories(){

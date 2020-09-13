@@ -21,9 +21,10 @@ Route::get('/category/{category}', 'Frontend\CategoryController@category')->name
 
 Route::get('/cart', 'Frontend\CartController@cart')->name('cart');
 
-Route::post('/order', 'Frontend\CartController@order')->name('cart.order');
-Route::get('/payment/{order}', 'Frontend\CartController@showPaymentPage')->name('payment');
-Route::post('/order/payment', 'Frontend\CartController@payment')->name('cart.payment');
+Route::post('/order', 'Frontend\OrderController@order')->name('cart.order');
+
+Route::get('/payment/{order}', 'Frontend\PaymentController@showPaymentPage')->name('payment');
+Route::post('/order/payment', 'Frontend\PaymentController@payment')->name('cart.payment');
 
 Route::get('/profile', 'Frontend\UserController@profile')->name('profile');
 

@@ -13,7 +13,7 @@
         <ul class="list-unstyled latest">
             @if($user->orderCount>0)
                 <hr>
-                @foreach($user->orders as $order)
+                @foreach($orders as $order)
                     <li class="latest-li border rounded-sm p-2 shadow-sm">
                         <h5>[{{ $order->order_date }}] - Order "{{ $order->status }}"</h5>
                         <ul style="list-style-type : disc !important">
