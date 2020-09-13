@@ -18,7 +18,7 @@ export default new Vuex.Store({
                 Vue.set(state.product_in_cart, index, { id: product.id, product: product, quantity: Number(orderQuantity) });
             } else {
                 orderQuantity = Number(1)
-                state.product_in_cart.push({ id: product.id, product: product, quantity: orderQuantity })
+                state.product_in_cart.push({ id: product.id, product: product.product, quantity: orderQuantity })
             }
             this.commit('saveToLocalStorage')
         },
@@ -30,6 +30,11 @@ export default new Vuex.Store({
         deleteProduct(state, product) {
             const index = state.product_in_cart.findIndex(item => item.id === product.id);
             state.product_in_cart.splice(index, 1);
+            this.commit('saveToLocalStorage')
+        },
+        updateProduct(state, product) {
+            const index = state.product_in_cart.findIndex(item => item.id === product.id);
+            Vue.set(state.product_in_cart, index, { id: product.id, product: product.product, quantity: product.quantity });
             this.commit('saveToLocalStorage')
         },
         updateStickyQte(state, qteTotal) {

@@ -11,4 +11,9 @@ class CartController extends Controller
     public function cart(){
         return view('frontend.carts.cart');
     }
+
+    public function order(Request $request){
+        dd($request->all());
+        return [] ;
+    }
 }

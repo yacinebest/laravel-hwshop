@@ -20,8 +20,7 @@ Route::get('/product/{product}', 'Frontend\ProductController@product')->name('pr
 Route::get('/category/{category}', 'Frontend\CategoryController@category')->name('category');
 
 Route::get('/cart', 'Frontend\CartController@cart')->name('cart');
-Route::post('/cart', 'Frontend\CartController@saveCart')->name('cart.save');
-Route::post('/cart/products', 'Frontend\CartController@getCart')->name('cart.get');
+Route::post('/order', 'Frontend\CartController@order')->name('cart.order');
 
 Route::get('/profile', 'Frontend\UserController@profile')->name('profile');
 

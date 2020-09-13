@@ -20,6 +20,7 @@ import ImageShow from "./components/backend/image/ImageShowComponent.vue";
 
 //Frontend
 import MiniCart from "./components/frontend/carts/MiniCartComponent.vue";
+import CartTable from "./components/frontend/carts/CartTableComponent.vue";
 import ProductCard from "./components/frontend/products/ProductCardComponent.vue";
 
 import store from "./store";
@@ -37,6 +38,7 @@ const app = new Vue({
         ImageShow,
         //Frontend
         MiniCart,
+        CartTable,
         ProductCard
 
     }

@@ -9,18 +9,17 @@
 @section('content')
 
 <div class="container-fluid mb-5" style="margin-top: 162px;">
-    <div class="row">
+    <cart-table :url_order={{ json_encode (route('cart.order'))  }}
+                :url_back={{  json_encode(redirect()->back()->getTargetUrl() ) }}></cart-table>
+
+    {{-- <div class="row">
 
         <aside class="col-lg-9">
             <div class="card" style="min-height: 99px;">
                 <div class="justify-content-center row">
-                    {{-- cart fill --}}
-                    {{-- <h2 class="font-weight-bold m-4 text-uppercase title-grid title-panier">Your Cart :</h2> --}}
-                    {{-- cart empty --}}
                     <h2 class="font-weight-bold m-4 text-uppercase title-grid title-panier">Your Cart Is Empty...</h2>
                 </div>
                 @if(false)
-                {{--  check if cart is fill --}}
 
                 <div class="table-responsive" >
                     <table class="table  table-shopping-cart">
@@ -34,7 +33,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {{--  --}}
                             <tr>
                                 <td>
                                     <figure class="itemside align-items-center">
@@ -70,7 +68,6 @@
                                     <button href="#" class="btn btn-light delete-article-page-panier" data-abc="true">Delete</button>
                                 </td>
                             </tr>
-                            {{--  --}}
                         </tbody>
                     </table>
                 </div>
@@ -84,7 +81,6 @@
             <div class="card">
                 <div class="card-body">
                     @if(false)
-                    {{--  check if cart is fill --}}
                         <dl class="dlist-align">
                             <dt>Total Price:</dt>
                             <dd class="text-right ml-3 dd-prix-total font-weight-bolder text-success">
@@ -109,6 +105,6 @@
 
         </aside>
 
-    </div>
+    </div> --}}
 </div>
 @endsection
