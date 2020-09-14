@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
 use Illuminate\Http\Request;
@@ -27,13 +28,16 @@ class CategoryController extends Controller
         return view('frontend.categories.category',compact('category','productsOrderBy','nbr_product','products'));
     }
 
-    public function paginateElement($id){
+    public function paginateElementWithFilter(Request $request,$id,$page){
         $category = $this->categoryRepository->baseFindOrFail($id);
-        $products = $category->products()->paginate(2);
-        return $products;
 
-        // $category = $this->categoryRepository->baseFindOrFail($id);
-        // return Category::with('brands')->get();
+        $products = null;
+        if(json_decode($request->input('brands')) ){
+            $products = $this->productRepository->filterProductsWithBrands($id,$page,$request);
+        }else{
+            $products = $this->productRepository->filterProductsWithoutBrands($id,$page,$request);
+        }
+        return ['products'=>$products,'nbr'=>$products->total()];
     }
 
 }

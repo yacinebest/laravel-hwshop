@@ -13,6 +13,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css"/>
 <!-- switch  -->
 <link rel="stylesheet" href="{{ asset('css/frontend/switch.css') }}">
+
+<link rel="stylesheet" href="https://unpkg.com/vue-range-component@1.0.3/dist/vue-range-slider.min.css">
 @endsection
 
 @section('content')
@@ -47,5 +49,5 @@
 <script src="{{ asset('js/frontend/owlcarousel.js') }}"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-<script src="{{ asset('js/frontend/slider-range.js') }}"></script>
+<script src="https://unpkg.com/vue-range-component@1.0.3/dist/vue-range-slider.min.js"></script>
 @endsection

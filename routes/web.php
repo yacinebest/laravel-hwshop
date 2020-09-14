@@ -18,7 +18,7 @@ Route::get('/', 'Frontend\HomeController@home')->name('home');
 Route::get('/FAQ', 'Frontend\FAQController@faq')->name('faq');
 Route::get('/product/{product}', 'Frontend\ProductController@product')->name('product');
 Route::get('/category/{category}', 'Frontend\CategoryController@category')->name('category');
-Route::get('/category/{category}/products', 'Frontend\CategoryController@paginateElement')->name('category.products.paginate');
+Route::post('/category/{category}/productsFilter/page/{page}', 'Frontend\CategoryController@paginateElementWithFilter')->name('category.products.paginate.filter');
 
 Route::get('/cart', 'Frontend\CartController@cart')->name('cart');
 

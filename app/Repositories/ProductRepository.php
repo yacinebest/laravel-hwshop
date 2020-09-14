@@ -5,12 +5,18 @@ namespace App\Repositories;
 use App\Models\History;
 use App\Models\Product;
 use App\Models\Supply;
+use App\Repositories\Contracts\CategoryRepositoryInterface;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ProductRepository extends BaseRepository implements ProductRepositoryInterface {
 
+    private $categoryRepository;
 
+    public function __construct(CategoryRepositoryInterface $categoryRepository) {
+        $this->categoryRepository = $categoryRepository;
+    }
 /*
 |---------------------------------------------------------------------------|
 | Override BaseRepository FUNCTION                                          |
@@ -124,6 +130,56 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
     public function orderByView($number = 0){
         $entities = $this->baseOrderBy(['view'=>'DESC']);
         return $this->baseTake($entities,$number);
+    }
+
+    public function getProductsIdEqualToBrands($brands,$products){
+        $result = collect();
+        foreach($brands as $key=>$value){
+            foreach($products as $product) {
+                foreach ($product->brands as $p_brand) {
+                    if($p_brand->id==$value){
+                        $result->push( $product->id );
+                        break;
+                    }
+                }
+            }
+        }
+        return $result;
+    }
+
+    public function filterProductsWithoutBrands($id,$page,$request){
+        $available = -1;
+        if($request->input('available'))
+            $available = 0;
+
+        $products = Product::
+                where('category_id',$id)
+            ->where('copy_number','>',$available)
+            ->where('price','>',$request->input('min'))
+            ->where('price','<',$request->input('max'))
+            ->orderBy($request->input('orderBy'),$request->input('orderByDirection'))
+            ->paginate($request->input('paginate'), ['*'], 'page', $page);
+
+        return $products;
+    }
+
+    public function filterProductsWithBrands($id,$page,$request){
+        $category = $this->categoryRepository->baseFindOrFail($id);
+
+        $available = -1;
+        if($request->input('available'))
+            $available = 0;
+
+        $result =  $this->getProductsIdEqualToBrands(json_decode($request->input('brands')),$category->products);
+        $products = Product::
+                where('category_id',$id)
+            ->whereIn('id',$result)
+            ->where('copy_number','>',$available)
+            ->where('price','>',$request->input('min'))
+            ->where('price','<',$request->input('max'))
+            ->orderBy($request->input('orderBy'),$request->input('orderByDirection'))
+            ->paginate($request->input('paginate'), ['*'], 'page', $page);
+            return $products;
     }
 
 /*

@@ -37,7 +37,7 @@
                     <div class="filter-content collapse show" id="collapse_3" >
                         <div class="card-body">
                             <label  v-for="brand in this.category.brands" :key="brand.id"  class="custom-control custom-checkbox">
-                                <input type="checkbox" :value="brand.name " v-model="brands" @change="changeBrands" class="custom-control-input marque-checkbox" />
+                                <input type="checkbox" :value="brand.id " v-model="brands" @change="updateProduct" class="custom-control-input marque-checkbox" />
                                 <div class="custom-control-label">
                                     {{ brand.name }}
                                     <b class="badge badge-pill badge-light float-right">
@@ -57,29 +57,28 @@
                         </a>
                     </header>
                     <div class="filter-content collapse show" id="collapse_4" >
-                        <!-- <div class="card-body">
-                            <p>
-                                <input type="text" v-model="price_range"  id="amount" readonly="" class="text-dark text-center"  style=" border: 0; font-weight: bold; width: -webkit-fill-available; " />
-                            </p>
-
-                            <div id="slider-range" class="ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content" >
-                                <div class="ui-slider-range ui-corner-all ui-widget-header" style="left: 0%; width: 99.6%;" >
-                                </div>
-
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 0%;" >
-                                </span>
-                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default" style="left: 99.6%;" >
-                                </span>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="d-block">
+                                    <h2 class="text-center">Min</h2>
+                                </label>
+                                <vue-range-slider ref="slider" :max="this.default_max" :step="Number(100)" v-model="min"></vue-range-slider>
                             </div>
 
-                            <button id="price-filter" class="btn btn-block btn-sm btn-primary w-50 mt-3 mx-auto" >
+                            <div>
+                                <label class="d-block">
+                                    <h2 class="text-center">Max</h2>
+                                </label>
+                                <vue-range-slider ref="slider" :max="this.default_max" :step="Number(100)" v-model="max"></vue-range-slider>
+                            </div>
+
+                            <button @click="updateProduct" id="price-filter" class="btn btn-block btn-sm btn-primary w-50 mt-3 mx-auto" >
                                 Submit
                             </button>
-
-                            <button id="price-reset" class="btn btn-block btn-sm btn-primary w-50 mt-3 mx-auto" >
+                            <button @click="changePriceReset" id="price-reset" class="btn btn-block btn-sm btn-primary w-50 mt-3 mx-auto" >
                                 Reset
                             </button>
-                        </div> -->
+                        </div>
 
 
                     </div>
@@ -97,26 +96,15 @@
                         <div class="card-body">
                             <ul class="list-group list-group-flush">
 
-                                <li class="list-group-item switch-list">
+                                <li class="switch-list">
                                     <label class="switch">
-                                        <input type="checkbox" value="disponible" class="primary more-filter" />
+                                        <input v-model="available" @change="updateProduct" type="checkbox" class="primary more-filter" />
                                         <span class="slider round"></span>
                                     </label>
                                     <p class="pl-2 switch-text">
                                         View Products Available
                                     </p>
                                 </li>
-
-                                <li class="list-group-item switch-list">
-                                    <label class="switch">
-                                        <input type="checkbox" value="indisponible" class="primary more-filter" />
-                                        <span class="slider round"></span>
-                                    </label>
-                                    <p class="pl-2 switch-text">
-                                        Show products Unavailable
-                                    </p>
-                                </li>
-
                             </ul>
                         </div>
                     </div>
@@ -130,7 +118,7 @@
             <header class="border-bottom mb-4 pb-3">
                 <div class="form-inline">
                     <span id="nombre-article" class="mr-md-auto">
-                        {{ nbr_product }} Products Finds
+                        {{ this.nbr_products }} Products Finds
                     </span>
                     <select id="order-select" class="mr-2 form-control" @change="changeOrder" v-model="order" >
                         <option value="created_at-desc" selected="selected">Most Recent</option>
@@ -141,7 +129,7 @@
                         <option value="price-desc">Decreasing price</option>
                     </select>
 
-                    <select id="number-per-page" class="mr-2 form-control"  @change="changeNumberPaginate" v-model="nbr_paginate">
+                    <select id="number-per-page" class="mr-2 form-control"  @change="changePaginateNumber" v-model="nbr_paginate">
                         <option value="3" selected="selected">3</option>
                         <option value="6">6</option>
                         <option value="9">9</option>
@@ -166,11 +154,18 @@
 </template>
 
 <script>
+import 'vue-range-component/dist/vue-range-slider.css'
+import VueRangeSlider from 'vue-range-component'
+
+
 export default {
     name: 'CategoryPaginateFilter',
     mounted() {
     // created() {
         this.loadProducts()
+    },
+    components: {
+        VueRangeSlider
     },
     props:{
         category: {
@@ -185,33 +180,58 @@ export default {
     },
     data() {
         return {
+            nbr_products: this.nbr_product,
             products: [],
             pagination: {},
-            next_page: null,
+            currentPage: 1,
             order: 'created_at-desc',
+            order_column: 'created_at',
+            direction_order: 'DESC',
             nbr_paginate: '3',
             brands: [],
-            price_range: ''
+            min: Number(0),
+            max: Number(100000),
+            default_max:Number(100000),
+            available: false
         }
     },
     methods:{
         loadProducts(page = 1){
-            axios.get(`/category/${this.category.id}/products?page=${page}`)
+            let form = new FormData()
+            form.append('paginate',Number(this.nbr_paginate))
+            form.append('orderBy',this.order_column)
+            form.append('orderByDirection',this.direction_order)
+            form.append('brands',JSON.stringify(this.brands))
+            form.append('min',this.min)
+            form.append('max',this.max)
+            form.append('available',this.available)
+            axios.post(`/category/${this.category.id}/productsFilter/page/${page}`,form)
                 .then( ({data: pagination}) => {
-                    this.pagination = pagination
-                    this.products = pagination.data
-                    this.next_page = pagination.next_page_url
+                    // console.log(pagination.products)
+                    // console.log(pagination.nbr)
+                    this.pagination = pagination.products
+                    this.products = pagination.products.data
+                    this.currentPage = pagination.products.current_page
+                    this.nbr_products = pagination.nbr
                 })
         },
         changeOrder(){
-            console.log(this.order)
+            this.order_column = (this.order.split('-')[0])
+            this.direction_order = (this.order.split('-')[1]).toUpperCase()
+            this.updateProduct()
         },
-        changeNumberPaginate(){
-            console.log(this.nbr_paginate)
+        changePriceReset(){
+            this.min =0
+            this.max = this.default_max
+            this.updateProduct()
         },
-        changeBrands(){
-            console.log(this.brands)
-        }
+        changePaginateNumber(){
+            this.currentPage = 1
+            this.updateProduct()
+        },
+        updateProduct(){
+            this.loadProducts(this.currentPage)
+        },
     }
 }
 </script>
