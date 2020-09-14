@@ -7,9 +7,10 @@
             </a>
         </div>
         <div class="form mt-3 w-50">
-            <form id="form-search-bar" action="/index.php" method="get" style="   width: -webkit-fill-available;   display: flex;   margin: 0px !important; ">
+            <form id="form-search-bar" action="{{ route('search.products',) }}" method="POST" style="   width: -webkit-fill-available;   display: flex;   margin: 0px !important; ">
+                @csrf
                 <input type="hidden" name="action" value="recherche" />
-                <input id="input-search" type="text" class="form-control col-12" name="q" placeholder="Search Product..."/>
+                <input id="input-search" type="text" class="form-control col-12" name="query" placeholder="Search Product..."/>
                 <span class="input-group-btn input-button-style">
                     <button type="submit" class="btn btn-default btn-search" type="button">
                         <span class="fa fa-search"></span>

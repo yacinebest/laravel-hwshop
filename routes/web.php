@@ -20,6 +20,9 @@ Route::get('/product/{product}', 'Frontend\ProductController@product')->name('pr
 Route::get('/category/{category}', 'Frontend\CategoryController@category')->name('category');
 Route::post('/category/{category}/productsFilter/page/{page}', 'Frontend\CategoryController@paginateElementWithFilter')->name('category.products.paginate.filter');
 
+Route::post('/search', 'Frontend\SearchController@search')->name('search.products');
+Route::post('/search/{search}/api/page/{page}', 'Frontend\SearchController@apiSearch')->name('search.api');
+
 Route::get('/cart', 'Frontend\CartController@cart')->name('cart');
 
 Route::post('/order', 'Frontend\OrderController@order')->name('cart.order');

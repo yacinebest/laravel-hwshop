@@ -27,4 +27,7 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface , CardCount
     public function getProductsIdEqualToBrands($brands,$products);
     public function filterProductsWithoutBrands($id,$page,$request);
     public function filterProductsWithBrands($id,$page,$request);
+
+    public function searchProducts($q,$nbr);
+    public function filterProductForSearch($q,$page,$request);
 }

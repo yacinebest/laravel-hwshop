@@ -34,6 +34,8 @@ import ProductCard from "./components/frontend/products/ProductCardComponent.vue
 Vue.component('product-card', ProductCard);
 import CategoryPaginateFilter from "./components/frontend/categories/CategoryPaginateFilterComponent.vue";
 
+import SearchPaginate from "./components/frontend/search/SearchPaginateComponent.vue";
+
 import { routes } from './routes.js'
 import store from "./store";
 
@@ -59,7 +61,8 @@ const app = new Vue({
         MiniCart,
         CartTable,
         ProductCard,
-        CategoryPaginateFilter
+        CategoryPaginateFilter,
+        SearchPaginate
 
     }
 

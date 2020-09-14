@@ -182,6 +182,19 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
             return $products;
     }
 
+    public function searchProducts($q,$nbr){
+        return Product::where('name','LIKE','%'.$q.'%')->paginate($nbr);
+    }
+
+     public function filterProductForSearch($q,$page,$request){
+
+        $products = Product::
+                where('name','LIKE','%'.$q.'%')
+            ->orderBy($request->input('orderBy'),$request->input('orderByDirection'))
+            ->paginate($request->input('paginate'), ['*'], 'page', $page);
+            return $products;
+    }
+
 /*
 |---------------------------------------------------------------------------|
 | Override Interface FUNCTION                                               |
