@@ -2467,7 +2467,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      authUser: this.user,
+      authuser: this.user,
       avatar: this.user.avatar,
       storage_folder: '/storage/uploads/avatars/',
       src: '/storage/uploads/avatars/' + this.user.avatar
@@ -2480,7 +2480,7 @@ __webpack_require__.r(__webpack_exports__);
       var selectedFile = event.target.files[0];
       var form = new FormData();
       form.append('avatar', selectedFile);
-      form.append('user_id', this.authUser.id); // let url = '/management/profile'
+      form.append('user_id', this.authuser.id); // let url = '/management/profile'
 
       var url = '/profile/avatar';
       axios.post(url, form, {
@@ -3172,14 +3172,14 @@ __webpack_require__.r(__webpack_exports__);
         return {};
       }
     },
-    authUser: {
+    authuser: {
       type: String,
       "default": ''
     }
   },
   computed: {
     isAuth: function isAuth() {
-      return this.authUser;
+      return this.authuser;
     }
   },
   methods: {
@@ -3280,7 +3280,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return {};
       }
     },
-    authUser: {
+    authuser: {
       type: String,
       "default": ''
     }
@@ -3414,7 +3414,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return {};
       }
     },
-    authUser: {
+    authuser: {
       type: String,
       "default": ''
     }
@@ -3424,7 +3424,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: {
     isAuth: function isAuth() {
-      return this.authUser;
+      return this.authuser;
     }
   },
   data: function data() {
@@ -3791,14 +3791,16 @@ __webpack_require__.r(__webpack_exports__);
       required: true
     },
     entity_owner: {
-      required: true
+      required: false,
+      "default": null //     required: true,
+
     },
     entity_model: {
       type: String,
       required: true,
       "default": ''
     },
-    authUser: {
+    authuser: {
       type: String,
       "default": ''
     }
@@ -3828,29 +3830,29 @@ __webpack_require__.r(__webpack_exports__);
     isUpvoted: function isUpvoted() {
       var _this = this;
 
-      if (this.authUser === '') return false;else return !!this.upvotes.find(function (v) {
-        return v.user_id === _this.authUser;
+      if (this.authuser === '') return false;else return !!this.upvotes.find(function (v) {
+        return v.user_id === _this.authuser;
       });
     },
     isDownvoted: function isDownvoted() {
       var _this2 = this;
 
-      if (this.authUser === '') return false;else return !!this.downvotes.find(function (v) {
-        return v.user_id === _this2.authUser;
+      if (this.authuser === '') return false;else return !!this.downvotes.find(function (v) {
+        return v.user_id === _this2.authuser;
       });
     },
     isOwner: function isOwner() {
-      if (this.authUser === '') return false;else return this.authUser === this.entity_owner;
+      if (this.authuser === '') return false;else return this.entity_owner != null && this.authuser === this.entity_owner;
     },
     isAuth: function isAuth() {
-      return this.authUser;
+      return this.authuser;
     }
   },
   methods: {
     vote: function vote(type) {
       var _this3 = this;
 
-      if (this.authUser != '') {
+      if (this.authuser != '') {
         if (this.isOwner) {
           alert("You Can't Like/Dislike Your Own");
         } else {
@@ -3862,7 +3864,7 @@ __webpack_require__.r(__webpack_exports__);
 
             if (_this3.isUpvoted || _this3.isDownvoted) {
               _this3.votes = _this3.votes.map(function (v) {
-                return v.user_id === _this3.authUser ? data : v;
+                return v.user_id === _this3.authuser ? data : v;
               });
             } else {
               _this3.votes.push(data);
@@ -43385,7 +43387,7 @@ var render = function() {
                 _vm.comment.user
                   ? _c("votes", {
                       attrs: {
-                        authUser: _vm.isAuth,
+                        authuser: _vm.isAuth,
                         initvotes: _vm.comment.votes,
                         entity_id: _vm.comment.id,
                         entity_owner: _vm.comment.user.id,
@@ -43467,7 +43469,7 @@ var render = function() {
               [
                 _c("replies", {
                   ref: "replies",
-                  attrs: { comment: _vm.comment, authUser: _vm.isAuth }
+                  attrs: { comment: _vm.comment, authuser: _vm.isAuth }
                 })
               ],
               1
@@ -43558,7 +43560,7 @@ var render = function() {
               attrs: {
                 comment: comment,
                 product: _vm.product,
-                authUser: _vm.isAuth
+                authuser: _vm.isAuth
               }
             })
           }),
@@ -43639,14 +43641,14 @@ var render = function() {
             _vm._v(" "),
             _c("small", [_vm._v(_vm._s(reply.body))]),
             _vm._v(" "),
-            _vm.authUser != ""
+            _vm.authuser != ""
               ? _c(
                   "div",
                   [
                     reply.user
                       ? _c("votes", {
                           attrs: {
-                            authUser: _vm.authUser,
+                            authuser: _vm.authuser,
                             initvotes: reply.votes,
                             entity_id: reply.id,
                             entity_owner: reply.user.id,

@@ -10,8 +10,8 @@
                 <h6  v-if="reply.username" class="mt-0" >{{ reply.username  }}</h6>
                 <small>{{ reply.body  }}</small>
 
-                <div v-if="authUser!=''" >
-                    <votes v-if="reply.user"  :authUser="authUser" :initvotes="reply.votes"  :entity_id="reply.id" :entity_owner="reply.user.id" entity_model="Comment"></votes>
+                <div v-if="authuser!=''" >
+                    <votes v-if="reply.user"  :authuser="authuser" :initvotes="reply.votes"  :entity_id="reply.id" :entity_owner="reply.user.id" entity_model="Comment"></votes>
                 </div>
                 <div v-else>
                     <votes v-if="reply.user" :initvotes="reply.votes"  :entity_id="reply.id" :entity_owner="reply.user.id" entity_model="Comment"></votes>
@@ -44,7 +44,7 @@ export default {
             required: true,
             default: () => ({})
         },
-        authUser: {
+        authuser: {
             type: String,
             default: ''
         }
@@ -54,7 +54,7 @@ export default {
     },
     computed: {
         isAuth(){
-            return this.authUser
+            return this.authuser
         }
     },
     data() {

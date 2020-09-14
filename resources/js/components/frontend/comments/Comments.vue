@@ -9,7 +9,7 @@
         </div>
 
         <div v-if="this.isAuth" >
-            <comment v-for="comment in comments.data" :key="comment.id" :comment="comment" :product="product" :authUser="isAuth" ></comment>
+            <comment v-for="comment in comments.data" :key="comment.id" :comment="comment" :product="product" :authuser="isAuth" ></comment>
         </div>
         <div v-else>
             <comment v-for="comment in comments.data" :key="comment.id" :comment="comment" :product="product"></comment>
@@ -39,7 +39,7 @@ export default {
             required: true,
             default: () => ({})
         },
-        authUser: {
+        authuser: {
             type: String,
             default: ''
         }

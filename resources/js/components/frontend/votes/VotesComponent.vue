@@ -66,14 +66,16 @@ export default {
             required: true,
         },
         entity_owner: {
-            required: true,
+            required: false,
+            default: null
+            //     required: true,
         },
         entity_model:{
             type: String,
             required: true,
             default: ''
         },
-         authUser: {
+         authuser: {
             type: String,
             default: ''
         }
@@ -97,31 +99,31 @@ export default {
             return numeral(this.downvotes.length).format('0a')
         },
         isUpvoted(){
-            if(this.authUser==='')
+            if(this.authuser==='')
                 return false
             else
-                return (!! this.upvotes.find( v => v.user_id ===this.authUser ) )
+                return (!! this.upvotes.find( v => v.user_id ===this.authuser ) )
         },
         isDownvoted(){
-            if(this.authUser==='')
+            if(this.authuser==='')
                 return false
             else
-                return (!! this.downvotes.find( v => v.user_id === this.authUser ) )
+                return (!! this.downvotes.find( v => v.user_id === this.authuser ) )
         },
 
         isOwner(){
-            if(this.authUser==='')
+            if(this.authuser==='')
                 return false
             else
-                return this.authUser === this.entity_owner
+                return this.entity_owner!=null  && this.authuser === this.entity_owner
         },
         isAuth(){
-            return this.authUser
+            return this.authuser
         }
     },
     methods: {
         vote(type){
-            if(this.authUser!=''){
+            if(this.authuser!=''){
                 if ( this.isOwner ) {
                     alert("You Can't Like/Dislike Your Own")
                 }
@@ -135,7 +137,7 @@ export default {
                         .then( ({data})=>{
                             if(this.isUpvoted || this.isDownvoted){
                                 this.votes = this.votes.map( v => {
-                                    return ( v.user_id === this.authUser ) ? data : v
+                                    return ( v.user_id === this.authuser ) ? data : v
                                 })
                             }
                             else{

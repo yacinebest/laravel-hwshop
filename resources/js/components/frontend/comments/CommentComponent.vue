@@ -9,7 +9,7 @@
 
 
             <div v-if="this.isAuth" class="d-flex">
-                <votes v-if="comment.user"  :authUser="isAuth" :initvotes="comment.votes"  :entity_id="comment.id" :entity_owner="comment.user.id" entity_model="Comment"></votes>
+                <votes v-if="comment.user"  :authuser="isAuth" :initvotes="comment.votes"  :entity_id="comment.id" :entity_owner="comment.user.id" entity_model="Comment"></votes>
                 <button @click="showFormReply" class="btn btn-sm ml-2" :class="{ 'btn-primary': !addingReply,'btn-danger':addingReply }" >{{ !this.addingReply ? 'Add Reply' : 'Cancel'  }}</button>
             </div>
             <div v-else>
@@ -25,7 +25,7 @@
 
 
             <div v-if="this.isAuth" >
-                <replies ref="replies" :comment="comment" :authUser="isAuth"></replies>
+                <replies ref="replies" :comment="comment" :authuser="isAuth"></replies>
             </div>
             <div v-else>
                 <replies ref="replies" :comment="comment"></replies>
@@ -64,14 +64,14 @@ export default {
             required: true,
             default: () => ({})
         },
-        authUser: {
+        authuser: {
             type: String,
             default: ''
         }
     },
      computed: {
         isAuth(){
-            return this.authUser
+            return this.authuser
         }
     },
     methods: {

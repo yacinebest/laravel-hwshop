@@ -78,8 +78,14 @@
 
                 <div class="w-100 px-3">
                     <a href="#comment-tab" class="go-to-comment">
-                        {{ $product->commentCount }} Opinion (s) / Give your opinion
+                        {{ $product->commentCount }} Opinion (s) /
                     </a>
+                    @if(Auth::check())
+                        <votes authuser="{{ Auth::user()->id }}" :initvotes="{{ $product->votes }}"  entity_id="{{ $product->id }}" entity_model="Product"></votes>
+                    @else
+                        <votes :initvotes="{{  $product->votes }}"  entity_id="{{ $product->id }}" entity_model="Product"></votes>
+                    @endif
+
                 </div>
                 <hr />
                 <div class="w-100 px-3 py-1">
@@ -129,7 +135,7 @@
 
         <div id="comment" class="tab-pane tab-details container-fluid comment p-4">
             @if(Auth::check())
-                <comments-card :authUser="{{json_encode( Auth::user()->id) }}" :product="{{ $product }}"></comments-card>
+                <comments-card :authuser="{{json_encode( Auth::user()->id) }}" :product="{{ $product }}"></comments-card>
             @else
                 <comments-card :product="{{ $product }}"></comments-card>
             @endif

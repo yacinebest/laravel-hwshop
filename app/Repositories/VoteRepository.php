@@ -23,7 +23,7 @@ class VoteRepository extends BaseRepository implements VoteRepositoryInterface {
     }
 
     public function otherFindOrFail($id,$model = null){
-        if($model=='Video')
+        if($model=='Product')
             return Product::findOrFail($id);
         else if($model == 'Comment')
             return Comment::findOrFail($id);

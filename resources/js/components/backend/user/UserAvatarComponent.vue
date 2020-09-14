@@ -46,7 +46,7 @@ export default {
     },
     data() {
         return {
-            authUser: this.user,
+            authuser: this.user,
             avatar : this.user.avatar,
             storage_folder: '/storage/uploads/avatars/',
             src:  '/storage/uploads/avatars/'  + this.user.avatar
@@ -57,7 +57,7 @@ export default {
             let selectedFile = event.target.files[0]
             let form = new FormData()
             form.append('avatar',selectedFile)
-            form.append('user_id',this.authUser.id)
+            form.append('user_id',this.authuser.id)
 
             // let url = '/management/profile'
             let url = '/profile/avatar'
