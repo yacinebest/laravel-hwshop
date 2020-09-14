@@ -3,17 +3,17 @@
 
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-padding nav-theme">
 
-        {{-- <button id="collapse-bar" class="navbar-toggler first-button collapsed" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <button id="collapse-bar" class="navbar-toggler first-button collapsed" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
-        </button> --}}
+        </button>
 
         <div class="justify-content-center">
-            <a href="#" class="navbar-brand mr-auto style-menu logo-site">
+            <a href="{{ route('home') }}" class="navbar-brand mr-auto style-menu logo-site">
                 <img class="logo-style logo-text" src="{{ asset('/storage/svg/logo-hwshop-text.svg') }}" alt="HWShop Name" />
             </a>
         </div>
 
-        {{-- <div class="nav navbar-nav btn-group btn-group-menu-mobile">
+        <div class="nav navbar-nav btn-group btn-group-menu-mobile">
             <button type="button" class="btn btn-primary button-icon button-cart">
                 <span class="fa fa-shopping-cart style-icon">
                     <span class="cercel-number"></span>
@@ -24,9 +24,15 @@
             </button>
             <div class="dropdown-menu dropdown-menu-right dropdown-menu-right-position p-0 m-0" >
                 <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding liste-comp" style="margin-top: 12px;" >
+
+                    @if(Auth::check())
+                        @include('frontend.layouts.navbars.menu.auth')
+                    @else
+                        @include('frontend.layouts.navbars.menu.user')
+                    @endif
                 </ul>
             </div>
-        </div> --}}
+        </div>
 
         <!-- premiere partie du Menu Accueil, categorie... -->
         <div id="navbarMenu" class="in navbar-collapse justify-content-center collapse pr-3">
@@ -66,9 +72,10 @@
         </div>
 
       <!-- deuxieme partie du Menu Mon compte -->
-        <div id="navbarMenuButtonGroup" class="navbarMenu-connexion-inscription">
+        <div id="navbarMenuButtonGroup">
+        {{-- <div id="navbarMenuButtonGroup" class="navbarMenu-connexion-inscription"> --}}
             <!-- Compte avec logo -->
-            {{-- <div class="nav navbar-nav navbar-right btn-group btn-group-menu">
+            <div class="nav navbar-nav navbar-right btn-group btn-group-menu">
                 <button id="user-shop-icon" type="button" class="btn btn-primary button-icon button-cart">
                     <span class="fa fa-shopping-cart style-icon">
                         <span class="cercel-number"></span>
@@ -81,9 +88,15 @@
 
                 <div class="dropdown-menu dropdown-menu-right m-0 p-0">
                     <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding liste-comp" style="margin-top: 12px; width: max-content; left: auto;" >
+
+                        @if(Auth::check())
+                            @include('frontend.layouts.navbars.menu.auth')
+                        @else
+                            @include('frontend.layouts.navbars.menu.user')
+                        @endif
                     </ul>
                 </div>
-            </div> --}}
+            </div>
 
             <!-- Compte sans logo avec texte seulemnt -->
             <div id="navbarcompte" class="nav navbar-nav navbar-right drop-compte">

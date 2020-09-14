@@ -7,7 +7,7 @@
             </a>
         </div>
         <div class="form mt-3 w-50">
-            <form id="form-search-bar" action="{{ route('search.products',) }}" method="POST" style="   width: -webkit-fill-available;   display: flex;   margin: 0px !important; ">
+            <form id="form-search-bar" action="{{ route('search') }}" method="POST" style="   width: -webkit-fill-available;   display: flex;   margin: 0px !important; ">
                 @csrf
                 <input type="hidden" name="action" value="recherche" />
                 <input id="input-search" type="text" class="form-control col-12" name="query" placeholder="Search Product..."/>

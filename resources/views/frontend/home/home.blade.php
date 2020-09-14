@@ -18,12 +18,12 @@
 <div class="container">
     <product-card :products_props="{{ $products  }}" page="home"></product-card>
 </div>
-
+{{--
 <div class="product-more text-right">
     <a href="#" class="btn btn-danger all-product-link pull-md-right h4 product-more text-right m-3 voir-plus-produit">
         See More Products
     </a>
-</div>
+</div> --}}
 <hr>
 @endforeach
 

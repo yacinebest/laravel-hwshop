@@ -1,12 +1,12 @@
 <template>
-    <div class="row">
+    <div class="row pt-4">
 
-        <main class="col-lg-9 col-md-8">
+        <main>
 
             <header class="border-bottom mb-4 pb-3">
                 <div class="form-inline">
                     <span id="nombre-article" class="mr-md-auto">
-                        {{ this.nbr_products }} Products Finds
+                        {{ this.nbr_products }} Products Finds For "{{q}}"
                     </span>
                     <select id="order-select" class="mr-2 form-control" @change="changeOrder" v-model="order" >
                         <option value="created_at-desc" selected="selected">Most Recent</option>
@@ -18,9 +18,9 @@
                     </select>
 
                     <select id="number-per-page" class="mr-2 form-control"  @change="changePaginateNumber" v-model="nbr_paginate">
-                        <option value="10" selected="selected">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
+                        <option value="9" selected="selected">9</option>
+                        <option value="18">18</option>
+                        <option value="27">27</option>
                     </select>
 
                 </div>
@@ -48,26 +48,18 @@ export default {
         q: {
             type: String,
             required: true,
-        },
-        products: {
-            // type: Array,
-            required: true,
-        },
-        nbr_product:{
-            type: Number,
-            required: true,
-            default: 0
         }
     },
     data() {
         return {
-            nbr_products: this.nbr_product,
+            products: [],
+            nbr_products: 0,
             pagination: {},
             currentPage: 1,
             order: 'created_at-desc',
             order_column: 'created_at',
             direction_order: 'DESC',
-            nbr_paginate: '10',
+            nbr_paginate: '9',
         }
     },
     methods:{

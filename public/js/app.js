@@ -3258,26 +3258,18 @@ __webpack_require__.r(__webpack_exports__);
     q: {
       type: String,
       required: true
-    },
-    products: {
-      // type: Array,
-      required: true
-    },
-    nbr_product: {
-      type: Number,
-      required: true,
-      "default": 0
     }
   },
   data: function data() {
     return {
-      nbr_products: this.nbr_product,
+      products: [],
+      nbr_products: 0,
       pagination: {},
       currentPage: 1,
       order: 'created_at-desc',
       order_column: 'created_at',
       direction_order: 'DESC',
-      nbr_paginate: '10'
+      nbr_paginate: '9'
     };
   },
   methods: {
@@ -41967,10 +41959,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row" }, [
+  return _c("div", { staticClass: "row pt-4" }, [
     _c(
       "main",
-      { staticClass: "col-lg-9 col-md-8" },
       [
         _c("header", { staticClass: "border-bottom mb-4 pb-3" }, [
           _c("div", { staticClass: "form-inline" }, [
@@ -41981,7 +41972,9 @@ var render = function() {
                 _vm._v(
                   "\n                    " +
                     _vm._s(this.nbr_products) +
-                    " Products Finds\n                "
+                    ' Products Finds For "' +
+                    _vm._s(_vm.q) +
+                    '"\n                '
                 )
               ]
             ),
@@ -42080,13 +42073,13 @@ var render = function() {
                 }
               },
               [
-                _c("option", { attrs: { value: "10", selected: "selected" } }, [
-                  _vm._v("10")
+                _c("option", { attrs: { value: "9", selected: "selected" } }, [
+                  _vm._v("9")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "20" } }, [_vm._v("20")]),
+                _c("option", { attrs: { value: "18" } }, [_vm._v("18")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "30" } }, [_vm._v("30")])
+                _c("option", { attrs: { value: "27" } }, [_vm._v("27")])
               ]
             )
           ])

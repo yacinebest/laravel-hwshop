@@ -361,10 +361,7 @@ body {
     position: absolute !important;
 }
 
-
-/* On alls that are greater or equal to 980px*/
-
-@media all and (min-width: 1200px) {
+@media all and (min-width: 1201px) {
     #panier {
         display: list-item;
     }
@@ -390,21 +387,9 @@ body {
     .btn-group-menu-mobile {
         display: none;
     }
-    /* group button pour avoir icon user et shop a droite sur mobile */
-    /*.border-style-navbar{
-	border-right: none;
-    border-left: white;
-    border-style: outset;
-    border-top: none;
-    border-bottom: none;
-    border-width: thin;
-	}*/
 }
 
-
-/* On alls that are 979px to 768px */
-
-@media all and (max-width: 1199px) and (min-width: 992px) {
+@media all and (max-width: 1200px) and (min-width: 993px) {
     #panier {
         display: none;
     }
@@ -430,21 +415,10 @@ body {
     .btn-group-menu-mobile {
         display: none;
     }
-    /* group button pour avoir icon user et shop a droite sur mobile */
-    /*.border-style-navbar{
-		border-right: none;
-		border-left: white;
-		border-style: outset;
-		border-top: none;
-		border-bottom: none;
-		border-width: thin;
-	}	*/
 }
 
-
-/* On alls that are 767px or less */
-
-@media all and (max-width: 1075px) {
+@media all and (max-width: 992px) {
+    /* @media all and (max-width: 1074px) { */
     #panier {
         display: none;
     }

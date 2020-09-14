@@ -190,8 +190,8 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
 
         $products = Product::
                 where('name','LIKE','%'.$q.'%')
-            ->orderBy($request->input('orderBy'),$request->input('orderByDirection'))
-            ->paginate($request->input('paginate'), ['*'], 'page', $page);
+            ->orderBy($request['orderBy'],$request['orderByDirection'])
+            ->paginate($request['paginate'], ['*'], 'page', $page);
             return $products;
     }
 

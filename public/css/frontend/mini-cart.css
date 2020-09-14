@@ -202,19 +202,20 @@ span.cercel-number {
     overflow: auto;
 }
 
-@media all and (min-width: 1136px) {
+@media all and (min-width: 1197px) {
+    /* @media all and (min-width: 1136px) { */
     .shopping-cart {
-        /*right: 466px !important;*/
         right: 29%!important;
+        right: 33%!important;
     }
     .list-article-panier {
         max-height: 340px !important;
     }
 }
 
-@media all and (max-width: 1135px) and (min-width: 955px) {
+@media all and (max-width: 1196px) and (min-width: 955px) {
+    /* @media all and (max-width: 1135px) and (min-width: 955px) { */
     .shopping-cart {
-        /*right: 35px !important;*/
         right: 3% !important;
     }
     .list-article-panier {

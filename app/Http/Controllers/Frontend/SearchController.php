@@ -16,13 +16,15 @@ class SearchController extends Controller
 
     public function search(Request $request){
         if($request->input('query')){
-            $products = $this->productRepository->searchProducts($request->input('query'),10);
-            $nbr_product = $products->total();
             $q = $request->input('query');
-            return view('frontend.search.search',compact('products','nbr_product','q')) ;
+            return redirect(route('search.products',$q));
         }
         else
             return redirect(route('home'));
+    }
+
+    public function searchProducts($search){
+        return view('frontend.search.search',compact('search')) ;
     }
 
     public function apiSearch(Request $request,$search,$page){

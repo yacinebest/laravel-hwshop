@@ -15,13 +15,7 @@
 {{-- section product filter --}}
 <section class="section-content padding-y mb-5">
     <div class="container">
-        @if($products)
-            <search-paginate :q="{{$q}}" :products="{{ $products  }}" :nbr_product="{{$nbr_product }}"></search-paginate>
-        @else
-            <div>
-                <h3>0 Products Found...</h3>
-            </div>
-        @endif
+        <search-paginate q="{{$search}}"></search-paginate>
     </div>
 </section>
 
