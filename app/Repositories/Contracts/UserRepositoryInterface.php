@@ -18,4 +18,6 @@ interface UserRepositoryInterface extends BaseRepositoryInterface , CardCountRou
     public function getEditableColumn();
 
     public function getOrdersSortByDate($user);
+
+    public function toggleVote($user,$entity,$type);
 }

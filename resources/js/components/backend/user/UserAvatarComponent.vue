@@ -13,8 +13,8 @@
                 <div class="col-lg-3 order-lg-2">
                     <div class="card-profile-image">
                         <input type="file" class="d-none" name="avatar" id="user-avatar" refs="avatar" @change="uploadAvatar" >
-                        <a href="#" onclick="document.getElementById('user-avatar').click();">
-                            <img :src="'/storage/uploads/avatars/' +this.avatar" class="rounded-circle" id="avatar-upload-img" >
+                        <a onclick="document.getElementById('user-avatar').click();">
+                            <img  id="avatar-upload-img" :src="this.src" class="rounded-circle w-100" >
                         </a>
                     </div>
                 </div>
@@ -48,6 +48,8 @@ export default {
         return {
             authUser: this.user,
             avatar : this.user.avatar,
+            storage_folder: '/storage/uploads/avatars/',
+            src:  '/storage/uploads/avatars/'  + this.user.avatar
         };
     },
     methods: {
@@ -57,16 +59,16 @@ export default {
             form.append('avatar',selectedFile)
             form.append('user_id',this.authUser.id)
 
-            axios.post('/management/profile',form,{
+            // let url = '/management/profile'
+            let url = '/profile/avatar'
+            axios.post(url,form,{
                     headers: {
                         "Content-Type": "multipart/form-data"
                     },
             })
                 .then( ({data}) => {
                     this.avatar = data
-                    let oldPath = document.getElementById("avatar-upload-img").getAttribute('src')
-                    let newPath = oldPath.substring(0, oldPath.lastIndexOf("/")) + "/" + this.avatar
-                    document.getElementById('avatar-img').setAttribute('src',newPath)
+                    this.src = this.storage_folder + this.avatar
                 })
         }
     }

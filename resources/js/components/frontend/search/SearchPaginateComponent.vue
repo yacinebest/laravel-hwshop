@@ -70,8 +70,6 @@ export default {
             form.append('orderByDirection',this.direction_order)
             axios.post(`/search/${this.q}/api/page/${page}`,form)
                 .then( ({data: pagination}) => {
-                    console.log(pagination.products)
-                    console.log(pagination.nbr)
                     this.pagination = pagination.products
                     this.products = pagination.products.data
                     this.currentPage = pagination.products.current_page

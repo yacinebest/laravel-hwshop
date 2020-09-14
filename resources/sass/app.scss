@@ -120,3 +120,30 @@
         }
     }
 }
+
+///vote UP DOWN
+.thumbs-up,
+.thumbs-down {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    fill: currentColor;
+}
+
+.thumbs-down-active,
+.thumbs-up-active {
+    color: #3EA6FF;
+}
+
+.thumbs-down {
+    margin-left: 1rem;
+}
+
+//
+.w-full {
+    width: 100% !important;
+}
+
+.w-80 {
+    width: 80% !important;
+}

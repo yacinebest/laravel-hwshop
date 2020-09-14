@@ -28,6 +28,8 @@
         "bootstrap-select": "^1.13.18",
         "font-awesome": "^4.7.0",
         "laravel-vue-pagination": "^2.3.1",
+        "numeral": "^2.0.6",
+        "vue-avatar": "^2.3.0",
         "vue-range-component": "^1.0.3",
         "vue-router": "^3.4.3",
         "vue-toasted": "^1.1.28",

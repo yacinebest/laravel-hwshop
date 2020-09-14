@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\User\PasswordRequest;
+use App\Repositories\Contracts\ImageRepositoryInterface;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,10 @@ class UserController extends Controller
 {
     private $userRepository;
 
-    public function __construct(UserRepositoryInterface $userRepository) {
+    public function __construct(UserRepositoryInterface $userRepository,
+                                ImageRepositoryInterface $imageRepository) {
         $this->userRepository = $userRepository;
+        $this->imageRepository = $imageRepository;
     }
 
 
@@ -44,6 +47,14 @@ class UserController extends Controller
         $user = $this->userRepository->getAuthUser();
         $this->userRepository->update($user,$request->all());
         return back()->withStatus(__('Profile successfully updated.'));
+    }
+
+    public function uploadAvatar(Request $request)
+    {
+        $avatar = $this->imageRepository->storeFile($request->file('avatar'),"public/uploads/avatars");
+        $user = $this->userRepository->baseFindOrFail($request->user_id);
+        $this->userRepository->update($user,['avatar' => $avatar ]);
+        return response()->json($avatar);
     }
 
      /**

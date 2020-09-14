@@ -12,7 +12,9 @@ class User extends Authenticatable
     use Notifiable;
     // protected $with =['orders'] ;
     // protected $appends =['isAdmin','isUser'];
-    protected $appends =['isAdmin','isUser','commentCount','upVoteCount','downVoteCount' ,
+
+    // protected $appends =['isAdmin','isUser','commentCount','upVoteCount','downVoteCount' ,
+    protected $appends =['isAdmin','isUser',
     'orderApprovedByAdminCount','age','roleType'];
 
     // Disable Incrementing
@@ -105,7 +107,27 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Vote');
     }
 
-
+    public function toggleVote($entity,$type)
+    {
+        if($vote = $entity->votes->where('user_id',$this->id)->first() ){
+            if($vote->type == $type)
+                return $vote->delete();
+            else{
+                $vote->update([
+                    'type'=>$type
+                ]);
+                return $vote;
+            }
+        }
+        else{
+            $ent = $entity->votes()->create([
+                'type'=>$type,
+                'user_id'=>$this->id
+            ])->fresh();
+            $entity->votes->push($ent);
+            return $ent;
+        }
+    }
 /*
 |---------------------------------------------------------------------------|
 | GETTER & SETTER                                                           |
@@ -191,4 +213,6 @@ class User extends Authenticatable
     {
         return count($this->orders);
     }
+
+
 }

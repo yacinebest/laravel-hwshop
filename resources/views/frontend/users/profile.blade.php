@@ -8,6 +8,9 @@
         My informations
     </div>
     <div class="card-body">
+
+        <user-avatar :user="{{ $user }}" :upload="true"></user-avatar>
+
         <form method="post" action="{{ route('profile.update') }}" autocomplete="off">
             @csrf
             @method('put')

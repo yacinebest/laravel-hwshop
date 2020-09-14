@@ -13,20 +13,39 @@
             @if($user->commentCount)
                 <hr>
                 @foreach($user->comments as $comment)
-                    <li class='latest-li border rounded-sm p-3 bg-light shadow-sm'>
-                        <h5>[{{ $comment->create_at }}] -
-                            <a href="{{ $comment->product->id }}">
-                                {{$comment->product->name}}
-                            </a>
-                        </h5>
-                        <p class='bg-white p-2 border rounded-sm shadow' style='background-color: #f6f7f9 !important;'>
-                            {{$comment->body}}
-                        </p>
+                    @if($comment->parent_id==null)
+                        <li class='latest-li border rounded-sm p-3 bg-light shadow-sm'>
+                            <h5>[{{ $comment->created_at }}] -
+                                <a href="{{ $comment->product->id }}">
+                                    {{$comment->product->name}}
+                                </a>
+                            </h5>
+                            <p class='bg-white p-2 border rounded-sm shadow' style='background-color: #f6f7f9 !important;'>
+                                {{$comment->body}}
+                            </p>
+                        </li>
+                    @else
+                        <li class='latest-li border rounded-sm p-3 bg-light shadow-sm'>
+                            <h5>[{{ $comment->created_at }}] -
+                                <a href="{{ $comment->product->id }}">
+                                    {{$comment->product->name}}
+                                </a>
+                                <br>
+                                Parent Comment By {{ $comment->parent->user->username }}
+                            </h5>
+                            <i ></i>[Parent Comment] - [{{ $comment->parent->created_at }}]
+                            <p class='bg-white p-2 border rounded-sm shadow' style='background-color: #f6f7f9 !important;'>
+                                {{$comment->parent->body}}
+                            </p>
+                            <i class="fa fa-reply px-2"></i>[Reply Comment] - [{{ $comment->created_at }}]
+                            <p class='bg-white mx-3 p-2 border rounded-sm shadow' style='background-color: #f6f7f9 !important;'>
+                                {{$comment->body}}
+                            </p>
 
-                        {{-- reply to comment --}}
-                        {{-- <i class="fa fa-reply px-2"></i>[Réponse de l\'équipe HWShop] - ['.$comment['date_reponse_admin'].'] --}}
-                        {{-- <p class='bg-white mx-3 p-2 border rounded-sm shadow' style='background-color: #f6f7f9 !important;'></p> --}}
-                    </li>
+
+
+                        </li>
+                    @endif
                     <hr>
                 @endforeach
             @else

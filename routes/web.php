@@ -49,8 +49,17 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('/register', 'Frontend\AuthController@showRegisterForm')->name('register.user');
 });
 
+Route::get('/products/{product}/comments', 'Frontend\CommentController@index')->name('comments.product.index');
+Route::get('/comments/{comment}/replies', 'Frontend\CommentController@show')->name('replies.comment.show');
 
+Route::group(['middleware' => ['auth']], function () {
+    Route::post('/comments/{product}','Frontend\CommentController@store')->name('comment.product.store');
+    Route::post('/votes/{entity}','Frontend\VoteController@vote')->name('vote.entity');
+    Route::post('/profile/avatar', ['as' => 'user.avatar', 'uses' => 'Frontend\UserController@uploadAvatar']);
+});
 
+////////////////////////////////////////////////////////////////////////////////////////
+//Backend
 Route::group(['prefix'=>'management'], function () {
     Route::get('', 'Backend\HomeController@welcome')->middleware('management.auth')->name('management');
     // Route::get('/management', 'Backend\HomeController@index')->middleware('isAdmin')->name('management');

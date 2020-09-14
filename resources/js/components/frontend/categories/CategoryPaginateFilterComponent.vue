@@ -142,7 +142,6 @@
             </header>
 
             <product-card  :products_props=" this.pagination.data" page="category"></product-card>
-            <!-- <product-card v-if="this.pagination && this.pagination.data"  :products_props=" this.pagination.data" page="category"></product-card> -->
 
             <pagination :data="this.pagination" @pagination-change-page="this.loadProducts">
                 <span slot="prev-nav">&lt; Previous</span>
@@ -207,8 +206,6 @@ export default {
             form.append('available',this.available)
             axios.post(`/category/${this.category.id}/productsFilter/page/${page}`,form)
                 .then( ({data: pagination}) => {
-                    // console.log(pagination.products)
-                    // console.log(pagination.nbr)
                     this.pagination = pagination.products
                     this.products = pagination.products.data
                     this.currentPage = pagination.products.current_page

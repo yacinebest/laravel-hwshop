@@ -95,4 +95,10 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface  
     public function getOrdersSortByDate($user){
         return $user->orders->sortByDesc('order_date');
     }
+
+    public function toggleVote($user,$entity,$type)
+    {
+        return $user->toggleVote($entity,$type) ;
+    }
+
 }

@@ -35,7 +35,8 @@ class Product extends BaseModel
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment');
+        return $this->hasMany('App\Models\Comment')->whereNull('parent_id')->orderBy('created_at','DESC');
+        // return $this->hasMany('App\Models\Comment');
     }
 
     public function votes()
@@ -91,7 +92,7 @@ class Product extends BaseModel
      */
     public function getCommentCountAttribute()
     {
-        return count($this->comments);
+        return count(Comment::where('product_id',$this->id)->get());
     }
 
      /**

@@ -26,7 +26,7 @@
                 <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding liste-comp" style="margin-top: 12px;" >
 
                     @if(Auth::check())
-                        @include('frontend.layouts.navbars.menu.auth')
+                        @include('frontend.layouts.navbars.menu.auth',['id_logout'=>'logout-form1'])
                     @else
                         @include('frontend.layouts.navbars.menu.user')
                     @endif
@@ -90,7 +90,7 @@
                     <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding liste-comp" style="margin-top: 12px; width: max-content; left: auto;" >
 
                         @if(Auth::check())
-                            @include('frontend.layouts.navbars.menu.auth')
+                            @include('frontend.layouts.navbars.menu.auth',['id_logout'=>'logout-form2'])
                         @else
                             @include('frontend.layouts.navbars.menu.user')
                         @endif
@@ -117,7 +117,7 @@
                     <ul class="dropdown-menu dropdown-width-compte navbar-dark bg-dark navbar-padding lop" >
 
                         @if(Auth::check())
-                            @include('frontend.layouts.navbars.menu.auth')
+                            @include('frontend.layouts.navbars.menu.auth',['id_logout'=>'logout-form'])
                         @else
                             @include('frontend.layouts.navbars.menu.user')
                         @endif

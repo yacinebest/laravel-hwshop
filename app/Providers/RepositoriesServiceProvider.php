@@ -62,6 +62,9 @@ class RepositoriesServiceProvider extends ServiceProvider
         $this->app->bind(    'App\\Repositories\\Contracts\\InvoiceRepositoryInterface' ,
                             'App\\Repositories\\InvoiceRepository');
 
+        $this->app->bind(    'App\\Repositories\\Contracts\\VoteRepositoryInterface' ,
+                            'App\\Repositories\\VoteRepository');
+
 
     }
 }

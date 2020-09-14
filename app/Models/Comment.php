@@ -5,7 +5,9 @@ namespace App\Models;
 class Comment extends BaseModel
 {
 
-    protected $appends =['upVoteCount','downVoteCount','voteCount'];
+    // protected $appends =[];
+    protected $appends =['username','upVoteCount','downVoteCount','voteCount'];
+    // protected $with =['user'] ;
 
     public function user()
     {
@@ -25,6 +27,11 @@ class Comment extends BaseModel
     public function parent()
     {
         return $this->belongsTo('App\Models\Comment', 'parent_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany('App\Models\Comment','parent_id')->whereNotNull('parent_id')->orderBy('created_at','DESC');
     }
 
 
@@ -55,6 +62,11 @@ class Comment extends BaseModel
     public function getVoteCountAttribute()
     {
         return count($this->votes);
+    }
+
+    public function getUsernameAttribute()
+    {
+        return $this->user->username;
     }
 
 }

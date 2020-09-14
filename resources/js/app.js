@@ -32,9 +32,16 @@ import MiniCart from "./components/frontend/carts/MiniCartComponent.vue";
 import CartTable from "./components/frontend/carts/CartTableComponent.vue";
 import ProductCard from "./components/frontend/products/ProductCardComponent.vue";
 Vue.component('product-card', ProductCard);
+import AddToCartBtn from "./components/frontend/products/AddToCartBtnComponent.vue";
+
 import CategoryPaginateFilter from "./components/frontend/categories/CategoryPaginateFilterComponent.vue";
 
 import SearchPaginate from "./components/frontend/search/SearchPaginateComponent.vue";
+
+import Votes from './components/frontend/votes/VotesComponent.vue';
+import CommentsCard from './components/frontend/comments/Comments.vue';
+import Replies from './components/frontend/comments/RepliesComponent.vue';
+import Comment from './components/frontend/comments/CommentComponent.vue';
 
 import { routes } from './routes.js'
 import store from "./store";
@@ -61,8 +68,14 @@ const app = new Vue({
         MiniCart,
         CartTable,
         ProductCard,
+        AddToCartBtn,
         CategoryPaginateFilter,
-        SearchPaginate
+        SearchPaginate,
+
+        Votes,
+        CommentsCard,
+        Replies,
+        Comment
 
     }
 
