@@ -30,9 +30,9 @@ class BrandSeeder extends Seeder
             if($nth>14)
                 $nth =0;
         }
-
+        $nth = 1;
         foreach (Product::all() as $product) {
-            $brand = $product->category->brands->random(1)->first();
+            $brand = $product->category->brands->random($nth)->first();
             if($brand)
                 $product->brands()->attach($brand);
             else{
@@ -40,6 +40,7 @@ class BrandSeeder extends Seeder
                 $product->category->brands()->attach($brand);
                 $product->brands()->attach($brand);
             }
+            $nth++;
         }
 
     }
