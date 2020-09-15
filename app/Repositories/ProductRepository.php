@@ -77,10 +77,6 @@ class ProductRepository extends BaseRepository implements ProductRepositoryInter
         $product->brands()->detach();
     }
 
-    public function getComments($product){
-        return $product->comments ;
-    }
-
     public function getSupplies($product){
         return $product->supplies;
     }

@@ -25,14 +25,18 @@ class ProductSeeder extends Seeder
         DB::table('products')->delete();
 
         $counter = 1;
+        $nth = 0;
         foreach (Order::all() as $order) {
-            $category = Category::all()->random(1)->first();
+            $category = Category::all()->get($nth);
             for ($i=$counter; $i > 0 ; $i--) {
                 $product = factory(\App\Models\Product::class)->
                             create(['category_id'=>$category->id,'datasheet'=>$this->random_pic()]);
                 $order->products()->attach($product,['ordered_quantity'=>$counter*10]);
             }
             $counter++;
+            $nth++;
+            if($nth>3)
+                $nth =0;
         }
 
     }

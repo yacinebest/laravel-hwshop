@@ -12,7 +12,6 @@ interface ProductRepositoryInterface extends BaseRepositoryInterface , CardCount
     public function attachBrandToProduct($brand,$product);
     public function detachAllBrandToProduct($product);
 
-    public function getComments($product);
     public function getSupplies($product);
     public function getSuppliesPaginate($product);
     public function getHistoriesPaginate($product);

@@ -28,7 +28,7 @@ class CommentController extends Controller
     public function show($id)
     {
         $product = $this->productRepository->baseFindOrFail( $id);
-        $comments = $this->productRepository->getComments($product);
+        $comments = $this->commentRepository->getCommentsForProduct($product);
         return view('backend.comments.show',compact('product','comments'));
     }
 

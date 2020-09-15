@@ -30,7 +30,7 @@
                         <a href="{{ route('image.show',$product->id) }}" class="btn btn-primary w-100 mt-2">{{ $product->imageCount }} Image</a>
                     </li>
                     <li>
-                        <a href="#" class="btn btn-primary w-100 mt-2">Comment</a>
+                        <a href="{{ route('comment.show',$product->id) }}" class="btn btn-primary w-100 mt-2">Comment</a>
                     </li>
                     <li>
                         <a href="{{ route('supply.show',$product->id) }}" class="btn btn-primary w-100  mt-2 ">Supply</a>
@@ -61,8 +61,8 @@
                     </li>
                     <li>
                         <p>
-                        <a href="#" class="btn btn-primary mr-2">{{ $product->upVoteCount }}  <i class="fa fa-thumbs-up" ></i></a>
-                        <a href="#" class="btn btn-primary ">{{ $product->downVoteCount }}  <i class="fa fa-thumbs-down"></i></a>
+                        <button  class="btn btn-primary mr-2">{{ $product->upVoteCount }}  <i class="fa fa-thumbs-up" ></i></button>
+                        <button  class="btn btn-primary ">{{ $product->downVoteCount }}  <i class="fa fa-thumbs-down"></i></button>
                         </p>
                     </li>
                 </ul>

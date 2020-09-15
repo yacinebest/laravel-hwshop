@@ -33,8 +33,8 @@
                             </form>
                         </li>
                         <li>
-                            <a href="#" class="btn btn-primary mr-2">{{ $comment->upVoteCount }}  <i class="fa fa-thumbs-up" ></i></a>
-                            <a href="#" class="btn btn-primary ">{{ $comment->downVoteCount }}  <i class="fa fa-thumbs-down"></i></a>
+                            <button class="btn btn-primary mr-2">{{ $comment->upVoteCount }}  <i class="fa fa-thumbs-up" ></i></button>
+                            <button class="btn btn-primary ">{{ $comment->downVoteCount }}  <i class="fa fa-thumbs-down"></i></button>
                         </li>
                     </ul>
                 </td>

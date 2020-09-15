@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\Comment;
 use App\Repositories\Contracts\CommentRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -43,6 +44,10 @@ class CommentRepository extends BaseRepository implements CommentRepositoryInter
 
     public function createReply(Request $request){
         return $this->baseCreate($request->only($this->replyRequest));
+    }
+
+    public function getCommentsForProduct($product,$nbr=10){
+        return Comment::where('product_id',$product->id)->paginate($nbr)  ;
     }
 
 }

@@ -8,4 +8,6 @@ interface CommentRepositoryInterface extends BaseRepositoryInterface {
     public function paginateReplies($comment,$number = 10);
     public function createComment(Request $request);
     public function createReply(Request $request);
+
+    public function getCommentsForProduct($product,$nbr=10);
 }
